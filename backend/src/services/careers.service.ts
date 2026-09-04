@@ -1,11 +1,20 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import * as os from 'os';
 
-export const STORAGE_DIR = path.resolve(__dirname, '../../storage/resumes');
+// Vercel's filesystem is read-only except /tmp — use it there,
+// keep the local repo folder for local dev.
+export const STORAGE_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'resumes')
+  : path.resolve(__dirname, '../../storage/resumes');
 
 // Verify and ensure storage directory exists
-if (!fs.existsSync(STORAGE_DIR)) {
-  fs.mkdirSync(STORAGE_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(STORAGE_DIR)) {
+    fs.mkdirSync(STORAGE_DIR, { recursive: true });
+  }
+} catch (error) {
+  console.error('[Careers Service] Failed to create storage directory:', error);
 }
 
 export function getAbsoluteFilePath(fileName: string): string {
