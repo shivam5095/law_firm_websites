@@ -1,0 +1,75 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    String   @default("NEW") // NEW, CONTACTED, IN_PROGRESS, CLOSED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConsultationRequest {
+  id            String   @id @default(uuid())
+  name          String
+  email         String
+  phone         String
+  matterType    String
+  preferredMode String   // Office, Phone, Video
+  preferredDate DateTime
+  message       String?
+  status        String   @default("NEW") // NEW, CONTACTED, IN_PROGRESS, CLOSED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model InternshipApplication {
+  id                    String   @id @default(uuid())
+  fullName              String
+  email                 String
+  phone                 String
+  city                  String
+  state                 String
+  dateOfBirth           DateTime?
+  lawSchool             String
+  course                String
+  currentYear           String
+  graduationYear        Int?
+  cgpa                  String?
+  areasOfInterest       String[]
+  internshipMode        String   // Office, Remote, Hybrid
+  duration              String   // e.g. 4 Weeks, 8 Weeks
+  startDate             DateTime
+  endDate               DateTime
+  previousExperience    String?
+  skills                String[]
+  motivation            String
+  additionalInformation String?
+  resumePath            String
+  resumeOriginalName    String
+  coverLetterPath       String?
+  writingSamplePath     String?
+  status                String   @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, SHORTLISTED, INTERVIEW, ACCEPTED, REJECTED, WITHDRAWN
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}

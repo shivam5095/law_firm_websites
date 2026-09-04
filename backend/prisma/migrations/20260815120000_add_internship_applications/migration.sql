@@ -1,0 +1,33 @@
+-- CreateTable
+CREATE TABLE "InternshipApplication" (
+    "id" TEXT NOT NULL,
+    "fullName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "state" TEXT NOT NULL,
+    "dateOfBirth" TIMESTAMP(3),
+    "lawSchool" TEXT NOT NULL,
+    "course" TEXT NOT NULL,
+    "currentYear" TEXT NOT NULL,
+    "graduationYear" INTEGER,
+    "cgpa" TEXT,
+    "areasOfInterest" TEXT[],
+    "internshipMode" TEXT NOT NULL,
+    "duration" TEXT NOT NULL,
+    "startDate" TIMESTAMP(3) NOT NULL,
+    "endDate" TIMESTAMP(3) NOT NULL,
+    "previousExperience" TEXT,
+    "skills" TEXT[],
+    "motivation" TEXT NOT NULL,
+    "additionalInformation" TEXT,
+    "resumePath" TEXT NOT NULL,
+    "resumeOriginalName" TEXT NOT NULL,
+    "coverLetterPath" TEXT,
+    "writingSamplePath" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'SUBMITTED',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "InternshipApplication_pkey" PRIMARY KEY ("id")
+);

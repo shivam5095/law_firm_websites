@@ -1,0 +1,40 @@
+<svg width="320" height="80" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stopColor="#FDE68A" />
+      <stop offset="0.5" stopColor="#D4AF37" />
+      <stop offset="1" stopColor="#996515" />
+    </linearGradient>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stopColor="#0B192C" />
+      <stop offset="1" stopColor="#050C16" />
+    </linearGradient>
+  </defs>
+
+  <!-- Emblem Shield -->
+  <rect x="10" y="10" width="60" height="60" rx="6" fill="url(#bgGradient)" stroke="url(#goldGradient)" stroke-width="1.5"/>
+  <rect x="14" y="14" width="52" height="52" rx="4" stroke="url(#goldGradient)" stroke-width="0.8" opacity="0.6" stroke-dasharray="3 2"/>
+
+  <!-- Sceptre & Scales -->
+  <path d="M40 18V58" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="40" cy="18" r="2.5" fill="url(#goldGradient)"/>
+  <path d="M26 27H54" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Left Pan -->
+  <path d="M26 27L20 37H32L26 27Z" stroke="url(#goldGradient)" stroke-width="1.2" fill="#D4AF37" fill-opacity="0.2"/>
+  <path d="M20 37C20 40 22.5 42 26 42C29.5 42 32 40 32 37" stroke="url(#goldGradient)" stroke-width="1.2"/>
+
+  <!-- Right Pan -->
+  <path d="M54 27L48 37H60L54 27Z" stroke="url(#goldGradient)" stroke-width="1.2" fill="#D4AF37" fill-opacity="0.2"/>
+  <path d="M48 37C48 40 50.5 42 54 42C57.5 42 60 40 60 37" stroke="url(#goldGradient)" stroke-width="1.2"/>
+
+  <!-- Base -->
+  <path d="M32 58H48" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M28 62H52" stroke="url(#goldGradient)" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Typography -->
+  <text x="82" y="38" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="bold" fill="#0B192C" letter-spacing="0.5">MAURYA LAW CHAMBERS</text>
+  <line x1="82" y1="46" x2="100" y2="46" stroke="#D4AF37" stroke-width="1.5"/>
+  <text x="106" y="50" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="#B8860B" letter-spacing="2.5">ADVOCATES &amp; LEGAL CONSULTANTS</text>
+  <text x="82" y="64" font-family="Inter, system-ui, sans-serif" font-size="8.5" font-weight="500" fill="#64748B" letter-spacing="0.5">Noida Hub • Delhi NCR • High Courts &amp; Tribunals</text>
+</svg>
