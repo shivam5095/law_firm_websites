@@ -4,7 +4,7 @@ A production-ready, strictly decoupled web application architecture designed for
 
 ## Project Structure
 This repository contains three independent projects that communicate solely via REST APIs:
-- **`backend/`**: Node.js & Express.js server providing REST APIs, JWT/bcrypt authentication, PostgreSQL database operations using Prisma ORM, and Resend email alerts.
+- **`backend/`**: Node.js & Express.js server providing REST APIs, JWT/bcrypt authentication, PostgreSQL database operations using Prisma ORM, and Resend email alerts..
 - **`frontend/`**: Next.js client-facing website showcasing attorney profiles, experience, publications, practice areas, and validated consultation booking forms.
 - **`admin/`**: Standalone Next.js administrator dashboard to manage consultation requests and contact messages.
 
