@@ -162,6 +162,62 @@ const clientsData: ClientEntity[] = [
   },
 ];
 
+function ClientCard({ client, duplicate = false }: { client: ClientEntity; duplicate?: boolean }) {
+  return (
+    <div
+      key={duplicate ? `${client.name}-duplicate` : client.name}
+      className={cn(
+        'group relative flex h-[360px] shrink-0 flex-col justify-between rounded-sm border bg-white p-5 transition-shadow duration-300 hover:shadow-md',
+        'w-[min(280px,calc((100vw-5rem)/2))] md:w-[min(280px,calc((100vw-6rem)/3))] xl:w-[min(280px,calc((100vw-7rem)/4))]',
+        client.bgLight
+      )}
+    >
+      <div>
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <div
+            className="flex h-10 min-w-10 shrink-0 items-center justify-center rounded-sm px-2 font-heading text-xs font-bold text-white shadow-xs"
+            style={{ backgroundColor: client.accentColor }}
+          >
+            {client.shortName.slice(0, 4)}
+          </div>
+          <span className="rounded-xs border border-charcoal-200 bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-charcoal-500">
+            {client.badge}
+          </span>
+        </div>
+        <h3 className="font-heading text-lg font-bold text-navy-950 transition-colors group-hover:text-gold-700">
+          {client.name}
+        </h3>
+        <p className="mb-4 mt-1 text-xs text-charcoal-500">{client.tagline}</p>
+        <div className="space-y-1.5 border-t border-charcoal-200/60 pt-3">
+          <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wider text-charcoal-600">
+            Representative Focus:
+          </span>
+          {client.matters.map((matter) => (
+            <div key={matter} className="flex items-center gap-1.5 text-xs text-charcoal-700">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold-500" />
+              <span>{matter}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-4 flex items-center justify-between border-t border-charcoal-200/60 pt-3 text-xs font-semibold text-navy-800">
+        <span className="text-[11px] font-normal text-charcoal-500">
+          {client.category === 'bank' ? 'Commercial Bank' : 'Financial Services'}
+        </span>
+        {!duplicate && (
+          <Link
+            href="/practice-areas/banking-finance"
+            className="inline-flex items-center gap-1 text-gold-700 transition-colors hover:text-navy-950"
+          >
+            <span>Inquire</span>
+            <ArrowUpRight size={13} />
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function ClientsRepresentedSection() {
   const [filter, setFilter] = useState<'all' | 'bank' | 'nbfc'>('all');
 
@@ -184,7 +240,7 @@ export function ClientsRepresentedSection() {
               Banks &amp; Financial Institutions Represented
             </h2>
             <p className="text-charcoal-600 text-sm md:text-base max-w-3xl mt-3 leading-relaxed">
-              Strategic counsel, debt recovery, and dispute resolution for premier scheduled commercial banks, 
+              Strategic counsel, debt recovery, and dispute resolution for premier scheduled commercial banks,
               multinational banking giants, and leading non-banking financial corporations (NBFCs) across India.
             </p>
           </div>
@@ -192,6 +248,8 @@ export function ClientsRepresentedSection() {
           {/* Filter Pills */}
           <div className="flex items-center gap-1.5 p-1 bg-ivory-100 rounded-sm border border-charcoal-200 shrink-0 self-start md:self-auto">
             <button
+              type="button"
+              aria-pressed={filter === 'all'}
               onClick={() => setFilter('all')}
               className={cn(
                 'px-3.5 py-1.5 text-xs font-medium rounded-xs transition-colors',
@@ -203,6 +261,8 @@ export function ClientsRepresentedSection() {
               All Entities ({clientsData.length})
             </button>
             <button
+              type="button"
+              aria-pressed={filter === 'bank'}
               onClick={() => setFilter('bank')}
               className={cn(
                 'px-3.5 py-1.5 text-xs font-medium rounded-xs transition-colors',
@@ -214,6 +274,8 @@ export function ClientsRepresentedSection() {
               Banks ({clientsData.filter((c) => c.category === 'bank').length})
             </button>
             <button
+              type="button"
+              aria-pressed={filter === 'nbfc'}
               onClick={() => setFilter('nbfc')}
               className={cn(
                 'px-3.5 py-1.5 text-xs font-medium rounded-xs transition-colors',
@@ -255,67 +317,22 @@ export function ClientsRepresentedSection() {
           </div>
         </div>
 
-        {/* Clients Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {filteredClients.map((client) => (
-            <div
-              key={client.name}
-              className={cn(
-                'group relative p-6 rounded-sm border transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 flex flex-col justify-between bg-white',
-                client.bgLight
-              )}
-            >
-              <div>
-                {/* Header Badge */}
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div
-                    className="w-10 h-10 rounded-sm flex items-center justify-center font-heading font-bold text-xs text-white shadow-xs shrink-0"
-                    style={{ backgroundColor: client.accentColor }}
-                  >
-                    {client.shortName.slice(0, 4)}
-                  </div>
-                  <span className="text-[10px] uppercase font-semibold tracking-wider text-charcoal-500 bg-white/90 px-2 py-0.5 border border-charcoal-200 rounded-xs">
-                    {client.badge}
-                  </span>
-                </div>
-
-                {/* Name & Tagline */}
-                <h3 className="font-heading text-lg font-bold text-navy-950 group-hover:text-gold-700 transition-colors">
-                  {client.name}
-                </h3>
-                <p className="text-xs text-charcoal-500 mt-1 mb-4">
-                  {client.tagline}
-                </p>
-
-                {/* Key Matters Handled */}
-                <div className="space-y-1.5 pt-3 border-t border-charcoal-200/60">
-                  <span className="text-[10px] uppercase font-semibold text-charcoal-600 tracking-wider block mb-1">
-                    Representative Focus:
-                  </span>
-                  {client.matters.map((matter, idx) => (
-                    <div key={idx} className="flex items-center gap-1.5 text-xs text-charcoal-700">
-                      <span className="w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0"></span>
-                      <span>{matter}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Card Footer */}
-              <div className="mt-5 pt-3 border-t border-charcoal-200/60 flex items-center justify-between text-xs font-semibold text-navy-800">
-                <span className="text-[11px] text-charcoal-500 font-normal">
-                  {client.category === 'bank' ? 'Commercial Bank' : 'Financial Services'}
-                </span>
-                <Link
-                  href="/practice-areas/banking-finance"
-                  className="inline-flex items-center gap-1 text-gold-700 hover:text-navy-950 transition-colors"
-                >
-                  <span>Inquire</span>
-                  <ArrowUpRight size={13} />
-                </Link>
-              </div>
+        <div
+          className="client-marquee-viewport"
+          role="region"
+          aria-label="Represented banks and financial institutions"
+          style={{ '--client-marquee-duration': `${Math.max(28, filteredClients.length * 4)}s` } as React.CSSProperties}
+        >
+          <div className="client-marquee-track">
+            <div className="client-marquee-group" role="list">
+              {filteredClients.map((client) => (
+                <div key={client.name} role="listitem">{ClientCard({ client })}</div>
+              ))}
             </div>
-          ))}
+            <div className="client-marquee-group" aria-hidden="true">
+              {filteredClients.map((client) => ClientCard({ client, duplicate: true }))}
+            </div>
+          </div>
         </div>
 
         {/* Bar Council Compliance Disclaimer Note */}

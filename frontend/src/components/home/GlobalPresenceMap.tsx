@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Globe, MapPin, Compass, CheckCircle2, Maximize2, ExternalLink, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { officeHubs } from '@/data/offices';
 
 interface LocationNode {
   name: string;
@@ -13,18 +14,21 @@ interface LocationNode {
   forum: string;
   focus: string;
   highlight: boolean;
+  designation?: string;
+  regionTag?: string;
 }
 
 const locationsList: LocationNode[] = [
-  // Central Hub
-  {
-    name: 'Noida Hub (Delhi NCR)',
+  ...officeHubs.map((hub): LocationNode => ({
+    name: `${hub.name} Hub`,
     region: 'Hub',
-    countryOrState: 'Uttar Pradesh, India',
-    forum: 'Lead Chambers & Supreme Court / Tribunals',
-    focus: 'Central command, high-stakes arbitration, NCLT, DRT, and banking litigation.',
+    countryOrState: hub.address,
+    forum: hub.courtsTribunals,
+    focus: `${hub.designation} serving ${hub.regionTag}.`,
     highlight: true,
-  },
+    designation: hub.designation,
+    regionTag: hub.regionTag,
+  })),
   // International Outward Reach
   {
     name: 'Atlanta (USA)',
@@ -172,8 +176,8 @@ export function GlobalPresenceMap() {
           </h2>
           <div className="w-16 h-0.5 bg-gold-500 mx-auto mt-4 mb-4" />
           <p className="text-ivory-300 text-sm md:text-base leading-relaxed">
-            Headquartered at the <strong className="text-gold-400 font-semibold">Noida Central Hub (Delhi NCR)</strong>, 
-            our dispute resolution, arbitration, and recovery capabilities bridge premier Indian state high courts with 
+            Operating from our <strong className="text-gold-400 font-semibold">Noida Principal HQ and Varanasi Additional HQ</strong>,
+            our dispute resolution, arbitration, and recovery capabilities bridge premier Indian state high courts with
             key cross-border hubs across the United States, Middle East, and Southeast Asia.
           </p>
         </div>
@@ -184,9 +188,11 @@ export function GlobalPresenceMap() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-navy-800 mb-6">
             <div className="flex items-center gap-2 text-xs text-ivory-300">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
-              <span className="font-semibold text-ivory-100">Central Hub: Noida, India</span>
+              <span className="font-semibold text-ivory-100">HQ Network: Noida &amp; Varanasi, India</span>
               <span className="text-navy-600">•</span>
-              <span className="text-gold-400 font-medium">14 Regional Connection Points</span>
+              <span className="text-gold-400 font-medium">
+                {locationsList.filter((location) => location.region !== 'Hub').length} Regional Connection Points
+              </span>
             </div>
 
             <div className="flex items-center gap-3">
@@ -236,12 +242,20 @@ export function GlobalPresenceMap() {
                   ? '/images/map/world-map-dark.jpg'
                   : '/images/map/world-map-light.jpg'
               }
-              alt="Regional Office Network - Noida Hub Connecting Global and Indian Offices"
+              alt="Regional Office Network connecting Noida and Varanasi hubs with global and Indian jurisdictions"
               fill
               priority
               className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
               sizes="(max-width: 1200px) 100vw, 1200px"
             />
+
+            <div aria-label="Headquarters shown on the map" className="absolute left-3 right-3 top-3 z-10 flex flex-wrap gap-2 md:left-4 md:right-auto md:top-4">
+              {officeHubs.map((hub) => (
+                <span key={hub.name} className="border border-gold-500/50 bg-navy-950/90 px-2.5 py-1.5 text-[10px] font-semibold text-ivory-100 backdrop-blur-sm md:text-xs">
+                  <span className="text-gold-400">{hub.name}</span> · {hub.designation}
+                </span>
+              ))}
+            </div>
 
             {/* Click to expand overlay hint */}
             <button
@@ -265,7 +279,7 @@ export function GlobalPresenceMap() {
             </div>
             <div className="p-3 bg-navy-950/50 rounded-sm border border-navy-800/80">
               <span className="text-gold-400 font-semibold block mb-1">Central Hub</span>
-              <span>Noida Command &amp; Delhi NCR</span>
+              <span>Noida &amp; Varanasi · Delhi NCR &amp; Eastern UP</span>
             </div>
             <div className="p-3 bg-navy-950/50 rounded-sm border border-navy-800/80">
               <span className="text-gold-400 font-semibold block mb-1">Cross-Border Scope</span>
@@ -319,7 +333,7 @@ export function GlobalPresenceMap() {
                     : 'text-ivory-400 hover:text-white'
                 )}
               >
-                Indian Jurisdictions (8)
+                Indian Jurisdictions ({locationsList.filter((location) => location.region === 'India' || location.region === 'Hub').length})
               </button>
             </div>
           </div>
@@ -345,8 +359,8 @@ export function GlobalPresenceMap() {
                           loc.region === 'Hub'
                             ? 'text-red-400 fill-red-400'
                             : loc.region === 'International'
-                            ? 'text-gold-400'
-                            : 'text-blue-400'
+                              ? 'text-gold-400'
+                              : 'text-blue-400'
                         }
                       />
                       <span className="font-heading font-bold text-lg text-ivory-100">
@@ -359,15 +373,15 @@ export function GlobalPresenceMap() {
                         loc.region === 'Hub'
                           ? 'bg-gold-500 text-navy-950'
                           : loc.region === 'International'
-                          ? 'bg-navy-800 text-gold-300 border border-gold-500/30'
-                          : 'bg-navy-800 text-blue-300 border border-blue-500/30'
+                            ? 'bg-navy-800 text-gold-300 border border-gold-500/30'
+                            : 'bg-navy-800 text-blue-300 border border-blue-500/30'
                       )}
                     >
                       {loc.region === 'Hub'
-                        ? 'Central Hub'
+                        ? loc.designation || 'HQ'
                         : loc.region === 'International'
-                        ? 'Global'
-                        : 'India'}
+                          ? 'Global'
+                          : 'India'}
                     </span>
                   </div>
 
@@ -381,7 +395,7 @@ export function GlobalPresenceMap() {
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-navy-800/80 flex items-center justify-between text-[11px] text-ivory-400">
-                  <span>{loc.countryOrState}</span>
+                  <span>{loc.region === 'Hub' ? `${loc.regionTag} · ${loc.countryOrState}` : loc.countryOrState}</span>
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-1 text-gold-400 hover:text-gold-300 font-medium transition-colors"

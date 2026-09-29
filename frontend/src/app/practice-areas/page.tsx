@@ -7,16 +7,16 @@ import * as LucideIcons from 'lucide-react';
 import { ArrowRight, CheckCircle2, Scale, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Practice Areas & Case Handling Methodology | Maurya Law Chambers',
+  title: 'Practice Areas & Case Handling Methodology',
   description: 'Explore our specialized legal practice disciplines across Banking & Finance, Debt Restructuring, Commercial Arbitration, and Insolvency, complete with our strategic case-handling methodology.',
 };
 
 export default function PracticeAreasPage() {
   return (
     <main className="min-h-screen bg-ivory-50 pb-24">
-      <PageHero 
-        title="Areas of Practice" 
-        description="Comprehensive legal counsel and focused dispute resolution across high-stakes financial, corporate, and infrastructure matters." 
+      <PageHero
+        title="Areas of Practice"
+        description="Comprehensive legal counsel and focused dispute resolution across high-stakes financial, corporate, and infrastructure matters."
       />
 
       <section className="py-16 max-w-7xl mx-auto px-6">
@@ -24,10 +24,10 @@ export default function PracticeAreasPage() {
           {practiceAreas.map((area, index) => {
             // @ts-ignore - Dynamic icon rendering
             const Icon = LucideIcons[area.icon] || LucideIcons.Scale;
-            
+
             return (
-              <div 
-                key={area.slug} 
+              <div
+                key={area.slug}
                 className="bg-white border border-charcoal-200/80 rounded-sm shadow-sm hover:shadow-md transition-shadow overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0"
               >
                 {/* Practice Area Image Column */}
@@ -40,7 +40,7 @@ export default function PracticeAreasPage() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-navy-950/40" />
-                  
+
                   {/* Badge & Icon on Image */}
                   <div className="absolute top-4 left-4 flex items-center gap-2 bg-navy-950/90 text-gold-400 border border-gold-500/40 px-3 py-1.5 rounded-xs backdrop-blur-xs text-xs font-semibold uppercase tracking-wider">
                     <Icon size={16} />
@@ -61,7 +61,7 @@ export default function PracticeAreasPage() {
                         {area.title}
                       </Link>
                     </h2>
-                    
+
                     <p className="text-charcoal-700 text-sm leading-relaxed mb-6">
                       {area.description}
                     </p>
@@ -100,7 +100,7 @@ export default function PracticeAreasPage() {
                       <strong className="text-navy-900 font-semibold">₹10 Lakh to ₹130+ Crore</strong>
                     </div>
 
-                    <Link 
+                    <Link
                       href={`/practice-areas/${area.slug}`}
                       className="inline-flex items-center gap-2 bg-navy-900 text-gold-400 border border-gold-500/50 hover:bg-gold-500 hover:text-navy-950 text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xs transition-all shadow-xs"
                     >

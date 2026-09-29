@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getAuthToken, clearAuthToken } from '@/lib/api';
-import { 
-  LayoutDashboard, 
-  CalendarDays, 
-  Mail, 
-  LogOut, 
-  Scale, 
-  Menu, 
+import {
+  LayoutDashboard,
+  CalendarDays,
+  Mail,
+  LogOut,
+  Scale,
+  Menu,
   X,
   UserCheck,
   Briefcase
@@ -26,7 +26,7 @@ const sidebarItems: SidebarItem[] = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Consultations', href: '/dashboard/consultations', icon: CalendarDays },
   { name: 'Contacts', href: '/dashboard/contacts', icon: Mail },
-  { name: 'Career Applications', href: '/dashboard/careers', icon: Briefcase },
+  { name: 'Careers Inbox', href: '/dashboard/careers', icon: Briefcase },
 ];
 
 export default function DashboardLayout({
@@ -52,7 +52,7 @@ export default function DashboardLayout({
           try {
             const user = JSON.parse(userStr);
             setAdminName(user.name || 'Administrator');
-          } catch (_) {}
+          } catch (_) { }
         }
       }
     }
@@ -80,7 +80,7 @@ export default function DashboardLayout({
       <header className="md:hidden bg-navy-800 text-white p-4 flex items-center justify-between shadow-md">
         <div className="flex items-center space-x-2">
           <Scale className="w-6 h-6 text-gold-400" />
-          <span className="font-serif text-lg tracking-tight font-medium">Maurya Law Admin</span>
+          <span className="font-serif text-lg tracking-tight font-medium">Maurya &amp; Co. Admin</span>
         </div>
         <button onClick={() => setMobileOpen(!mobileOpen)} className="p-1">
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -98,7 +98,7 @@ export default function DashboardLayout({
           <div className="p-6 border-b border-navy-800 flex items-center space-x-3">
             <Scale className="w-8 h-8 text-gold-400 shrink-0" />
             <div>
-              <h2 className="font-serif text-lg font-medium leading-none tracking-tight">Maurya Law Chambers</h2>
+              <h2 className="font-serif text-lg font-medium leading-none tracking-tight">Maurya &amp; Co.</h2>
               <span className="text-xs text-gold-400 tracking-widest uppercase mt-1 inline-block">Portal</span>
             </div>
           </div>
@@ -115,8 +115,8 @@ export default function DashboardLayout({
                   onClick={() => setMobileOpen(false)}
                   className={`
                     flex items-center space-x-3 px-4 py-3 text-sm font-medium transition-all duration-150 rounded-sm
-                    ${isActive 
-                      ? 'bg-gold-500 text-navy-900 shadow-lg shadow-gold-500/10 font-semibold' 
+                    ${isActive
+                      ? 'bg-gold-500 text-navy-900 shadow-lg shadow-gold-500/10 font-semibold'
                       : 'text-slate-300 hover:bg-navy-800 hover:text-white'
                     }
                   `}
@@ -171,7 +171,7 @@ export default function DashboardLayout({
 
       {/* Mobile Sidebar Overlay */}
       {mobileOpen && (
-        <div 
+        <div
           onClick={() => setMobileOpen(false)}
           className="md:hidden fixed inset-0 z-40 bg-black/50 transition-opacity"
         />

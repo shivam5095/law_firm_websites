@@ -5,8 +5,8 @@ import { firm } from '@/data/firm';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Maurya Law Chambers',
-  description: 'Connect with Maurya Law Chambers at our Noida Hub (Delhi NCR). Reach out for high-stakes banking litigation, commercial arbitration, and corporate dispute counsel.',
+  title: 'Contact Us',
+  description: 'Connect with Maurya & Co. at our Noida Hub (Delhi NCR). Reach out for high-stakes banking litigation, commercial arbitration, and corporate dispute counsel.',
 };
 
 export default function ContactPage() {
@@ -24,7 +24,7 @@ export default function ContactPage() {
               Contact Our Chambers
             </h1>
             <p className="text-base sm:text-lg text-ivory-300 leading-relaxed">
-              We provide strategic dispute resolution and corporate counsel across India and global jurisdictions. 
+              We provide strategic dispute resolution and corporate counsel across India and global jurisdictions.
               Contact our team to schedule an initial consultation or confidential matter assessment.
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function ContactPage() {
       <section className="py-16 lg:py-20 bg-ivory-50">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-            
+
             {/* Left Column - Contact Info */}
             <div className="lg:col-span-5 space-y-6">
               <div>
@@ -43,7 +43,7 @@ export default function ContactPage() {
                 <p className="text-xs text-charcoal-600 mb-6">
                   Direct channels for immediate institutional or individual legal inquiries.
                 </p>
-                
+
                 <div className="space-y-4">
                   {/* Address */}
                   <div className="flex p-5 bg-white border border-charcoal-200 rounded-sm shadow-xs">
@@ -56,9 +56,9 @@ export default function ContactPage() {
                         {firm.address}<br />
                         {firm.city}, {firm.state}, {firm.country}
                       </p>
-                      <a 
-                        href={`https://maps.google.com/?q=${encodeURIComponent('Sector 62, Noida, Uttar Pradesh, India')}`} 
-                        target="_blank" 
+                      <a
+                        href={`https://maps.google.com/?q=${encodeURIComponent('Sector 62, Noida, Uttar Pradesh, India')}`}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-xs font-semibold text-gold-700 hover:text-navy-900"
                       >
@@ -76,8 +76,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-heading font-bold text-sm text-navy-950 mb-1">Direct Phone</h4>
                       <p className="text-xs text-charcoal-700 mb-2">{firm.phone}</p>
-                      <a 
-                        href={`tel:${firm.phone.replace(/[^0-9+]/g, '')}`} 
+                      <a
+                        href={`tel:${firm.phone.replace(/[^0-9+]/g, '')}`}
                         className="text-xs font-semibold text-gold-700 hover:text-navy-900"
                       >
                         Call Chambers &rarr;
@@ -93,8 +93,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-heading font-bold text-sm text-navy-950 mb-1">Official Email</h4>
                       <p className="text-xs text-charcoal-700 mb-2">{firm.email}</p>
-                      <a 
-                        href={`mailto:${firm.email}`} 
+                      <a
+                        href={`mailto:${firm.email}`}
                         className="text-xs font-semibold text-gold-700 hover:text-navy-900"
                       >
                         Send Formal Brief &rarr;
@@ -118,7 +118,7 @@ export default function ContactPage() {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <a 
+                <a
                   href={`https://wa.me/${firm.whatsapp.replace(/[^0-9]/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -127,7 +127,7 @@ export default function ContactPage() {
                   <MessageCircle className="w-4 h-4 mr-2" />
                   <span>WhatsApp Direct</span>
                 </a>
-                <Link 
+                <Link
                   href="/consultation"
                   className="flex-1 flex items-center justify-center bg-navy-950 text-gold-400 border border-gold-500/50 px-5 py-3 rounded-xs font-semibold text-xs uppercase tracking-wider hover:bg-gold-500 hover:text-navy-950 transition-all shadow-xs"
                 >
@@ -156,7 +156,7 @@ export default function ContactPage() {
       {/* Map Embed Section */}
       <section className="h-[360px] w-full bg-navy-950 relative border-t border-navy-800">
         <iframe
-          title="Maurya Law Chambers Noida Hub Location Map"
+          title="Maurya & Co. Noida Hub Location Map"
           src="https://maps.google.com/maps?q=Sector%2062,%20Noida,%20Uttar%20Pradesh,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
           className="w-full h-full border-0 grayscale contrast-125 opacity-80 hover:opacity-100 transition-opacity"
           loading="lazy"

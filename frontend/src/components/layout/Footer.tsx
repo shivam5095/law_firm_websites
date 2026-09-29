@@ -3,6 +3,7 @@ import { firm } from '@/data/firm';
 import { practiceAreas } from '@/data/practiceAreas';
 import { FirmLogo } from '@/components/common/FirmLogo';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { officeHubs } from '@/data/offices';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -77,14 +78,16 @@ export function Footer() {
             Central Hub & Reach
           </h3>
           <div className="space-y-3 text-sm text-ivory-300 mb-6">
-            <div className="flex items-start gap-2">
-              <MapPin size={16} className="text-gold-400 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium text-ivory-100">Noida Central Hub</p>
-                <p>{firm.address}</p>
-                <p>{firm.city}, {firm.state}, {firm.country}</p>
+            {officeHubs.map((hub) => (
+              <div key={hub.name} className="flex items-start gap-2">
+                <MapPin size={16} className="text-gold-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium text-ivory-100">{hub.name} · {hub.designation}</p>
+                  <p>{hub.address}</p>
+                  <p className="text-xs text-ivory-400">{hub.regionTag}</p>
+                </div>
               </div>
-            </div>
+            ))}
             <div className="flex items-start gap-2 pt-2 border-t border-navy-800">
               <Clock size={16} className="text-gold-400 shrink-0 mt-0.5" />
               <div>
@@ -93,7 +96,7 @@ export function Footer() {
               </div>
             </div>
           </div>
-          <a 
+          <a
             href={`https://wa.me/${firm.whatsapp.replace(/\D/g, '')}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -108,7 +111,7 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-navy-800 bg-navy-950/80">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-ivory-400">
-          <p>&copy; {currentYear} {firm.name} (Advocates &amp; Legal Consultants). All rights reserved.</p>
+          <p>&copy; {currentYear} {firm.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/disclaimer" className="hover:text-gold-400 transition-colors">BCI Disclaimer</Link>
             <span>&middot;</span>

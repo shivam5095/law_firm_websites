@@ -1,0 +1,1 @@
+ALTER TABLE "InternshipApplication" RENAME TO "LegacyInternshipApplication";

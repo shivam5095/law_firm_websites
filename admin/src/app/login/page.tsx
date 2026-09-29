@@ -40,7 +40,7 @@ export default function LoginPage() {
     setErrorMsg('');
     try {
       const response = await adminApi.post('/auth/login', data);
-      
+
       if (response.success && response.data.token) {
         setAuthToken(response.data.token);
         if (typeof window !== 'undefined') {
@@ -61,14 +61,14 @@ export default function LoginPage() {
     <main className="min-h-screen bg-navy-900 flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background Decorative Element */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold-500 via-transparent to-transparent"></div>
-      
+
       <div className="w-full max-w-md bg-white border border-charcoal-100 p-8 shadow-2xl relative z-10">
         <div className="flex flex-col items-center mb-8">
           <div className="bg-navy-800 p-3 rounded-full text-gold-500 mb-4 shadow-md">
             <Scale className="w-8 h-8" />
           </div>
           <h1 className="font-serif text-2xl md:text-3xl text-navy-800 tracking-tight font-medium text-center">
-            Maurya Law Chambers
+            Maurya &amp; Co.
           </h1>
           <p className="text-sm text-charcoal-500 uppercase tracking-widest mt-1">
             Secure Admin Access
@@ -90,9 +90,8 @@ export default function LoginPage() {
               type="email"
               {...register('email')}
               placeholder="admin@lawfirm.com"
-              className={`w-full px-4 py-3 border rounded-none focus:outline-none focus:ring-1 transition-colors ${
-                errors.email ? 'border-red-500 focus:ring-red-500' : 'border-charcoal-200 focus:ring-navy-700 focus:border-navy-700'
-              }`}
+              className={`w-full px-4 py-3 border rounded-none focus:outline-none focus:ring-1 transition-colors ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-charcoal-200 focus:ring-navy-700 focus:border-navy-700'
+                }`}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
@@ -107,9 +106,8 @@ export default function LoginPage() {
               type="password"
               {...register('password')}
               placeholder="••••••••"
-              className={`w-full px-4 py-3 border rounded-none focus:outline-none focus:ring-1 transition-colors ${
-                errors.password ? 'border-red-500 focus:ring-red-500' : 'border-charcoal-200 focus:ring-navy-700 focus:border-navy-700'
-              }`}
+              className={`w-full px-4 py-3 border rounded-none focus:outline-none focus:ring-1 transition-colors ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-charcoal-200 focus:ring-navy-700 focus:border-navy-700'
+                }`}
             />
             {errors.password && (
               <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>

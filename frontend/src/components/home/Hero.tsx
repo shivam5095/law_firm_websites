@@ -35,17 +35,17 @@ export function Hero() {
             <span>{firm.name} • Noida Central Hub (Delhi NCR)</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-heading text-4xl sm:text-5xl lg:text-6xl text-ivory-100 font-bold leading-[1.15] tracking-tight"
           >
-            Strategic Legal Counsel.<br />
+            Where Law Meets Strategy.<br />
             <span className="text-gold-400 font-medium">Focused Dispute Resolution.</span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -53,21 +53,21 @@ export function Hero() {
           >
             {firm.description}
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-10 flex flex-col sm:flex-row gap-4"
           >
-            <Link 
+            <Link
               href="/consultation"
               className="inline-flex justify-center items-center px-8 py-4 bg-gold-500 text-navy-950 font-bold text-xs uppercase tracking-wider hover:bg-gold-400 transition-all shadow-lg rounded-xs gap-2"
             >
               <span>Request a Consultation</span>
               <ArrowRight size={14} />
             </Link>
-            <Link 
+            <Link
               href="/practice-areas"
               className="inline-flex justify-center items-center px-8 py-4 border border-gold-500/50 bg-navy-950/50 text-ivory-100 font-semibold text-xs uppercase tracking-wider hover:bg-white/10 transition-colors duration-300 rounded-xs"
             >
@@ -78,7 +78,7 @@ export function Hero() {
       </div>
 
       {/* Bottom Sub-tagline */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.8 }}

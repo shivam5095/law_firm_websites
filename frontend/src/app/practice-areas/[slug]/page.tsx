@@ -16,13 +16,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const area = practiceAreas.find((p) => p.slug === slug);
-  
+
   if (!area) {
     return { title: 'Practice Area Not Found' };
   }
-  
+
   return {
-    title: `${area.title} — Strategy & Case Handling | Maurya Law Chambers`,
+    title: `${area.title} — Strategy & Case Handling`,
     description: area.shortDescription,
   };
 }
@@ -30,15 +30,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function PracticeAreaPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const area = practiceAreas.find((p) => p.slug === slug);
-  
+
   if (!area) {
     notFound();
   }
 
   // @ts-ignore
   const Icon = LucideIcons[area.icon] || LucideIcons.Scale;
-  
-  const relatedExperience = experienceItems.filter(item => 
+
+  const relatedExperience = experienceItems.filter(item =>
     item.practiceAreas.includes(area.slug)
   );
 
@@ -129,7 +129,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
           {/* Section 2: Detailed "How I Handle Cases In This Area" */}
           <section className="p-8 md:p-10 bg-white border border-gold-500/40 rounded-sm shadow-sm relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-gold-500"></div>
-            
+
             <div className="flex items-center gap-2 text-gold-700 text-xs font-bold uppercase tracking-widest mb-2">
               <Scale size={18} className="text-gold-600" />
               <span>Practitioner Case Handling Protocol</span>
@@ -290,7 +290,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
               <p className="text-xs text-ivory-300 mb-5 leading-relaxed">
                 Schedule an in-depth preliminary case audit to discuss specific facts, forum options, and strategic timeline.
               </p>
-              <Link 
+              <Link
                 href="/consultation"
                 className="block w-full text-center bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-5 py-3 text-xs uppercase tracking-wider rounded-xs transition-colors shadow-md"
               >

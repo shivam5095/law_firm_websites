@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { PageHero } from '@/components/common/PageHero';
 import { CareerForm } from '@/components/forms/CareerForm';
 import { firm } from '@/data/firm';
 import Image from 'next/image';
@@ -12,10 +11,23 @@ export const metadata: Metadata = {
 export default function CareersPage() {
   return (
     <main className="min-h-screen bg-ivory-50 pb-24">
-      <PageHero
-        title="Build Your Legal Career With Us"
-        description="We welcome applications from motivated law students and young legal professionals interested in gaining practical exposure to legal research, arbitration, banking and finance, commercial disputes and related areas of practice."
-      />
+      <section className="relative isolate flex min-h-[360px] items-end overflow-hidden bg-navy-950 md:min-h-[440px]">
+        <Image
+          src="/images/careers/indian-legal-interns.jpg"
+          alt="Law students working together on legal research"
+          fill
+          priority
+          loading="eager"
+          sizes="100vw"
+          className="-z-20 object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/95 via-navy-950/70 to-navy-950/25" />
+        <div className="mx-auto w-full max-w-7xl px-6 pb-14 pt-28 md:pb-20">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gold-400">Careers at {firm.name}</p>
+          <h1 className="max-w-3xl font-heading text-4xl font-bold leading-tight text-ivory-100 md:text-5xl">Build Your Legal Career With Us</h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ivory-200 md:text-lg">We welcome motivated law students and young legal professionals interested in practical exposure to commercial legal work.</p>
+        </div>
+      </section>
 
       {/* Grid Introduction with Photo */}
       <section className="py-20 max-w-7xl mx-auto px-6">
@@ -28,11 +40,11 @@ export default function CareersPage() {
               A Structured Exposure to Commercial Practice
             </h2>
             <div className="w-12 h-0.5 bg-gold-500"></div>
-            
+
             <p className="text-charcoal-700 leading-relaxed text-base md:text-lg">
               Our internship programme is designed to offer law students and recent graduates hands-on experience in research, drafting, and case preparation. Interns work closely with senior advocates on live client matters across our focus practice areas.
             </p>
-            
+
             <div className="space-y-3 text-sm text-charcoal-600 pt-2">
               <p className="flex items-start">
                 <span className="text-gold-600 mr-3 font-bold">✓</span>
@@ -60,7 +72,6 @@ export default function CareersPage() {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 30vw"
               className="object-cover"
-              quality={80}
             />
             <div className="absolute inset-0 bg-navy-900/5" />
           </div>
@@ -73,7 +84,7 @@ export default function CareersPage() {
               Submit Application
             </h2>
             <p className="text-charcoal-600 text-sm">
-              Please fill out the form below accurately and upload your documents. All fields marked with * are mandatory.
+              Share a brief introduction and attach your resume. Our team will contact you if there is a suitable opportunity.
             </p>
           </div>
 

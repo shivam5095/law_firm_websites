@@ -2,10 +2,11 @@ import { MetadataRoute } from 'next';
 import { practiceAreas } from '@/data/practiceAreas';
 import { lawyers } from '@/data/lawyers';
 import { publications } from '@/data/publications';
+import { firm } from '@/data/firm';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
-  
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || firm.website;
+
   const staticPages = [
     '', '/about', '/practice-areas', '/team', '/experience',
     '/insights', '/publications', '/consultation', '/contact',
