@@ -49,7 +49,7 @@ export function ConsultationForm() {
         <p className="text-charcoal-700 max-w-md">
           Thank you for reaching out. We have received your consultation request and our team will get back to you shortly to confirm the appointment.
         </p>
-        <button 
+        <button
           onClick={() => setIsSuccess(false)}
           className="mt-4 text-sm font-medium text-navy-600 hover:text-navy-900 underline underline-offset-4"
         >
@@ -72,6 +72,7 @@ export function ConsultationForm() {
           <label htmlFor="name" className="block text-sm font-medium text-charcoal-700">Full Name</label>
           <input
             id="name"
+            autoComplete="name"
             {...register('name')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",
@@ -81,12 +82,13 @@ export function ConsultationForm() {
           />
           {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
         </div>
-        
+
         <div className="space-y-2">
           <label htmlFor="phone" className="block text-sm font-medium text-charcoal-700">Phone</label>
           <input
             id="phone"
             type="tel"
+            autoComplete="tel"
             {...register('phone')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",
@@ -104,6 +106,7 @@ export function ConsultationForm() {
           <input
             id="email"
             type="email"
+            autoComplete="email"
             {...register('email')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",

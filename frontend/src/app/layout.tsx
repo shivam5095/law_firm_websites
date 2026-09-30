@@ -55,10 +55,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col font-body antialiased">
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <HomeDisclaimerGate disclaimer={<DisclaimerCopy />}>
           <TopBar />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <div id="main-content" className="flex-1">{children}</div>
           <Footer />
           <FloatingButtons />
         </HomeDisclaimerGate>

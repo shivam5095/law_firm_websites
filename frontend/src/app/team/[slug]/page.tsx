@@ -41,16 +41,17 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
   return (
     <main className="min-h-screen bg-ivory-50 pb-20">
       {/* Profile Hero */}
-      <section className="bg-navy-900 text-white pt-32 pb-16">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-12 items-end">
-          <div className="w-full md:w-1/3 max-w-sm relative aspect-[3/4] bg-navy-800 shrink-0 border-4 border-white/10 shadow-xl">
+      <section className="min-h-[40svh] bg-navy-900 py-12 text-white lg:min-h-[50vh] lg:py-16">
+        <div className="max-w-7xl mx-auto flex flex-col items-end gap-8 px-4 md:px-6 lg:flex-row lg:gap-12 lg:px-8">
+          <div className="relative aspect-[3/4] w-full max-w-sm shrink-0 border-4 border-white/10 bg-navy-800 shadow-xl lg:w-1/3">
             {lawyer.image ? (
               <Image
                 src={lawyer.image}
                 alt={lawyer.name}
                 fill
+                sizes="(max-width: 1023px) min(100vw - 2rem, 24rem), 33vw"
+                fetchPriority="high"
                 className="object-cover object-top"
-                priority
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-gold-500 font-heading text-8xl opacity-20">
@@ -58,7 +59,7 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
               </div>
             )}
           </div>
-          <div className="w-full md:w-2/3 pb-8">
+          <div className="w-full pb-4 lg:w-2/3 lg:pb-8">
             <div className="flex items-center gap-2 text-sm text-ivory-300 mb-4 uppercase tracking-wider">
               <Link href="/team" className="hover:text-white transition-colors">Our Team</Link>
               <span>/</span>
@@ -85,7 +86,7 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
       </section>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 gap-12 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-3 lg:gap-16 lg:px-8 lg:py-24">
         <div className="lg:col-span-2 space-y-16">
           {/* Biography */}
           <section>

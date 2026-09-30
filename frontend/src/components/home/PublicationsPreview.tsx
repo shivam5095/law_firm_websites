@@ -12,7 +12,7 @@ export function PublicationsPreview() {
             <h2 className="font-heading text-3xl md:text-4xl text-navy-900 mb-6">Legal Insights & Publications</h2>
             <div className="w-12 h-0.5 bg-gold-500"></div>
           </div>
-          <Link 
+          <Link
             href="/publications"
             className="inline-flex items-center text-sm font-medium text-navy-800 hover:text-gold-600 transition-colors"
           >
@@ -20,9 +20,9 @@ export function PublicationsPreview() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {recentPubs.map((pub, index) => (
-            <Link 
+            <Link
               key={pub.id || index}
               href={`/publications/${pub.slug || pub.id}`}
               className="group block bg-white p-8 border border-charcoal-100 hover:border-gold-300 transition-colors h-full flex flex-col"

@@ -11,16 +11,16 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
       {/* Page Hero */}
-      <section className="bg-navy-950 text-white py-20 lg:py-24 border-b border-navy-800">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="flex min-h-[40svh] items-center bg-navy-950 text-white py-12 lg:min-h-[50vh] border-b border-navy-800">
+        <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-gold-400 mb-3">
               <MapPin size={14} />
               <span>Noida Central Hub • Pan-India Outreach</span>
             </div>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl mb-4 font-bold text-ivory-100">
+            <h1 className="page-heading mb-4 font-bold text-ivory-100">
               Contact Our Chambers
             </h1>
             <p className="text-base sm:text-lg text-ivory-300 leading-relaxed">
@@ -51,7 +51,7 @@ export default function ContactPage() {
                       <MapPin className="w-5 h-5 text-gold-600" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-sm text-navy-950 mb-1">Central Hub Location</h4>
+                      <h3 className="font-heading font-bold text-sm text-navy-950 mb-1">Central Hub Location</h3>
                       <p className="text-xs text-charcoal-700 leading-relaxed mb-2">
                         {firm.address}<br />
                         {firm.city}, {firm.state}, {firm.country}
@@ -74,7 +74,7 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-gold-600" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-sm text-navy-950 mb-1">Direct Phone</h4>
+                      <h3 className="font-heading font-bold text-sm text-navy-950 mb-1">Direct Phone</h3>
                       <p className="text-xs text-charcoal-700 mb-2">{firm.phone}</p>
                       <a
                         href={`tel:${firm.phone.replace(/[^0-9+]/g, '')}`}
@@ -91,7 +91,7 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-gold-600" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-sm text-navy-950 mb-1">Official Email</h4>
+                      <h3 className="font-heading font-bold text-sm text-navy-950 mb-1">Official Email</h3>
                       <p className="text-xs text-charcoal-700 mb-2">{firm.email}</p>
                       <a
                         href={`mailto:${firm.email}`}
@@ -108,7 +108,7 @@ export default function ContactPage() {
                       <Clock className="w-5 h-5 text-gold-600" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-sm text-navy-950 mb-1">Consultation Hours</h4>
+                      <h3 className="font-heading font-bold text-sm text-navy-950 mb-1">Consultation Hours</h3>
                       <p className="text-xs text-charcoal-700">{firm.officeHours}</p>
                       <p className="text-[11px] text-charcoal-500 mt-1">Emergency injunction advisory available on request.</p>
                     </div>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                   href={`https://wa.me/${firm.whatsapp.replace(/[^0-9]/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center bg-[#25D366] text-white px-5 py-3 rounded-xs font-semibold text-xs uppercase tracking-wider hover:bg-[#128C7E] transition-colors shadow-xs"
+                  className="flex-1 flex items-center justify-center bg-[#25D366] text-navy-950 px-5 py-3 rounded-xs font-semibold text-xs uppercase tracking-wider hover:bg-[#128C7E] hover:text-white transition-colors shadow-xs"
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
                   <span>WhatsApp Direct</span>
@@ -175,6 +175,6 @@ export default function ContactPage() {
           </span>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

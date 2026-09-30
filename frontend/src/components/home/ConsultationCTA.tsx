@@ -9,15 +9,15 @@ export function ConsultationCTA() {
         <p className="text-ivory-200 text-lg md:text-xl max-w-2xl mx-auto mb-10">
           Our office is available to discuss your legal requirements and explore how we may assist.
         </p>
-        
+
         <div className="flex flex-col items-center gap-8">
-          <Link 
+          <Link
             href="/consultation"
-            className="inline-flex justify-center items-center px-10 py-4 bg-gold-500 text-navy-900 font-medium hover:bg-gold-400 transition-colors duration-300 text-lg"
+            className="inline-flex min-h-11 w-full items-center justify-center bg-gold-500 px-6 py-4 text-base font-medium text-navy-900 transition-colors duration-300 hover:bg-gold-400 sm:w-auto sm:px-10 sm:text-lg"
           >
             Request a Consultation
           </Link>
-          
+
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-12 text-ivory-200">
             {firm.phone && (
               <a href={`tel:${firm.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-gold-400 transition-colors">

@@ -45,7 +45,7 @@ export function ContactForm() {
         <p className="text-charcoal-700 max-w-md">
           Thank you for reaching out to us. We have received your message and will respond as soon as possible.
         </p>
-        <button 
+        <button
           onClick={() => setIsSuccess(false)}
           className="mt-4 text-sm font-medium text-navy-600 hover:text-navy-900 underline underline-offset-4"
         >
@@ -68,6 +68,7 @@ export function ContactForm() {
           <label htmlFor="name" className="block text-sm font-medium text-charcoal-700">Full Name</label>
           <input
             id="name"
+            autoComplete="name"
             {...register('name')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",
@@ -77,12 +78,13 @@ export function ContactForm() {
           />
           {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
         </div>
-        
+
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-medium text-charcoal-700">Email Address</label>
           <input
             id="email"
             type="email"
+            autoComplete="email"
             {...register('email')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",
@@ -100,6 +102,7 @@ export function ContactForm() {
           <input
             id="phone"
             type="tel"
+            autoComplete="tel"
             {...register('phone')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",

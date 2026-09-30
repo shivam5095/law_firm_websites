@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 export default function ConsultationPage() {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       {/* Page Hero */}
-      <section className="bg-navy-900 text-white py-20 lg:py-28">
+      <section className="flex min-h-[40svh] items-center bg-navy-900 text-white py-12 lg:min-h-[50vh]">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="max-w-3xl">
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl mb-6">
+            <h1 className="page-heading mb-5 font-bold text-ivory-100">
               Request a Consultation
             </h1>
             <p className="text-lg text-white/80 leading-relaxed">
@@ -40,7 +40,7 @@ export default function ConsultationPage() {
             <div className="lg:w-1/3 space-y-8">
               <div className="bg-ivory-50 p-8 border border-charcoal-100 rounded-sm">
                 <h3 className="font-heading text-2xl text-navy-900 mb-6">Contact Information</h3>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <MapPin className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
@@ -106,6 +106,6 @@ export default function ConsultationPage() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

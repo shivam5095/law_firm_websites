@@ -45,14 +45,15 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
   return (
     <main className="min-h-screen bg-ivory-50 pb-24">
       {/* Top Banner with Background Image */}
-      <div className="bg-navy-950 text-white pt-24 pb-16 md:pt-28 md:pb-20 relative overflow-hidden">
+      <div className="relative flex min-h-[40svh] items-center overflow-hidden bg-navy-950 py-12 text-white lg:min-h-[50vh] lg:py-16">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
             src={area.image}
             alt={area.title}
             fill
-            priority
+            sizes="100vw"
+            fetchPriority="high"
             className="object-cover opacity-20 filter blur-[1px]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/70" />

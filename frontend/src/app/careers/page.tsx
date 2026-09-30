@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 export default function CareersPage() {
   return (
     <main className="min-h-screen bg-ivory-50 pb-24">
-      <section className="relative isolate flex min-h-[360px] items-end overflow-hidden bg-navy-950 md:min-h-[440px]">
+      <section className="relative isolate flex min-h-[40svh] items-end overflow-hidden bg-navy-950 lg:min-h-[50vh]">
         <Image
           src="/images/careers/indian-legal-interns.jpg"
           alt="Law students working together on legal research"
           fill
-          priority
+          fetchPriority="high"
           loading="eager"
           sizes="100vw"
           className="-z-20 object-cover"

@@ -1,162 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { Globe, MapPin, Compass, CheckCircle2, Maximize2, ExternalLink, Shield } from 'lucide-react';
+import { Globe, Maximize2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { officeHubs } from '@/data/offices';
 
-interface LocationNode {
-  name: string;
-  region: 'International' | 'India' | 'Hub';
-  countryOrState: string;
-  forum: string;
-  focus: string;
-  highlight: boolean;
-  designation?: string;
-  regionTag?: string;
-}
-
-const locationsList: LocationNode[] = [
-  ...officeHubs.map((hub): LocationNode => ({
-    name: `${hub.name} Hub`,
-    region: 'Hub',
-    countryOrState: hub.address,
-    forum: hub.courtsTribunals,
-    focus: `${hub.designation} serving ${hub.regionTag}.`,
-    highlight: true,
-    designation: hub.designation,
-    regionTag: hub.regionTag,
-  })),
-  // International Outward Reach
-  {
-    name: 'Atlanta (USA)',
-    region: 'International',
-    countryOrState: 'Georgia, USA',
-    forum: 'US Federal & State Commercial Courts',
-    focus: 'Cross-border commercial dispute advisory, contractual breaches & international litigation coordination.',
-    highlight: false,
-  },
-  {
-    name: 'Georgia (USA)',
-    region: 'International',
-    countryOrState: 'United States',
-    forum: 'Commercial Courts & Arbitration',
-    focus: 'Transatlantic debt enforcement, discovery facilitation & corporate compliance advisory.',
-    highlight: false,
-  },
-  {
-    name: 'Florida (USA)',
-    region: 'International',
-    countryOrState: 'United States',
-    forum: 'Commercial Arbitration & State Courts',
-    focus: 'Asset recovery across jurisdictions, maritime & commercial dispute notices.',
-    highlight: false,
-  },
-  {
-    name: 'Dubai (UAE)',
-    region: 'International',
-    countryOrState: 'United Arab Emirates',
-    forum: 'DIAC & DIFC Courts Representation',
-    focus: 'Middle-East trade arbitrations, enforcement of foreign decrees, cross-border banking recovery.',
-    highlight: false,
-  },
-  {
-    name: 'Kuwait City (Kuwait)',
-    region: 'International',
-    countryOrState: 'State of Kuwait',
-    forum: 'GCC Regional Arbitration & Legal Advisory',
-    focus: 'Gulf region corporate representations, expatriate asset claims & cross-border contracts.',
-    highlight: false,
-  },
-  {
-    name: 'Malaysia',
-    region: 'International',
-    countryOrState: 'Southeast Asia',
-    forum: 'AIAC / Kuala Lumpur Commercial Arbitration',
-    focus: 'South-East Asia bilateral dispute resolution, infrastructure contracts & maritime trade.',
-    highlight: false,
-  },
-  {
-    name: 'Indonesia',
-    region: 'International',
-    countryOrState: 'Southeast Asia',
-    forum: 'BANI & Regional Commercial Forums',
-    focus: 'Natural resources, energy contracts & international trade dispute strategy.',
-    highlight: false,
-  },
-
-  // Indian States & Metros
-  {
-    name: 'Delhi NCR',
-    region: 'India',
-    countryOrState: 'National Capital Territory',
-    forum: 'Supreme Court, Delhi High Court, NCLAT, DIAC',
-    focus: 'Appellate advocacy, commercial division suits, institutional arbitration & tribunal enforcement.',
-    highlight: true,
-  },
-  {
-    name: 'Uttar Pradesh',
-    region: 'India',
-    countryOrState: 'UP State Jurisdictions',
-    forum: 'Allahabad High Court, Lucknow Bench & Commercial Courts',
-    focus: 'Statewide recovery proceedings, civil revisions, writ petitions & government contract disputes.',
-    highlight: true,
-  },
-  {
-    name: 'Mumbai',
-    region: 'India',
-    countryOrState: 'Maharashtra',
-    forum: 'Bombay High Court, NCLT Principal Benches, DRT',
-    focus: 'Financial capital banking recovery, consortium debt restructuring & securities litigation.',
-    highlight: true,
-  },
-  {
-    name: 'Bangalore (Bengaluru)',
-    region: 'India',
-    countryOrState: 'Karnataka',
-    forum: 'Karnataka High Court & City Civil Courts',
-    focus: 'Tech commercial contracts, venture debt enforcement & software IP arbitrations.',
-    highlight: false,
-  },
-  {
-    name: 'Hyderabad',
-    region: 'India',
-    countryOrState: 'Telangana',
-    forum: 'Telangana High Court & IAMC Hyderabad',
-    focus: 'Pharma & infrastructure arbitrations, corporate recovery suits & commercial injunctions.',
-    highlight: false,
-  },
-  {
-    name: 'Gujarat',
-    region: 'India',
-    countryOrState: 'Gujarat State Jurisdictions',
-    forum: 'Gujarat High Court, GIFT City Arbitration',
-    focus: 'International financial services centre (GIFT City) disputes, ports & industrial debt resolution.',
-    highlight: false,
-  },
-  {
-    name: 'Kolkata',
-    region: 'India',
-    countryOrState: 'West Bengal',
-    forum: 'Calcutta High Court & Commercial Divisions',
-    focus: 'Heavy engineering, mining & eastern region banking debt enforcement matters.',
-    highlight: false,
-  },
+const regionalConnectionPointCount = 14;
+const networkLocations = [
+  'Noida', 'Varanasi', 'Atlanta', 'Georgia (USA)', 'Florida (USA)', 'Dubai', 'Kuwait City', 'Malaysia',
+  'Indonesia', 'Delhi NCR', 'Uttar Pradesh', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Gujarat', 'Kolkata',
 ];
 
 export function GlobalPresenceMap() {
   const [activeTheme, setActiveTheme] = useState<'dark' | 'light'>('dark');
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'international' | 'india'>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const filteredLocations = locationsList.filter((loc) => {
-    if (selectedFilter === 'all') return true;
-    if (selectedFilter === 'international') return loc.region === 'International';
-    if (selectedFilter === 'india') return loc.region === 'India' || loc.region === 'Hub';
-    return true;
-  });
 
   return (
     <section className="py-24 bg-navy-950 text-white relative overflow-hidden border-b border-navy-800">
@@ -191,7 +49,7 @@ export function GlobalPresenceMap() {
               <span className="font-semibold text-ivory-100">HQ Network: Noida &amp; Varanasi, India</span>
               <span className="text-navy-600">•</span>
               <span className="text-gold-400 font-medium">
-                {locationsList.filter((location) => location.region !== 'Hub').length} Regional Connection Points
+                {regionalConnectionPointCount} Regional Connection Points
               </span>
             </div>
 
@@ -244,7 +102,6 @@ export function GlobalPresenceMap() {
               }
               alt="Regional Office Network connecting Noida and Varanasi hubs with global and Indian jurisdictions"
               fill
-              priority
               className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
               sizes="(max-width: 1200px) 100vw, 1200px"
             />
@@ -268,7 +125,18 @@ export function GlobalPresenceMap() {
           </div>
 
           {/* Map Sub-features banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 mt-6 border-t border-navy-800 text-center text-xs text-ivory-300">
+          <div className="mt-6 border-t border-navy-800 pt-6">
+            <h3 className="font-heading text-lg text-ivory-100">Network Locations</h3>
+            <ul className="mt-3 grid grid-cols-2 gap-2 text-xs text-ivory-300 sm:grid-cols-4 lg:grid-cols-8">
+              {networkLocations.map((location) => (
+                <li key={location} className="border border-navy-800 bg-navy-950/50 px-3 py-2">
+                  {location}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 border-t border-navy-800 pt-6 text-center text-xs text-ivory-300 sm:grid-cols-2 lg:grid-cols-4">
             <div className="p-3 bg-navy-950/50 rounded-sm border border-navy-800/80">
               <span className="text-gold-400 font-semibold block mb-1">Global Reach</span>
               <span>USA • UAE • Kuwait • ASEAN</span>
@@ -288,126 +156,6 @@ export function GlobalPresenceMap() {
           </div>
         </div>
 
-        {/* Interactive Jurisdictional Directory & Focus Areas */}
-        <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-            <div>
-              <h3 className="font-heading text-2xl font-bold text-ivory-100">
-                Jurisdictional Breakdown &amp; Practice Forums
-              </h3>
-              <p className="text-xs text-ivory-400 mt-1">
-                Explore dispute resolution, court appearance, and advisory coverage for each territory.
-              </p>
-            </div>
-
-            {/* Filter Buttons */}
-            <div className="flex items-center gap-1.5 p-1 bg-navy-900 rounded-sm border border-navy-800 text-xs shrink-0">
-              <button
-                onClick={() => setSelectedFilter('all')}
-                className={cn(
-                  'px-3 py-1 rounded-xs transition-colors',
-                  selectedFilter === 'all'
-                    ? 'bg-gold-500 text-navy-950 font-semibold'
-                    : 'text-ivory-400 hover:text-white'
-                )}
-              >
-                All Jurisdictions ({locationsList.length})
-              </button>
-              <button
-                onClick={() => setSelectedFilter('international')}
-                className={cn(
-                  'px-3 py-1 rounded-xs transition-colors',
-                  selectedFilter === 'international'
-                    ? 'bg-gold-500 text-navy-950 font-semibold'
-                    : 'text-ivory-400 hover:text-white'
-                )}
-              >
-                Global Outreach (7)
-              </button>
-              <button
-                onClick={() => setSelectedFilter('india')}
-                className={cn(
-                  'px-3 py-1 rounded-xs transition-colors',
-                  selectedFilter === 'india'
-                    ? 'bg-gold-500 text-navy-950 font-semibold'
-                    : 'text-ivory-400 hover:text-white'
-                )}
-              >
-                Indian Jurisdictions ({locationsList.filter((location) => location.region === 'India' || location.region === 'Hub').length})
-              </button>
-            </div>
-          </div>
-
-          {/* Locations Matrix */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredLocations.map((loc) => (
-              <div
-                key={loc.name}
-                className={cn(
-                  'p-6 rounded-sm border transition-all duration-300 hover:border-gold-500/60 bg-navy-900/70 relative flex flex-col justify-between',
-                  loc.region === 'Hub'
-                    ? 'border-gold-500 bg-navy-900 shadow-lg ring-1 ring-gold-500/30'
-                    : 'border-navy-800'
-                )}
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-2">
-                      <MapPin
-                        size={16}
-                        className={
-                          loc.region === 'Hub'
-                            ? 'text-red-400 fill-red-400'
-                            : loc.region === 'International'
-                              ? 'text-gold-400'
-                              : 'text-blue-400'
-                        }
-                      />
-                      <span className="font-heading font-bold text-lg text-ivory-100">
-                        {loc.name}
-                      </span>
-                    </div>
-                    <span
-                      className={cn(
-                        'text-[10px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-xs shrink-0',
-                        loc.region === 'Hub'
-                          ? 'bg-gold-500 text-navy-950'
-                          : loc.region === 'International'
-                            ? 'bg-navy-800 text-gold-300 border border-gold-500/30'
-                            : 'bg-navy-800 text-blue-300 border border-blue-500/30'
-                      )}
-                    >
-                      {loc.region === 'Hub'
-                        ? loc.designation || 'HQ'
-                        : loc.region === 'International'
-                          ? 'Global'
-                          : 'India'}
-                    </span>
-                  </div>
-
-                  <p className="text-xs font-medium text-gold-400 mb-2">
-                    {loc.forum}
-                  </p>
-
-                  <p className="text-xs text-ivory-300 leading-relaxed">
-                    {loc.focus}
-                  </p>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-navy-800/80 flex items-center justify-between text-[11px] text-ivory-400">
-                  <span>{loc.region === 'Hub' ? `${loc.regionTag} · ${loc.countryOrState}` : loc.countryOrState}</span>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1 text-gold-400 hover:text-gold-300 font-medium transition-colors"
-                  >
-                    <span>Matter Inquiry</span>
-                    <span>&rarr;</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Fullscreen Lightbox Modal */}

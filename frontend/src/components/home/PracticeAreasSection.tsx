@@ -21,15 +21,16 @@ export function PracticeAreasSection() {
             <div className="w-16 h-0.5 bg-gold-500 mt-4"></div>
           </div>
           <p className="text-charcoal-600 text-sm md:text-base max-w-md leading-relaxed">
-            Every practice area is backed by hands-on litigation methodology, proactive risk mitigation, 
+            Every practice area is backed by hands-on litigation methodology, proactive risk mitigation,
             forensic evidentiary audits, and decisive courtroom advocacy.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {practiceAreas.map((area) => (
-            <div
+            <Link
               key={area.id}
+              href={`/practice-areas/${area.slug}`}
               className="group flex flex-col h-full bg-white border border-charcoal-200/80 shadow-xs hover:shadow-xl transition-all duration-300 rounded-sm overflow-hidden hover:-translate-y-1"
             >
               {/* Image Container */}
@@ -55,7 +56,7 @@ export function PracticeAreasSection() {
                 <h3 className="font-heading text-xl md:text-2xl text-navy-950 font-bold mb-3 group-hover:text-gold-700 transition-colors">
                   {area.title}
                 </h3>
-                
+
                 <p className="text-charcoal-600 text-xs md:text-sm leading-relaxed mb-5">
                   {area.shortDescription}
                 </p>
@@ -71,16 +72,13 @@ export function PracticeAreasSection() {
                 </div>
 
                 <div className="pt-4 border-t border-charcoal-100 flex items-center justify-between">
-                  <Link
-                    href={`/practice-areas/${area.slug}`}
-                    className="inline-flex items-center text-xs font-bold tracking-wider uppercase text-navy-900 hover:text-gold-600 transition-colors gap-2"
-                  >
+                  <span className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-wider text-navy-900 transition-colors group-hover:text-gold-600">
                     <span>Read Case Methodology</span>
                     <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                  </Link>
+                  </span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

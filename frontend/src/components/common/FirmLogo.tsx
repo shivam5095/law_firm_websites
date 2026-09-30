@@ -9,6 +9,7 @@ interface FirmLogoProps {
   variant?: 'full' | 'emblem' | 'compact';
   theme?: 'light' | 'dark';
   href?: string;
+  priority?: boolean;
 }
 
 export function FirmLogo({
@@ -16,6 +17,7 @@ export function FirmLogo({
   variant = 'full',
   theme = 'light',
   href = '/',
+  priority = false,
 }: FirmLogoProps) {
   const isDarkTheme = theme === 'dark';
 
@@ -27,8 +29,9 @@ export function FirmLogo({
           alt=""
           width={48}
           height={48}
+          sizes="48px"
+          fetchPriority={priority ? 'high' : undefined}
           className="w-full h-full"
-          priority
         />
       </div>
 
@@ -50,7 +53,7 @@ export function FirmLogo({
             <span
               className={cn(
                 'text-[9px] md:text-[10px] font-semibold tracking-[0.04em] leading-tight',
-                isDarkTheme ? 'text-gold-400' : 'text-gold-600'
+                isDarkTheme ? 'text-gold-400' : 'text-navy-800'
               )}
             >
               {firm.tagline}
@@ -63,7 +66,7 @@ export function FirmLogo({
 
   if (href) {
     return (
-      <Link href={href} aria-label={firm.name}>
+      <Link href={href} aria-label={variant === 'emblem' ? firm.name : undefined}>
         {logoContent}
       </Link>
     );
