@@ -53,7 +53,7 @@ export const lawyers: Lawyer[] = [
     slug: 'anand-kumar-maurya',
     name: 'Anand Kumar Maurya',
     designation: 'Advocate',
-    email: 'anandkrmaurya13@gmail.com',
+    email: 'contact.mauryaandco@gmail.com',
     phone: '+917985933594',
     image: '/images/team/anand-kumar-maurya.jpg',
     shortBio: 'Anand Kumar Maurya is a specialized Advocate focusing on complex commercial arbitration, restructuring, and banking & finance disputes. He brings robust strategic insight and a detail-oriented approach to high-stakes legal matters.',
