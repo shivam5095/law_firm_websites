@@ -48,24 +48,16 @@ export function FloatingButtons() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 right-6 z-40 hidden flex-col gap-3 md:flex"
+            className="fixed bottom-[88px] right-6 z-40 hidden md:flex"
           >
-            <a
-              href={getPhoneUrl(firm.phone)}
-              className="group flex items-center justify-center rounded-full bg-navy-800 p-3 text-white shadow-lg transition-colors hover:bg-navy-700"
-              aria-label="Call us"
-            >
-              <Phone size={24} className="transition-transform group-hover:scale-110" />
-            </a>
-
             <a
               href={getWhatsAppUrl(firm.whatsapp)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-center rounded-full bg-green-600 p-3 text-white shadow-lg transition-colors hover:bg-green-500"
+              className="group flex size-12 items-center justify-center rounded-full bg-gold-500 text-navy-950 shadow-lg transition-colors hover:bg-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
               aria-label="Message on WhatsApp"
             >
-              <MessageCircle size={24} className="transition-transform group-hover:scale-110" />
+              <MessageCircle aria-hidden="true" size={24} className="transition-transform group-hover:scale-110" />
             </a>
           </motion.div>
         )}
@@ -75,22 +67,22 @@ export function FloatingButtons() {
         <div
           aria-hidden="true"
           className="md:hidden"
-          style={{ height: 'calc(4rem + env(safe-area-inset-bottom))' }}
+          style={{ height: 'calc(61px + env(safe-area-inset-bottom))' }}
         />
       )}
 
       {!hidePhoneBar && !isKeyboardOpen && (
-        <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-charcoal-200 bg-white/95 p-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] shadow-[0_-8px_24px_rgba(10,22,40,0.12)] backdrop-blur md:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-gold-500 bg-navy-950 p-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] shadow-[0_-8px_24px_rgba(10,22,40,0.12)] md:hidden">
           <a
             href={getPhoneUrl(firm.phone)}
-            className="flex min-h-11 items-center justify-center gap-2 bg-navy-900 px-3 text-xs font-semibold uppercase text-white"
+            className="flex min-h-11 items-center justify-center gap-2 bg-navy-900 px-3 text-xs font-semibold uppercase text-white focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
           >
             <Phone size={16} aria-hidden="true" />
             Call
           </a>
           <Link
             href="/consultation"
-            className="flex min-h-11 items-center justify-center gap-2 bg-gold-500 px-3 text-xs font-semibold uppercase text-navy-950"
+            className="flex min-h-11 items-center justify-center gap-2 bg-gold-500 px-3 text-xs font-semibold uppercase text-navy-950 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
           >
             Request Consultation
           </Link>
