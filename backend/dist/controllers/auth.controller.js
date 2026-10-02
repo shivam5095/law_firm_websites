@@ -73,7 +73,7 @@ async function login(req, res, next) {
                 errors: [],
             });
         }
-        const secret = process.env.JWT_SECRET || 'fallback_secret';
+        const secret = process.env.JWT_SECRET;
         const expires = process.env.JWT_EXPIRES_IN || '1d';
         const token = jwt.sign({
             id: user.id,

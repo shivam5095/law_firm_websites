@@ -1,5 +1,6 @@
 import rateLimit from 'express-rate-limit';
 
+// For multi-instance/serverless deployments, upgrade to shared Upstash Redis rate limiting.
 // Standard rate limit for all endpoints: max 100 requests per 15 mins
 export const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

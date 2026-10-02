@@ -13,6 +13,7 @@ import {
 } from '../controllers/admin.controller';
 import { authMiddleware, adminMiddleware } from '../middleware/authMiddleware';
 import { strictLimiter } from '../middleware/rateLimitMiddleware';
+import prisma from '../config/db';
 import careersRouter from './careers.routes';
 
 const router = Router();
@@ -21,12 +22,13 @@ const router = Router();
 router.use('/', careersRouter);
 
 // Health Check
-router.get('/health', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'API is running smoothly.',
-    data: { uptime: process.uptime() },
-  });
+router.get('/health', async (_req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    return res.status(200).json({ status: 'ok', database: 'up' });
+  } catch {
+    return res.status(503).json({ status: 'error', database: 'down' });
+  }
 });
 
 // Public Submission Routes (Rate Limited)

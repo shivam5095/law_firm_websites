@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.careerApplicationSchema = void 0;
+exports.careerApplicationSchema = exports.resumeSizeSchema = exports.MAX_RESUME_SIZE_BYTES = void 0;
 const zod_1 = require("zod");
+exports.MAX_RESUME_SIZE_BYTES = 4 * 1024 * 1024;
+exports.resumeSizeSchema = zod_1.z.number().max(exports.MAX_RESUME_SIZE_BYTES, 'Resume must be 4 MB or smaller.');
 exports.careerApplicationSchema = zod_1.z.object({
     fullName: zod_1.z.string().trim().min(2, 'Full name must be at least 2 characters long').max(120),
     email: zod_1.z.string().trim().email('Invalid email address').max(254),

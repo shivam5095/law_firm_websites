@@ -33,40 +33,5 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authMiddleware = authMiddleware;
-exports.adminMiddleware = adminMiddleware;
-const jwt = __importStar(require("jsonwebtoken"));
-function authMiddleware(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({
-            success: false,
-            message: 'Access denied. No authentication token provided.',
-            errors: [],
-        });
-    }
-    const token = authHeader.split(' ')[1];
-    const secret = process.env.JWT_SECRET;
-    try {
-        const decoded = jwt.verify(token, secret);
-        req.user = decoded;
-        next();
-    }
-    catch (error) {
-        return res.status(401).json({
-            success: false,
-            message: 'Invalid or expired authentication token.',
-            errors: [],
-        });
-    }
-}
-function adminMiddleware(req, res, next) {
-    if (!req.user || req.user.role !== 'ADMIN') {
-        return res.status(403).json({
-            success: false,
-            message: 'Access denied. Administrator privileges required.',
-            errors: [],
-        });
-    }
-    next();
-}
+const dotenv = __importStar(require("dotenv"));
+dotenv.config();

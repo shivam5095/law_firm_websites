@@ -25,7 +25,7 @@ export function authMiddleware(
   }
 
   const token = authHeader.split(' ')[1];
-  const secret = process.env.JWT_SECRET || 'fallback_secret';
+  const secret = process.env.JWT_SECRET as string;
 
   try {
     const decoded = jwt.verify(token, secret) as {

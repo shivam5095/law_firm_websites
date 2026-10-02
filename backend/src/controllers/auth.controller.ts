@@ -41,7 +41,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       });
     }
 
-    const secret = process.env.JWT_SECRET || 'fallback_secret';
+    const secret = process.env.JWT_SECRET as string;
     const expires = process.env.JWT_EXPIRES_IN || '1d';
 
     const token = jwt.sign(

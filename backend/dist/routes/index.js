@@ -9,17 +9,20 @@ const auth_controller_1 = require("../controllers/auth.controller");
 const admin_controller_1 = require("../controllers/admin.controller");
 const authMiddleware_1 = require("../middleware/authMiddleware");
 const rateLimitMiddleware_1 = require("../middleware/rateLimitMiddleware");
+const db_1 = __importDefault(require("../config/db"));
 const careers_routes_1 = __importDefault(require("./careers.routes"));
 const router = (0, express_1.Router)();
 // Mount Careers Sub-module
 router.use('/', careers_routes_1.default);
 // Health Check
-router.get('/health', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'API is running smoothly.',
-        data: { uptime: process.uptime() },
-    });
+router.get('/health', async (_req, res) => {
+    try {
+        await db_1.default.$queryRaw `SELECT 1`;
+        return res.status(200).json({ status: 'ok', database: 'up' });
+    }
+    catch {
+        return res.status(503).json({ status: 'error', database: 'down' });
+    }
 });
 // Public Submission Routes (Rate Limited)
 router.post('/contact', rateLimitMiddleware_1.strictLimiter, submission_controller_1.createContact);

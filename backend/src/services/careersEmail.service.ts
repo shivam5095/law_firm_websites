@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const apiKey = process.env.RESEND_API_KEY;
 const resend = apiKey && apiKey !== 're_123456789' ? new Resend(apiKey) : null;
-const careersEmail = process.env.CAREERS_EMAIL || process.env.CONTACT_EMAIL || 'anandkrmaurya13@gmail.com';
+const careersEmail = process.env.CAREERS_EMAIL || process.env.CONTACT_EMAIL || 'contact.mauryaandco@gmail.com';
 
 function escapeHtml(value: string) {
     return value.replace(/[&<>"']/g, (character) => ({

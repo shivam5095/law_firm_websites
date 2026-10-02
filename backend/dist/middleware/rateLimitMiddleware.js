@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.strictLimiter = exports.apiLimiter = void 0;
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+// For multi-instance/serverless deployments, upgrade to shared Upstash Redis rate limiting.
 // Standard rate limit for all endpoints: max 100 requests per 15 mins
 exports.apiLimiter = (0, express_rate_limit_1.default)({
     windowMs: 15 * 60 * 1000, // 15 minutes

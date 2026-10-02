@@ -1,7 +1,7 @@
 import { Briefcase, Mail } from 'lucide-react';
 
 export default function CareersInboxPage() {
-    const careersEmail = process.env.NEXT_PUBLIC_CAREERS_EMAIL || 'anandkrmaurya13@gmail.com';
+    const careersEmail = process.env.NEXT_PUBLIC_CAREERS_EMAIL || 'contact.mauryaandco@gmail.com';
 
     return (
         <section className="max-w-3xl space-y-6">

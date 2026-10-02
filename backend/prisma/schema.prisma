@@ -1,6 +1,7 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -12,9 +13,12 @@ model AdminUser {
   name         String
   email        String   @unique
   passwordHash String
+  // Kept as String to preserve compatibility with existing role values.
   role         String   @default("ADMIN")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([createdAt])
 }
 
 model ContactMessage {
@@ -24,9 +28,14 @@ model ContactMessage {
   phone     String?
   subject   String
   message   String
+  // Status fields remain strings to preserve current API values.
   status    String   @default("NEW") // NEW, CONTACTED, IN_PROGRESS, CLOSED
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
 }
 
 model ConsultationRequest {
@@ -41,5 +50,9 @@ model ConsultationRequest {
   status        String   @default("NEW") // NEW, CONTACTED, IN_PROGRESS, CLOSED
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
 }
 

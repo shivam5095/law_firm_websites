@@ -44,7 +44,7 @@ const careers_validator_1 = require("../validators/careers.validator");
 const careersEmail_service_1 = require("../services/careersEmail.service");
 const upload = (0, multer_1.default)({
     storage: multer_1.default.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024, files: 1 },
+    limits: { fileSize: careers_validator_1.MAX_RESUME_SIZE_BYTES, files: 1 },
     fileFilter: (_req, file, callback) => {
         const extension = path.extname(file.originalname).toLowerCase();
         if (['.pdf', '.doc', '.docx'].includes(extension)) {
@@ -58,10 +58,13 @@ const uploadSingleResume = upload.single('resume');
 function uploadResume(req, res, next) {
     uploadSingleResume(req, res, (error) => {
         if (error) {
+            const message = error instanceof multer_1.default.MulterError && error.code === 'LIMIT_FILE_SIZE'
+                ? 'Resume must be 4 MB or smaller.'
+                : error.message;
             return res.status(400).json({
                 success: false,
-                message: error.message,
-                errors: [{ field: 'resume', message: error.message }],
+                message,
+                errors: [{ field: 'resume', message }],
             });
         }
         return next();
@@ -89,7 +92,15 @@ async function applyForInternship(req, res, next) {
         return res.status(400).json({
             success: false,
             message: 'Resume upload is required.',
-            errors: [{ field: 'resume', message: 'Please attach a PDF or DOC resume up to 5 MB.' }],
+            errors: [{ field: 'resume', message: 'Please attach a PDF or DOC resume up to 4 MB.' }],
+        });
+    }
+    const resumeSize = careers_validator_1.resumeSizeSchema.safeParse(req.file.size);
+    if (!resumeSize.success) {
+        return res.status(400).json({
+            success: false,
+            message: resumeSize.error.errors[0].message,
+            errors: [{ field: 'resume', message: resumeSize.error.errors[0].message }],
         });
     }
     try {

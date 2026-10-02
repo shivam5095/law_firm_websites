@@ -1,21 +1,23 @@
+import '../src/config/loadEnv';
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
-
-// Load env variables
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = process.env.ADMIN_EMAIL || 'admin@lawfirm.com';
+  const email = process.env.ADMIN_EMAIL;
   const password = process.env.ADMIN_PASSWORD;
 
+  if (!email) {
+    throw new Error('ADMIN_EMAIL environment variable is required.');
+  }
+
   if (!password) {
-    console.error('Error: ADMIN_PASSWORD environment variable is not defined.');
-    console.log('Skipping seed or please define ADMIN_PASSWORD in your backend/.env file.');
-    process.exit(1);
+    throw new Error('ADMIN_PASSWORD environment variable is required.');
+  }
+
+  if (password.length < 12) {
+    throw new Error('ADMIN_PASSWORD must be at least 12 characters long.');
   }
 
   console.log(`Starting seeding for admin user: ${email}...`);

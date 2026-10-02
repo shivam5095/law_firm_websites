@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+export const MAX_RESUME_SIZE_BYTES = 4 * 1024 * 1024;
+export const resumeSizeSchema = z.number().max(MAX_RESUME_SIZE_BYTES, 'Resume must be 4 MB or smaller.');
+
 export const careerApplicationSchema = z.object({
     fullName: z.string().trim().min(2, 'Full name must be at least 2 characters long').max(120),
     email: z.string().trim().email('Invalid email address').max(254),

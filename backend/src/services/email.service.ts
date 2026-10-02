@@ -9,7 +9,7 @@ if (apiKey && apiKey !== 're_123456789') {
   console.log('[Email Service] Warning: RESEND_API_KEY is not defined or is placeholder. Emails will be logged to console.');
 }
 
-const targetEmail = process.env.CONTACT_EMAIL || 'anandkrmaurya13@gmail.com';
+const targetEmail = process.env.CONTACT_EMAIL || 'contact.mauryaandco@gmail.com';
 
 export async function sendContactNotification(data: {
   name: string;
@@ -64,7 +64,7 @@ export async function sendConsultationNotification(data: {
   const formattedDate = new Date(data.preferredDate).toLocaleDateString('en-IN', {
     dateStyle: 'full',
   });
-  
+
   const subject = `[Consultation Request] ${data.name} - ${data.matterType}`;
   const html = `
     <h2>New Consultation Request</h2>

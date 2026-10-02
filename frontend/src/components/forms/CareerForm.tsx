@@ -26,8 +26,8 @@ export function CareerForm() {
             setIsSubmitting(false);
             return;
         }
-        if (resume.size > 5 * 1024 * 1024) {
-            setErrorMessage('Resume must be 5 MB or smaller.');
+        if (resume.size > 4 * 1024 * 1024) {
+            setErrorMessage('Resume must be 4 MB or smaller.');
             setIsSubmitting(false);
             return;
         }
@@ -87,7 +87,7 @@ export function CareerForm() {
                 <textarea name="message" rows={4} required minLength={10} maxLength={3000} className={`${inputClass} resize-y`} placeholder="A brief introduction and what you hope to work on..." />
             </label>
             <div className="space-y-2">
-                <span className="block text-sm font-medium text-charcoal-700">Resume (PDF, DOC, or DOCX, max 5 MB)</span>
+                <span className="block text-sm font-medium text-charcoal-700">Resume (PDF, DOC, or DOCX, max 4 MB)</span>
                 <label className="flex min-h-12 cursor-pointer items-center gap-3 border border-charcoal-200 bg-white px-4 py-3 text-sm text-charcoal-700 hover:border-navy-600">
                     <Upload size={17} className="shrink-0 text-gold-700" />
                     <span className="truncate">{resumeName || 'Choose a file'}</span>
