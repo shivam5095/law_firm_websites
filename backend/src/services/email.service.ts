@@ -10,6 +10,7 @@ if (apiKey && apiKey !== 're_123456789') {
 }
 
 const targetEmail = process.env.CONTACT_EMAIL || 'contact.mauryaandco@gmail.com';
+const fromEmail = process.env.RESEND_FROM_EMAIL || 'Law Firm Website <onboarding@resend.dev>';
 
 export async function sendContactNotification(data: {
   name: string;
@@ -33,15 +34,16 @@ export async function sendContactNotification(data: {
 
   if (resend) {
     try {
-      await resend.emails.send({
-        from: 'Law Firm Website <onboarding@resend.dev>',
+      const { data, error } = await resend.emails.send({
+        from: fromEmail,
         to: targetEmail,
         subject,
         html,
       });
-      console.log(`[Email Service] Contact notification email sent to ${targetEmail}`);
+      if (error) throw new Error(error.message);
+      console.log(`[Email Service] Contact notification accepted by Resend (id=${data?.id})`);
     } catch (error) {
-      console.error('[Email Service] Failed to send contact notification:', error);
+      console.error('[Email Service] Resend rejected contact notification:', error);
     }
   } else {
     console.log('\n--- DEV EMAIL SIMULATION ---');
@@ -82,15 +84,16 @@ export async function sendConsultationNotification(data: {
 
   if (resend) {
     try {
-      await resend.emails.send({
-        from: 'Law Firm Website <onboarding@resend.dev>',
+      const { data, error } = await resend.emails.send({
+        from: fromEmail,
         to: targetEmail,
         subject,
         html,
       });
-      console.log(`[Email Service] Consultation notification email sent to ${targetEmail}`);
+      if (error) throw new Error(error.message);
+      console.log(`[Email Service] Consultation notification accepted by Resend (id=${data?.id})`);
     } catch (error) {
-      console.error('[Email Service] Failed to send consultation notification:', error);
+      console.error('[Email Service] Resend rejected consultation notification:', error);
     }
   } else {
     console.log('\n--- DEV EMAIL SIMULATION ---');
