@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model AdminUser {
@@ -13,7 +13,6 @@ model AdminUser {
   name         String
   email        String   @unique
   passwordHash String
-  // Kept as String to preserve compatibility with existing role values.
   role         String   @default("ADMIN")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -28,8 +27,7 @@ model ContactMessage {
   phone     String?
   subject   String
   message   String
-  // Status fields remain strings to preserve current API values.
-  status    String   @default("NEW") // NEW, CONTACTED, IN_PROGRESS, CLOSED
+  status    String   @default("NEW")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -44,10 +42,10 @@ model ConsultationRequest {
   email         String
   phone         String
   matterType    String
-  preferredMode String   // Office, Phone, Video
+  preferredMode String
   preferredDate DateTime
   message       String?
-  status        String   @default("NEW") // NEW, CONTACTED, IN_PROGRESS, CLOSED
+  status        String   @default("NEW")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -56,3 +54,20 @@ model ConsultationRequest {
   @@index([createdAt])
 }
 
+model Lawyer {
+  id             String   @id @default(uuid())
+  name           String
+  designation    String
+  specialization String
+  bio            String?
+  email          String?
+  phone          String?
+  image          String?
+  experience     Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([name])
+  @@index([specialization])
+  @@index([createdAt])
+}

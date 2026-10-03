@@ -1,10 +1,5 @@
 import { Router } from 'express';
-
-import {
-  createContact,
-  createConsultation,
-} from '../controllers/submission.controller';
-
+import { createContact, createConsultation } from '../controllers/submission.controller';
 import { login } from '../controllers/auth.controller';
 
 import {
@@ -18,15 +13,8 @@ import {
   deleteConsultation,
 } from '../controllers/admin.controller';
 
-import {
-  authMiddleware,
-  adminMiddleware,
-} from '../middleware/authMiddleware';
-
-import {
-  strictLimiter,
-} from '../middleware/rateLimitMiddleware';
-
+import { authMiddleware, adminMiddleware } from '../middleware/authMiddleware';
+import { strictLimiter } from '../middleware/rateLimitMiddleware';
 import prisma from '../config/db';
 
 import careersRouter from './careers.routes';
@@ -34,22 +22,13 @@ import lawyersRouter from './lawyers.routes';
 
 const router = Router();
 
-/* =========================================
-   CAREERS ROUTES
-   ========================================= */
-
+// Careers
 router.use('/', careersRouter);
 
-/* =========================================
-   LAWYERS ROUTES
-   ========================================= */
-
+// Lawyers
 router.use('/', lawyersRouter);
 
-/* =========================================
-   HEALTH CHECK
-   ========================================= */
-
+// Health Check
 router.get('/health', async (_req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
@@ -58,46 +37,8 @@ router.get('/health', async (_req, res) => {
       status: 'ok',
       database: 'up',
     });
-  } catch (error: unknown) {
-    const errorDetails =
-      error && typeof error === 'object'
-        ? (error as {
-          name?: unknown;
-          code?: unknown;
-          message?: unknown;
-        })
-        : {};
-
-    const sanitize = (value: unknown) => {
-      if (typeof value === 'string') {
-        return value.replace(
-          /postgres(?:ql)?:\/\/\S+/gi,
-          '[redacted]'
-        );
-      }
-
-      if (
-        typeof value === 'number' ||
-        typeof value === 'boolean' ||
-        value == null
-      ) {
-        return value;
-      }
-
-      return '[non-primitive error field]';
-    };
-
-    console.error({
-      name: sanitize(errorDetails.name),
-
-      ...(errorDetails.code !== undefined
-        ? {
-          code: sanitize(errorDetails.code),
-        }
-        : {}),
-
-      message: sanitize(errorDetails.message),
-    });
+  } catch (error) {
+    console.error('Database health check failed:', error);
 
     return res.status(503).json({
       status: 'error',
@@ -106,90 +47,25 @@ router.get('/health', async (_req, res) => {
   }
 });
 
-/* =========================================
-   PUBLIC SUBMISSION ROUTES
-   ========================================= */
+// Public submissions
+router.post('/contact', strictLimiter, createContact);
+router.post('/consultations', strictLimiter, createConsultation);
 
-// Contact form
-router.post(
-  '/contact',
-  strictLimiter,
-  createContact
-);
+// Login
+router.post('/auth/login', strictLimiter, login);
 
-// Consultation form
-router.post(
-  '/consultations',
-  strictLimiter,
-  createConsultation
-);
+// Admin authentication
+router.use('/admin', authMiddleware, adminMiddleware);
 
-/* =========================================
-   AUTHENTICATION
-   ========================================= */
+router.get('/admin/contacts', getContacts);
+router.get('/admin/contacts/:id', getContactById);
+router.patch('/admin/contacts/:id/status', updateContactStatus);
+router.delete('/admin/contacts/:id', deleteContact);
 
-router.post(
-  '/auth/login',
-  strictLimiter,
-  login
-);
-
-/* =========================================
-   ADMIN ROUTES
-   ========================================= */
-
-router.use(
-  '/admin',
-  authMiddleware,
-  adminMiddleware
-);
-
-/* =========================================
-   ADMIN CONTACTS
-   ========================================= */
-
-router.get(
-  '/admin/contacts',
-  getContacts
-);
-
-router.get(
-  '/admin/contacts/:id',
-  getContactById
-);
-
-router.patch(
-  '/admin/contacts/:id/status',
-  updateContactStatus
-);
-
-router.delete(
-  '/admin/contacts/:id',
-  deleteContact
-);
-
-/* =========================================
-   ADMIN CONSULTATIONS
-   ========================================= */
-
-router.get(
-  '/admin/consultations',
-  getConsultations
-);
-
-router.get(
-  '/admin/consultations/:id',
-  getConsultationById
-);
-
-router.patch(
-  '/admin/consultations/:id/status',
-  updateConsultationStatus
-);
-
-router.delete(
-  '/admin/consultations/:id',
-  deleteConsultation
-);
+router.get('/admin/consultations', getConsultations);
+router.get('/admin/consultations/:id', getConsultationById);
+router.patch('/admin/consultations/:id/status', updateConsultationStatus);
+router.delete('/admin/consultations/:id', deleteConsultation);
 
 export default router;
+
