@@ -26,7 +26,20 @@ router.get('/health', async (_req, res) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
     return res.status(200).json({ status: 'ok', database: 'up' });
-  } catch {
+  } catch (error: unknown) {
+    const errorDetails = error && typeof error === 'object'
+      ? error as { name?: unknown; code?: unknown; message?: unknown }
+      : {};
+    const sanitize = (value: unknown) => {
+      if (typeof value === 'string') return value.replace(/postgres(?:ql)?:\/\/\S+/gi, '[redacted]');
+      if (typeof value === 'number' || typeof value === 'boolean' || value == null) return value;
+      return '[non-primitive error field]';
+    };
+    console.error({
+      name: sanitize(errorDetails.name),
+      ...(errorDetails.code !== undefined ? { code: sanitize(errorDetails.code) } : {}),
+      message: sanitize(errorDetails.message),
+    });
     return res.status(503).json({ status: 'error', database: 'down' });
   }
 });
