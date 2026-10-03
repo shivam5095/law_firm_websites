@@ -2,16 +2,14 @@ import './config/env';
 import app from './app';
 import prisma from './config/db';
 
-if (!process.env.VERCEL) {
-  if (process.env.NODE_ENV !== 'production') {
-    try {
-      const databaseUrl = new URL(process.env.DATABASE_URL as string);
-      console.log(`[Server] Database host=${databaseUrl.hostname} port=${databaseUrl.port || '5432'}`);
-    } catch {
-      console.log('[Server] Database host and port unavailable');
-    }
-  }
+try {
+  const databaseUrl = new URL(process.env.DATABASE_URL as string);
+  console.log(`[Server] Database host=${databaseUrl.hostname} port=${databaseUrl.port || '5432'}`);
+} catch {
+  console.log('[Server] Database host and port unavailable');
+}
 
+if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
   const server = app.listen(PORT, () => {
     console.log(`[Server] Backend running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
