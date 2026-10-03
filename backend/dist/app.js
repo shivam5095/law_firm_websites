@@ -12,6 +12,8 @@ const routes_1 = __importDefault(require("./routes"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const rateLimitMiddleware_1 = require("./middleware/rateLimitMiddleware");
 const app = (0, express_1.default)();
+// Vercel sits behind exactly one proxy hop.
+app.set('trust proxy', 1);
 // Security Headers
 app.use((0, helmet_1.default)());
 // CORS configuration - Allow only specific frontend and admin origins

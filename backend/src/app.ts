@@ -8,6 +8,8 @@ import { errorMiddleware } from './middleware/errorMiddleware';
 import { apiLimiter } from './middleware/rateLimitMiddleware';
 
 const app = express();
+// Vercel sits behind exactly one proxy hop.
+app.set('trust proxy', 1);
 
 // Security Headers
 app.use(helmet());
