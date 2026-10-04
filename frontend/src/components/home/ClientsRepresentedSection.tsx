@@ -539,11 +539,6 @@ export function ClientsRepresentedSection() {
           </button>
         </div>
 
-        {/* Bar Council Compliance Disclaimer Note */}
-        <div className="mt-8 p-4 bg-ivory-50 border border-charcoal-200 text-xs text-charcoal-500 leading-relaxed rounded-sm">
-          <strong className="text-navy-900 font-medium">Informational Disclaimer: </strong>
-          The institutional names listed above represent corporate banks and non-banking financial entities for which the advocate and chambers have undertaken legal assignments, litigation, tribunal representation, facility documentation, or advisory matters. In adherence to the Bar Council of India rules, this compilation is intended strictly for factual informational reference and does not constitute advertisement or solicitation of legal business.
-        </div>
       </div>
     </section>
   );

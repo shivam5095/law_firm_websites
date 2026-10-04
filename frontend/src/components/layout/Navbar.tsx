@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone } from 'lucide-react';
 import { firm } from '@/data/firm';
-import { FirmLogo } from '@/components/common/FirmLogo';
 import { getWhatsAppUrl, getPhoneUrl } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
@@ -18,8 +18,6 @@ const navItems = [
   { label: 'Insights', href: '/insights' },
   { label: 'Publications', href: '/publications' },
   { label: 'Careers', href: '/careers' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 export function Navbar() {
@@ -89,32 +87,49 @@ export function Navbar() {
           : 'bg-white/90 backdrop-blur-sm border-b border-charcoal-100'
       )}
     >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-2 px-4 md:px-6 lg:px-8">
-        <FirmLogo theme="light" className="navbar-logo" priority />
+      <div className="mx-auto flex h-full max-w-7xl flex-nowrap items-center justify-between gap-2 px-4 md:px-6 lg:px-8">
+        <Link href="/" aria-label="Maurya & Co.">
+          <Image
+            src="/images/logo/firm-logo-full-nowhite.png"
+            alt="Maurya & Co. Advocates and Legal Consultants"
+            width={1073}
+            height={210}
+            priority
+            className="h-auto w-[230px] max-w-[55vw]"
+          />
+        </Link>
 
-        <nav aria-label="Primary navigation" className="desktop-nav hidden items-center gap-1 lg:flex xl:gap-3 2xl:gap-5">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'min-h-11 whitespace-nowrap px-0.5 text-[11px] font-medium transition-colors hover:text-gold-600 xl:px-1 xl:text-[12px] 2xl:text-[13px]',
-                pathname === item.href
-                  ? 'text-navy-900 font-semibold underline decoration-gold-500 underline-offset-4'
-                  : 'text-navy-900'
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden flex-nowrap items-center gap-6 lg:flex">
+          <nav aria-label="Primary navigation" className="desktop-nav hidden flex-nowrap items-center gap-0 lg:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'min-h-11 whitespace-nowrap px-0.5 text-[11px] font-medium transition-colors hover:text-gold-600 xl:px-1 xl:text-[12px] 2xl:text-[13px]',
+                  pathname === item.href
+                    ? 'text-navy-900 font-semibold underline decoration-gold-500 underline-offset-4'
+                    : 'text-navy-900'
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <nav aria-label="Primary navigation" className="tablet-nav hidden items-center gap-2">
+          <Link
+            href="/consultation"
+            className="desktop-consultation hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-4 text-xs font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950 2xl:px-5"
+          >
+            Request Consultation
+          </Link>
+        </div>
+
+        <nav aria-label="Primary navigation" className="tablet-nav !hidden items-center gap-2">
           {[
             { label: 'Practice Areas', href: '/practice-areas' },
             { label: 'Experience', href: '/experience' },
             { label: 'Team', href: '/team' },
-            { label: 'Contact', href: '/contact' },
           ].map((item) => (
             <Link key={item.href} href={item.href} className="min-h-11 whitespace-nowrap px-1 text-xs font-medium text-navy-900 hover:text-gold-600">
               {item.label}
@@ -125,7 +140,7 @@ export function Navbar() {
               More
             </summary>
             <div className="absolute right-0 top-full z-20 min-w-48 border border-charcoal-200 bg-white p-2 shadow-lg">
-              {navItems.filter((item) => !['/practice-areas', '/experience', '/team', '/contact'].includes(item.href)).map((item) => (
+              {navItems.filter((item) => !['/practice-areas', '/experience', '/team'].includes(item.href)).map((item) => (
                 <Link key={item.href} href={item.href} className="flex min-h-11 items-center px-3 text-sm text-navy-900 hover:bg-ivory-50 hover:text-gold-700">
                   {item.label}
                 </Link>
@@ -134,23 +149,14 @@ export function Navbar() {
           </details>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            href="/consultation"
-            className="desktop-consultation hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-4 text-xs font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950 2xl:px-5"
-          >
-            Request Consultation
-          </Link>
-        </div>
-
         <Link
           href="/consultation"
-          className="tablet-consultation hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-3 text-[10px] font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950"
+          className="tablet-consultation !hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-3 text-[10px] font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950"
         >
           Request Consultation
         </Link>
 
-        <div className="mobile-nav-actions flex items-center gap-2">
+        <div className="mobile-nav-actions !flex items-center gap-2 lg:!hidden">
           <a
             href={getPhoneUrl(firm.phone)}
             className="flex h-11 w-11 items-center justify-center text-navy-900 hover:text-gold-600"
@@ -181,7 +187,16 @@ export function Navbar() {
           className="fixed inset-0 z-60 flex h-svh flex-col bg-white"
         >
           <div className="flex h-16 shrink-0 items-center justify-between border-b border-charcoal-100 bg-ivory-50 px-4 md:px-6">
-            <FirmLogo theme="light" priority />
+            <Link href="/" aria-label="Maurya & Co.">
+              <Image
+                src="/images/logo/firm-logo-full-nowhite.png"
+                alt="Maurya & Co. Advocates and Legal Consultants"
+                width={1073}
+                height={210}
+                priority
+                className="h-auto w-[230px] max-w-[55vw]"
+              />
+            </Link>
             <button
               onClick={() => setIsOpen(false)}
               className="flex h-11 w-11 items-center justify-center rounded-sm text-navy-900 hover:text-gold-600"
@@ -196,7 +211,6 @@ export function Navbar() {
               { label: 'Practice Areas', href: '/practice-areas' },
               { label: 'Experience', href: '/experience' },
               { label: 'Our Team', href: '/team' },
-              { label: 'Contact', href: '/contact' },
             ].map((item) => (
               <Link
                 key={item.href}
@@ -216,7 +230,7 @@ export function Navbar() {
                 <span aria-hidden="true" className="text-gold-600">+</span>
               </summary>
               <div className="pb-2 pl-4">
-                {navItems.filter((item) => !['/practice-areas', '/experience', '/team', '/contact'].includes(item.href)).map((item) => (
+                {navItems.filter((item) => !['/practice-areas', '/experience', '/team'].includes(item.href)).map((item) => (
                   <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)} className="flex min-h-12 items-center border-t border-charcoal-50 text-base text-navy-800">
                     {item.label}
                   </Link>

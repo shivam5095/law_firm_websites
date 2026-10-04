@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createContact, createConsultation } from '../controllers/submission.controller';
+import { createConsultation } from '../controllers/submission.controller';
 import { login } from '../controllers/auth.controller';
 
 import {
@@ -48,7 +48,6 @@ router.get('/health', async (_req, res) => {
 });
 
 // Public submissions
-router.post('/contact', strictLimiter, createContact);
 router.post('/consultations', strictLimiter, createConsultation);
 
 // Login
@@ -68,4 +67,3 @@ router.patch('/admin/consultations/:id/status', updateConsultationStatus);
 router.delete('/admin/consultations/:id', deleteConsultation);
 
 export default router;
-

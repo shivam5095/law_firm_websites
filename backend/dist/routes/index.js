@@ -35,7 +35,6 @@ router.get('/health', async (_req, res) => {
     }
 });
 // Public submissions
-router.post('/contact', rateLimitMiddleware_1.strictLimiter, submission_controller_1.createContact);
 router.post('/consultations', rateLimitMiddleware_1.strictLimiter, submission_controller_1.createConsultation);
 // Login
 router.post('/auth/login', rateLimitMiddleware_1.strictLimiter, auth_controller_1.login);

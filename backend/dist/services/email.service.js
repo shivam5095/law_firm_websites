@@ -4,7 +4,6 @@ exports.validateEmailConfiguration = validateEmailConfiguration;
 exports.escapeHtml = escapeHtml;
 exports.sendCareerApplicationNotification = sendCareerApplicationNotification;
 exports.sendConsultationNotification = sendConsultationNotification;
-exports.sendContactNotification = sendContactNotification;
 exports.sendTestEmail = sendTestEmail;
 const resend_1 = require("resend");
 function readEnv(name) {
@@ -108,18 +107,6 @@ async function sendConsultationNotification(data) {
       <p><b>Email:</b> ${escapeHtml(data.email)}</p>
       <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>
       <p><b>Preferred date:</b> ${escapeHtml(data.preferredDate.toDateString())}</p>
-      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
-    });
-}
-// ---- Contact ----
-async function sendContactNotification(data) {
-    return sendNotification({
-        subject: `New contact message: ${data.name}`,
-        replyTo: data.email,
-        html: `
-      <h2>New Contact Message</h2>
-      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
-      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
       <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
     });
 }

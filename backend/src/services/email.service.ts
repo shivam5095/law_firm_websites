@@ -135,24 +135,6 @@ export async function sendConsultationNotification(data: {
   });
 }
 
-// ---- Contact ----
-export async function sendContactNotification(data: {
-  name: string;
-  email: string;
-  message: string;
-  [key: string]: unknown;
-}): Promise<EmailResult> {
-  return sendNotification({
-    subject: `New contact message: ${data.name}`,
-    replyTo: data.email,
-    html: `
-      <h2>New Contact Message</h2>
-      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
-      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
-      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
-  });
-}
-
 // ---- Test ----
 export async function sendTestEmail(): Promise<EmailResult> {
   return sendNotification({

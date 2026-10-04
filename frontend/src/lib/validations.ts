@@ -16,13 +16,3 @@ export const consultationSchema = z.object({
 });
 
 export type ConsultationFormData = z.infer<typeof consultationSchema>;
-
-export const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters long'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().optional().nullable(),
-  subject: z.string().min(3, 'Subject must be at least 3 characters long'),
-  message: z.string().min(10, 'Message must be at least 10 characters long'),
-});
-
-export type ContactFormData = z.infer<typeof contactSchema>;

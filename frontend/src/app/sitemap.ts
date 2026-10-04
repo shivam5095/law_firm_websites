@@ -9,8 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages = [
     '', '/about', '/practice-areas', '/team', '/experience',
-    '/insights', '/publications', '/consultation', '/contact',
-    '/careers', '/faq', '/disclaimer', '/privacy-policy', '/terms',
+    '/insights', '/publications', '/consultation',
+    '/careers', '/disclaimer', '/privacy-policy', '/terms',
   ];
 
   const practiceAreaPages = practiceAreas.map(pa => `/practice-areas/${pa.slug}`);

@@ -12,7 +12,7 @@ export function FloatingButtons() {
   const [isVisible, setIsVisible] = useState(false);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const pathname = usePathname();
-  const hidePhoneBar = pathname === '/contact' || pathname === '/consultation';
+  const hidePhoneBar = pathname === '/consultation';
 
   useEffect(() => {
     const handleScroll = () => {

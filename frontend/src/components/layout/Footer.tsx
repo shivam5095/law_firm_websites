@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { firm } from '@/data/firm';
 import { practiceAreas } from '@/data/practiceAreas';
-import { FirmLogo } from '@/components/common/FirmLogo';
 import { ArrowRight, ChevronDown, Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { officeHubs } from '@/data/offices';
 import { BackToTop } from '@/components/layout/BackToTop';
@@ -13,8 +13,6 @@ const quickLinks = [
   { label: 'Insights', href: '/insights' },
   { label: 'Publications', href: '/publications' },
   { label: 'Careers', href: '/careers' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 const footerLinkClass = 'inline-flex min-h-11 min-w-0 items-center gap-2 break-words text-sm text-ivory-300 transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2';
@@ -48,17 +46,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-navy-800 bg-navy-950 pt-16 text-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 px-4 pb-10 md:grid-cols-2 md:gap-x-10 md:gap-y-8 md:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1.5fr] lg:gap-10 lg:px-8">
-        <div className="min-w-0 md:col-span-2 lg:col-span-1">
-          <div className="mb-4">
-            <FirmLogo theme="dark" />
-          </div>
-          <div className="mb-5 h-[2px] w-12 bg-gold-500" />
-          <p className="mb-6 break-words text-sm leading-relaxed text-ivory-300">
-            {firm.description}
-          </p>
-        </div>
-
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 px-4 pb-10 md:grid-cols-2 md:gap-x-10 md:gap-y-8 md:px-6 lg:grid-cols-3 lg:gap-10 lg:px-8">
         <nav aria-label="Footer" className="grid grid-cols-1 gap-8 md:contents">
           <div className="min-w-0">
             <details className="group md:hidden">
@@ -143,6 +131,23 @@ export function Footer() {
             <span>Connect on WhatsApp</span>
             <ArrowRight aria-hidden="true" size={14} />
           </a>
+        </div>
+      </div>
+
+      <div className="border-t border-navy-800">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-8 md:flex-row md:items-center md:gap-10 md:px-6 lg:px-8">
+          <div className="max-w-[260px] shrink-0">
+            <Image
+              src="/images/logo/firm-logo-full-nowhite.png"
+              alt="Maurya & Co. Advocates and Legal Consultants"
+              width={1073}
+              height={210}
+              style={{ width: 'auto', height: 'auto', maxWidth: '260px' }}
+            />
+          </div>
+          <p className="max-w-3xl break-words text-sm leading-relaxed text-ivory-300">
+            Maurya &amp; Co., anchored at the Noida Hub (Delhi NCR), provides high-stakes legal counsel, banking recovery litigation, debt restructuring, commercial arbitration, and dispute resolution across premier Indian and cross-border jurisdictions.
+          </p>
         </div>
       </div>
 
