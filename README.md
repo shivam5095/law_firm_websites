@@ -1,6 +1,6 @@
 # Premium Indian Law Firm Website
 
-A production-ready, strictly decoupled web application architecture designed for a premium Indian Law Firm.
+A production-ready, strictly decoupled web application architecture designed for a premium Indian Law Firm..
 
 ## Project Structure
 This repository contains three independent projects that communicate solely via REST APIs:
