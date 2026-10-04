@@ -159,10 +159,11 @@ export function ConsultationForm() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="preferredDate" className="block text-sm font-medium text-charcoal-700">Preferred Date (Optional)</label>
+          <label htmlFor="preferredDate" className="block text-sm font-medium text-charcoal-700">Preferred Date </label>
           <input
             id="preferredDate"
             type="date"
+            required
             {...register('preferredDate')}
             className={cn(
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",
