@@ -51,7 +51,9 @@ export default function ConsultationsPage() {
       if (statusFilter) params.append('status', statusFilter);
       if (searchTerm) params.append('search', searchTerm);
 
-      const response = await adminApi.get(`/admin/consultations?${params.toString()}`);
+      const response = await adminApi.get<{ success: boolean; data: Consultation[] }>(
+        `/admin/consultations?${params.toString()}`
+      );
       if (response.success) {
         setConsultations(response.data);
       }
@@ -75,7 +77,10 @@ export default function ConsultationsPage() {
   const handleStatusChange = async (id: string, newStatus: string) => {
     setActionLoading(true);
     try {
-      const response = await adminApi.patch(`/admin/consultations/${id}/status`, { status: newStatus });
+      const response = await adminApi.patch<{
+        success: boolean;
+        data: Pick<Consultation, 'status'>;
+      }>(`/admin/consultations/${id}/status`, { status: newStatus });
       if (response.success) {
         // Update local list
         setConsultations((prev) =>
@@ -96,7 +101,9 @@ export default function ConsultationsPage() {
     if (!deleteId) return;
     setActionLoading(true);
     try {
-      const response = await adminApi.delete(`/admin/consultations/${deleteId}`);
+      const response = await adminApi.delete<{ success: boolean }>(
+        `/admin/consultations/${deleteId}`
+      );
       if (response.success) {
         setConsultations((prev) => prev.filter((c) => c.id !== deleteId));
         if (selectedCon && selectedCon.id === deleteId) {

@@ -39,7 +39,10 @@ export default function LoginPage() {
     setLoading(true);
     setErrorMsg('');
     try {
-      const response = await adminApi.post('/auth/login', data);
+      const response = await adminApi.post<{
+        success: boolean;
+        data: { token: string; user: { name: string } };
+      }>('/auth/login', data);
 
       if (response.success && response.data.token) {
         setAuthToken(response.data.token);

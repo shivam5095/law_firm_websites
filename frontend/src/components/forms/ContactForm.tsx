@@ -9,9 +9,15 @@ import { cn } from '@/lib/utils';
 
 import { api } from '@/lib/api';
 
+interface SubmissionResponse {
+  success: boolean;
+  message: string;
+}
+
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   const {
@@ -27,11 +33,14 @@ export function ContactForm() {
     setIsSubmitting(true);
     setErrorMsg('');
     try {
-      await api.post('/contact', data);
+      const response = await api.post<SubmissionResponse>('/contact', data);
+      setSuccessMsg(response.message);
       setIsSuccess(true);
       reset();
-    } catch (error: any) {
-      setErrorMsg(error.message || 'An error occurred while sending your message. Please try again or contact us directly via email or phone.');
+    } catch (error: unknown) {
+      setErrorMsg(error instanceof Error
+        ? error.message
+        : 'An error occurred while sending your message. Please try again or contact us directly via email or phone.');
     } finally {
       setIsSubmitting(false);
     }
@@ -43,7 +52,7 @@ export function ContactForm() {
         <CheckCircle2 className="w-12 h-12 text-gold-500" />
         <h3 className="font-heading text-2xl text-navy-900">Message Sent</h3>
         <p className="text-charcoal-700 max-w-md">
-          Thank you for reaching out to us. We have received your message and will respond as soon as possible.
+          {successMsg || 'Thank you for reaching out to us. We have received your message and will respond as soon as possible.'}
         </p>
         <button
           onClick={() => setIsSuccess(false)}
@@ -58,7 +67,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {errorMsg && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-sm border border-red-200 text-sm">
+        <div role="alert" className="bg-red-50 text-red-600 p-4 rounded-sm border border-red-200 text-sm">
           {errorMsg}
         </div>
       )}

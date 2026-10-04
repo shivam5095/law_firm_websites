@@ -9,9 +9,15 @@ import { cn } from '@/lib/utils';
 
 import { api } from '@/lib/api';
 
+interface SubmissionResponse {
+  success: boolean;
+  message: string;
+}
+
 export function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   const {
@@ -31,11 +37,14 @@ export function ConsultationForm() {
     setIsSubmitting(true);
     setErrorMsg('');
     try {
-      await api.post('/consultations', data);
+      const response = await api.post<SubmissionResponse>('/consultations', data);
+      setSuccessMsg(response.message);
       setIsSuccess(true);
       reset();
-    } catch (error: any) {
-      setErrorMsg(error.message || 'An error occurred while submitting the form. Please try again or contact us directly.');
+    } catch (error: unknown) {
+      setErrorMsg(error instanceof Error
+        ? error.message
+        : 'An error occurred while submitting the form. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -47,7 +56,7 @@ export function ConsultationForm() {
         <CheckCircle2 className="w-12 h-12 text-gold-500" />
         <h3 className="font-heading text-2xl text-navy-900">Request Submitted</h3>
         <p className="text-charcoal-700 max-w-md">
-          Thank you for reaching out. We have received your consultation request and our team will get back to you shortly to confirm the appointment.
+          {successMsg || 'Thank you for reaching out. We have received your consultation request and our team will get back to you shortly to confirm the appointment.'}
         </p>
         <button
           onClick={() => setIsSuccess(false)}
@@ -62,7 +71,7 @@ export function ConsultationForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {errorMsg && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-sm border border-red-200 text-sm">
+        <div role="alert" className="bg-red-50 text-red-600 p-4 rounded-sm border border-red-200 text-sm">
           {errorMsg}
         </div>
       )}

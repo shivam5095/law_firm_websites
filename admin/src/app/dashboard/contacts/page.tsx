@@ -44,7 +44,9 @@ export default function ContactsPage() {
       if (statusFilter) params.append('status', statusFilter);
       if (searchTerm) params.append('search', searchTerm);
 
-      const response = await adminApi.get(`/admin/contacts?${params.toString()}`);
+      const response = await adminApi.get<{ success: boolean; data: ContactMessage[] }>(
+        `/admin/contacts?${params.toString()}`
+      );
       if (response.success) {
         setMessages(response.data);
       }
@@ -68,7 +70,10 @@ export default function ContactsPage() {
   const handleStatusChange = async (id: string, newStatus: string) => {
     setActionLoading(true);
     try {
-      const response = await adminApi.patch(`/admin/contacts/${id}/status`, { status: newStatus });
+      const response = await adminApi.patch<{
+        success: boolean;
+        data: Pick<ContactMessage, 'status'>;
+      }>(`/admin/contacts/${id}/status`, { status: newStatus });
       if (response.success) {
         setMessages((prev) =>
           prev.map((m) => (m.id === id ? { ...m, status: response.data.status } : m))
@@ -88,7 +93,9 @@ export default function ContactsPage() {
     if (!deleteId) return;
     setActionLoading(true);
     try {
-      const response = await adminApi.delete(`/admin/contacts/${deleteId}`);
+      const response = await adminApi.delete<{ success: boolean }>(
+        `/admin/contacts/${deleteId}`
+      );
       if (response.success) {
         setMessages((prev) => prev.filter((m) => m.id !== deleteId));
         if (selectedMsg && selectedMsg.id === deleteId) {

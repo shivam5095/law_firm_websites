@@ -13,7 +13,7 @@ export default function CareersPage() {
     <main className="min-h-screen bg-ivory-50 pb-24">
       <section className="relative isolate flex min-h-[40svh] items-end overflow-hidden bg-navy-950 lg:min-h-[50vh]">
         <Image
-          src="/images/careers/indian-legal-interns.jpg"
+          src="/images/hero/careers/indian-legal-interns.jpg"
           alt="Law students working together on legal research"
           fill
           fetchPriority="high"
@@ -67,7 +67,7 @@ export default function CareersPage() {
 
           <div className="lg:col-span-5 relative aspect-[3/2] lg:aspect-[4/5] overflow-hidden border border-charcoal-100 shadow-sm bg-charcoal-100">
             <Image
-              src="/images/careers/indian-legal-interns.jpg"
+              src="/images/hero/careers/indian-legal-interns.jpg"
               alt="Indian law interns working in our library"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 30vw"

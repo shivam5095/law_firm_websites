@@ -44,8 +44,8 @@ export default function DashboardOverview() {
     async function fetchData() {
       try {
         const [consResponse, contactsResponse] = await Promise.all([
-          adminApi.get('/admin/consultations'),
-          adminApi.get('/admin/contacts'),
+          adminApi.get<{ success: boolean; data: Consultation[] }>('/admin/consultations'),
+          adminApi.get<{ success: boolean; data: Contact[] }>('/admin/contacts'),
         ]);
 
         if (consResponse.success) setConsultations(consResponse.data);
