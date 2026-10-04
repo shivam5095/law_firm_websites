@@ -6,8 +6,10 @@ import morgan from 'morgan';
 import routes from './routes';
 import { errorMiddleware } from './middleware/errorMiddleware';
 import { apiLimiter } from './middleware/rateLimitMiddleware';
+import { validateEmailConfiguration } from './services/email.service';
 
 const app = express();
+validateEmailConfiguration();
 // Vercel sits behind exactly one proxy hop.
 app.set('trust proxy', 1);
 

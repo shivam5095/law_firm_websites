@@ -13,17 +13,11 @@ const db_1 = __importDefault(require("../config/db"));
 const careers_routes_1 = __importDefault(require("./careers.routes"));
 const lawyers_routes_1 = __importDefault(require("./lawyers.routes"));
 const router = (0, express_1.Router)();
-/* =========================================
-   CAREERS ROUTES
-   ========================================= */
+// Careers
 router.use('/', careers_routes_1.default);
-/* =========================================
-   LAWYERS ROUTES
-   ========================================= */
+// Lawyers
 router.use('/', lawyers_routes_1.default);
-/* =========================================
-   HEALTH CHECK
-   ========================================= */
+// Health Check
 router.get('/health', async (_req, res) => {
     try {
         await db_1.default.$queryRaw `SELECT 1`;
@@ -33,60 +27,24 @@ router.get('/health', async (_req, res) => {
         });
     }
     catch (error) {
-        const errorDetails = error && typeof error === 'object'
-            ? error
-            : {};
-        const sanitize = (value) => {
-            if (typeof value === 'string') {
-                return value.replace(/postgres(?:ql)?:\/\/\S+/gi, '[redacted]');
-            }
-            if (typeof value === 'number' ||
-                typeof value === 'boolean' ||
-                value == null) {
-                return value;
-            }
-            return '[non-primitive error field]';
-        };
-        console.error({
-            name: sanitize(errorDetails.name),
-            ...(errorDetails.code !== undefined
-                ? {
-                    code: sanitize(errorDetails.code),
-                }
-                : {}),
-            message: sanitize(errorDetails.message),
-        });
+        console.error('Database health check failed:', error);
         return res.status(503).json({
             status: 'error',
             database: 'down',
         });
     }
 });
-/* =========================================
-   PUBLIC SUBMISSION ROUTES
-   ========================================= */
-// Contact form
+// Public submissions
 router.post('/contact', rateLimitMiddleware_1.strictLimiter, submission_controller_1.createContact);
-// Consultation form
 router.post('/consultations', rateLimitMiddleware_1.strictLimiter, submission_controller_1.createConsultation);
-/* =========================================
-   AUTHENTICATION
-   ========================================= */
+// Login
 router.post('/auth/login', rateLimitMiddleware_1.strictLimiter, auth_controller_1.login);
-/* =========================================
-   ADMIN ROUTES
-   ========================================= */
+// Admin authentication
 router.use('/admin', authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware);
-/* =========================================
-   ADMIN CONTACTS
-   ========================================= */
 router.get('/admin/contacts', admin_controller_1.getContacts);
 router.get('/admin/contacts/:id', admin_controller_1.getContactById);
 router.patch('/admin/contacts/:id/status', admin_controller_1.updateContactStatus);
 router.delete('/admin/contacts/:id', admin_controller_1.deleteContact);
-/* =========================================
-   ADMIN CONSULTATIONS
-   ========================================= */
 router.get('/admin/consultations', admin_controller_1.getConsultations);
 router.get('/admin/consultations/:id', admin_controller_1.getConsultationById);
 router.patch('/admin/consultations/:id/status', admin_controller_1.updateConsultationStatus);

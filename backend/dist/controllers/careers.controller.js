@@ -41,7 +41,7 @@ exports.applyForInternship = applyForInternship;
 const multer_1 = __importDefault(require("multer"));
 const path = __importStar(require("path"));
 const careers_validator_1 = require("../validators/careers.validator");
-const careersEmail_service_1 = require("../services/careersEmail.service");
+const email_service_1 = require("../services/email.service");
 const upload = (0, multer_1.default)({
     storage: multer_1.default.memoryStorage(),
     limits: { fileSize: careers_validator_1.MAX_RESUME_SIZE_BYTES, files: 1 },
@@ -51,7 +51,7 @@ const upload = (0, multer_1.default)({
             callback(null, true);
             return;
         }
-        callback(new Error('Resume must be a PDF or DOC file.'));
+        callback(new Error('Resume must be a PDF, DOC, or DOCX file.'));
     },
 });
 const uploadSingleResume = upload.single('resume');
@@ -104,13 +104,19 @@ async function applyForInternship(req, res, next) {
         });
     }
     try {
-        await (0, careersEmail_service_1.sendCareerApplicationNotification)({
+        const emailSent = await (0, email_service_1.sendCareerApplicationNotification)({
             ...parsed.data,
             resume: {
-                filename: path.basename(req.file.originalname),
-                content: req.file.buffer.toString('base64'),
+                filename: req.file.originalname,
+                content: req.file.buffer,
             },
         });
+        if (!emailSent) {
+            return res.status(503).json({
+                success: false,
+                message: 'We could not submit your application right now. Please try again later.',
+            });
+        }
         return res.status(201).json({ success: true, message: 'Application submitted successfully.' });
     }
     catch (error) {

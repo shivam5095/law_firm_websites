@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import * as path from 'path';
 import { careerApplicationSchema, MAX_RESUME_SIZE_BYTES, resumeSizeSchema } from '../validators/careers.validator';
-import { sendCareerApplicationNotification } from '../services/careersEmail.service';
+import { sendCareerApplicationNotification } from '../services/email.service';
 
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -13,7 +13,7 @@ const upload = multer({
             callback(null, true);
             return;
         }
-        callback(new Error('Resume must be a PDF or DOC file.'));
+        callback(new Error('Resume must be a PDF, DOC, or DOCX file.'));
     },
 });
 
@@ -73,13 +73,19 @@ export async function applyForInternship(req: Request, res: Response, next: Next
     }
 
     try {
-        await sendCareerApplicationNotification({
+        const emailSent = await sendCareerApplicationNotification({
             ...parsed.data,
             resume: {
-                filename: path.basename(req.file.originalname),
-                content: req.file.buffer.toString('base64'),
+                filename: req.file.originalname,
+                content: req.file.buffer,
             },
         });
+        if (!emailSent) {
+            return res.status(503).json({
+                success: false,
+                message: 'We could not submit your application right now. Please try again later.',
+            });
+        }
         return res.status(201).json({ success: true, message: 'Application submitted successfully.' });
     } catch (error) {
         return next(error);

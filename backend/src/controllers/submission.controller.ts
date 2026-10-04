@@ -30,12 +30,13 @@ export async function createContact(req: Request, res: Response, next: NextFunct
       },
     });
 
-    // Send email notification (asynchronous)
-    sendContactNotification({ name, email, phone, subject, message }).catch(console.error);
+    const emailSent = await sendContactNotification({ name, email, phone, subject, message });
 
     return res.status(201).json({
       success: true,
-      message: 'Message sent successfully. We will contact you soon.',
+      message: emailSent
+        ? 'Message sent successfully. We will contact you soon.'
+        : 'Your message was received, but our team could not be notified automatically.',
       data: contact,
     });
   } catch (error) {
@@ -72,8 +73,7 @@ export async function createConsultation(req: Request, res: Response, next: Next
       },
     });
 
-    // Send email notification (asynchronous)
-    sendConsultationNotification({
+    const emailSent = await sendConsultationNotification({
       name,
       email,
       phone,
@@ -85,7 +85,9 @@ export async function createConsultation(req: Request, res: Response, next: Next
 
     return res.status(201).json({
       success: true,
-      message: 'Consultation request submitted successfully.',
+      message: emailSent
+        ? 'Consultation request submitted successfully.'
+        : 'Your consultation request was received, but our team could not be notified automatically.',
       data: request,
     });
   } catch (error) {

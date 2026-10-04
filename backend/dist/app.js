@@ -11,7 +11,9 @@ const morgan_1 = __importDefault(require("morgan"));
 const routes_1 = __importDefault(require("./routes"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const rateLimitMiddleware_1 = require("./middleware/rateLimitMiddleware");
+const email_service_1 = require("./services/email.service");
 const app = (0, express_1.default)();
+(0, email_service_1.validateEmailConfiguration)();
 // Vercel sits behind exactly one proxy hop.
 app.set('trust proxy', 1);
 // Security Headers
