@@ -1,132 +1,132 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateEmailConfiguration = validateEmailConfiguration;
-exports.sendContactNotification = sendContactNotification;
-exports.sendConsultationNotification = sendConsultationNotification;
+exports.escapeHtml = escapeHtml;
 exports.sendCareerApplicationNotification = sendCareerApplicationNotification;
+exports.sendConsultationNotification = sendConsultationNotification;
+exports.sendContactNotification = sendContactNotification;
+exports.sendTestEmail = sendTestEmail;
 const resend_1 = require("resend");
-let resendClient = null;
+function readEnv(name) {
+    let v = (process.env[name] || '').trim();
+    if ((v.startsWith('"') && v.endsWith('"')) ||
+        (v.startsWith("'") && v.endsWith("'"))) {
+        v = v.slice(1, -1).trim();
+    }
+    return v;
+}
+const EMAIL_RE = /^[^\s@<>"',;]+@[^\s@<>"',;]+\.[^\s@<>"',;]+$/;
 function validateEmailConfiguration() {
-    const requiredVariables = ['RESEND_API_KEY', 'EMAIL_FROM', 'NOTIFY_EMAIL'];
-    const missingVariables = requiredVariables.filter((name) => !process.env[name]?.trim());
-    if (missingVariables.length > 0) {
-        console.error(`[Email Service] Missing required environment variables: ${missingVariables.join(', ')}`);
-    }
+    const problems = [];
+    if (!readEnv('RESEND_API_KEY'))
+        problems.push('RESEND_API_KEY is missing');
+    const from = readEnv('EMAIL_FROM');
+    const to = readEnv('NOTIFY_EMAIL');
+    if (!from)
+        problems.push('EMAIL_FROM is missing');
+    else if (!EMAIL_RE.test(from))
+        problems.push('EMAIL_FROM must be a plain email address');
+    else if (from.toLowerCase().endsWith('@gmail.com'))
+        problems.push('EMAIL_FROM cannot be a gmail.com address (use onboarding@resend.dev or a verified domain)');
+    if (!to)
+        problems.push('NOTIFY_EMAIL is missing');
+    else if (!EMAIL_RE.test(to))
+        problems.push('NOTIFY_EMAIL must be a plain email address');
+    return problems;
 }
-function getResendClient() {
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey)
-        return null;
-    if (!resendClient) {
-        resendClient = new resend_1.Resend(apiKey);
-    }
-    return resendClient;
+let client = null;
+function getClient() {
+    if (!client)
+        client = new resend_1.Resend(readEnv('RESEND_API_KEY'));
+    return client;
 }
-function safeErrorMessage(error) {
-    const message = error instanceof Error
-        ? error.message
-        : typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
-            ? error.message
-            : 'Unknown email error';
-    const apiKey = process.env.RESEND_API_KEY;
-    const redactedMessage = apiKey ? message.split(apiKey).join('[REDACTED]') : message;
-    return redactedMessage.replace(/\bre_[A-Za-z0-9_-]{20,}\b/g, '[REDACTED]');
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
-async function sendNotification(type, notification) {
-    const from = process.env.EMAIL_FROM;
-    const to = process.env.NOTIFY_EMAIL;
-    const missingVariables = [
-        !process.env.RESEND_API_KEY?.trim() && 'RESEND_API_KEY',
-        !from?.trim() && 'EMAIL_FROM',
-        !to?.trim() && 'NOTIFY_EMAIL',
-    ].filter((name) => Boolean(name));
-    if (missingVariables.length > 0) {
-        console.error(`[Email Service] Cannot send ${type}; missing required environment variables: ${missingVariables.join(', ')}`);
-        return false;
+async function sendNotification(opts) {
+    const problems = validateEmailConfiguration();
+    if (problems.length) {
+        const reason = `EMAIL_CONFIG_ERROR ${problems.join('; ')}`;
+        console.error(reason);
+        return { success: false, reason };
     }
+    const base = {
+        from: readEnv('EMAIL_FROM'),
+        to: readEnv('NOTIFY_EMAIL'),
+        subject: opts.subject,
+        reply_to: opts.replyTo && EMAIL_RE.test(opts.replyTo) ? opts.replyTo : undefined,
+        attachments: opts.attachments,
+    };
     try {
-        const resend = getResendClient();
-        if (!resend || !from || !to)
-            return false;
-        const { data, error } = await resend.emails.send({
-            from,
-            to,
-            subject: notification.subject,
-            html: notification.html,
-            ...(notification.replyTo ? { reply_to: notification.replyTo } : {}),
-            ...(notification.attachments ? { attachments: notification.attachments } : {}),
-        });
+        const { error } = opts.html
+            ? await getClient().emails.send({ ...base, html: opts.html })
+            : await getClient().emails.send({ ...base, text: opts.text || '' });
         if (error) {
-            console.error(`[Email Service] Resend rejected ${type}: ${safeErrorMessage(error)}`);
-            return false;
+            const e = error;
+            const reason = `RESEND_ERROR status=${e.statusCode ?? 'unknown'} ` +
+                `name=${e.name ?? 'unknown'} message=${(e.message ?? '').slice(0, 300)}`;
+            console.error(reason);
+            return { success: false, reason };
         }
-        console.log(`[Email Service] ${type} accepted by Resend (id=${data?.id})`);
-        return true;
+        return { success: true };
     }
-    catch (error) {
-        console.error(`[Email Service] Could not send ${type}: ${safeErrorMessage(error)}`);
-        return false;
+    catch (err) {
+        const reason = `RESEND_EXCEPTION ${err.message?.slice(0, 300)}`;
+        console.error(reason);
+        return { success: false, reason };
     }
 }
-async function sendContactNotification(data) {
-    const html = `
-    <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
-    <p><strong>Subject:</strong> ${data.subject}</p>
-    <p><strong>Message:</strong></p>
-    <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #002B49;">
-      ${data.message.replace(/\n/g, '<br/>')}
-    </div>
-  `;
-    return sendNotification('contact notification', {
-        subject: `[Contact Form] ${data.subject}`,
-        html,
-    });
-}
-async function sendConsultationNotification(data) {
-    const formattedDate = new Date(data.preferredDate).toLocaleDateString('en-IN', {
-        dateStyle: 'full',
-    });
-    const subject = `[Consultation Request] ${data.name} - ${data.matterType}`;
-    const html = `
-    <h2>New Consultation Request</h2>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Phone:</strong> ${data.phone}</p>
-    <p><strong>Nature of Matter:</strong> ${data.matterType}</p>
-    <p><strong>Preferred Mode:</strong> ${data.preferredMode}</p>
-    <p><strong>Preferred Date:</strong> ${formattedDate}</p>
-    <p><strong>Brief Description:</strong></p>
-    <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #D4AF37;">
-      ${data.message ? data.message.replace(/\n/g, '<br/>') : 'No description provided.'}
-    </div>
-  `;
-    return sendNotification('consultation notification', { subject, html });
-}
+// ---- Careers ----
 async function sendCareerApplicationNotification(data) {
-    const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;',
-    })[character] || character);
-    const html = `
-    <h2>New Career Application</h2>
-    <p><strong>Name:</strong> ${escapeHtml(data.fullName)}</p>
-    <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-    <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
-    <p><strong>Practice area:</strong> ${escapeHtml(data.practiceArea)}</p>
-    <p><strong>Message / background:</strong></p>
-    <p>${escapeHtml(data.message).replace(/\r?\n/g, '<br/>')}</p>
-    <p>Resume is attached.</p>
-  `;
-    return sendNotification('career application notification', {
-        subject: `Career Application — ${data.fullName}`,
-        html,
+    return sendNotification({
+        subject: `New career application: ${data.name}`,
         replyTo: data.email,
+        html: `
+      <h2>New Career Application</h2>
+      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+      <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>
+      <p><b>Practice area:</b> ${escapeHtml(data.practiceArea)}</p>
+      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
         attachments: [data.resume],
+    });
+}
+// ---- Consultation ----
+// ---- Consultation ----
+async function sendConsultationNotification(data) {
+    return sendNotification({
+        subject: `New consultation request: ${data.name}`,
+        replyTo: data.email,
+        html: `
+      <h2>New Consultation Request</h2>
+      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+      <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>
+      <p><b>Preferred date:</b> ${escapeHtml(data.preferredDate.toDateString())}</p>
+      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
+    });
+}
+// ---- Contact ----
+async function sendContactNotification(data) {
+    return sendNotification({
+        subject: `New contact message: ${data.name}`,
+        replyTo: data.email,
+        html: `
+      <h2>New Contact Message</h2>
+      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
+    });
+}
+// ---- Test ----
+async function sendTestEmail() {
+    return sendNotification({
+        subject: 'Test email from law firm backend',
+        text: 'If you can read this, Resend is configured correctly.',
     });
 }

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export interface CustomError extends Error {
   status?: number;
+  statusCode?: number;
   errors?: any[];
 }
 
@@ -11,7 +12,7 @@ export function errorMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  const status = err.status || 500;
+  const status = err.status || err.statusCode || 500;
   const message = err.message || 'Something went wrong.';
   const errors = err.errors || [];
 

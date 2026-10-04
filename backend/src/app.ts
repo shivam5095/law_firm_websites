@@ -32,7 +32,8 @@ app.use(
         return callback(null, true);
       } else {
         const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
+        const error = Object.assign(new Error(msg), { status: 403 });
+        return callback(error, false);
       }
     },
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],

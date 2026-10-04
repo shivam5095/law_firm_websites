@@ -23,7 +23,7 @@ JWT_EXPIRES_IN=1d
 FRONTEND_URL=http://localhost:3000
 ADMIN_URL=http://localhost:3001
 RESEND_API_KEY=<set-resend-api-key>
-EMAIL_FROM=Law Firm Website <no-reply@your-verified-domain.com>
+EMAIL_FROM=no-reply@your-verified-domain.com
 NOTIFY_EMAIL=contact@example.com
 ADMIN_EMAIL=admin@lawfirm.com
 ADMIN_PASSWORD=adminpassword123
@@ -52,6 +52,12 @@ Start the Express server on `http://localhost:5000`:
 npm run dev
 ```
 
+### Send a Resend Test Email
+With `RESEND_API_KEY`, `EMAIL_FROM`, and `NOTIFY_EMAIL` set in `backend/.env`, run:
+```bash
+npm run email:test
+```
+
 ---
 
 ## Available Scripts
@@ -64,3 +70,4 @@ npm run dev
 - `npm run prisma:migrate` - Applies schema modifications to the PostgreSQL database.
 - `npm run prisma:seed` - Creates the default admin credential record in the database.
 - `npm run prisma:studio` - Launches the interactive Prisma data browser GUI.
+- `npm run email:test` - Sends a plain-text test email through the configured Resend service.

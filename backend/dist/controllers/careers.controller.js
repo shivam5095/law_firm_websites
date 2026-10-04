@@ -42,12 +42,17 @@ const multer_1 = __importDefault(require("multer"));
 const path = __importStar(require("path"));
 const careers_validator_1 = require("../validators/careers.validator");
 const email_service_1 = require("../services/email.service");
+const ALLOWED_EXTENSIONS = ['.pdf', '.doc', '.docx'];
+function getExtension(originalName) {
+    const filename = originalName.replace(/\\/g, '/').split('/').pop() || '';
+    return { filename, extension: path.extname(filename).toLowerCase() };
+}
 const upload = (0, multer_1.default)({
     storage: multer_1.default.memoryStorage(),
-    limits: { fileSize: careers_validator_1.MAX_RESUME_SIZE_BYTES, files: 1 },
+    limits: { fileSize: careers_validator_1.MAX_RESUME_SIZE_BYTES, files: 1, fields: 20, fieldSize: 10 * 1024 },
     fileFilter: (_req, file, callback) => {
-        const extension = path.extname(file.originalname).toLowerCase();
-        if (['.pdf', '.doc', '.docx'].includes(extension)) {
+        const { extension } = getExtension(file.originalname);
+        if (ALLOWED_EXTENSIONS.includes(extension)) {
             callback(null, true);
             return;
         }
@@ -58,10 +63,13 @@ const uploadSingleResume = upload.single('resume');
 function uploadResume(req, res, next) {
     uploadSingleResume(req, res, (error) => {
         if (error) {
-            const message = error instanceof multer_1.default.MulterError && error.code === 'LIMIT_FILE_SIZE'
+            const tooLarge = error instanceof multer_1.default.MulterError && error.code === 'LIMIT_FILE_SIZE';
+            const message = tooLarge
                 ? 'Resume must be 4 MB or smaller.'
-                : error.message;
-            return res.status(400).json({
+                : error instanceof multer_1.default.MulterError && error.code === 'LIMIT_FIELD_VALUE'
+                    ? 'Application fields must be 10 KB or smaller.'
+                    : error.message;
+            return res.status(tooLarge ? 413 : 400).json({
                 success: false,
                 message,
                 errors: [{ field: 'resume', message }],
@@ -92,7 +100,7 @@ async function applyForInternship(req, res, next) {
         return res.status(400).json({
             success: false,
             message: 'Resume upload is required.',
-            errors: [{ field: 'resume', message: 'Please attach a PDF or DOC resume up to 4 MB.' }],
+            errors: [{ field: 'resume', message: 'Please attach a PDF, DOC, or DOCX resume up to 4 MB.' }],
         });
     }
     const resumeSize = careers_validator_1.resumeSizeSchema.safeParse(req.file.size);
@@ -104,17 +112,33 @@ async function applyForInternship(req, res, next) {
         });
     }
     try {
-        const emailSent = await (0, email_service_1.sendCareerApplicationNotification)({
-            ...parsed.data,
-            resume: {
-                filename: req.file.originalname,
-                content: req.file.buffer,
-            },
-        });
-        if (!emailSent) {
-            return res.status(503).json({
+        const { filename, extension } = getExtension(req.file.originalname);
+        if (!ALLOWED_EXTENSIONS.includes(extension) || !Buffer.isBuffer(req.file.buffer)) {
+            return res.status(400).json({
                 success: false,
-                message: 'We could not submit your application right now. Please try again later.',
+                message: 'Please attach a PDF, DOC, or DOCX resume up to 4 MB.',
+                code: 'INVALID_RESUME',
+            });
+        }
+        const safeBaseName = path.basename(filename, path.extname(filename))
+            .replace(/[^\p{L}\p{N}._-]+/gu, '_')
+            .replace(/^\.+/, '')
+            .slice(0, 120);
+        const attachmentFilename = `${safeBaseName || 'resume'}${extension}`;
+        const emailResult = await (0, email_service_1.sendCareerApplicationNotification)({
+            name: parsed.data.fullName,
+            email: parsed.data.email,
+            phone: parsed.data.phone,
+            practiceArea: parsed.data.practiceArea,
+            message: parsed.data.message,
+            resume: { filename: attachmentFilename, content: req.file.buffer },
+        });
+        if (!emailResult.success) {
+            console.error(emailResult.reason); // shows the real Resend error in Vercel Logs
+            return res.status(502).json({
+                success: false,
+                message: 'Application email could not be sent. Please try again later.',
+                code: 'EMAIL_SEND_FAILED',
             });
         }
         return res.status(201).json({ success: true, message: 'Application submitted successfully.' });

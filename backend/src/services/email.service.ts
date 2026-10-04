@@ -1,178 +1,162 @@
 import { Resend } from 'resend';
 
-type EmailAttachment = {
-  filename: string;
-  content: string | Buffer;
-};
+export type EmailResult = { success: true } | { success: false; reason: string };
 
-type EmailNotification = {
+function readEnv(name: string): string {
+  let v = (process.env[name] || '').trim();
+  if (
+    (v.startsWith('"') && v.endsWith('"')) ||
+    (v.startsWith("'") && v.endsWith("'"))
+  ) {
+    v = v.slice(1, -1).trim();
+  }
+  return v;
+}
+
+const EMAIL_RE = /^[^\s@<>"',;]+@[^\s@<>"',;]+\.[^\s@<>"',;]+$/;
+
+export function validateEmailConfiguration(): string[] {
+  const problems: string[] = [];
+  if (!readEnv('RESEND_API_KEY')) problems.push('RESEND_API_KEY is missing');
+  const from = readEnv('EMAIL_FROM');
+  const to = readEnv('NOTIFY_EMAIL');
+  if (!from) problems.push('EMAIL_FROM is missing');
+  else if (!EMAIL_RE.test(from)) problems.push('EMAIL_FROM must be a plain email address');
+  else if (from.toLowerCase().endsWith('@gmail.com'))
+    problems.push('EMAIL_FROM cannot be a gmail.com address (use onboarding@resend.dev or a verified domain)');
+  if (!to) problems.push('NOTIFY_EMAIL is missing');
+  else if (!EMAIL_RE.test(to)) problems.push('NOTIFY_EMAIL must be a plain email address');
+  return problems;
+}
+
+let client: Resend | null = null;
+function getClient(): Resend {
+  if (!client) client = new Resend(readEnv('RESEND_API_KEY'));
+  return client;
+}
+
+export function escapeHtml(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+type SendOptions = {
   subject: string;
-  html: string;
+  html?: string;
+  text?: string;
   replyTo?: string;
-  attachments?: EmailAttachment[];
+  attachments?: { filename: string; content: Buffer }[];
 };
 
-let resendClient: Resend | null = null;
-
-export function validateEmailConfiguration() {
-  const requiredVariables = ['RESEND_API_KEY', 'EMAIL_FROM', 'NOTIFY_EMAIL'] as const;
-  const missingVariables = requiredVariables.filter((name) => !process.env[name]?.trim());
-
-  if (missingVariables.length > 0) {
-    console.error(`[Email Service] Missing required environment variables: ${missingVariables.join(', ')}`);
-  }
-}
-
-function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return null;
-
-  if (!resendClient) {
-    resendClient = new Resend(apiKey);
+async function sendNotification(opts: SendOptions): Promise<EmailResult> {
+  const problems = validateEmailConfiguration();
+  if (problems.length) {
+    const reason = `EMAIL_CONFIG_ERROR ${problems.join('; ')}`;
+    console.error(reason);
+    return { success: false, reason };
   }
 
-  return resendClient;
-}
-
-function safeErrorMessage(error: unknown) {
-  const message = error instanceof Error
-    ? error.message
-    : typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
-      ? error.message
-      : 'Unknown email error';
-  const apiKey = process.env.RESEND_API_KEY;
-
-  const redactedMessage = apiKey ? message.split(apiKey).join('[REDACTED]') : message;
-  return redactedMessage.replace(/\bre_[A-Za-z0-9_-]{20,}\b/g, '[REDACTED]');
-}
-
-async function sendNotification(type: string, notification: EmailNotification): Promise<boolean> {
-  const from = process.env.EMAIL_FROM;
-  const to = process.env.NOTIFY_EMAIL;
-  const missingVariables = [
-    !process.env.RESEND_API_KEY?.trim() && 'RESEND_API_KEY',
-    !from?.trim() && 'EMAIL_FROM',
-    !to?.trim() && 'NOTIFY_EMAIL',
-  ].filter((name): name is string => Boolean(name));
-
-  if (missingVariables.length > 0) {
-    console.error(`[Email Service] Cannot send ${type}; missing required environment variables: ${missingVariables.join(', ')}`);
-    return false;
-  }
+  const base = {
+    from: readEnv('EMAIL_FROM'),
+    to: readEnv('NOTIFY_EMAIL'),
+    subject: opts.subject,
+    reply_to: opts.replyTo && EMAIL_RE.test(opts.replyTo) ? opts.replyTo : undefined,
+    attachments: opts.attachments,
+  };
 
   try {
-    const resend = getResendClient();
-    if (!resend || !from || !to) return false;
-
-    const { data, error } = await resend.emails.send({
-      from,
-      to,
-      subject: notification.subject,
-      html: notification.html,
-      ...(notification.replyTo ? { reply_to: notification.replyTo } : {}),
-      ...(notification.attachments ? { attachments: notification.attachments } : {}),
-    });
+    const { error } = opts.html
+      ? await getClient().emails.send({ ...base, html: opts.html })
+      : await getClient().emails.send({ ...base, text: opts.text || '' });
 
     if (error) {
-      console.error(`[Email Service] Resend rejected ${type}: ${safeErrorMessage(error)}`);
-      return false;
+      const e = error as { name?: string; message?: string; statusCode?: number };
+      const reason =
+        `RESEND_ERROR status=${e.statusCode ?? 'unknown'} ` +
+        `name=${e.name ?? 'unknown'} message=${(e.message ?? '').slice(0, 300)}`;
+      console.error(reason);
+      return { success: false, reason };
     }
-
-    console.log(`[Email Service] ${type} accepted by Resend (id=${data?.id})`);
-    return true;
-  } catch (error) {
-    console.error(`[Email Service] Could not send ${type}: ${safeErrorMessage(error)}`);
-    return false;
+    return { success: true };
+  } catch (err) {
+    const reason = `RESEND_EXCEPTION ${(err as Error).message?.slice(0, 300)}`;
+    console.error(reason);
+    return { success: false, reason };
   }
 }
 
-export async function sendContactNotification(data: {
+// ---- Careers ----
+export async function sendCareerApplicationNotification(data: {
   name: string;
   email: string;
-  phone?: string | null;
-  subject: string;
+  phone: string;
+  practiceArea: string; // adjust to your field name
   message: string;
-}) {
-  const html = `
-    <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
-    <p><strong>Subject:</strong> ${data.subject}</p>
-    <p><strong>Message:</strong></p>
-    <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #002B49;">
-      ${data.message.replace(/\n/g, '<br/>')}
-    </div>
-  `;
-
-  return sendNotification('contact notification', {
-    subject: `[Contact Form] ${data.subject}`,
-    html,
+  resume: { filename: string; content: Buffer };
+}): Promise<EmailResult> {
+  return sendNotification({
+    subject: `New career application: ${data.name}`,
+    replyTo: data.email,
+    html: `
+      <h2>New Career Application</h2>
+      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+      <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>
+      <p><b>Practice area:</b> ${escapeHtml(data.practiceArea)}</p>
+      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
+    attachments: [data.resume],
   });
 }
 
+// ---- Consultation ----
+// ---- Consultation ----
 export async function sendConsultationNotification(data: {
   name: string;
   email: string;
   phone: string;
-  matterType: string;
-  preferredMode: string;
   preferredDate: Date;
-  message?: string | null;
-}) {
-  const formattedDate = new Date(data.preferredDate).toLocaleDateString('en-IN', {
-    dateStyle: 'full',
+  message: string;
+  [key: string]: unknown;
+}): Promise<EmailResult> {
+  return sendNotification({
+    subject: `New consultation request: ${data.name}`,
+    replyTo: data.email,
+    html: `
+      <h2>New Consultation Request</h2>
+      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+      <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>
+      <p><b>Preferred date:</b> ${escapeHtml(data.preferredDate.toDateString())}</p>
+      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
   });
-
-  const subject = `[Consultation Request] ${data.name} - ${data.matterType}`;
-  const html = `
-    <h2>New Consultation Request</h2>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Phone:</strong> ${data.phone}</p>
-    <p><strong>Nature of Matter:</strong> ${data.matterType}</p>
-    <p><strong>Preferred Mode:</strong> ${data.preferredMode}</p>
-    <p><strong>Preferred Date:</strong> ${formattedDate}</p>
-    <p><strong>Brief Description:</strong></p>
-    <div style="background: #f5f5f5; padding: 15px; border-left: 4px solid #D4AF37;">
-      ${data.message ? data.message.replace(/\n/g, '<br/>') : 'No description provided.'}
-    </div>
-  `;
-
-  return sendNotification('consultation notification', { subject, html });
 }
 
-export async function sendCareerApplicationNotification(data: {
-  fullName: string;
+// ---- Contact ----
+export async function sendContactNotification(data: {
+  name: string;
   email: string;
-  phone: string;
-  practiceArea: string;
   message: string;
-  resume: EmailAttachment;
-}) {
-  const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-  })[character] || character);
-
-  const html = `
-    <h2>New Career Application</h2>
-    <p><strong>Name:</strong> ${escapeHtml(data.fullName)}</p>
-    <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-    <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
-    <p><strong>Practice area:</strong> ${escapeHtml(data.practiceArea)}</p>
-    <p><strong>Message / background:</strong></p>
-    <p>${escapeHtml(data.message).replace(/\r?\n/g, '<br/>')}</p>
-    <p>Resume is attached.</p>
-  `;
-
-  return sendNotification('career application notification', {
-    subject: `Career Application — ${data.fullName}`,
-    html,
+  [key: string]: unknown;
+}): Promise<EmailResult> {
+  return sendNotification({
+    subject: `New contact message: ${data.name}`,
     replyTo: data.email,
-    attachments: [data.resume],
+    html: `
+      <h2>New Contact Message</h2>
+      <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+      <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+      <p><b>Message:</b><br>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`,
+  });
+}
+
+// ---- Test ----
+export async function sendTestEmail(): Promise<EmailResult> {
+  return sendNotification({
+    subject: 'Test email from law firm backend',
+    text: 'If you can read this, Resend is configured correctly.',
   });
 }

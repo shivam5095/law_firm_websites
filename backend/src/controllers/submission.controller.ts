@@ -30,11 +30,11 @@ export async function createContact(req: Request, res: Response, next: NextFunct
       },
     });
 
-    const emailSent = await sendContactNotification({ name, email, phone, subject, message });
+    const emailResult = await sendContactNotification({ name, email, phone, subject, message });
 
     return res.status(201).json({
       success: true,
-      message: emailSent
+      message: emailResult.success
         ? 'Message sent successfully. We will contact you soon.'
         : 'Your message was received, but our team could not be notified automatically.',
       data: contact,
@@ -73,19 +73,19 @@ export async function createConsultation(req: Request, res: Response, next: Next
       },
     });
 
-    const emailSent = await sendConsultationNotification({
+    const emailResult = await sendConsultationNotification({
       name,
       email,
       phone,
       matterType,
       preferredMode,
       preferredDate: new Date(preferredDate),
-      message,
-    }).catch(console.error);
+      message: message ?? '',
+    });
 
     return res.status(201).json({
       success: true,
-      message: emailSent
+      message: emailResult.success
         ? 'Consultation request submitted successfully.'
         : 'Your consultation request was received, but our team could not be notified automatically.',
       data: request,
