@@ -1,20 +1,11 @@
 import { firm } from '@/data/firm';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import { getPhoneUrl } from '@/lib/utils';
 
 export function TopBar() {
   return (
     <div className="top-info-bar min-h-11 bg-navy-950 text-ivory-300 border-b border-navy-800 text-[11px] px-4 md:px-6 lg:px-8">
       <div className="top-info-inner max-w-7xl mx-auto flex items-center justify-between gap-2">
-        <div className="top-info-left hidden lg:flex items-center gap-2">
-          <span className="flex items-center gap-1.5 whitespace-nowrap text-gold-400 font-medium">
-            <MapPin size={12} className="text-gold-400" />
-            <span>Noida Hub • Delhi NCR</span>
-          </span>
-          <span className="text-navy-700">|</span>
-          <span className="whitespace-nowrap text-ivory-400">Supreme Court, High Courts, NCLT, DRT & Arbitration</span>
-        </div>
-
         <div className="top-info-contact ml-auto flex min-w-0 items-center justify-end gap-2">
           <a
             href={getPhoneUrl(firm.phone)}
@@ -31,8 +22,6 @@ export function TopBar() {
             <Mail size={11} className="text-gold-400" />
             <span className="truncate">{firm.email}</span>
           </a>
-          <span className="hidden lg:inline text-navy-700">|</span>
-          <span className="hidden lg:inline whitespace-nowrap text-ivory-400">{firm.officeHours}</span>
         </div>
       </div>
     </div>

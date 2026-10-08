@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { ConsultationForm } from '@/components/forms/ConsultationForm';
-import { MapPin, Phone, Mail, Clock, Info } from 'lucide-react';
+import { MapPin, Phone, Mail, Info } from 'lucide-react';
 import { firm } from '@/data/firm';
 
 export const metadata: Metadata = {
@@ -68,13 +68,6 @@ export default function ConsultationPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-start">
-                    <Clock className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
-                    <div>
-                      <p className="font-medium text-charcoal-900">Office Hours</p>
-                      <p className="text-charcoal-600 mt-1 whitespace-pre-line">{firm.officeHours}</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 

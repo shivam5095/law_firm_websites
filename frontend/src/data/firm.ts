@@ -14,6 +14,5 @@ export const firm = {
   website: 'https://mauryalawchambers.com',
   linkedin: 'https://www.linkedin.com/in/anand-kumar-maurya-1456a11a2/',
   whatsapp: '+917985933594',
-  officeHours: 'Mon – Sat: 9:00 AM – 7:30 PM IST',
   topBarText: 'Noida Hub • Delhi NCR | Commercial Arbitration • Banking & Finance • High Courts & Tribunals',
 };

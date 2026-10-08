@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { firm } from '@/data/firm';
 import { practiceAreas } from '@/data/practiceAreas';
-import { ArrowRight, ChevronDown, Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { ArrowRight, ChevronDown, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { officeHubs } from '@/data/offices';
 import { BackToTop } from '@/components/layout/BackToTop';
 
@@ -113,13 +113,6 @@ export function Footer() {
                 </span>
               </a>
             ))}
-            <div className="flex min-h-11 items-start gap-3 border-t border-navy-800 pt-3">
-              <Clock aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-gold-400" />
-              <div className="min-w-0 break-words">
-                <p className="font-medium text-ivory-100">Consultation Hours</p>
-                <p>{firm.officeHours}</p>
-              </div>
-            </div>
           </div>
           <a
             href={`https://wa.me/${firm.whatsapp.replace(/\D/g, '')}`}
