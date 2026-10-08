@@ -4,9 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { firm } from '@/data/firm';
-import { getWhatsAppUrl, getPhoneUrl } from '@/lib/utils';
+import { getWhatsAppUrl } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -157,13 +157,6 @@ export function Navbar() {
         </Link>
 
         <div className="mobile-nav-actions !flex items-center gap-2 lg:!hidden">
-          <a
-            href={getPhoneUrl(firm.phone)}
-            className="flex h-11 w-11 items-center justify-center text-navy-900 hover:text-gold-600"
-            aria-label="Call Us"
-          >
-            <Phone size={18} />
-          </a>
           <button
             ref={menuButtonRef}
             onClick={() => setIsOpen(true)}
@@ -247,7 +240,6 @@ export function Navbar() {
               Request a Consultation
             </Link>
             <div className="mt-2 flex justify-center gap-6 text-xs text-charcoal-600">
-              <a href={getPhoneUrl(firm.phone)} className="flex min-h-11 items-center gap-2"><Phone size={14} />Call {firm.phone}</a>
               <a href={getWhatsAppUrl(firm.whatsapp)} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center gap-2">WhatsApp</a>
             </div>
           </div>

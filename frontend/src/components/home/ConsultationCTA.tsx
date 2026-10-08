@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { firm } from '@/data/firm'
 
 export function ConsultationCTA() {
   return (
@@ -18,21 +17,6 @@ export function ConsultationCTA() {
             Request a Consultation
           </Link>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-12 text-ivory-200">
-            {firm.phone && (
-              <a href={`tel:${firm.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-gold-400 transition-colors">
-                {firm.phone}
-              </a>
-            )}
-            {firm.phone && firm.email && (
-              <span className="hidden sm:inline text-navy-700">|</span>
-            )}
-            {firm.email && (
-              <a href={`mailto:${firm.email}`} className="hover:text-gold-400 transition-colors">
-                {firm.email}
-              </a>
-            )}
-          </div>
         </div>
       </div>
     </section>

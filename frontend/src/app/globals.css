@@ -223,18 +223,6 @@ section[class*="py-"] {
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .top-info-bar {
-    font-size: 10px;
-  }
-
-  .top-info-inner,
-  .top-info-left,
-  .top-info-contact {
-    gap: 0.5rem;
-  }
-}
-
 @media (min-width: 1024px) {
   .section-padding {
     padding-top: 6rem;

@@ -5,8 +5,6 @@ export const firm = {
   founderTitle: 'Advocate & Principal Founder',
   tagline: 'Where Law Meets Strategy.',
   description: 'Maurya & Co., anchored at the Noida Hub (Delhi NCR), provides high-stakes legal counsel, banking recovery litigation, debt restructuring, commercial arbitration, and dispute resolution across premier Indian and cross-border jurisdictions.',
-  phone: '+91 79859 33594',
-  email: 'contact.mauryaandco@gmail.com',
   address: 'Noida Hub, Sector 62 / Express Trade Corridor',
   city: 'Noida',
   state: 'Uttar Pradesh (Delhi NCR)',

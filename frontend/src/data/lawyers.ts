@@ -3,8 +3,6 @@ export type Lawyer = {
   slug: string;
   name: string;
   designation: string;
-  email: string;
-  phone: string;
   image: string;
   shortBio: string;
   fullBio: string;
@@ -53,8 +51,6 @@ export const lawyers: Lawyer[] = [
     slug: 'anand-kumar-maurya',
     name: 'Anand Kumar Maurya',
     designation: 'Advocate',
-    email: 'contact.mauryaandco@gmail.com',
-    phone: '+917985933594',
     image: '/images/team/anand-kumar-maurya.jpg',
     shortBio: 'Anand Kumar Maurya is a specialized Advocate focusing on complex commercial arbitration, restructuring, and banking & finance disputes. He brings robust strategic insight and a detail-oriented approach to high-stakes legal matters.',
     fullBio: 'Anand Kumar Maurya represents clients in complex commercial litigation, arbitration, and banking and finance matters. As an Advocate, his practice is distinguished by a proactive, strategic approach to dispute resolution and corporate restructuring. With substantial experience spanning critical areas such as insolvency proceedings, project disputes, and structured debt resolution, Anand consistently delivers pragmatic legal counsel tailored to his clients\' commercial objectives.\n\nHe has built a strong foundation in commercial law, augmenting his extensive legal knowledge with practical insights gained from prestigious domestic and international legal engagements. He regularly advises on complex facility documentation, multi-lender restructuring scenarios, and intricate arbitration proceedings, offering precise, results-oriented legal solutions.',

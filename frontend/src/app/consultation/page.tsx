@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { ConsultationForm } from '@/components/forms/ConsultationForm';
-import { MapPin, Phone, Mail, Info } from 'lucide-react';
+import { MapPin, Info } from 'lucide-react';
 import { firm } from '@/data/firm';
 
 export const metadata: Metadata = {
@@ -49,22 +49,6 @@ export default function ConsultationPage() {
                       <p className="text-charcoal-600 mt-1 leading-relaxed whitespace-pre-line">
                         {firm.address}
                       </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <Phone className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
-                    <div>
-                      <p className="font-medium text-charcoal-900">Phone</p>
-                      <p className="text-charcoal-600 mt-1">{firm.phone}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <Mail className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
-                    <div>
-                      <p className="font-medium text-charcoal-900">Email</p>
-                      <p className="text-charcoal-600 mt-1">{firm.email}</p>
                     </div>
                   </div>
 

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Inter } from 'next/font/google';
-import { TopBar } from '@/components/layout/TopBar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingButtons } from '@/components/layout/FloatingButtons';
@@ -57,7 +56,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col font-body antialiased">
         <a className="skip-link" href="#main-content">Skip to content</a>
         <HomeDisclaimerGate disclaimer={<DisclaimerCopy />}>
-          <TopBar />
           <Navbar />
           <div id="main-content" className="flex-1">{children}</div>
           <Footer />

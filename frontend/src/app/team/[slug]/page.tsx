@@ -71,16 +71,6 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
             <p className="text-gold-400 text-xl tracking-wide uppercase font-semibold mb-6">
               {lawyer.designation}
             </p>
-            <div className="flex flex-wrap gap-4 text-sm text-ivory-200">
-              <a href={`mailto:${lawyer.email}`} className="flex items-center hover:text-white transition-colors">
-                <span className="mr-2">✉</span> {lawyer.email}
-              </a>
-              {lawyer.phone && (
-                <a href={`tel:${lawyer.phone}`} className="flex items-center hover:text-white transition-colors">
-                  <span className="mr-2">☎</span> {lawyer.phone}
-                </a>
-              )}
-            </div>
           </div>
         </div>
       </section>

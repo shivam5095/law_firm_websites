@@ -74,7 +74,7 @@ export function FloatingButtons() {
       {!hidePhoneBar && !isKeyboardOpen && (
         <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-gold-500 bg-navy-950 p-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] shadow-[0_-8px_24px_rgba(10,22,40,0.12)] md:hidden">
           <a
-            href={getPhoneUrl(firm.phone)}
+            href={getPhoneUrl(firm.whatsapp)}
             className="flex min-h-11 items-center justify-center gap-2 bg-navy-900 px-3 text-xs font-semibold uppercase text-white focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
           >
             <Phone size={16} aria-hidden="true" />

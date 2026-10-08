@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { firm } from '@/data/firm';
 import { practiceAreas } from '@/data/practiceAreas';
-import { ArrowRight, ChevronDown, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { ArrowRight, ChevronDown, MapPin, MessageCircle } from 'lucide-react';
 import { officeHubs } from '@/data/offices';
 import { BackToTop } from '@/components/layout/BackToTop';
 
@@ -82,20 +82,6 @@ export function Footer() {
             Central Hub & Reach
           </h2>
           <div className="space-y-2 text-sm text-ivory-300">
-            <a
-              href="tel:+917985933594"
-              className="flex min-h-11 items-center gap-3 break-words transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
-            >
-              <Phone aria-hidden="true" size={16} className="shrink-0 text-gold-400" />
-              <span>{firm.phone}</span>
-            </a>
-            <a
-              href={`mailto:${firm.email}`}
-              className="flex min-h-11 min-w-0 items-center gap-3 break-all transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
-            >
-              <Mail aria-hidden="true" size={16} className="shrink-0 text-gold-400" />
-              <span className="min-w-0 break-all">{firm.email}</span>
-            </a>
             {officeHubs.map((hub) => (
               <a
                 key={hub.name}
