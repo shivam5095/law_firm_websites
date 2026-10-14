@@ -25,18 +25,32 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+  const isHome = pathname === '/';
+  const isHomeAtTop = isHome && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (pathname === '/') {
+        const hero = document.querySelector('main > section');
+        const headerHeight = headerRef.current?.offsetHeight ?? 0;
+        setIsScrolled(hero ? hero.getBoundingClientRect().bottom <= headerHeight : window.scrollY > 20);
+      } else {
+        setIsScrolled(window.scrollY > 20);
+      }
     };
+    const frameId = window.requestAnimationFrame(handleScroll);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pathname]);
 
   useEffect(() => {
-    setIsOpen(false);
+    const frameId = window.requestAnimationFrame(() => setIsOpen(false));
+    return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
 
   useEffect(() => {
@@ -80,49 +94,72 @@ export function Navbar() {
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         'sticky top-0 z-50 h-16 lg:h-18 transition-colors duration-300',
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-charcoal-200/80 shadow-md'
-          : 'bg-white/90 backdrop-blur-sm border-b border-charcoal-100'
+        isHomeAtTop && '-mb-16 lg:-mb-[4.5rem]',
+        isHomeAtTop
+          ? 'isolate border-0 bg-transparent shadow-none before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-[150px] before:bg-[linear-gradient(to_bottom,rgba(0,26,48,0.94),transparent)]'
+          : isScrolled
+            ? isHome
+              ? 'bg-white border-b border-charcoal-200/80 shadow-md'
+              : 'bg-white/95 backdrop-blur-md border-b border-charcoal-200/80 shadow-md'
+            : 'bg-white/90 backdrop-blur-sm border-b border-charcoal-100'
       )}
     >
-      <div className="mx-auto flex h-full max-w-7xl flex-nowrap items-center justify-between gap-2 px-4 md:px-6 lg:px-8">
-        <Link href="/" aria-label="Maurya & Co.">
+      <div className={cn(
+        'relative z-10 mx-auto flex h-full flex-nowrap items-center justify-between gap-2',
+        'max-w-[1800px] px-12'
+      )}>
+        <Link href="/" aria-label="Maurya & Co." className="inline-flex h-full items-center">
           <Image
-            src="/images/logo/firm-logo-full-nowhite.png"
+            src="/images/logo/firm-logo-white.png"
             alt="Maurya & Co. Advocates and Legal Consultants"
-            width={1073}
-            height={210}
+            width={2170}
+            height={725}
             priority
-            className="h-auto w-[230px] max-w-[55vw]"
+            className="h-auto max-h-full w-[230px] object-contain"
           />
         </Link>
 
-        <div className="hidden flex-nowrap items-center gap-6 lg:flex">
-          <nav aria-label="Primary navigation" className="desktop-nav hidden flex-nowrap items-center gap-0 lg:flex">
+        <div className={cn(
+          'hidden ml-auto flex-nowrap items-center min-[1280px]:flex'
+        )}>
+          <nav aria-label="Primary navigation" className={cn(
+            'desktop-nav hidden flex-nowrap items-center gap-4 min-[1280px]:flex max-[1279px]:!hidden'
+          )}>
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'min-h-11 whitespace-nowrap px-0.5 text-[11px] font-medium transition-colors hover:text-gold-600 xl:px-1 xl:text-[12px] 2xl:text-[13px]',
-                  pathname === item.href
-                    ? 'text-navy-900 font-semibold underline decoration-gold-500 underline-offset-4'
-                    : 'text-navy-900'
+                  'min-h-11 whitespace-nowrap transition-colors',
+                  isHomeAtTop
+                    ? pathname === item.href
+                      ? 'text-[17px] font-semibold text-white underline decoration-[#E5C158] decoration-2 underline-offset-4 [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
+                      : 'text-[17px] font-medium text-white hover:text-white [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
+                    : pathname === item.href
+                      ? 'text-[17px] font-semibold text-navy-900 underline decoration-gold-500 underline-offset-4 hover:text-gold-600'
+                      : 'text-[17px] font-medium text-navy-900 hover:text-gold-600'
                 )}
               >
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/consultation"
+              className={cn(
+                'min-h-11 whitespace-nowrap transition-colors',
+                isHomeAtTop
+                  ? 'text-[17px] font-medium text-white hover:text-white [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
+                  : pathname === '/consultation'
+                    ? 'text-[17px] font-semibold text-navy-900 underline decoration-gold-500 underline-offset-4 hover:text-gold-600'
+                    : 'text-[17px] font-medium text-navy-900 hover:text-gold-600'
+              )}
+            >
+              Request Consultation
+            </Link>
           </nav>
-
-          <Link
-            href="/consultation"
-            className="desktop-consultation hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-4 text-xs font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950 2xl:px-5"
-          >
-            Request Consultation
-          </Link>
         </div>
 
         <nav aria-label="Primary navigation" className="tablet-nav !hidden items-center gap-2">
@@ -156,11 +193,14 @@ export function Navbar() {
           Request Consultation
         </Link>
 
-        <div className="mobile-nav-actions !flex items-center gap-2 lg:!hidden">
+        <div className="mobile-nav-actions !flex items-center gap-2 min-[1280px]:!hidden">
           <button
             ref={menuButtonRef}
             onClick={() => setIsOpen(true)}
-            className="flex h-11 w-11 items-center justify-center rounded-sm border border-charcoal-200 text-navy-900 hover:text-gold-600"
+            className={cn(
+              'flex h-11 w-11 items-center justify-center rounded-sm border border-charcoal-200 text-navy-900 hover:text-gold-600',
+              isHomeAtTop && 'border-white/40 text-white hover:text-[#E5C158]'
+            )}
             aria-label="Open Menu"
             aria-expanded={isOpen}
             aria-controls="mobile-navigation-panel"
@@ -230,15 +270,18 @@ export function Navbar() {
                 ))}
               </div>
             </details>
-          </nav>
-          <div className="shrink-0 border-t border-charcoal-100 bg-white p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
             <Link
               href="/consultation"
               onClick={() => setIsOpen(false)}
-              className="flex min-h-12 w-full items-center justify-center border border-gold-500 bg-navy-900 px-6 text-xs font-semibold uppercase text-gold-400 hover:bg-gold-500 hover:text-navy-900"
+              className={cn(
+                'flex min-h-12 items-center border-b border-charcoal-100 text-lg font-medium transition-colors',
+                pathname === '/consultation' ? 'text-gold-600 font-semibold' : 'text-navy-900'
+              )}
             >
-              Request a Consultation
+              Request Consultation
             </Link>
+          </nav>
+          <div className="shrink-0 border-t border-charcoal-100 bg-white p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
             <div className="mt-2 flex justify-center gap-6 text-xs text-charcoal-600">
               <a href={getWhatsAppUrl(firm.whatsapp)} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center gap-2">WhatsApp</a>
             </div>
