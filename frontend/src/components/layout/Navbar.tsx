@@ -111,16 +111,18 @@ export function Navbar() {
         'relative z-10 mx-auto flex h-full flex-nowrap items-center justify-between gap-2',
         'max-w-[1800px] px-12'
       )}>
-        <Link href="/" aria-label="Maurya & Co." className="inline-flex h-full items-center">
-          <Image
-            src="/images/logo/firm-logo-white.png"
-            alt="Maurya & Co. Advocates and Legal Consultants"
-            width={2170}
-            height={725}
-            priority
-            className="h-auto max-h-full w-[230px] object-contain"
-          />
-        </Link>
+        {!isHome && (
+          <Link href="/" aria-label="Maurya & Co." className="inline-flex h-full items-center">
+            <Image
+              src="/images/logo/firm-logo-white.png"
+              alt="Maurya & Co. Advocates and Legal Consultants"
+              width={2170}
+              height={725}
+              priority
+              className="h-auto max-h-full w-[230px] object-contain"
+            />
+          </Link>
+        )}
 
         <div className={cn(
           'hidden ml-auto flex-nowrap items-center min-[1280px]:flex'
