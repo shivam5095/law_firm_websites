@@ -241,18 +241,12 @@ function normalizeCarouselPosition(viewport: HTMLDivElement | null, group: HTMLD
 }
 
 export function ClientsRepresentedSection() {
-  const [filter, setFilter] = useState<'all' | 'bank' | 'nbfc'>('all');
   const viewportRef = useRef<HTMLDivElement>(null);
   const firstGroupRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(false);
   const pauseReasonsRef = useRef({ hovered: false, touching: false, focused: false });
   const reducedMotionRef = useRef(false);
   const manualMovementRef = useRef<ManualMovement | null>(null);
-
-  const filteredClients = featuredClients.filter((client) => {
-    if (filter === 'all') return true;
-    return client.category === filter;
-  });
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -332,7 +326,7 @@ export function ClientsRepresentedSection() {
       resizeObserver.disconnect();
       motionPreference.removeEventListener('change', handleMotionPreference);
     };
-  }, [filter]);
+  }, []);
 
   const updatePauseState = () => {
     const reasons = pauseReasonsRef.current;
@@ -345,7 +339,7 @@ export function ClientsRepresentedSection() {
     const firstLogo = firstGroup?.firstElementChild;
     if (!viewport || !(firstLogo instanceof HTMLElement)) return;
 
-    const logosToMove = Math.min(2, filteredClients.length);
+    const logosToMove = Math.min(2, featuredClients.length);
     const distance = logosToMove * (firstLogo.getBoundingClientRect().width + CLIENT_CARD_GAP) * direction;
 
     if (reducedMotionRef.current) {
@@ -366,7 +360,7 @@ export function ClientsRepresentedSection() {
     <section className="py-20 md:py-28 bg-white border-b border-charcoal-100">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-charcoal-100 gap-6">
+        <div className="mb-12 pb-6 border-b border-charcoal-100">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold-600 mb-2">
               <ShieldCheck size={16} className="text-gold-500" />
@@ -381,48 +375,6 @@ export function ClientsRepresentedSection() {
             </p>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex items-center gap-1.5 p-1 bg-ivory-100 rounded-sm border border-charcoal-200 shrink-0 self-start md:self-auto">
-            <button
-              type="button"
-              aria-pressed={filter === 'all'}
-              onClick={() => setFilter('all')}
-              className={cn(
-                'px-3.5 py-1.5 text-xs font-medium rounded-xs transition-colors',
-                filter === 'all'
-                  ? 'bg-navy-900 text-gold-400 shadow-xs'
-                  : 'text-charcoal-600 hover:text-navy-900'
-              )}
-            >
-              All Entities ({featuredClients.length})
-            </button>
-            <button
-              type="button"
-              aria-pressed={filter === 'bank'}
-              onClick={() => setFilter('bank')}
-              className={cn(
-                'px-3.5 py-1.5 text-xs font-medium rounded-xs transition-colors',
-                filter === 'bank'
-                  ? 'bg-navy-900 text-gold-400 shadow-xs'
-                  : 'text-charcoal-600 hover:text-navy-900'
-              )}
-            >
-              Banks ({featuredClients.filter((c) => c.category === 'bank').length})
-            </button>
-            <button
-              type="button"
-              aria-pressed={filter === 'nbfc'}
-              onClick={() => setFilter('nbfc')}
-              className={cn(
-                'px-3.5 py-1.5 text-xs font-medium rounded-xs transition-colors',
-                filter === 'nbfc'
-                  ? 'bg-navy-900 text-gold-400 shadow-xs'
-                  : 'text-charcoal-600 hover:text-navy-900'
-              )}
-            >
-              NBFCs &amp; FinTech ({featuredClients.filter((c) => c.category === 'nbfc').length})
-            </button>
-          </div>
         </div>
 
         {/* Stats Strip */}
@@ -508,7 +460,7 @@ export function ClientsRepresentedSection() {
                   role={groupIndex === 0 ? 'list' : undefined}
                   aria-hidden={groupIndex === 0 ? undefined : true}
                 >
-                  {filteredClients.map((client) => (
+                  {featuredClients.map((client) => (
                     <div
                       key={`${groupIndex}-${client.name}`}
                       role={groupIndex === 0 ? 'listitem' : undefined}
