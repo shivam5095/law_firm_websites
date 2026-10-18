@@ -249,8 +249,6 @@ export function ScrollDossierSlider() {
     }
   };
 
-  const progressPercent = ((activeSlideIndex + 1) / DOSSIERS.length) * 100;
-
   return (
     <section
       id="dossier-slider"
@@ -259,45 +257,6 @@ export function ScrollDossierSlider() {
       onTouchEnd={handleTouchEnd}
       className="relative w-full h-[100dvh] min-h-[620px] max-h-[920px] bg-[#070E1A] text-white flex flex-col justify-between overflow-hidden select-none"
     >
-      {/* TOP HEADER BAR */}
-      <div className="relative z-30 border-b border-white/10 bg-[#070E1A]/95 backdrop-blur-md px-4 sm:px-8 lg:px-12 py-3 shrink-0">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-gold-400 animate-pulse" />
-            <div>
-              <span className="font-mono text-[10px] uppercase tracking-widest text-gold-400 font-semibold block leading-none mb-1">
-                Interactive Practice Registry
-              </span>
-              <span className="font-heading text-base sm:text-lg text-white font-medium leading-none">
-                Chambers Case Dossiers
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 sm:gap-6">
-            <span className="hidden md:inline-block font-mono text-[11px] text-white/40 tracking-wider">
-              [SCROLL OR CLICK TABS TO GLIDE]
-            </span>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/15 px-3 py-1 rounded-xs font-mono text-xs">
-              <span className="text-gold-400 font-bold">
-                {String(activeSlideIndex + 1).padStart(2, '0')}
-              </span>
-              <span className="text-white/30">/</span>
-              <span className="text-white/60">
-                {String(DOSSIERS.length).padStart(2, '0')}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10">
-          <div
-            className="h-full bg-gradient-to-r from-gold-500 via-amber-400 to-gold-300 transition-all duration-500 ease-out"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-      </div>
-
       {/* MIDDLE SLIDE TRACK */}
       <div className="w-full flex-1 min-h-0 relative overflow-hidden flex items-center justify-center">
 
