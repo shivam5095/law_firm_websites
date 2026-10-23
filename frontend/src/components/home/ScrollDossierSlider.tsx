@@ -29,7 +29,7 @@ const DOSSIERS: DossierSlide[] = [
     category: 'BANKING LITIGATION',
     title: 'Banking Default & Asset Recovery',
     subtitle: 'Section 13/14 SARFAESI & DRT Multi-Lender Proceedings',
-    image: '/images/practice/banking-finance.jpg',
+    image: '/images/practice/banking-finance.jpeg',
     statLabel: 'Portfolio Value',
     statValue: '\u20B9100\u2013130 Cr',
     statDetail: 'Stressed-asset credit portfolios audited & enforced across banking consortiums',
@@ -49,7 +49,7 @@ const DOSSIERS: DossierSlide[] = [
     category: 'DEBT RESTRUCTURING',
     title: 'Stressed Assets & Consortium Restructuring',
     subtitle: 'Inter-Creditor Agreements (ICA) & One-Time Settlements (OTS)',
-    image: '/images/practice/debt-restructuring.jpg',
+    image: '/images/practice/debt-restructuring.jpeg',
     statLabel: 'Single Exposure Resolved',
     statValue: '\u20B985 Cr',
     statDetail: 'Consortium loan resolution for stressed infrastructure borrower without liquidation',
@@ -89,7 +89,7 @@ const DOSSIERS: DossierSlide[] = [
     category: 'INFRASTRUCTURE DISPUTES',
     title: 'Highway & EPC Concession Arbitrations',
     subtitle: 'NHAI, Road Development & EPC Construction Claims',
-    image: '/images/practice/infrastructure-disputes.jpg',
+    image: '/images/practice/infrastructure-project-finance.jpeg',
     statLabel: 'Matters Handled',
     statValue: 'Multi-Crore',
     statDetail: 'Claims involving delay damages, material escalation, and contractual termination',
@@ -100,7 +100,7 @@ const DOSSIERS: DossierSlide[] = [
       'Bank Guarantee Restraining Applications',
       'Dispute Resolution Board (DRB) Hearings'
     ],
-    link: '/practice-areas/infrastructure-disputes',
+    link: '/practice-areas/project-infrastructure-disputes',
     tagline: 'Vigorous advocacy in concession agreements, delay forensic analysis, and performance securities.'
   },
   {
@@ -109,7 +109,7 @@ const DOSSIERS: DossierSlide[] = [
     category: 'INSOLVENCY & NCLT',
     title: 'Insolvency Defense & CIRP Mitigation',
     subtitle: 'Corporate Debtor & Operational Creditor Proceedings',
-    image: '/images/practice/insolvency.jpg',
+    image: '/images/practice/insolvency.jpeg',
     statLabel: 'Statutory Arena',
     statValue: 'NCLT & NCLAT',
     statDetail: 'Section 7, 9 & 10 applications, Committee of Creditors advisory, Section 12A settlements',
@@ -120,7 +120,7 @@ const DOSSIERS: DossierSlide[] = [
       'Section 12A Withdrawal & Settlement Petitions',
       'Resolution Plan Legality & Priority Audits'
     ],
-    link: '/practice-areas/insolvency',
+    link: '/practice-areas/insolvency-financial-distress',
     tagline: 'Strategic positioning under the IBC to protect corporate solvent viability and prevent hostile takeovers.'
   },
   {
@@ -129,7 +129,7 @@ const DOSSIERS: DossierSlide[] = [
     category: 'CROSS-BORDER MATTERS',
     title: 'Cross-Border Judgment Enforcement',
     subtitle: 'Foreign Awards & Multijurisdictional Demands',
-    image: '/images/practice/commercial-disputes.jpg',
+    image: '/images/practice/dispute-resolution.jpeg',
     statLabel: 'International Training',
     statValue: '9 Institutions',
     statDetail: 'Trained at Baker McKenzie (Chicago), CIArb (London), and Leiden University (Netherlands)',
@@ -142,6 +142,46 @@ const DOSSIERS: DossierSlide[] = [
     ],
     link: '/experience',
     tagline: 'Applying global standards of legal drafting to cross-border financial and judgment recovery.'
+  },
+  {
+    id: 'dossier-07',
+    number: '07',
+    category: 'CAPITAL MARKETS',
+    title: 'Capital Markets',
+    subtitle: 'Placeholder: overview to be provided.',
+    image: '/images/practice/capital.jpeg',
+    statLabel: 'Practice Details',
+    statValue: 'TBD',
+    statDetail: 'Placeholder: details to be provided.',
+    proceduralCode: 'PLACEHOLDER: DETAILS TO BE PROVIDED',
+    instruments: [
+      'Placeholder: instrument details to be provided.',
+      'Placeholder: instrument details to be provided.',
+      'Placeholder: instrument details to be provided.',
+      'Placeholder: instrument details to be provided.'
+    ],
+    link: '/practice-areas/capital-markets',
+    tagline: 'Placeholder: practice overview to be provided.'
+  },
+  {
+    id: 'dossier-08',
+    number: '08',
+    category: 'FINANCIAL & REGULATORY',
+    title: 'Financial & Regulatory',
+    subtitle: 'Placeholder: overview to be provided.',
+    image: '/images/practice/financial-regulatory.jpeg',
+    statLabel: 'Practice Details',
+    statValue: 'TBD',
+    statDetail: 'Placeholder: details to be provided.',
+    proceduralCode: 'PLACEHOLDER: DETAILS TO BE PROVIDED',
+    instruments: [
+      'Placeholder: instrument details to be provided.',
+      'Placeholder: instrument details to be provided.',
+      'Placeholder: instrument details to be provided.',
+      'Placeholder: instrument details to be provided.'
+    ],
+    link: '/practice-areas/financial-regulatory',
+    tagline: 'Placeholder: practice overview to be provided.'
   }
 ];
 
@@ -421,7 +461,7 @@ export function ScrollDossierSlider() {
       {/* BOTTOM SCRUBBER BAR */}
       <div className="relative z-30 border-t border-white/10 bg-[#070E1A]/95 backdrop-blur-md px-4 sm:px-8 lg:px-12 py-2.5 sm:py-3 shrink-0">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5 sm:gap-3 overflow-x-auto py-1 scrollbar-none">
+          <div className="min-w-0 flex-1 flex items-center gap-1.5 sm:gap-3 overflow-x-auto py-1 scrollbar-none whitespace-nowrap">
             {DOSSIERS.map((d, index) => {
               const isActive = activeSlideIndex === index;
               return (

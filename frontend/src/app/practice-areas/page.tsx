@@ -8,7 +8,7 @@ import { ArrowRight, CheckCircle2, Scale, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Practice Areas & Case Handling Methodology',
-  description: 'Explore our specialized legal practice disciplines across Banking & Finance, Debt Restructuring, Commercial Arbitration, and Insolvency, complete with our strategic case-handling methodology.',
+  description: 'Explore our legal practice areas across banking, debt restructuring, arbitration, infrastructure, commercial disputes, insolvency, capital markets, and financial regulation.',
 };
 
 export default function PracticeAreasPage() {
@@ -95,10 +95,14 @@ export default function PracticeAreasPage() {
 
                   {/* Actions */}
                   <div className="pt-5 border-t border-charcoal-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="text-xs text-charcoal-500 font-medium">
-                      <span>Representative scale: </span>
-                      <strong className="text-navy-900 font-semibold">₹10 Lakh to ₹130+ Crore</strong>
-                    </div>
+                    {area.representativeScale !== null && (
+                      <div className="text-xs text-charcoal-500 font-medium">
+                        <span>Representative scale: </span>
+                        <strong className="text-navy-900 font-semibold">
+                          {area.representativeScale ?? '₹10 Lakh to ₹130+ Crore'}
+                        </strong>
+                      </div>
+                    )}
 
                     <Link
                       href={`/practice-areas/${area.slug}`}

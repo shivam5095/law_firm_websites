@@ -10,6 +10,7 @@ export type PracticeArea = {
   title: string;
   shortDescription: string;
   description: string;
+  representativeScale?: string | null;
   icon: string;
   image: string;
   services: string[];
@@ -29,7 +30,7 @@ export const practiceAreas: PracticeArea[] = [
     shortDescription: 'Comprehensive legal counsel for banking sector disputes, recovery strategies, facility enforcement, and regulatory compliance.',
     description: 'Our Banking & Finance practice offers robust legal counsel across complex lending arrangements, security enforcement, and high-stakes financial disputes. We regularly represent scheduled commercial banks, financial institutions, NBFCs, and corporate borrowers across loan documentation, regulatory compliance, and multi-crore recovery proceedings.',
     icon: 'Landmark',
-    image: '/images/practice/banking-finance.jpg',
+    image: '/images/practice/banking-finance.jpeg',
     services: [
       'Debt Recovery Tribunal (DRT & DRAT) litigation',
       'SARFAESI Act security enforcement & Section 13/14 actions',
@@ -109,7 +110,7 @@ Fourth, during hearings, I maintain rigorous focus on procedural precision, dism
     shortDescription: 'Strategic advice on restructuring stressed assets, one-time settlements (OTS), and sustainable debt realignment.',
     description: 'We provide specialized legal services for the resolution of stressed assets and corporate debt restructuring. Our practice encompasses negotiating restructuring master agreements, formulating one-time settlement (OTS) proposals, facilitating consortium buy-outs, and advising on inter-creditor dynamics to revive distressed businesses while safeguarding creditor returns.',
     icon: 'Briefcase',
-    image: '/images/practice/debt-restructuring.jpg',
+    image: '/images/practice/debt-restructuring.jpeg',
     services: [
       'One-Time Settlement (OTS) drafting and negotiation',
       'Inter-Creditor Agreement (ICA) evaluation',
@@ -263,7 +264,7 @@ Following the pronouncement of the arbitral award, I immediately initiate execut
     shortDescription: 'Specialized counsel for construction delays, EPC contracts, concession terminations, and infrastructure conflicts.',
     description: 'Infrastructure and major engineering projects involve substantial capital exposure and intricate multi-layered contracts. We represent developers, concessionaires, EPC contractors, and institutional lenders in complex disputes involving delay claims, force majeure, liquidated damages, design variations, and wrongful contract terminations.',
     icon: 'Building2',
-    image: '/images/practice/infrastructure-disputes.jpg',
+    image: '/images/practice/infrastructure-project-finance.jpeg',
     services: [
       'EPC, FIDIC & concession contract dispute resolution',
       'Delay, disruption & prolongation claims quantification',
@@ -339,7 +340,7 @@ During arbitration, I lead specialized technical expert evidence using standard 
     shortDescription: 'Strategic resolution of contractual breaches, corporate disputes, shareholder oppression, and high-value claims.',
     description: 'We navigate complex commercial disputes for corporations, directors, investors, and high-net-worth individuals. Our practice covers contract breaches, joint venture breakdowns, director disputes, summary suits, and corporate litigation across Commercial Courts, High Courts, and specialized tribunals across India.',
     icon: 'Handshake',
-    image: '/images/practice/commercial-disputes.jpg',
+    image: '/images/practice/dispute-resolution.jpeg',
     services: [
       'Commercial suits & summary suits (Order 37 CPC)',
       'Breach of contract & specific performance claims',
@@ -415,7 +416,7 @@ Throughout trial, my advocacy centers on precision witness examination and docum
     shortDescription: 'Navigating the IBC framework for creditors and debtors facing insolvency, CIRP, and corporate liquidation.',
     description: 'We provide specialized legal counsel under the Insolvency and Bankruptcy Code (IBC). We represent financial creditors, operational creditors, and corporate debtors across Corporate Insolvency Resolution Processes (CIRP), liquidation proceedings, and pre-packaged insolvency regimes before NCLT and NCLAT.',
     icon: 'ShieldAlert',
-    image: '/images/practice/insolvency.jpg',
+    image: '/images/practice/insolvency.jpeg',
     services: [
       'Initiation of CIRP by Financial Creditors (Section 7 IBC)',
       'Operational Creditor petitions & Section 8 demand notices (Section 9 IBC)',
@@ -485,6 +486,62 @@ Throughout the CIRP, I actively represent stakeholders before the NCLT and NCLAT
       {
         question: 'Can a matter be settled after an IBC petition is admitted by the NCLT?',
         answer: 'Yes. Under Section 12A of the IBC and Regulation 30A, an application can be withdrawn with the approval of 90% voting share of the Committee of Creditors (CoC) or through settlement with the applicant creditor before CoC constitution.'
+      }
+    ]
+  },
+  {
+    id: 'capital-markets',
+    slug: 'capital-markets',
+    title: 'Capital Markets',
+    shortDescription: 'Placeholder: description to be provided.',
+    description: 'Placeholder: practice description to be provided.',
+    representativeScale: null,
+    icon: 'Landmark',
+    image: '/images/practice/capital.jpeg',
+    services: ['Placeholder: services to be provided.'],
+    keyMatters: ['Placeholder: representative matters to be provided.'],
+    approach: 'Placeholder: approach to be provided.',
+    caseHandlingStrategy: 'Placeholder: case-handling strategy to be provided.',
+    handlingMethodology: [
+      {
+        stepNumber: '01',
+        title: 'Placeholder',
+        description: 'Placeholder: handling methodology to be provided.'
+      }
+    ],
+    strategicTactics: ['Placeholder: strategic tactics to be provided.'],
+    faqs: [
+      {
+        question: 'Placeholder: question to be provided.',
+        answer: 'Placeholder: answer to be provided.'
+      }
+    ]
+  },
+  {
+    id: 'financial-regulatory',
+    slug: 'financial-regulatory',
+    title: 'Financial & Regulatory',
+    shortDescription: 'Placeholder: description to be provided.',
+    description: 'Placeholder: practice description to be provided.',
+    representativeScale: null,
+    icon: 'Scale',
+    image: '/images/practice/financial-regulatory.jpeg',
+    services: ['Placeholder: services to be provided.'],
+    keyMatters: ['Placeholder: representative matters to be provided.'],
+    approach: 'Placeholder: approach to be provided.',
+    caseHandlingStrategy: 'Placeholder: case-handling strategy to be provided.',
+    handlingMethodology: [
+      {
+        stepNumber: '01',
+        title: 'Placeholder',
+        description: 'Placeholder: handling methodology to be provided.'
+      }
+    ],
+    strategicTactics: ['Placeholder: strategic tactics to be provided.'],
+    faqs: [
+      {
+        question: 'Placeholder: question to be provided.',
+        answer: 'Placeholder: answer to be provided.'
       }
     ]
   }

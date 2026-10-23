@@ -33,7 +33,7 @@ export function Footer() {
   );
   const practiceAreaList = (
     <ul className="space-y-1">
-      {practiceAreas.slice(0, 6).map((area) => (
+      {practiceAreas.map((area) => (
         <li key={area.id}>
           <Link href={`/practice-areas/${area.slug}`} className={footerLinkClass}>
             <span aria-hidden="true" className="text-xs text-gold-500/80">›</span>
