@@ -255,10 +255,23 @@ export function ScrollDossierSlider() {
       ref={sectionRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full h-[100dvh] min-h-[620px] max-h-[920px] bg-[#070E1A] text-white flex flex-col justify-between overflow-hidden select-none"
+      className="relative w-full min-h-[max(100dvh,620px)] bg-[#070E1A] text-white flex flex-col overflow-hidden select-none"
     >
+      <header className="w-full shrink-0 px-4 sm:px-8 lg:px-14 pt-10 sm:pt-14 lg:pt-20 pb-6 sm:pb-8 lg:pb-10 text-center">
+        <p className="font-mono text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
+          Our Expertise
+        </p>
+        <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-white font-normal leading-tight">
+          Areas of Practice
+        </h2>
+        <div className="w-24 h-px bg-gold-500 mx-auto my-4" />
+        <p className="text-sm sm:text-base text-white/60 max-w-3xl mx-auto leading-relaxed">
+          Banking, debt, commercial, infrastructure, insolvency and cross-border disputes, handled with procedural precision.
+        </p>
+      </header>
+
       {/* MIDDLE SLIDE TRACK */}
-      <div className="w-full flex-1 min-h-0 relative overflow-hidden flex items-center justify-center">
+      <div className="w-full h-[min(58dvh,540px)] min-h-[360px] shrink-0 relative overflow-hidden flex items-center justify-center">
 
         <button
           onClick={() => goToSlide(activeSlideIndex - 1)}
@@ -316,7 +329,7 @@ export function ScrollDossierSlider() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0c182b] via-[#0c182b]/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-[#0c182b]/30 lg:to-[#0c182b]" />
                     <div className="absolute top-4 left-4 bg-black/75 backdrop-blur-md border border-gold-500/40 px-3 py-1 font-mono text-[10px] text-gold-300 tracking-wider uppercase font-semibold">
-                      DOSSIER \u00A7 {dossier.number}
+                      DOSSIER &sect; {dossier.number}
                     </div>
                     <div className="absolute bottom-4 left-4 right-4 bg-[#08101E]/85 backdrop-blur-md border border-white/10 p-3 rounded-xs">
                       <span className="font-mono text-[9px] uppercase tracking-widest text-gold-400 block mb-0.5">
@@ -373,7 +386,7 @@ export function ScrollDossierSlider() {
                               key={idx}
                               className="flex items-center gap-2 text-xs text-white/80 font-sans"
                             >
-                              <span className="text-gold-400 font-mono text-xs">\u00A7</span>
+                              <span className="text-gold-400 font-mono text-xs">&sect;</span>
                               <span className="truncate">{ins}</span>
                             </div>
                           ))}
