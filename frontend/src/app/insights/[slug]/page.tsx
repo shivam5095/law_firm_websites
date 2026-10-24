@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { publications } from '@/data/publications';
 import { lawyers } from '@/data/lawyers';
+import { PublicationLink } from '@/components/publications/PublicationLink';
 
 export async function generateStaticParams() {
   return publications.map((pub) => ({
@@ -49,6 +50,15 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
             <h1 className="page-heading mb-8 font-medium text-ivory-100">
               {pub.title}
             </h1>
+
+            {pub.externalUrl && (
+              <PublicationLink
+                publication={pub}
+                className="mb-8 inline-flex items-center border border-gold-500 px-5 py-3 text-sm font-medium text-gold-300 transition-colors hover:bg-gold-500 hover:text-navy-900"
+              >
+                Read the full article on {pub.publication}
+              </PublicationLink>
+            )}
 
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-ivory-200">
               <div className="flex items-center">

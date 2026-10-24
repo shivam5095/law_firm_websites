@@ -1,8 +1,9 @@
-import Link from 'next/link'
-import { publications } from '@/data/publications'
+import Link from 'next/link';
+import { publications } from '@/data/publications';
+import { PublicationLink } from '@/components/publications/PublicationLink';
 
 export function PublicationsPreview() {
-  const recentPubs = publications.slice(0, 3)
+  const recentPubs = publications.slice(0, 3);
 
   return (
     <section className="bg-ivory-50 py-24 md:py-32">
@@ -22,28 +23,33 @@ export function PublicationsPreview() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {recentPubs.map((pub, index) => (
-            <Link
+            <article
               key={pub.id || index}
-              href={`/publications/${pub.slug || pub.id}`}
-              className="group block bg-white p-8 border border-charcoal-100 hover:border-gold-300 transition-colors h-full flex flex-col"
+              className="group flex h-full flex-col border border-charcoal-100 bg-white p-8 transition-colors hover:border-gold-300"
             >
               <div className="text-sm text-charcoal-500 mb-4 flex items-center justify-between">
                 <span className="font-medium text-gold-600">{pub.publication}</span>
                 <span>{pub.date}</span>
               </div>
               <h3 className="font-heading text-xl text-navy-900 mb-4 group-hover:text-gold-600 transition-colors">
-                {pub.title}
+                <PublicationLink publication={pub} className="focus:outline-none">
+                  {pub.title}
+                </PublicationLink>
               </h3>
               <p className="text-charcoal-600 line-clamp-3 mb-6 mt-auto">
                 {pub.excerpt}
               </p>
-              <div className="text-sm font-medium text-navy-900 flex items-center mt-auto">
-                Read Article <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </Link>
+              <PublicationLink
+                publication={pub}
+                className="mt-auto flex items-center text-sm font-medium text-navy-900 transition-colors group-hover:text-gold-600"
+              >
+                {pub.externalUrl ? `Read on ${pub.publication}` : 'Read Article'}
+                {!pub.externalUrl && <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>}
+              </PublicationLink>
+            </article>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

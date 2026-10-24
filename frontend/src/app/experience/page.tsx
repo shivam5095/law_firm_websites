@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { PageHero } from '@/components/common/PageHero';
 import { experienceItems } from '@/data/experience';
 
@@ -27,6 +28,19 @@ export default function ExperiencePage() {
       <section className="py-20 max-w-5xl mx-auto px-6">
         <div className="mb-12 bg-white p-6 border border-charcoal-200 text-charcoal-600 text-sm italic">
           Disclaimer: The descriptions below are illustrative of the types of matters handled by our firm and its members. To protect confidentiality, specific client identities and certain identifying details have been withheld.
+        </div>
+
+        <div className="mb-12 flex flex-col gap-4 border border-charcoal-200 bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-heading text-xl text-navy-900">Anand Kumar Maurya</p>
+            <p className="mt-1 text-sm text-charcoal-600">Founder and Principal Advocate</p>
+          </div>
+          <Link
+            href="/team/anand-kumar-maurya"
+            className="inline-flex w-fit items-center border border-navy-900 px-5 py-3 text-sm font-medium text-navy-900 transition-colors hover:bg-navy-900 hover:text-white"
+          >
+            View Full Profile <span aria-hidden="true" className="ml-2">→</span>
+          </Link>
         </div>
 
         <div className="space-y-16">

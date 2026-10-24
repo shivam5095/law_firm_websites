@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { PageHero } from '@/components/common/PageHero';
 import { publications } from '@/data/publications';
 import { lawyers } from '@/data/lawyers';
-import Link from 'next/link';
+import { PublicationLink } from '@/components/publications/PublicationLink';
 
 export const metadata: Metadata = {
   title: 'Publications | Premium Indian Law Firm',
@@ -33,9 +33,14 @@ export default function PublicationsPage() {
                 {publications.map((pub, idx) => (
                   <tr key={idx} className="hover:bg-ivory-50 transition-colors group">
                     <td className="p-6">
-                      <Link href={`/insights/${pub.slug}`} className="font-heading text-lg text-navy-800 group-hover:text-gold-600 transition-colors block mb-1">
+                      <PublicationLink publication={pub} className="font-heading text-lg text-navy-800 group-hover:text-gold-600 transition-colors block mb-1">
                         {pub.title}
-                      </Link>
+                        {pub.externalUrl && (
+                          <span className="mt-2 block font-sans text-xs font-medium text-gold-700">
+                            Read on {pub.publication}
+                          </span>
+                        )}
+                      </PublicationLink>
                       <div className="md:hidden text-sm text-charcoal-500 italic mb-1">{pub.publication}</div>
                       <div className="sm:hidden text-sm text-charcoal-600">{lawyers[0].name}</div>
                       <span className="inline-block mt-2 text-xs bg-charcoal-100 text-charcoal-600 px-2 py-1 rounded-sm">

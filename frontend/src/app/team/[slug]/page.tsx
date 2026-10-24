@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation';
 import { lawyers } from '@/data/lawyers';
 import { publications } from '@/data/publications';
 import { practiceAreas } from '@/data/practiceAreas';
+import profile from '@/data/anand-profile-content.json';
+import { AnandProfileContent } from '@/components/team/AnandProfileContent';
 
 export async function generateStaticParams() {
   return lawyers.map((lawyer) => ({
@@ -20,6 +22,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: 'Advocate Not Found' };
   }
 
+  if (slug === 'anand-kumar-maurya') {
+    return {
+      title: `${profile.name}, ${profile.title}`,
+      description: profile.intro,
+    };
+  }
+
   return {
     title: `${lawyer.name}, ${lawyer.designation}`,
     description: lawyer.shortBio,
@@ -32,6 +41,10 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
 
   if (!lawyer) {
     notFound();
+  }
+
+  if (slug === 'anand-kumar-maurya') {
+    return <AnandProfileContent />;
   }
 
   const lawyerPracticeAreas = practiceAreas.filter(pa =>

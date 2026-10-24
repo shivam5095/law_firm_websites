@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { PageHero } from '@/components/common/PageHero';
-import Link from 'next/link';
 import { publications } from '@/data/publications';
 import { lawyers } from '@/data/lawyers';
+import { PublicationLink } from '@/components/publications/PublicationLink';
 
 export const metadata: Metadata = {
   title: 'Legal Insights & Publications | Premium Indian Law Firm',
@@ -35,10 +35,15 @@ export default function InsightsPage() {
                 </div>
                 
                 <h2 className="font-heading text-xl text-navy-900 mb-4 group-hover:text-gold-600 transition-colors line-clamp-3">
-                  <Link href={`/insights/${pub.slug}`} className="focus:outline-none">
+                  <PublicationLink publication={pub} className="focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     {pub.title}
-                  </Link>
+                    {pub.externalUrl && (
+                      <span className="relative mt-2 block text-xs font-medium text-gold-700">
+                        Read on {pub.publication}
+                      </span>
+                    )}
+                  </PublicationLink>
                 </h2>
                 
                 <p className="text-sm text-charcoal-600 mb-6 flex-grow line-clamp-4">
