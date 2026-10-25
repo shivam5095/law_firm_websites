@@ -299,7 +299,7 @@ export function ScrollDossierSlider() {
       ref={sectionRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full h-[calc(100dvh-5rem)] min-h-[calc(620px-5rem)] bg-[#070E1A] text-white flex flex-col overflow-hidden select-none"
+      className="relative flex w-full flex-col overflow-hidden bg-[#070E1A] text-white select-none"
     >
       <header className="w-full shrink-0 px-4 sm:px-8 lg:px-14 pt-10 sm:pt-14 lg:pt-20 pb-6 sm:pb-8 lg:pb-10 text-center">
         <p className="font-mono text-xs uppercase tracking-widest text-gold-400 font-semibold mb-3">
@@ -310,12 +310,12 @@ export function ScrollDossierSlider() {
         </h2>
         <div className="w-24 h-px bg-gold-500 mx-auto my-4" />
         <p className="text-sm sm:text-base text-white/60 max-w-3xl mx-auto leading-relaxed">
-          Banking, debt, commercial, infrastructure, insolvency and cross-border disputes, handled with procedural precision.
+          Banking, debt, infrastructure, insolvency, capital markets and cross-border disputes, handled with procedural precision.
         </p>
       </header>
 
       {/* MIDDLE SLIDE TRACK */}
-      <div className="w-full flex-1 min-h-0 relative overflow-hidden flex items-center justify-center">
+      <div className="relative flex w-full items-center justify-center overflow-hidden py-2 sm:py-4">
 
         <button
           onClick={() => goToSlide(activeSlideIndex - 1, true)}
@@ -343,37 +343,28 @@ export function ScrollDossierSlider() {
             damping: 26,
             mass: 0.85
           }}
-          className="flex h-full w-full"
+          className="flex w-full"
         >
           {DOSSIERS.map((dossier, i) => {
             const isActive = activeSlideIndex === i;
             return (
               <div
                 key={dossier.id}
-                className="w-full shrink-0 h-full flex items-center justify-center px-4 sm:px-8 lg:px-14 py-2 select-none"
+                className="flex w-full shrink-0 items-center justify-center px-4 py-2 select-none sm:px-8 lg:px-14"
               >
                 <motion.div
-                  layout
-                  animate={{
-                    scale: isActive ? 1 : 0.94,
-                    opacity: isActive ? 1 : 0.35,
-                  }}
+                  animate={{ opacity: isActive ? 1 : 0.35 }}
                   transition={{ duration: 0.4 }}
-                  style={
+                  className={`w-full min-w-[280px] max-w-[1100px] overflow-hidden rounded-sm border border-white/15 bg-[#0c182b] shadow-2xl ${
                     isDetailsOpen && isActive
-                      ? undefined
-                      : { width: 'min(100%, calc((100dvh - 27rem - 3rem) * 1.7778))' }
-                  }
-                  className={`w-full max-w-6xl bg-[#0c182b] border border-white/15 rounded-sm shadow-2xl overflow-hidden ${
-                    isDetailsOpen && isActive
-                      ? 'h-full max-h-[540px] grid grid-cols-1 grid-rows-[minmax(0,40%)_minmax(0,1fr)] lg:grid-cols-12 lg:grid-rows-1'
+                      ? 'grid grid-cols-1 lg:grid-cols-12'
                       : 'h-auto flex flex-col'
                   }`}
                 >
                   {/* Left Column: Photography */}
                   <div
-                    className={`relative bg-[#08101E] overflow-hidden group transition-[grid-column] duration-500 ${
-                      isDetailsOpen && isActive ? 'h-full min-h-0 flex items-center justify-center lg:col-span-5' : 'w-full'
+                    className={`group relative overflow-hidden bg-[#08101E] ${
+                      isDetailsOpen && isActive ? 'lg:col-span-5' : 'w-full'
                     }`}
                   >
                     <button
@@ -384,11 +375,7 @@ export function ScrollDossierSlider() {
                       }}
                       aria-label={`View details for ${dossier.title}`}
                       aria-expanded={isActive && isDetailsOpen}
-                      className={`z-10 w-full text-left focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-[-4px] ${
-                        isDetailsOpen && isActive
-                          ? 'absolute inset-0 flex h-full items-center justify-center'
-                          : 'relative block'
-                      }`}
+                      className="relative z-10 block w-full text-left focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-[-4px]"
                     >
                       <Image
                         src={dossier.image}
@@ -400,7 +387,7 @@ export function ScrollDossierSlider() {
                         priority={i === 0 || i === 1}
                         className={
                           isDetailsOpen && isActive
-                            ? 'h-auto w-auto max-h-full max-w-full object-contain'
+                            ? 'block h-auto w-full object-contain'
                             : 'block h-auto w-full'
                         }
                       />
@@ -422,11 +409,11 @@ export function ScrollDossierSlider() {
                       )}
                     </button>
                     {!isDetailsOpen && (
-                      <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-[#0c182b] px-3 py-2">
-                        <span className="font-mono text-[10px] text-gold-300 uppercase tracking-widest">
+                      <div className="flex flex-col gap-1.5 border-t border-white/10 bg-[#0c182b] px-3 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                        <span className="min-w-0 truncate font-mono text-[10px] uppercase tracking-widest text-gold-300">
                           {dossier.title}
                         </span>
-                        <span className="shrink-0 font-mono text-[9px] text-white/50 tracking-wider">
+                        <span className="shrink-0 whitespace-nowrap font-mono text-[9px] tracking-wider text-white/50">
                           Click to view details
                         </span>
                       </div>
@@ -442,7 +429,7 @@ export function ScrollDossierSlider() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 24 }}
                         transition={{ duration: 0.25 }}
-                        className="min-h-0 lg:col-span-7 p-5 sm:p-7 lg:p-8 flex flex-col justify-between overflow-y-auto"
+                        className="flex min-w-0 flex-col justify-between overflow-y-auto p-5 sm:p-7 lg:col-span-7 lg:p-8"
                       >
                         <div>
                           <div className="flex items-center justify-between gap-3 pb-3 mb-2.5 border-b border-white/10">
