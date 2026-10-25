@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { firm } from '@/data/firm';
 import { practiceAreas } from '@/data/practiceAreas';
-import { ArrowRight, ChevronDown, MessageCircle } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/common/WhatsAppIcon';
 import { BackToTop } from '@/components/layout/BackToTop';
 
 const quickLinks = [
@@ -86,7 +87,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-gold-500 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-navy-950 transition-colors hover:bg-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2 md:w-auto"
           >
-            <MessageCircle aria-hidden="true" size={16} />
+            <WhatsAppIcon size={16} />
             <span>Connect on WhatsApp</span>
             <ArrowRight aria-hidden="true" size={14} />
           </a>

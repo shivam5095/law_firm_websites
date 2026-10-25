@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Phone } from 'lucide-react';
+import { Phone } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/common/WhatsAppIcon';
 import { firm } from '@/data/firm';
 import { getWhatsAppUrl, getPhoneUrl } from '@/lib/utils';
 
@@ -57,7 +58,7 @@ export function FloatingButtons() {
               className="group flex size-12 items-center justify-center rounded-full bg-gold-500 text-navy-950 shadow-lg transition-colors hover:bg-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
               aria-label="Message on WhatsApp"
             >
-              <MessageCircle aria-hidden="true" size={24} className="transition-transform group-hover:scale-110" />
+              <WhatsAppIcon size={24} className="transition-transform group-hover:scale-110" />
             </a>
           </motion.div>
         )}
