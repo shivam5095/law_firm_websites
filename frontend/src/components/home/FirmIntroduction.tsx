@@ -1,8 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight, Award, GraduationCap, Building2, BookOpen, ChevronRight } from 'lucide-react';
 import { firm } from '@/data/firm';
 
 export function FirmIntroduction() {
@@ -40,19 +38,15 @@ export function FirmIntroduction() {
             <div className="hidden sm:block absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gold-500 pointer-events-none" />
           </div>
 
-          {/* Right Column: Editorial Narrative & Institutional Pedigree (7 Cols) */}
+          {/* Right Column: Editorial Narrative (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 text-gold-600 font-mono text-[11px] uppercase tracking-widest font-semibold mb-4">
-              <span>Chambers Doctrine &amp; Pedigree</span>
-            </div>
-
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-navy-950 font-normal leading-tight tracking-tight mb-6">
               Restrained, factual precision in high-stakes corporate disputes.
             </h2>
 
             <div className="w-16 h-0.5 bg-gold-500 mb-8" />
 
-            <div className="prose prose-slate text-charcoal-700 text-sm md:text-base leading-relaxed space-y-4 mb-8 max-w-none">
+            <div className="prose prose-slate text-charcoal-700 text-sm md:text-base leading-relaxed space-y-4 max-w-none">
               <p>
                 The Chambers of Anand Kumar Maurya operates with an acute recognition of commercial reality: 
                 litigation and credit distress are not abstract legal puzzles, but high-impact balance sheet events. 
@@ -64,25 +58,6 @@ export function FirmIntroduction() {
                 SBI, HDFC Bank, Axis Bank, American Express, and Standard Chartered—we prioritize early factual audits to dismantle 
                 procedural bottlenecks before irreversible default positions are triggered.
               </p>
-            </div>
-
-            {/* Link to Full Profile */}
-            <div className="flex items-center gap-6">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-navy-950 hover:bg-navy-900 text-ivory-50 font-mono text-xs uppercase tracking-widest font-semibold rounded-xs transition-colors group"
-              >
-                <span>Read Full Chambers Profile</span>
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-gold-400" />
-              </Link>
-
-              <Link
-                href="/team/anand-kumar-maurya"
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-charcoal-700 hover:text-gold-600 font-semibold tracking-wider uppercase transition-colors"
-              >
-                <span>Curriculum Vitae</span>
-                <ChevronRight size={14} />
-              </Link>
             </div>
 
           </div>

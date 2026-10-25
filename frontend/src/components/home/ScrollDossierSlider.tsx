@@ -413,9 +413,6 @@ export function ScrollDossierSlider() {
                         <span className="min-w-0 truncate font-mono text-[10px] uppercase tracking-widest text-gold-300">
                           {dossier.title}
                         </span>
-                        <span className="shrink-0 whitespace-nowrap font-mono text-[9px] tracking-wider text-white/50">
-                          Click to view details
-                        </span>
                       </div>
                     )}
                   </div>
@@ -519,27 +516,7 @@ export function ScrollDossierSlider() {
 
       {/* BOTTOM SCRUBBER BAR */}
       <div className="relative z-30 border-t border-white/10 bg-[#070E1A]/95 backdrop-blur-md px-4 sm:px-8 lg:px-12 py-2.5 sm:py-3 shrink-0">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="min-w-0 flex-1 flex items-center gap-1.5 sm:gap-3 overflow-x-auto py-1 scrollbar-none whitespace-nowrap">
-            {DOSSIERS.map((d, index) => {
-              const isActive = activeSlideIndex === index;
-              return (
-                <button
-                  key={d.id}
-                  onClick={() => goToSlide(index, true)}
-                  className={`px-2.5 sm:px-3 py-1.5 rounded-xs font-mono text-[11px] tracking-wider uppercase transition-all flex items-center gap-1.5 shrink-0 ${
-                    isActive
-                      ? 'bg-gold-500 text-navy-950 font-bold shadow-md shadow-gold-500/20'
-                      : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10 border border-white/5'
-                  }`}
-                >
-                  <span className={isActive ? 'text-navy-950' : 'text-gold-400'}>{d.number}</span>
-                  <span className="hidden sm:inline">{d.category.split(' ')[0]}</span>
-                </button>
-              );
-            })}
-          </div>
-
+        <div className="max-w-7xl mx-auto flex items-center justify-end gap-3">
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => goToSlide(activeSlideIndex - 1, true)}

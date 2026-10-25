@@ -2,8 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { firm } from '@/data/firm';
 import { practiceAreas } from '@/data/practiceAreas';
-import { ArrowRight, ChevronDown, MapPin, MessageCircle } from 'lucide-react';
-import { officeHubs } from '@/data/offices';
+import { ArrowRight, ChevronDown, MessageCircle } from 'lucide-react';
 import { BackToTop } from '@/components/layout/BackToTop';
 
 const quickLinks = [
@@ -81,25 +80,6 @@ export function Footer() {
           <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gold-400">
             Central Hub & Reach
           </h2>
-          <div className="space-y-2 text-sm text-ivory-300">
-            {officeHubs.map((hub) => (
-              <a
-                key={hub.name}
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hub.address)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-11 min-w-0 items-start gap-3 break-words py-1 transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2"
-              >
-                <MapPin aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-gold-400" />
-                <span className="min-w-0 break-words">
-                  <span className="block font-medium text-ivory-100">{hub.name}</span>
-                  <span className="block text-ivory-300">{hub.designation}</span>
-                  <span className="block">{hub.address}</span>
-                  <span className="block text-xs text-ivory-300">{hub.regionTag}</span>
-                </span>
-              </a>
-            ))}
-          </div>
           <a
             href={`https://wa.me/${firm.whatsapp.replace(/\D/g, '')}`}
             target="_blank"

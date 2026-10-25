@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Globe, Maximize2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { officeHubs } from '@/data/offices';
 
 export function GlobalPresenceMap() {
   const [activeTheme, setActiveTheme] = useState<'dark' | 'light'>('dark');
@@ -71,14 +70,6 @@ export function GlobalPresenceMap() {
               className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
               sizes="(max-width: 1200px) 100vw, 1200px"
             />
-
-            <div aria-label="Headquarters shown on the map" className="absolute left-3 right-3 top-3 z-10 flex flex-wrap gap-2 md:left-4 md:right-auto md:top-4">
-              {officeHubs.map((hub) => (
-                <span key={hub.name} className="border border-gold-500/50 bg-navy-950/90 px-2.5 py-1.5 text-[10px] font-semibold text-ivory-100 backdrop-blur-sm md:text-xs">
-                  <span className="text-gold-400">{hub.name}</span> · {hub.designation}
-                </span>
-              ))}
-            </div>
 
             {/* Click to expand overlay hint */}
             <button
