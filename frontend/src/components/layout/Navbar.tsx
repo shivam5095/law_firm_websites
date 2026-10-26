@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -31,7 +31,18 @@ export function Navbar() {
   const isAbout = pathname === '/about';
   const isHomeAtTop = isHome && !isScrolled;
 
+  useLayoutEffect(() => {
+    if (pathname !== '/about') return;
+
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
   useEffect(() => {
+    if (pathname === '/about') return;
+
     const handleScroll = () => {
       if (pathname === '/') {
         const hero = document.querySelector('main > section');
@@ -98,7 +109,7 @@ export function Navbar() {
       ref={headerRef}
       className={cn(
         isAbout
-          ? 'about-navbar sticky inset-x-0 top-0 z-50 h-[calc(4rem+env(safe-area-inset-top))] lg:h-[calc(4.5rem+env(safe-area-inset-top))] transition-colors duration-300'
+          ? 'about-navbar sticky inset-x-0 top-0 z-50 h-[calc(4rem+env(safe-area-inset-top))] lg:h-[calc(4.5rem+env(safe-area-inset-top))] transition-[background-color,color,box-shadow] duration-[250ms]'
           : 'sticky top-0 z-50 h-16 lg:h-18 transition-colors duration-300',
         (isHomeAtTop || isAbout) && '-mb-16 lg:-mb-[4.5rem]',
         (isHomeAtTop || (isAbout && !isScrolled))
@@ -138,7 +149,7 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   'min-h-11 whitespace-nowrap transition-colors',
-                  isHomeAtTop || isAbout
+                  isHomeAtTop || (isAbout && !isScrolled)
                     ? pathname === item.href
                       ? 'text-[17px] font-semibold text-white underline decoration-[#E5C158] decoration-2 underline-offset-4 [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
                       : 'text-[17px] font-medium text-white hover:text-white [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
@@ -154,7 +165,7 @@ export function Navbar() {
               href="/consultation"
               className={cn(
                 'min-h-11 whitespace-nowrap transition-colors',
-                  isHomeAtTop || isAbout
+                  isHomeAtTop || (isAbout && !isScrolled)
                   ? 'text-[17px] font-medium text-white hover:text-white [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
                   : pathname === '/consultation'
                     ? 'text-[17px] font-semibold text-navy-900 underline decoration-gold-500 underline-offset-4 hover:text-gold-600'
@@ -172,12 +183,12 @@ export function Navbar() {
             { label: 'Experience', href: '/experience' },
             { label: 'Team', href: '/team' },
           ].map((item) => (
-            <Link key={item.href} href={item.href} className={cn('min-h-11 whitespace-nowrap px-1 text-xs font-medium hover:text-gold-600', isAbout ? 'text-white' : 'text-navy-900')}>
+            <Link key={item.href} href={item.href} className={cn('min-h-11 whitespace-nowrap px-1 text-xs font-medium hover:text-gold-600', isAbout && !isScrolled ? 'text-white' : 'text-navy-900')}>
               {item.label}
             </Link>
           ))}
           <details className="relative">
-            <summary className={cn('flex min-h-11 cursor-pointer items-center whitespace-nowrap px-1 text-xs font-medium hover:text-gold-600', isAbout ? 'text-white' : 'text-navy-900')}>
+            <summary className={cn('flex min-h-11 cursor-pointer items-center whitespace-nowrap px-1 text-xs font-medium hover:text-gold-600', isAbout && !isScrolled ? 'text-white' : 'text-navy-900')}>
               More
             </summary>
             <div className="absolute right-0 top-full z-20 min-w-48 border border-charcoal-200 bg-white p-2 shadow-lg">
@@ -192,7 +203,7 @@ export function Navbar() {
 
         <Link
           href="/consultation"
-          className={cn('tablet-consultation !hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-3 text-[10px] font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950', isAbout && 'border-white/50 bg-transparent text-white')}
+          className={cn('tablet-consultation !hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-3 text-[10px] font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950', isAbout && !isScrolled && 'border-white/50 bg-transparent text-white')}
         >
           Request Consultation
         </Link>
@@ -203,7 +214,7 @@ export function Navbar() {
             onClick={() => setIsOpen(true)}
             className={cn(
               'flex h-11 w-11 items-center justify-center rounded-sm border border-charcoal-200 text-navy-900 hover:text-gold-600',
-              (isHomeAtTop || isAbout) && 'border-white/40 text-white hover:text-[#E5C158]'
+              (isHomeAtTop || (isAbout && !isScrolled)) && 'border-white/40 text-white hover:text-[#E5C158]'
             )}
             aria-label="Open Menu"
             aria-expanded={isOpen}
