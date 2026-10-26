@@ -98,15 +98,13 @@ export function Navbar() {
       ref={headerRef}
       className={cn(
         isAbout
-          ? 'about-navbar absolute inset-x-0 top-0 z-50 h-[calc(4rem+env(safe-area-inset-top))] lg:h-[calc(4.5rem+env(safe-area-inset-top))] transition-colors duration-300'
+          ? 'about-navbar sticky inset-x-0 top-0 z-50 h-[calc(4rem+env(safe-area-inset-top))] lg:h-[calc(4.5rem+env(safe-area-inset-top))] transition-colors duration-300'
           : 'sticky top-0 z-50 h-16 lg:h-18 transition-colors duration-300',
-        isHomeAtTop && '-mb-16 lg:-mb-[4.5rem]',
-        isHomeAtTop
+        (isHomeAtTop || isAbout) && '-mb-16 lg:-mb-[4.5rem]',
+        (isHomeAtTop || (isAbout && !isScrolled))
           ? 'isolate border-0 bg-transparent shadow-none before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-[150px] before:bg-[linear-gradient(to_bottom,rgba(0,26,48,0.94),transparent)]'
-          : isAbout
-            ? 'isolate border-0 bg-transparent shadow-none before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-[150px] before:bg-[linear-gradient(to_bottom,rgba(10,22,40,0.75),transparent)]'
           : isScrolled
-            ? isHome
+            ? isHome || isAbout
               ? 'bg-white border-b border-charcoal-200/80 shadow-md'
               : 'bg-white/95 backdrop-blur-md border-b border-charcoal-200/80 shadow-md'
             : 'bg-white/90 backdrop-blur-sm border-b border-charcoal-100'
@@ -114,20 +112,19 @@ export function Navbar() {
     >
       <div className={cn(
         'relative z-10 mx-auto flex h-full flex-nowrap items-center justify-between gap-2',
-        isAbout ? 'max-w-[1800px] px-5 sm:px-8 lg:px-14' : 'max-w-[1800px] px-12'
+        'max-w-[1800px] px-3 sm:px-5 lg:px-8'
       )}>
-        {!isHome && (
-          <Link href="/" aria-label="Maurya & Co." className="inline-flex h-full items-center">
+        <Link href="/" aria-label="Maurya & Co." className={cn('inline-flex h-full shrink-0 items-center', isAbout && !isScrolled && 'drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]')}>
             <Image
-              src="/images/logo/firm-logo-white.png"
+              src="/images/logo/firm-logo-gold.png"
               alt="Maurya & Co. Advocates and Legal Consultants"
-              width={2170}
-              height={725}
+              width={1536}
+              height={1024}
+              sizes="(min-width: 1024px) 90px, 72px"
               priority
-              className={cn('h-auto max-h-full object-contain', isAbout ? 'w-[min(230px,55vw)]' : 'w-[230px]')}
+              className="h-12 w-[72px] shrink-0 object-contain lg:h-[60px] lg:w-[90px]"
             />
-          </Link>
-        )}
+        </Link>
 
         <div className={cn(
           'hidden ml-auto flex-nowrap items-center min-[1280px]:flex'
@@ -229,12 +226,13 @@ export function Navbar() {
           <div className="flex h-16 shrink-0 items-center justify-between border-b border-charcoal-100 bg-ivory-50 px-4 md:px-6">
             <Link href="/" aria-label="Maurya & Co.">
               <Image
-                src="/images/logo/firm-logo-full-nowhite.png"
+                src="/images/logo/firm-logo-gold.png"
                 alt="Maurya & Co. Advocates and Legal Consultants"
-                width={1073}
-                height={210}
+                width={1536}
+                height={1024}
                 priority
-                className="h-auto w-[230px] max-w-[55vw]"
+                sizes="72px"
+                className="h-12 w-[72px] object-contain"
               />
             </Link>
             <button
