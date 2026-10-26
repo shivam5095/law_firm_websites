@@ -28,6 +28,7 @@ export function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isAbout = pathname === '/about';
   const isHomeAtTop = isHome && !isScrolled;
 
   useEffect(() => {
@@ -96,10 +97,14 @@ export function Navbar() {
     <header
       ref={headerRef}
       className={cn(
-        'sticky top-0 z-50 h-16 lg:h-18 transition-colors duration-300',
+        isAbout
+          ? 'about-navbar absolute inset-x-0 top-0 z-50 h-[calc(4rem+env(safe-area-inset-top))] lg:h-[calc(4.5rem+env(safe-area-inset-top))] transition-colors duration-300'
+          : 'sticky top-0 z-50 h-16 lg:h-18 transition-colors duration-300',
         isHomeAtTop && '-mb-16 lg:-mb-[4.5rem]',
         isHomeAtTop
           ? 'isolate border-0 bg-transparent shadow-none before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-[150px] before:bg-[linear-gradient(to_bottom,rgba(0,26,48,0.94),transparent)]'
+          : isAbout
+            ? 'isolate border-0 bg-transparent shadow-none before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-[150px] before:bg-[linear-gradient(to_bottom,rgba(10,22,40,0.75),transparent)]'
           : isScrolled
             ? isHome
               ? 'bg-white border-b border-charcoal-200/80 shadow-md'
@@ -109,7 +114,7 @@ export function Navbar() {
     >
       <div className={cn(
         'relative z-10 mx-auto flex h-full flex-nowrap items-center justify-between gap-2',
-        'max-w-[1800px] px-12'
+        isAbout ? 'max-w-[1800px] px-5 sm:px-8 lg:px-14' : 'max-w-[1800px] px-12'
       )}>
         {!isHome && (
           <Link href="/" aria-label="Maurya & Co." className="inline-flex h-full items-center">
@@ -119,7 +124,7 @@ export function Navbar() {
               width={2170}
               height={725}
               priority
-              className="h-auto max-h-full w-[230px] object-contain"
+              className={cn('h-auto max-h-full object-contain', isAbout ? 'w-[min(230px,55vw)]' : 'w-[230px]')}
             />
           </Link>
         )}
@@ -136,7 +141,7 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   'min-h-11 whitespace-nowrap transition-colors',
-                  isHomeAtTop
+                  isHomeAtTop || isAbout
                     ? pathname === item.href
                       ? 'text-[17px] font-semibold text-white underline decoration-[#E5C158] decoration-2 underline-offset-4 [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
                       : 'text-[17px] font-medium text-white hover:text-white [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
@@ -152,7 +157,7 @@ export function Navbar() {
               href="/consultation"
               className={cn(
                 'min-h-11 whitespace-nowrap transition-colors',
-                isHomeAtTop
+                  isHomeAtTop || isAbout
                   ? 'text-[17px] font-medium text-white hover:text-white [text-shadow:0_1px_8px_rgba(0,26,48,0.6)]'
                   : pathname === '/consultation'
                     ? 'text-[17px] font-semibold text-navy-900 underline decoration-gold-500 underline-offset-4 hover:text-gold-600'
@@ -170,17 +175,17 @@ export function Navbar() {
             { label: 'Experience', href: '/experience' },
             { label: 'Team', href: '/team' },
           ].map((item) => (
-            <Link key={item.href} href={item.href} className="min-h-11 whitespace-nowrap px-1 text-xs font-medium text-navy-900 hover:text-gold-600">
+            <Link key={item.href} href={item.href} className={cn('min-h-11 whitespace-nowrap px-1 text-xs font-medium hover:text-gold-600', isAbout ? 'text-white' : 'text-navy-900')}>
               {item.label}
             </Link>
           ))}
           <details className="relative">
-            <summary className="flex min-h-11 cursor-pointer items-center whitespace-nowrap px-1 text-xs font-medium text-navy-900 hover:text-gold-600">
+            <summary className={cn('flex min-h-11 cursor-pointer items-center whitespace-nowrap px-1 text-xs font-medium hover:text-gold-600', isAbout ? 'text-white' : 'text-navy-900')}>
               More
             </summary>
             <div className="absolute right-0 top-full z-20 min-w-48 border border-charcoal-200 bg-white p-2 shadow-lg">
               {navItems.filter((item) => !['/practice-areas', '/experience', '/team'].includes(item.href)).map((item) => (
-                <Link key={item.href} href={item.href} className="flex min-h-11 items-center px-3 text-sm text-navy-900 hover:bg-ivory-50 hover:text-gold-700">
+                <Link key={item.href} href={item.href} className={cn('flex min-h-11 items-center px-3 text-sm text-navy-900 hover:bg-ivory-50 hover:text-gold-700', isAbout && pathname === item.href && 'underline decoration-gold-500 underline-offset-4')}>
                   {item.label}
                 </Link>
               ))}
@@ -190,7 +195,7 @@ export function Navbar() {
 
         <Link
           href="/consultation"
-          className="tablet-consultation !hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-3 text-[10px] font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950"
+          className={cn('tablet-consultation !hidden min-h-11 items-center whitespace-nowrap border border-gold-500/50 bg-navy-900 px-3 text-[10px] font-semibold uppercase text-gold-400 shadow-sm hover:bg-gold-500 hover:text-navy-950', isAbout && 'border-white/50 bg-transparent text-white')}
         >
           Request Consultation
         </Link>
@@ -201,7 +206,7 @@ export function Navbar() {
             onClick={() => setIsOpen(true)}
             className={cn(
               'flex h-11 w-11 items-center justify-center rounded-sm border border-charcoal-200 text-navy-900 hover:text-gold-600',
-              isHomeAtTop && 'border-white/40 text-white hover:text-[#E5C158]'
+              (isHomeAtTop || isAbout) && 'border-white/40 text-white hover:text-[#E5C158]'
             )}
             aria-label="Open Menu"
             aria-expanded={isOpen}
@@ -266,7 +271,7 @@ export function Navbar() {
               </summary>
               <div className="pb-2 pl-4">
                 {navItems.filter((item) => !['/practice-areas', '/experience', '/team'].includes(item.href)).map((item) => (
-                  <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)} className="flex min-h-12 items-center border-t border-charcoal-50 text-base text-navy-800">
+                  <Link key={item.href} href={item.href} onClick={() => setIsOpen(false)} className={cn('flex min-h-12 items-center border-t border-charcoal-50 text-base text-navy-800', isAbout && pathname === item.href && 'text-gold-600 underline decoration-gold-500 underline-offset-4')}>
                     {item.label}
                   </Link>
                 ))}
