@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { practiceAreas } from '@/data/practiceAreas';
 import { experienceItems } from '@/data/experience';
 import * as LucideIcons from 'lucide-react';
-import { Shield, CheckCircle2, ArrowRight, Scale, Briefcase, FileCheck } from 'lucide-react';
+import { Shield, ArrowRight, Scale, Briefcase, FileCheck } from 'lucide-react';
 
 export async function generateStaticParams() {
   return practiceAreas.map((area) => ({
@@ -35,7 +35,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
     notFound();
   }
 
-  // @ts-ignore
+  // @ts-expect-error - Dynamic icon rendering
   const Icon = LucideIcons[area.icon] || LucideIcons.Scale;
 
   const relatedExperience = experienceItems.filter(item =>

@@ -20,7 +20,7 @@ export default function TermsPage() {
 
           <h2>2. Use of the Site</h2>
           <p>
-            The information contained on this website is provided for informational purposes only, and should not be construed as legal advice on any subject matter. No recipients of content from this site, clients or otherwise, should act or refrain from acting on the basis of any content included in the site without seeking the appropriate legal or other professional advice on the particular facts and circumstances at issue from an attorney licensed in the recipient's state.
+            The information contained on this website is provided for informational purposes only, and should not be construed as legal advice on any subject matter. No recipients of content from this site, clients or otherwise, should act or refrain from acting on the basis of any content included in the site without seeking the appropriate legal or other professional advice on the particular facts and circumstances at issue from an attorney licensed in the recipient&apos;s state.
           </p>
 
           <h2>3. Intellectual Property Rights</h2>

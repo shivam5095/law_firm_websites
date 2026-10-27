@@ -19,14 +19,14 @@ const experienceData: ExperienceItem[] = [
     category: 'Commercial Disputes',
     description: 'Represented clients and formulated litigation strategy in multiple complex portfolio matters encompassing varied commercial claims.',
     scale: 'approximately ₹100-130 crore',
-    practiceAreas: ['commercial-disputes', 'arbitration-dispute-resolution']
+    practiceAreas: ['commercial-disputes']
   },
   {
     id: 'exp-3',
     category: 'International Arbitration',
     description: 'Drafted and processed comprehensive cross-border demand notices for international commercial disputes.',
     scale: 'USD 1 million',
-    practiceAreas: ['arbitration-dispute-resolution', 'commercial-disputes']
+    practiceAreas: ['commercial-disputes']
   },
   {
     id: 'exp-4',
@@ -51,7 +51,7 @@ const experienceData: ExperienceItem[] = [
     id: 'exp-7',
     category: 'Commercial Arbitration',
     description: 'Assisted in drafting detailed statements of claim, defense, and section 9 applications for interim relief in domestic arbitrations.',
-    practiceAreas: ['arbitration-dispute-resolution', 'commercial-disputes']
+    practiceAreas: ['commercial-disputes']
   },
   {
     id: 'exp-8',
@@ -81,7 +81,7 @@ const experienceData: ExperienceItem[] = [
     id: 'exp-12',
     category: 'Arbitration',
     description: 'Worked on matters relating to the challenge and enforcement of arbitral awards under the Arbitration and Conciliation Act.',
-    practiceAreas: ['arbitration-dispute-resolution']
+    practiceAreas: []
   }
 ];
 

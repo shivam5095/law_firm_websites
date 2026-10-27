@@ -61,7 +61,7 @@ export default function CareersPage() {
             </div>
 
             <p className="text-xs text-charcoal-500 italic pt-4">
-              * Applications are reviewed based on the firm's requirements and the applicant's profile. Submission of an application does not guarantee an internship slot.
+              * Applications are reviewed based on the firm&apos;s requirements and the applicant&apos;s profile. Submission of an application does not guarantee an internship slot.
             </p>
           </div>
 

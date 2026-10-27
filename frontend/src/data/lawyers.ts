@@ -170,7 +170,6 @@ export const lawyers: Lawyer[] = [
     practiceAreaSlugs: [
       'banking-finance',
       'debt-restructuring',
-      'arbitration-dispute-resolution',
       'project-infrastructure-disputes',
       'commercial-disputes',
       'insolvency-financial-distress'

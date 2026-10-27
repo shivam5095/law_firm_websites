@@ -23,8 +23,8 @@ export function HomeDisclaimerGate({
 
         try {
             if (window.sessionStorage.getItem(ACCEPTANCE_KEY) === 'true') {
-                setIsAccepted(true);
-                return;
+                const acceptTimer = window.setTimeout(() => setIsAccepted(true), 0);
+                return () => window.clearTimeout(acceptTimer);
             }
         } catch {
             // Keep the gate active when session storage is unavailable.

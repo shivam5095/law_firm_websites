@@ -7,7 +7,7 @@ export type FAQ = {
 export const faqs: FAQ[] = [
   {
     question: 'What areas of law does the firm specialize in?',
-    answer: 'We primarily focus on Banking & Finance, Debt Restructuring, Arbitration & Dispute Resolution, Project & Infrastructure Disputes, Commercial Disputes, and Insolvency & Financial Distress matters.',
+    answer: 'We primarily focus on Banking & Finance, Debt Restructuring, Project & Infrastructure Disputes, Commercial Disputes, and Insolvency & Financial Distress matters.',
     category: 'Practice Areas'
   },
   {

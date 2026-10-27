@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { practiceAreas } from '@/data/practiceAreas';
 import * as LucideIcons from 'lucide-react';
-import { ArrowRight, CheckCircle2, Scale, Shield } from 'lucide-react';
+import { ArrowRight, Scale } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Practice Areas & Case Handling Methodology',
@@ -22,7 +22,7 @@ export default function PracticeAreasPage() {
       <section className="py-16 max-w-7xl mx-auto px-6">
         <div className="space-y-12">
           {practiceAreas.map((area, index) => {
-            // @ts-ignore - Dynamic icon rendering
+            // @ts-expect-error - Dynamic icon rendering
             const Icon = LucideIcons[area.icon] || LucideIcons.Scale;
 
             return (
@@ -31,31 +31,29 @@ export default function PracticeAreasPage() {
                 className="bg-white border border-charcoal-200/80 rounded-sm shadow-sm hover:shadow-md transition-shadow overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0"
               >
                 {/* Practice Area Image Column */}
-                <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full bg-navy-950">
+                <div className="relative w-full aspect-[16/9] lg:col-span-5 bg-navy-950">
                   <Image
                     src={area.image}
                     alt={area.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
-                    className="object-cover"
+                    className="object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-navy-950/40" />
 
                   {/* Badge & Icon on Image */}
-                  <div className="absolute top-4 left-4 flex items-center gap-2 bg-navy-950/90 text-gold-400 border border-gold-500/40 px-3 py-1.5 rounded-xs backdrop-blur-xs text-xs font-semibold uppercase tracking-wider">
-                    <Icon size={16} />
+                  <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-navy-950/90 text-gold-400 border border-gold-500/40 px-2 py-1 rounded-xs backdrop-blur-xs text-[9px] font-semibold uppercase tracking-wider">
+                    <Icon size={12} />
                     <span>Practice Discipline 0{index + 1}</span>
-                  </div>
-
-                  <div className="absolute bottom-4 left-4 right-4 text-white text-xs">
-                    <span className="text-gold-400 font-semibold block mb-0.5">Primary Forums:</span>
-                    <span className="text-ivory-200 text-[11px]">Commercial Courts, High Courts, NCLT, DRT &amp; Arbitral Tribunals</span>
                   </div>
                 </div>
 
                 {/* Practice Content Column */}
                 <div className="lg:col-span-7 p-8 lg:p-10 flex flex-col justify-between">
                   <div>
+                    <p className="text-xs text-charcoal-500 mb-3">
+                      <span className="text-gold-700 font-semibold">Primary Forums: </span>
+                      Commercial Courts, High Courts, NCLT, DRT &amp; Arbitral Tribunals
+                    </p>
                     <h2 className="font-heading text-2xl lg:text-3xl font-bold text-navy-950 mb-3 hover:text-gold-700 transition-colors">
                       <Link href={`/practice-areas/${area.slug}`}>
                         {area.title}

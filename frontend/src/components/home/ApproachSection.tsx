@@ -20,7 +20,7 @@ export function ApproachSection() {
             <div className="text-gold-500 text-sm font-semibold tracking-wider uppercase mb-4">02.</div>
             <h3 className="font-heading text-2xl text-navy-900 mb-4">Strategy</h3>
             <p className="text-charcoal-600 leading-relaxed">
-              We develop a considered legal strategy that aligns with our client's objectives and practical constraints.
+              We develop a considered legal strategy that aligns with our client&apos;s objectives and practical constraints.
             </p>
           </div>
           

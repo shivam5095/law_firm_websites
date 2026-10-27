@@ -138,7 +138,6 @@ export function ConsultationForm() {
           >
             <option value="Banking & Finance">Banking & Finance</option>
             <option value="Debt Restructuring">Debt Restructuring</option>
-            <option value="Arbitration & Dispute Resolution">Arbitration & Dispute Resolution</option>
             <option value="Project & Infrastructure Disputes">Project & Infrastructure Disputes</option>
             <option value="Commercial Disputes">Commercial Disputes</option>
             <option value="Insolvency & Financial Distress">Insolvency & Financial Distress</option>

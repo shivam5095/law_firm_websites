@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { firm } from '@/data/firm';
 
 export function FirmIntroduction() {
   return (
