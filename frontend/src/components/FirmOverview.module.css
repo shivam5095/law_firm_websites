@@ -1,0 +1,127 @@
+.aboutSection {
+  padding-block: 3.5rem;
+  background: #fdfcfa;
+}
+
+.aboutContainer {
+  width: 100%;
+  max-width: 1260px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.homeSection {
+  padding-block: 3rem;
+  background: #faf8f5;
+}
+
+.homeContainer {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.overviewText {
+  min-width: 0;
+}
+
+.sectionHeading {
+  margin: 0 0 1.25rem;
+  color: #0a1628;
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.firmName {
+  margin: 0;
+  color: #9a7d34;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.tagline {
+  margin: 0 0 1.5rem;
+  color: #111d35;
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+.goldRule {
+  width: 2rem;
+  height: 2px;
+  margin-bottom: 1.5rem;
+  background: #b8963e;
+}
+
+.bodyCopy {
+  max-width: 70ch;
+  margin: 0 0 1.5rem;
+  color: #3a3a4e;
+  line-height: 1.75;
+}
+
+.receptionFrame {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 14px 34px rgba(20, 33, 58, 0.22);
+  aspect-ratio: 16 / 9;
+}
+
+.receptionImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 640px) {
+  .aboutContainer {
+    padding-inline: 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .homeSection {
+    padding-block: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .aboutSection,
+  .homeSection {
+    padding-block: 6rem;
+  }
+
+  .aboutContainer {
+    padding-inline: 56px;
+  }
+
+  .homeContainer {
+    padding-inline: 3rem;
+  }
+
+  .overviewGrid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .aboutContainer {
+    max-width: 1280px;
+  }
+}

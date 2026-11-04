@@ -1,4 +1,5 @@
 import { Hero } from '@/components/home/Hero';
+import { FirmOverview } from '@/components/FirmOverview';
 import { FirmIntroduction } from '@/components/home/FirmIntroduction';
 import { ScrollDossierSlider } from '@/components/home/ScrollDossierSlider';
 import { ClientsRepresentedSection } from '@/components/home/ClientsRepresentedSection';
@@ -12,6 +13,8 @@ export default function HomePage() {
     <main className="relative w-full">
       {/* 1. Architectural Editorial Hero with Live Ledger Stats */}
       <Hero />
+
+      <FirmOverview surface="home" />
 
       {/* 2. Chambers Doctrine & Counsel Pedigree */}
       <FirmIntroduction />

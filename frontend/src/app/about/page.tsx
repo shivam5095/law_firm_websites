@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { firm } from '@/data/firm';
+import { FirmOverview } from '@/components/FirmOverview';
 import styles from './about.module.css';
 
 export const metadata: Metadata = {
@@ -37,35 +37,7 @@ export default function AboutPage() {
 
       <section className={styles.contentSection}>
         <div className={styles.contentContainer}>
-          <div className={styles.overviewGrid}>
-            <div className={styles.overviewText}>
-              <h2 className={styles.sectionHeading}>Firm Overview</h2>
-              <p className={styles.firmName}>{firm.name}</p>
-              <p className={styles.tagline}>{firm.tagline}</p>
-              <div className={styles.goldRule} aria-hidden="true" />
-              <p className={styles.bodyCopy}>
-                Our firm is a leading Indian legal practice recognized for its depth of knowledge,
-                strategic thinking, and unwavering commitment to client success. We represent a diverse
-                range of clients, including domestic and international corporations, financial institutions,
-                and high-net-worth individuals across complex legal matters.
-              </p>
-              <p className={styles.bodyCopy}>
-                With a focus on corporate law, dispute resolution, intellectual property, and real estate,
-                we combine rigorous legal analysis with commercial acumen to deliver pragmatic solutions.
-              </p>
-            </div>
-            <div className={styles.receptionFrame}>
-              <Image
-                src="/images/about/about-reception.jpeg"
-                alt="Maurya & Co. reception"
-                width={1600}
-                height={900}
-                sizes="(max-width: 1023px) 100vw, (max-width: 1280px) 48vw, 560px"
-                className={styles.receptionImage}
-              />
-            </div>
-          </div>
-
+          <FirmOverview />
           <div className={styles.philosophy}>
             <h2 className={styles.sectionHeading}>Our Philosophy</h2>
             <div className={styles.goldRule} aria-hidden="true" />
