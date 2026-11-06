@@ -8,6 +8,10 @@ export type PracticeArea = {
   id: string;
   slug: string;
   title: string;
+  /** Short uppercase label shown beneath the practice area artwork. */
+  caption: string;
+  /** Controls whether the area is published in the home page slider. */
+  published: boolean;
   shortDescription: string;
   description: string;
   representativeScale?: string | null;
@@ -27,6 +31,8 @@ export const practiceAreas: PracticeArea[] = [
     id: 'banking-finance',
     slug: 'banking-finance',
     title: 'Banking & Finance',
+    caption: 'BANKING & FINANCE',
+    published: true,
     shortDescription: 'Comprehensive legal counsel for banking sector disputes, recovery strategies, facility enforcement, and regulatory compliance.',
     description: 'Our Banking & Finance practice offers robust legal counsel across complex lending arrangements, security enforcement, and high-stakes financial disputes. We regularly represent scheduled commercial banks, financial institutions, NBFCs, and corporate borrowers across loan documentation, regulatory compliance, and multi-crore recovery proceedings.',
     icon: 'Landmark',
@@ -107,6 +113,8 @@ Fourth, during hearings, I maintain rigorous focus on procedural precision, dism
     id: 'debt-restructuring',
     slug: 'debt-restructuring',
     title: 'Debt Restructuring',
+    caption: 'DEBT RESTRUCTURING',
+    published: true,
     shortDescription: 'Strategic advice on restructuring stressed assets, one-time settlements (OTS), and sustainable debt realignment.',
     description: 'We provide specialized legal services for the resolution of stressed assets and corporate debt restructuring. Our practice encompasses negotiating restructuring master agreements, formulating one-time settlement (OTS) proposals, facilitating consortium buy-outs, and advising on inter-creditor dynamics to revive distressed businesses while safeguarding creditor returns.',
     icon: 'Briefcase',
@@ -181,6 +189,8 @@ Throughout the process, I maintain an active line of communication with consorti
     id: 'project-infrastructure-disputes',
     slug: 'project-infrastructure-disputes',
     title: 'Project & Infrastructure Disputes',
+    caption: 'PROJECT & INFRASTRUCTURE DISPUTES',
+    published: true,
     shortDescription: 'Specialized counsel for construction delays, EPC contracts, concession terminations, and infrastructure conflicts.',
     description: 'Infrastructure and major engineering projects involve substantial capital exposure and intricate multi-layered contracts. We represent developers, concessionaires, EPC contractors, and institutional lenders in complex disputes involving delay claims, force majeure, liquidated damages, design variations, and wrongful contract terminations.',
     icon: 'Building2',
@@ -257,6 +267,8 @@ During arbitration, I lead specialized technical expert evidence using standard 
     id: 'commercial-disputes',
     slug: 'commercial-disputes',
     title: 'Commercial Disputes',
+    caption: 'COMMERCIAL DISPUTES',
+    published: true,
     shortDescription: 'Strategic resolution of contractual breaches, corporate disputes, shareholder oppression, and high-value claims.',
     description: 'We navigate complex commercial disputes for corporations, directors, investors, and high-net-worth individuals. Our practice covers contract breaches, joint venture breakdowns, director disputes, summary suits, and corporate litigation across Commercial Courts, High Courts, and specialized tribunals across India.',
     icon: 'Handshake',
@@ -333,6 +345,8 @@ Throughout trial, my advocacy centers on precision witness examination and docum
     id: 'insolvency-financial-distress',
     slug: 'insolvency-financial-distress',
     title: 'Insolvency & Financial Distress',
+    caption: 'INSOLVENCY & FINANCIAL DISTRESS',
+    published: true,
     shortDescription: 'Navigating the IBC framework for creditors and debtors facing insolvency, CIRP, and corporate liquidation.',
     description: 'We provide specialized legal counsel under the Insolvency and Bankruptcy Code (IBC). We represent financial creditors, operational creditors, and corporate debtors across Corporate Insolvency Resolution Processes (CIRP), liquidation proceedings, and pre-packaged insolvency regimes before NCLT and NCLAT.',
     icon: 'ShieldAlert',
@@ -413,6 +427,8 @@ Throughout the CIRP, I actively represent stakeholders before the NCLT and NCLAT
     id: 'capital-markets',
     slug: 'capital-markets',
     title: 'Capital Markets',
+    caption: 'CAPITAL MARKETS',
+    published: false,
     shortDescription: 'Placeholder: description to be provided.',
     description: 'Placeholder: practice description to be provided.',
     representativeScale: null,
@@ -441,6 +457,8 @@ Throughout the CIRP, I actively represent stakeholders before the NCLT and NCLAT
     id: 'financial-regulatory',
     slug: 'financial-regulatory',
     title: 'Financial & Regulatory',
+    caption: 'FINANCIAL & REGULATORY',
+    published: false,
     shortDescription: 'Placeholder: description to be provided.',
     description: 'Placeholder: practice description to be provided.',
     representativeScale: null,

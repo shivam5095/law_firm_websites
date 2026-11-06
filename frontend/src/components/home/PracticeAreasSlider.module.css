@@ -1,0 +1,124 @@
+.viewport {
+  display: flex;
+  width: min(100%, 64rem);
+  margin-inline: auto;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 1rem 1rem;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  display: flex;
+  flex: 0 0 100%;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 0.25rem;
+  background: #0c182b;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.imageLink {
+  display: block;
+  overflow: hidden;
+  background: #08101e;
+  text-decoration: none;
+}
+
+.imageLink:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid #c9a84c;
+  outline-offset: -3px;
+  box-shadow: 0 0 0 4px rgb(201 168 76 / 0.35);
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1600 / 901;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: contain;
+  transition: transform 300ms ease;
+}
+
+.imageLink:hover .image {
+  transform: scale(1.03);
+}
+
+.controls {
+  display: flex;
+  width: min(100%, 64rem);
+  margin-inline: auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem 1rem;
+}
+
+.arrowButton {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 9999px;
+  background: rgb(0 0 0 / 0.6);
+  color: #e4c477;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.arrowButton:hover:not(:disabled) {
+  border-color: #b8963e;
+  background: #b8963e;
+  color: #060e1a;
+}
+
+.arrowButton:focus-visible {
+  outline: 2px solid #e4c477;
+  outline-offset: 3px;
+}
+
+.arrowButton:disabled {
+  cursor: default;
+  opacity: 0.25;
+}
+
+@media (max-width: 63.999rem) {
+  .viewport {
+    width: 100%;
+  }
+
+  .controls {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    scroll-behavior: auto;
+  }
+
+  .image,
+  .arrowButton {
+    transition: none;
+  }
+}

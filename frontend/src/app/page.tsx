@@ -1,7 +1,7 @@
 import { Hero } from '@/components/home/Hero';
 import { FirmOverview } from '@/components/FirmOverview';
 import { FirmIntroduction } from '@/components/home/FirmIntroduction';
-import { ScrollDossierSlider } from '@/components/home/ScrollDossierSlider';
+import { PracticeAreasSlider } from '@/components/home/PracticeAreasSlider';
 import { ClientsRepresentedSection } from '@/components/home/ClientsRepresentedSection';
 import { GlobalPresenceMap } from '@/components/home/GlobalPresenceMap';
 import { PublicationsPreview } from '@/components/home/PublicationsPreview';
@@ -20,7 +20,7 @@ export default function HomePage() {
       <FirmIntroduction />
 
       {/* 3. Flagship Slide-by-Slide Scroll-Driven Case Dossier Showcase */}
-      <ScrollDossierSlider />
+      <PracticeAreasSlider />
 
       {/* 5. Institutional Banking & NBFC Counterparty Register */}
       <ClientsRepresentedSection />
