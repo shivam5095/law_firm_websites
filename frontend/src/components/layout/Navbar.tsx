@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -23,14 +23,33 @@ function isActivePath(pathname: string, href: string) {
   return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 }
 
+// Routes with a dark, full-width opening hero begin in overlay mode.
+const headerThemes: Record<string, 'overlay' | 'solid'> = {
+  '/': 'overlay',
+  '/about': 'overlay',
+  '/careers': 'overlay',
+  '/consultation': 'overlay',
+  '/practice-areas': 'overlay',
+  '/team': 'overlay',
+  '/experience': 'overlay',
+  '/insights': 'overlay',
+  '/publications': 'overlay',
+  '/disclaimer': 'overlay',
+  '/privacy-policy': 'overlay',
+  '/terms': 'overlay',
+};
+
 export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const isHeroPage = pathname === '/' || pathname === '/about';
-  const isTransparent = isHeroPage && !isScrolled;
+  const routeRoot = pathname.split('/').slice(0, 2).join('/') || '/';
+  const startTheme = pathname.startsWith('/insights/')
+    ? 'solid'
+    : headerThemes[pathname] ?? headerThemes[routeRoot] ?? 'solid';
+  const isOverlay = startTheme === 'overlay' && !isScrolled;
 
   const closeMenu = useCallback(() => {
     setIsOpen(false);
@@ -42,29 +61,14 @@ export function Navbar() {
     window.setTimeout(() => menuRef.current?.querySelector<HTMLAnchorElement>('a[href]')?.focus(), 50);
   }, []);
 
-  useEffect(() => {
-    const mobileViewport = window.matchMedia('(max-width: 767px)');
-
+  useLayoutEffect(() => {
     const updateScrollState = () => setIsScrolled(window.scrollY > 80);
-    const updateViewportState = () => {
-      if (isHeroPage && mobileViewport.matches) {
-        setIsScrolled(window.scrollY > 80);
-        window.addEventListener('scroll', updateScrollState, { passive: true });
-      } else {
-        setIsScrolled(true);
-        window.removeEventListener('scroll', updateScrollState);
-        setIsOpen(false);
-      }
-    };
-
-    updateViewportState();
-    mobileViewport.addEventListener('change', updateViewportState);
-
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
     return () => {
       window.removeEventListener('scroll', updateScrollState);
-      mobileViewport.removeEventListener('change', updateViewportState);
     };
-  }, [isHeroPage, pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -105,10 +109,10 @@ export function Navbar() {
     <header
       className={[
         styles.header,
-        isHeroPage ? styles.heroPage : '',
-        isTransparent ? styles.transparent : '',
-        isTransparent ? styles.heroTransparent : '',
+        isOverlay ? styles.overlay : styles.solid,
       ].filter(Boolean).join(' ')}
+      data-start-theme={startTheme}
+      data-state={isOverlay ? 'overlay' : 'solid'}
     >
       <div className={styles.inner}>
         <Link href="/" aria-label="Maurya & Co." className={styles.logoLink}>

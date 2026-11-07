@@ -271,6 +271,17 @@ section[class*="py-"] {
   transform: translateY(0);
 }
 
+/* Pages that begin in the solid header state need room below the fixed bar. */
+header[data-start-theme="solid"] + #main-content {
+  padding-top: calc(64px + env(safe-area-inset-top));
+}
+
+@media (min-width: 768px) {
+  header[data-start-theme="solid"] + #main-content {
+    padding-top: clamp(64px, calc(2.34375vw + 46px), 76px);
+  }
+}
+
 .desktop-nav,
 .tablet-nav,
 .desktop-consultation,
