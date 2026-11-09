@@ -376,35 +376,6 @@ export function ClientsRepresentedSection() {
           </div>
 
         </div>
-
-        {/* Stats Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 p-6 bg-ivory-50 border border-charcoal-200/80 rounded-sm">
-          <div className="border-r last:border-0 border-charcoal-200/80 pr-4">
-            <div className="text-2xl md:text-3xl font-heading font-bold text-navy-950">₹500+ Cr.</div>
-            <div className="text-xs text-charcoal-600 uppercase tracking-wider font-medium mt-1">
-              Handled in Claims &amp; Restructuring
-            </div>
-          </div>
-          <div className="border-r last:border-0 border-charcoal-200/80 px-2 md:px-4">
-            <div className="text-2xl md:text-3xl font-heading font-bold text-navy-950">14+ Entities</div>
-            <div className="text-xs text-charcoal-600 uppercase tracking-wider font-medium mt-1">
-              Leading Banks &amp; Premier NBFCs
-            </div>
-          </div>
-          <div className="border-r last:border-0 border-charcoal-200/80 px-2 md:px-4">
-            <div className="text-2xl md:text-3xl font-heading font-bold text-navy-950">DRT &amp; NCLT</div>
-            <div className="text-xs text-charcoal-600 uppercase tracking-wider font-medium mt-1">
-              Tribunal &amp; High Court Advocacy
-            </div>
-          </div>
-          <div className="pl-2 md:pl-4">
-            <div className="text-2xl md:text-3xl font-heading font-bold text-navy-950">Pan-India</div>
-            <div className="text-xs text-charcoal-600 uppercase tracking-wider font-medium mt-1">
-              Multi-Jurisdiction Recovery Network
-            </div>
-          </div>
-        </div>
-
         <div className="flex items-center gap-3">
           <button
             type="button"

@@ -25,6 +25,7 @@ const points: MapPoint[] = [
   { name: 'Atlanta, USA', lat: 33.749, lng: -84.388 },
   { name: 'Georgia, USA (Macon)', lat: 32.8407, lng: -83.6324 },
   { name: 'Florida, USA (Orlando)', lat: 28.5383, lng: -81.3792 },
+  { name: 'California, USA', lat: 36.7783, lng: -119.4179 },
 ];
 
 const showNameOnHover = false;
