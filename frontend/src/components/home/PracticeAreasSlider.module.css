@@ -6,8 +6,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.5rem 1rem 1rem;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 1rem;
+  scroll-snap-type: none;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -16,9 +15,16 @@
   display: none;
 }
 
+.group {
+  display: flex;
+  flex: 0 0 auto;
+  width: max-content;
+  gap: 1rem;
+}
+
 .card {
   display: flex;
-  flex: 0 0 100%;
+  flex: 0 0 min(calc(100vw - 2rem), 62rem);
   min-width: 0;
   flex-direction: column;
   overflow: hidden;
@@ -26,8 +32,6 @@
   border-radius: 0.25rem;
   background: #0c182b;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .imageLink {

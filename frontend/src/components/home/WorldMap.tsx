@@ -30,9 +30,13 @@ const points: MapPoint[] = [
 
 const showNameOnHover = false;
 const W = 1000;
-const H = 540;
+const H = 392;
 const countries = feature(world as never, (world as unknown as { objects: { countries: never } }).objects.countries);
-const projection = geoEquirectangular().fitExtent([[4, 4], [W - 4, H - 4]], countries);
+const projectionScale = W / ((180 - -170) * Math.PI / 180);
+const projection = geoEquirectangular()
+  .scale(projectionScale)
+  .translate([projectionScale * 170 * Math.PI / 180, projectionScale * 80 * Math.PI / 180])
+  .clipExtent([[0, 0], [W, H]]);
 const countryPath = geoPath(projection);
 
 const stars = Array.from({ length: 76 }, (_, i) => ({
@@ -53,7 +57,7 @@ function arcPath(from: number[], to: number[], distance: number) {
 }
 
 export default function WorldMap() {
-  const cardRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const positions = useMemo(() => points.map((p) => projection([p.lng, p.lat]) ?? [0, 0]), []);
@@ -82,8 +86,10 @@ export default function WorldMap() {
   void showNameOnHover;
 
   return (
-    <section ref={cardRef} className="mapCard" role="img" aria-label="World map showing Maurya & Co. network from Delhi to India, Kuwait, UAE, Malaysia, Indonesia and the USA">
-      <svg className="mapSvg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <section className="mapSection">
+    <div className="mapContainer">
+    <div ref={cardRef} className="mapCard" role="img" aria-label="World map showing Maurya & Co. network from Delhi to India, Kuwait, UAE, Malaysia, Indonesia and the USA">
+      <svg className="mapSvg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
           <linearGradient id="mapOcean" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#071428" />
@@ -112,7 +118,9 @@ export default function WorldMap() {
         <circle cx={origin[0]} cy={origin[1]} r="4.5" fill="#dfb45e" filter="url(#dotGlow)" />
       </svg>
       <style jsx>{`
-        .mapCard{position:relative;width:100%;aspect-ratio:1.85/1;overflow:hidden;border-radius:16px;background:#071428;isolation:isolate}
+        .mapSection{padding:56px 24px}
+        .mapContainer{width:100%;max-width:80rem;margin:0 auto}
+        .mapCard{position:relative;width:100%;aspect-ratio:1000/392;margin:0 auto;overflow:hidden;border-radius:16px;background:#071428;isolation:isolate}
         .mapSvg{display:block;width:100%;height:100%}
         .star{fill:#fff;opacity:.48}.twinkle{animation:twinkle ease-in-out infinite alternate}
         .route{stroke-dasharray:1;stroke-dashoffset:0}.draw{stroke-dashoffset:1;animation:draw 1.35s cubic-bezier(.22,.65,.3,1) forwards}
@@ -122,9 +130,11 @@ export default function WorldMap() {
         @keyframes draw{to{stroke-dashoffset:0}}@keyframes travel{0%{stroke-dashoffset:1;opacity:0}8%{opacity:.95}70%{opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
         @keyframes dotIn{to{opacity:1;transform:scale(1)}}@keyframes pulse{0%{transform:scale(.7);opacity:.9}100%{transform:scale(2.6);opacity:0}}
         @keyframes twinkle{from{opacity:.16}to{opacity:.82}}
-        @media(max-width:640px){.destination{r:2.5px}.glint{stroke-width:1.5}.mapSvg>g:nth-of-type(3n+1) .glint,.mapSvg>g:nth-of-type(3n+2) .glint{display:none}}
+        @media(max-width:640px){.mapSection{padding:32px 24px}.mapCard{aspect-ratio:1.7/1}.destination{r:2.5px}.glint{stroke-width:1.5}.mapSvg>g:nth-of-type(3n+1) .glint,.mapSvg>g:nth-of-type(3n+2) .glint{display:none}}
         @media(prefers-reduced-motion:reduce){.twinkle,.draw,.glint,.pulse,.dotIn{animation:none!important;opacity:1;stroke-dashoffset:0;transform:none}}
       `}</style>
+    </div>
+    </div>
     </section>
   );
 }
