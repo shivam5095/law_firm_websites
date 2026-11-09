@@ -3,10 +3,12 @@ import { FirmOverview } from '@/components/FirmOverview';
 import { FirmIntroduction } from '@/components/home/FirmIntroduction';
 import { PracticeAreasSlider } from '@/components/home/PracticeAreasSlider';
 import { ClientsRepresentedSection } from '@/components/home/ClientsRepresentedSection';
-import { GlobalPresenceMap } from '@/components/home/GlobalPresenceMap';
+import dynamic from 'next/dynamic';
 import { PublicationsPreview } from '@/components/home/PublicationsPreview';
 import { CareersCTA } from '@/components/home/CareersCTA';
 import { ConsultationCTA } from '@/components/home/ConsultationCTA';
+
+const WorldMap = dynamic(() => import('@/components/home/WorldMap'));
 
 export default function HomePage() {
   return (
@@ -25,8 +27,7 @@ export default function HomePage() {
       {/* 5. Institutional Banking & NBFC Counterparty Register */}
       <ClientsRepresentedSection />
 
-      {/* 7. Strategic Jurisdictions & High Court Footprint */}
-      <GlobalPresenceMap />
+      <WorldMap />
 
       {/* 8. Scholarly Briefs & Legal Publications */}
       <PublicationsPreview />
