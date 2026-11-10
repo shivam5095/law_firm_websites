@@ -16,7 +16,7 @@ export default function HomePage() {
       {/* 1. Architectural Editorial Hero with Live Ledger Stats */}
       <Hero />
 
-      <FirmOverview surface="home" />
+      <FirmOverview surface="home" variant="collage" />
 
       {/* 2. Chambers Doctrine & Counsel Pedigree */}
       <FirmIntroduction />

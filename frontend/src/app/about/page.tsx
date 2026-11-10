@@ -37,7 +37,7 @@ export default function AboutPage() {
 
       <section className={styles.contentSection}>
         <div className={styles.contentContainer}>
-          <FirmOverview />
+          <FirmOverview showCabinImage={false} />
           <div className={styles.philosophy}>
             <h2 className={styles.sectionHeading}>Our Philosophy</h2>
             <div className={styles.goldRule} aria-hidden="true" />
