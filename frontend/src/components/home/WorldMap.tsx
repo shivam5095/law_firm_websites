@@ -187,7 +187,6 @@ export default function WorldMap() {
         <header className="mapHeading">
           <h2>Our Global Reach</h2>
           <span aria-hidden="true" />
-          <p>Connected legal counsel bridging cross-border corporate, dispute, and investment mandates.</p>
         </header>
         <div ref={mapRef} className="mapCard">
           <svg className="mapSvg" viewBox={`0 0 ${WIDTH} ${HEIGHT}`} preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animated world map showing Maurya & Co. presence from Delhi across India and internationally">
@@ -279,7 +278,7 @@ export default function WorldMap() {
         .mapSection{padding:56px 24px;background:#fff;color:#14243B;border-top:1px solid rgba(20,36,59,.08)}
         .mapContainer{width:100%;max-width:80rem;margin:0 auto}
         .mapHeading{text-align:center;margin:0 auto 26px;max-width:900px}
-        .mapHeading h2{font-family:var(--font-heading),Georgia,serif;font-size:clamp(36px,5vw,64px);line-height:1.08;font-weight:600;color:#14243B;margin:0}
+        .mapHeading h2{font-family:var(--font-heading),Georgia,serif;font-size:clamp(28px,3.5vw,42px);line-height:1.08;font-weight:600;color:#14243B;margin:0}
         .mapHeading span{display:block;width:64px;height:2px;background:#B89548;margin:15px auto 13px}
         .mapHeading p{font-size:15px;line-height:1.65;color:#5B6475;margin:0}
         .mapCard{width:100%;aspect-ratio:2/1;overflow:hidden;border-radius:18px;border:1px solid rgba(20,36,59,.15);background:radial-gradient(ellipse at center,#14243B 0%,#0B1426 100%);box-shadow:0 24px 60px rgba(11,20,38,.25)}
