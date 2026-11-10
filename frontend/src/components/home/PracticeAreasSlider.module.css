@@ -84,7 +84,7 @@
   margin-inline: auto;
   overflow: hidden;
   overflow-y: hidden;
-  padding: 0.625rem 1.5rem 1rem;
+  padding: 0.625rem 1.5rem 0.75rem;
   touch-action: pan-y;
   cursor: grab;
 }
@@ -148,7 +148,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.75rem;
-  padding: 0.75rem 1.5rem 3.4375rem;
+  padding: 0.75rem 6rem 2.5rem 1.5rem;
 }
 
 .arrowButton {
@@ -206,7 +206,7 @@
 @media (min-width: 40rem) and (max-width: 79.999rem) {
   .viewport {
     width: min(100%, 60rem);
-    padding: 0.625rem 0.5rem 1rem;
+    padding: 0.625rem 0.5rem 0.75rem;
   }
 
   .card {
@@ -217,13 +217,15 @@
     width: min(100%, 60rem);
     padding-inline: 0.5rem;
     padding-top: 0.75rem;
+    padding-right: 6rem;
+    padding-bottom: 2.25rem;
   }
 }
 
 @media (max-width: 39.999rem) {
   .viewport {
     width: 100%;
-    padding: 0.75rem 0.5rem 1rem;
+    padding: 0.75rem 0.5rem;
   }
 
   .card {
@@ -232,7 +234,7 @@
 
   .controls {
     width: 100%;
-    padding: 0.75rem 0.5rem 3.4375rem;
+    padding: 0.75rem 5rem 2rem 0.5rem;
   }
 }
 

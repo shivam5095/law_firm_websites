@@ -297,11 +297,11 @@ export function PracticeAreasSlider() {
         </div>
       </div>
       <div className={styles.content}>
-        <header className="w-full px-4 pt-[60px] pb-2 text-center sm:px-8 sm:pt-[68px] sm:pb-3 lg:px-14 lg:pt-[84px] lg:pb-[10px]">
+        <header className="w-full px-4 pt-9 pb-2 text-center sm:px-8 sm:pt-10 sm:pb-3 lg:px-14 lg:pt-12 lg:pb-[10px]">
           <h2 id="practice-areas-heading" className="font-heading text-3xl font-normal leading-tight text-white sm:text-4xl lg:text-4xl">
             Areas of Practice
           </h2>
-          <div className="mx-auto mt-4 mb-5 h-px w-24 bg-gold-500" />
+          <div className="mx-auto mt-4 mb-4 h-px w-24 bg-gold-500" />
         </header>
 
         <div
