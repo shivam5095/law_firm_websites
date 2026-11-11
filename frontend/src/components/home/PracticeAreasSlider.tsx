@@ -3,12 +3,10 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { practiceAreas } from '@/data/practiceAreas';
 import styles from './PracticeAreasSlider.module.css';
 
 const AUTOPLAY_PX_PER_SECOND = 50;
-const ARROW_DURATION_MS = 600;
 const RESUME_DELAY_MS = 1500;
 const TRACK_GAP = 16;
 
@@ -211,28 +209,6 @@ export function PracticeAreasSlider() {
     };
   }, [applyOffset]);
 
-  const moveByCard = (direction: -1 | 1) => {
-    const period = periodRef.current;
-    if (!period || !practiceAreas.length) return;
-    const stride = period / practiceAreas.length;
-    const currentIndex = activeIndexRef.current;
-    const nextIndex = (currentIndex + direction + practiceAreas.length) % practiceAreas.length;
-    let from = offsetRef.current;
-    let to = nextIndex * stride;
-    if (direction > 0 && currentIndex === practiceAreas.length - 1) to = period;
-    if (direction < 0 && currentIndex === 0) {
-      from += period;
-      to = period - stride;
-    }
-    movementRef.current = {
-      from,
-      to,
-      startedAt: null,
-      duration: reducedMotionRef.current ? 0 : ARROW_DURATION_MS,
-    };
-    syncAnimationRef.current?.();
-  };
-
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (!periodRef.current || event.button !== 0) return;
     if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
@@ -334,18 +310,9 @@ export function PracticeAreasSlider() {
             ))}
           </div>
         </div>
-
-        <div className={styles.controls}>
-          <button type="button" onClick={() => moveByCard(-1)} className={styles.arrowButton} aria-label="Previous practice area">
-            <ChevronLeft size={20} aria-hidden="true" />
-          </button>
-          <span className="sr-only" aria-live="polite" aria-atomic="true">
-            Slide {activeIndex + 1} of {practiceAreas.length}
-          </span>
-          <button type="button" onClick={() => moveByCard(1)} className={styles.arrowButton} aria-label="Next practice area">
-            <ChevronRight size={20} aria-hidden="true" />
-          </button>
-        </div>
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          Slide {activeIndex + 1} of {practiceAreas.length}
+        </span>
       </div>
     </section>
   );
