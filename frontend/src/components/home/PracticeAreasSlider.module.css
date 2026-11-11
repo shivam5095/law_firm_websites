@@ -5,6 +5,11 @@
   background: #070d1f;
 }
 
+.heading {
+  width: 100%;
+  padding: 2.25rem 1rem 0.5rem;
+}
+
 .background {
   position: absolute;
   z-index: -1;
@@ -235,6 +240,49 @@
   .controls {
     width: 100%;
     padding: 0.75rem 5rem 2rem 0.5rem;
+  }
+}
+
+@media (min-width: 40rem) {
+  .heading {
+    padding: 2.5rem 2rem 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    overflow-x: clip;
+    overflow-y: visible;
+    scroll-margin-top: clamp(4rem, calc(2.34375vw + 2.875rem), 4.75rem);
+  }
+
+  .heading {
+    padding-top: clamp(4rem, calc(2.34375vw + 2.875rem), 4.75rem);
+  }
+
+  .viewport {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    overflow: visible;
+    padding-inline: 0;
+  }
+
+  .card {
+    flex-basis: clamp(20rem, 42vw, 43.75rem);
+  }
+
+  .controls {
+    margin-top: clamp(1rem, 2vw, 2rem);
+    padding-top: 0;
+    padding-bottom: clamp(2rem, 2.5vw, 2.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    padding-inline: 3.5rem;
+    padding-bottom: 0.625rem;
   }
 }
 

@@ -281,7 +281,7 @@ export function PracticeAreasSlider() {
       ref={sectionRef}
       id="dossier-slider"
       aria-labelledby="practice-areas-heading"
-      className={`relative isolate w-full overflow-hidden bg-[#070D1F] text-white ${styles.section}`}
+      className={`relative isolate w-full bg-[#070D1F] text-white ${styles.section}`}
       onMouseEnter={() => setPauseReason('hovered', true)}
       onMouseLeave={() => setPauseReason('hovered', false)}
     >
@@ -297,7 +297,7 @@ export function PracticeAreasSlider() {
         </div>
       </div>
       <div className={styles.content}>
-        <header className="w-full px-4 pt-9 pb-2 text-center sm:px-8 sm:pt-10 sm:pb-3 lg:px-14 lg:pt-12 lg:pb-[0.625rem]">
+        <header className={`${styles.heading} text-center`}>
           <h2 id="practice-areas-heading" className="font-heading text-3xl font-normal leading-tight text-white sm:text-4xl lg:text-4xl">
             Areas of Practice
           </h2>
