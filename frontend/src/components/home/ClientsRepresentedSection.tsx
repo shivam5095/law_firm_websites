@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
@@ -15,6 +15,8 @@ interface ClientEntity {
   tagline: string;
   matters: string[];
   logo?: string;
+  logoWidth?: number;
+  logoHeight?: number;
 }
 
 const clientsData: ClientEntity[] = [
@@ -72,6 +74,9 @@ const clientsData: ClientEntity[] = [
     bgLight: 'bg-red-50/60 border-red-200/60',
     tagline: 'Premier Commercial & Retail Banking',
     matters: ['Section 9 Interim Relief', 'Commercial Arbitration', 'Asset Recovery Strategy'],
+    logo: '/logos/kotak-mahindra-bank.jpg',
+    logoWidth: 1200,
+    logoHeight: 390,
   },
   {
     name: 'IndusInd Bank',
@@ -173,6 +178,19 @@ const clientsData: ClientEntity[] = [
     matters: ['Digital Lending Compliance', 'Default Recovery Mechanisms', 'Dispute Resolution'],
     logo: '/logos/moneyview.png',
   },
+  {
+    name: 'Dhanvi Apparels',
+    shortName: 'DHANVI',
+    category: 'nbfc',
+    badge: 'Apparel Enterprise',
+    accentColor: '#1E3A8A',
+    bgLight: 'bg-slate-50 border-slate-200',
+    tagline: 'Dhanvi Apparels',
+    matters: [],
+    logo: '/logos/dhanvi-apparels.png',
+    logoWidth: 956,
+    logoHeight: 264,
+  },
 ];
 
 const featuredClientNames = [
@@ -189,6 +207,7 @@ const featuredClientNames = [
   'MoneyView',
   'Tata Capital',
   'Kotak Mahindra Bank',
+  'Dhanvi Apparels',
 ];
 
 const featuredClients = featuredClientNames
@@ -207,8 +226,10 @@ function ClientLogo({ client }: { client: ClientEntity }) {
       <Image
         src={client.logo}
         alt={client.name}
-        width={160}
-        height={64}
+        width={client.logoWidth ?? 160}
+        height={client.logoHeight ?? 64}
+        quality={client.logoWidth ? 100 : undefined}
+        unoptimized={Boolean(client.logoWidth)}
         className="h-16 w-full object-contain"
         onError={() => setImageFailed(true)}
       />
@@ -362,13 +383,10 @@ export function ClientsRepresentedSection() {
         {/* Section Header */}
         <div className="mb-12 pb-6 border-b border-charcoal-100">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold-600 mb-2">
-              <ShieldCheck size={16} className="text-gold-500" />
-              <span>Institutional Casework &amp; Client Representation</span>
-            </div>
             <h2 className="font-heading text-3xl md:text-4xl text-navy-950 font-bold tracking-tight">
-              Banks &amp; Financial Institutions Represented
+              Institutional Client Represented
             </h2>
+            <div aria-hidden="true" className="mt-4 h-0.5 w-12 bg-gold-500" />
             <p className="text-charcoal-600 text-sm md:text-base max-w-3xl mt-3 leading-relaxed">
               Strategic counsel, debt recovery, and dispute resolution for premier scheduled commercial banks,
               multinational banking giants, and leading non-banking financial corporations (NBFCs) across India.
@@ -438,6 +456,7 @@ export function ClientsRepresentedSection() {
                       aria-label={groupIndex === 0 ? client.name : undefined}
                       className={cn(
                         'flex h-24 w-36 shrink-0 items-center justify-center rounded-sm border p-3 shadow-sm md:h-28 md:w-44',
+                        client.shortName === 'KOTAK' && 'border-[#e5322d] bg-[#e5322d]',
                         client.shortName === 'IDFC FIRST' && 'border-red-900 bg-red-900',
                         client.shortName === 'MONEYVIEW' && 'border-emerald-950 bg-emerald-950',
                         client.shortName === 'BAJAJ' && 'border-gray-200 bg-gray-100',
