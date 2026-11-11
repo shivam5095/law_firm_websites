@@ -58,7 +58,7 @@ export function GlobalPresenceMap() {
           </div>
 
           {/* Interactive Graphic Frame */}
-          <div className="group relative aspect-[16/9] max-h-[620px] w-full overflow-hidden rounded-sm border border-navy-800 bg-navy-950">
+          <div className="group relative aspect-[16/9] max-h-[38.75rem] w-full overflow-hidden rounded-sm border border-navy-800 bg-navy-950">
             <Image
               src={
                 activeTheme === 'dark'

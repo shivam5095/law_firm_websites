@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@media (min-width: 1024px) {
+  html {
+    font-size: clamp(14px, 0.3125vw + 10px, 16px);
+  }
+}
+
 @theme {
   --color-navy-50: #f0f3f9;
   --color-navy-100: #dce3f0;
@@ -52,7 +58,7 @@ body {
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 320px;
+  min-width: 20rem;
   font-size: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
   line-height: 1.6;
 }
@@ -189,7 +195,7 @@ h4 {
 
 /* Gold accent line */
 .gold-line {
-  width: 48px;
+  width: 3rem;
   height: 2px;
   background-color: var(--color-gold-500);
 }
@@ -273,12 +279,12 @@ section[class*="py-"] {
 
 /* Pages that begin in the solid header state need room below the fixed bar. */
 header[data-start-theme="solid"] + #main-content {
-  padding-top: calc(64px + env(safe-area-inset-top));
+  padding-top: calc(4rem + env(safe-area-inset-top));
 }
 
 @media (min-width: 768px) {
   header[data-start-theme="solid"] + #main-content {
-    padding-top: clamp(64px, calc(2.34375vw + 46px), 76px);
+    padding-top: clamp(4rem, calc(2.34375vw + 2.875rem), 4.75rem);
   }
 }
 

@@ -103,7 +103,7 @@ export function AnandProfileContent() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-10 sm:px-6 md:py-14 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12 lg:px-8 lg:py-16">
         <aside className="hidden lg:block">
           <nav aria-label="Jump to profile section" className="sticky top-24 border-l border-charcoal-200 pl-4">
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gold-700">
+            <p className="mb-4 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-gold-700">
               On this page
             </p>
             <ul className="space-y-3">

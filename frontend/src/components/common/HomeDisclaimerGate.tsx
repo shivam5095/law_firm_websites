@@ -71,7 +71,7 @@ export function HomeDisclaimerGate({
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="bci-disclaimer-title"
-                        className="flex max-h-[min(90vh,760px)] w-full max-w-2xl flex-col border border-gold-500/50 bg-ivory-50 shadow-2xl"
+                        className="flex max-h-[min(90vh,47.5rem)] w-full max-w-2xl flex-col border border-gold-500/50 bg-ivory-50 shadow-2xl"
                     >
                         <header className="border-b border-charcoal-200 px-6 py-5 md:px-8">
                             <p className="text-xs font-semibold uppercase tracking-widest text-gold-700">{firm.name}</p>

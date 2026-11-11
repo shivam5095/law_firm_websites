@@ -52,7 +52,7 @@ export function FirmLogo({
             <span className="h-[1px] w-2.5 bg-gold-500/80"></span>
             <span
               className={cn(
-                'text-[9px] md:text-[10px] font-semibold tracking-[0.04em] leading-tight',
+                'text-[0.5625rem] md:text-[0.625rem] font-semibold tracking-[0.04em] leading-tight',
                 isDarkTheme ? 'text-gold-400' : 'text-navy-800'
               )}
             >

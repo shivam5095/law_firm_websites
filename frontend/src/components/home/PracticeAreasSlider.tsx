@@ -29,7 +29,7 @@ function PracticeAreaSlide({ area }: { area: (typeof practiceAreas)[number] }) {
           alt={area.title}
           width={1600}
           height={900}
-          sizes="(max-width: 639px) min(88vw, calc(100vw - 3.5rem)), (max-width: 1279px) min(700px, 72vw), (max-width: 1599px) calc(50vw - 40px), 700px"
+          sizes="(max-width: 639px) min(88vw, calc(100vw - 3.5rem)), (max-width: 79.999rem) min(43.75rem, 72vw), (max-width: 99.999rem) calc(50vw - 2.5rem), 43.75rem"
           className={styles.image}
           draggable={false}
         />
@@ -297,7 +297,7 @@ export function PracticeAreasSlider() {
         </div>
       </div>
       <div className={styles.content}>
-        <header className="w-full px-4 pt-9 pb-2 text-center sm:px-8 sm:pt-10 sm:pb-3 lg:px-14 lg:pt-12 lg:pb-[10px]">
+        <header className="w-full px-4 pt-9 pb-2 text-center sm:px-8 sm:pt-10 sm:pb-3 lg:px-14 lg:pt-12 lg:pb-[0.625rem]">
           <h2 id="practice-areas-heading" className="font-heading text-3xl font-normal leading-tight text-white sm:text-4xl lg:text-4xl">
             Areas of Practice
           </h2>

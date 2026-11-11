@@ -41,7 +41,7 @@ export default function PracticeAreasPage() {
                   />
 
                   {/* Badge & Icon on Image */}
-                  <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-navy-950/90 text-gold-400 border border-gold-500/40 px-2 py-1 rounded-xs backdrop-blur-xs text-[9px] font-semibold uppercase tracking-wider">
+                  <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-navy-950/90 text-gold-400 border border-gold-500/40 px-2 py-1 rounded-xs backdrop-blur-xs text-[0.5625rem] font-semibold uppercase tracking-wider">
                     <Icon size={12} />
                     <span>Practice Discipline 0{index + 1}</span>
                   </div>

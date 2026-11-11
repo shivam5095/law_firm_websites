@@ -96,13 +96,13 @@ export function Footer() {
 
       <div className="border-t border-navy-800">
         <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-8 md:flex-row md:items-center md:gap-10 md:px-6 lg:px-8">
-          <div className="max-w-[260px] shrink-0">
+          <div className="max-w-[16.25rem] shrink-0">
             <Image
               src="/images/logo/firm-logo-full-nowhite.png"
               alt="Maurya & Co. Advocates and Legal Consultants"
               width={1073}
               height={210}
-              style={{ width: 'auto', height: 'auto', maxWidth: '260px' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '16.25rem' }}
             />
           </div>
           <p className="max-w-3xl break-words text-sm leading-relaxed text-ivory-300">

@@ -29,8 +29,8 @@ export function FirmOverview({ headingLevel: Heading = 'h2', surface = 'about', 
             </p>
           </div>
           {(surface === 'about' || variant === 'collage') && showCabinImage ? (
-            <div className="relative isolate mx-auto aspect-[7/6] w-full max-w-[520px]">
-              <div className="absolute -right-[14px] top-[14px] -z-10 h-[62%] w-[86%] border border-[#b08d3c]/55" aria-hidden="true" />
+            <div className="relative isolate mx-auto aspect-[7/6] w-full max-w-[32.5rem]">
+              <div className="absolute -right-[0.875rem] top-[0.875rem] -z-10 h-[62%] w-[86%] border border-[#b08d3c]/55" aria-hidden="true" />
               <div className="absolute right-0 top-0 h-[62%] w-[86%] overflow-hidden rounded-sm shadow-2xl">
                 <Image
                   src="/images/about/about-reception.jpeg"

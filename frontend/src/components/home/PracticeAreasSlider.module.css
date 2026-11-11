@@ -50,7 +50,7 @@
   top: -20%;
   display: block;
   height: 140%;
-  filter: blur(14px);
+  filter: blur(0.875rem);
   mix-blend-mode: screen;
   pointer-events: none;
 }
@@ -60,18 +60,18 @@
   transform: rotate(25deg);
 }
 
-.blueBeams i:nth-child(1) { left: 1%; width: 90px; opacity: 0.34; }
-.blueBeams i:nth-child(2) { left: 13%; width: 125px; opacity: 0.48; }
-.blueBeams i:nth-child(3) { left: 27%; width: 155px; opacity: 0.58; }
+.blueBeams i:nth-child(1) { left: 1%; width: 5.625rem; opacity: 0.34; }
+.blueBeams i:nth-child(2) { left: 13%; width: 7.8125rem; opacity: 0.48; }
+.blueBeams i:nth-child(3) { left: 27%; width: 9.6875rem; opacity: 0.58; }
 
 .goldBeams i {
   background: linear-gradient(to bottom, transparent, rgba(240, 196, 92, 0.6), transparent);
   transform: rotate(-25deg);
 }
 
-.goldBeams i:nth-child(1) { right: 0%; width: 95px; opacity: 0.34; }
-.goldBeams i:nth-child(2) { right: 13%; width: 125px; opacity: 0.48; }
-.goldBeams i:nth-child(3) { right: 27%; width: 155px; opacity: 0.58; }
+.goldBeams i:nth-child(1) { right: 0%; width: 5.9375rem; opacity: 0.34; }
+.goldBeams i:nth-child(2) { right: 13%; width: 7.8125rem; opacity: 0.48; }
+.goldBeams i:nth-child(3) { right: 27%; width: 9.6875rem; opacity: 0.58; }
 
 .content {
   position: relative;
@@ -111,7 +111,7 @@
 
 .card {
   display: block;
-  flex: 0 0 min(700px, calc(50vw - 40px));
+  flex: 0 0 min(43.75rem, calc(50vw - 2.5rem));
   min-width: 0;
   overflow: visible;
 }
@@ -136,7 +136,7 @@
   width: 100%;
   height: auto;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   box-shadow: 0 16px 36px rgb(0 0 0 / 0.35);
 }
 
@@ -199,7 +199,7 @@
   }
 
   .card {
-    flex-basis: 700px;
+    flex-basis: 43.75rem;
   }
 }
 
@@ -210,7 +210,7 @@
   }
 
   .card {
-    flex-basis: min(700px, 72vw);
+    flex-basis: min(43.75rem, 72vw);
   }
 
   .controls {

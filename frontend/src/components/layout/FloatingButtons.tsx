@@ -49,7 +49,7 @@ export function FloatingButtons() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-[88px] right-6 z-40 hidden md:flex"
+            className="fixed bottom-[5.5rem] right-6 z-40 hidden md:flex"
           >
             <a
               href={getWhatsAppUrl(firm.whatsapp)}
@@ -68,7 +68,7 @@ export function FloatingButtons() {
         <div
           aria-hidden="true"
           className="md:hidden"
-          style={{ height: 'calc(61px + env(safe-area-inset-bottom))' }}
+          style={{ height: 'calc(3.8125rem + env(safe-area-inset-bottom))' }}
         />
       )}
 
