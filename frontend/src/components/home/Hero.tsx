@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { firm } from '@/data/firm';
+import HeroMapAnimation from './HeroMapAnimation';
 
 export function Hero() {
   return (
@@ -16,6 +17,7 @@ export function Hero() {
           blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 3'%3E%3Crect width='8' height='3' fill='%230b1526'/%3E%3C/svg%3E"
           className="object-cover object-[30%_center] lg:object-center"
         />
+        <HeroMapAnimation />
       </div>
       <h1 className="sr-only">Where Law Meets Strategy. Focused Dispute Resolution.</h1>
       <p className="sr-only">{firm.description}</p>
