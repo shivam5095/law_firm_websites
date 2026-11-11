@@ -35,19 +35,21 @@ export function FirmOverview({ headingLevel: Heading = 'h2', surface = 'about', 
                 <Image
                   src="/images/about/about-reception.jpeg"
                   alt="Maurya & Co. reception with the gold M logo"
-                  fill
-                  sizes="(max-width: 767px) 86vw, (max-width: 1023px) 43vw, 448px"
-                  className="object-cover"
+                  width={1600}
+                  height={900}
+                  unoptimized
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 h-[62%] w-[46%] bg-white p-2.5 shadow-2xl">
+              <div className={`${styles.cabinCard} absolute bottom-0 left-0 bg-white p-2.5 shadow-2xl`}>
                 <div className="relative h-full w-full overflow-hidden">
                   <Image
                     src="/images/about/about-cabin.jpeg"
                     alt="Partner's cabin with a horse painting and chair"
-                    fill
-                    sizes="(max-width: 767px) 46vw, (max-width: 1023px) 23vw, 239px"
-                    className="object-cover object-[72%_center]"
+                    width={1600}
+                    height={900}
+                    unoptimized
+                    className="h-full w-full object-cover object-center"
                   />
                 </div>
               </div>

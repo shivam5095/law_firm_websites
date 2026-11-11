@@ -33,6 +33,29 @@
   min-width: 0;
 }
 
+.cabinCard {
+  width: 60%;
+  aspect-ratio: 4 / 4.2;
+}
+
+@media (min-width: 1024px) {
+  .cabinCard {
+    transform: translateX(-52px);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .cabinCard {
+    transform: translateX(-40px);
+  }
+}
+
+@media (max-width: 639px) {
+  .cabinCard {
+    width: 56%;
+  }
+}
+
 .sectionHeading {
   margin: 0 0 1.25rem;
   color: #0a1628;
