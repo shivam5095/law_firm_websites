@@ -27,7 +27,7 @@ export default function InsightsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {publications.map((pub) => (
-            <article key={pub.slug} className="bg-white border border-charcoal-100 shadow-sm flex flex-col h-full group hover:shadow-md transition-shadow">
+            <article key={pub.id} className="bg-white border border-charcoal-100 shadow-sm flex flex-col h-full group hover:shadow-md transition-shadow">
               <div className="p-8 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-4">
                   <span className="text-xs font-semibold text-gold-600 uppercase tracking-wider">{pub.category}</span>

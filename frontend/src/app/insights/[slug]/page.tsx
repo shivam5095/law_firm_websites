@@ -7,13 +7,13 @@ import { PublicationLink } from '@/components/publications/PublicationLink';
 
 export async function generateStaticParams() {
   return publications.map((pub) => ({
-    slug: pub.slug,
+    slug: pub.slug ?? pub.id,
   }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const pub = publications.find((p) => p.slug === slug);
+  const pub = publications.find((p) => (p.slug ?? p.id) === slug);
 
   if (!pub) {
     return { title: 'Publication Not Found' };
@@ -27,13 +27,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function InsightDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const pub = publications.find((p) => p.slug === slug);
+  const pub = publications.find((p) => (p.slug ?? p.id) === slug);
 
   if (!pub) {
     notFound();
   }
 
-  const relatedPubs = publications.filter(p => p.slug !== slug && p.category === pub.category).slice(0, 3);
+  const relatedPubs = publications.filter(p => (p.slug ?? p.id) !== slug && p.category === pub.category).slice(0, 3);
 
   return (
     <main className="min-h-screen bg-ivory-50 pb-20">
@@ -106,10 +106,10 @@ export default async function InsightDetailPage({ params }: { params: Promise<{ 
             <h2 className="font-heading text-3xl text-navy-900 mb-12 text-center">Related Publications</h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {relatedPubs.map((relatedPub) => (
-                <div key={relatedPub.slug} className="group">
+                <div key={relatedPub.id} className="group">
                   <span className="text-xs font-semibold text-gold-600 uppercase tracking-wider mb-2 block">{relatedPub.category}</span>
                   <h3 className="font-heading text-xl text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">
-                    <Link href={`/insights/${relatedPub.slug}`}>
+                    <Link href={`/insights/${relatedPub.slug ?? relatedPub.id}`}>
                       {relatedPub.title}
                     </Link>
                   </h3>

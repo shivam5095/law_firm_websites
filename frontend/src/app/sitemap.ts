@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const practiceAreaPages = practiceAreas.map(pa => `/practice-areas/${pa.slug}`);
   const teamPages = lawyers.map(l => `/team/${l.slug}`);
-  const insightPages = publications.map(p => `/insights/${p.slug}`);
+  const insightPages = publications.map(p => `/insights/${p.slug ?? p.id}`);
 
   const allPages = [...staticPages, ...practiceAreaPages, ...teamPages, ...insightPages];
 

@@ -227,7 +227,7 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <div className="space-y-4">
                 {publications.map((pub, idx: number) => (
-                  <Link href={`/insights/${pub.slug}`} key={idx} className="block group">
+                  <Link href={`/insights/${pub.slug ?? pub.id}`} key={idx} className="block group">
                     <div className="border border-charcoal-100 p-5 hover:border-gold-300 transition-colors bg-white">
                       <p className="text-xs text-charcoal-500 mb-2">
                         {pub.publication} · {pub.date}
