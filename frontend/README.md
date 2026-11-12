@@ -5,7 +5,7 @@ Premium Indian Law Firm client-facing website built with Next.js (App Router), T
 ## Core Features
 - **Modern Design**: Bespoke styling using deep navy, gold, and warm ivory colors.
 - **Client Forms**: Client-side validated contact and consultation booking forms.
-- **Data Integration**: Statically generated page listings for practice areas, selected experiences, publications, legal insights, and attorney profiles.
+- **Data Integration**: Statically generated page listings for practice areas, practice-area experience highlights, publications, legal insights, and attorney profiles.
 - **Performance & SEO**: Configured semantic HTML, Open Graph/Twitter meta structures, and static path prerendering.
 
 ---

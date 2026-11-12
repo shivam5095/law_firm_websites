@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || firm.website;
 
   const staticPages = [
-    '', '/about', '/practice-areas', '/team', '/experience',
+    '', '/about', '/practice-areas', '/team',
     '/insights', '/publications', '/consultation',
     '/careers', '/disclaimer', '/privacy-policy', '/terms', '/terms-of-use',
   ];

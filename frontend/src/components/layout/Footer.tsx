@@ -9,7 +9,6 @@ import { BackToTop } from '@/components/layout/BackToTop';
 const quickLinks = [
   { label: 'About Us', href: '/about' },
   { label: 'Our Team', href: '/team' },
-  { label: 'Experience', href: '/experience' },
   { label: 'Insights', href: '/insights' },
   { label: 'Publications', href: '/publications' },
   { label: 'Careers', href: '/careers' },

@@ -6,7 +6,7 @@ export type ExperienceItem = {
   practiceAreas: string[];
 };
 
-const experienceData: ExperienceItem[] = [
+const experienceItems: ExperienceItem[] = [
   {
     id: 'exp-1',
     category: 'Debt Restructuring',
@@ -85,4 +85,4 @@ const experienceData: ExperienceItem[] = [
   }
 ];
 
-export { experienceData, experienceData as experienceItems };
+export { experienceItems };

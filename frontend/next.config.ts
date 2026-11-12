@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [{
+      source: '/experience',
+      destination: '/',
+      permanent: true,
+    }, {
       source: '/practice-areas/arbitration-dispute-resolution',
       destination: '/practice-areas',
       permanent: true,
