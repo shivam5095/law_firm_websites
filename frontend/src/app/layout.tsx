@@ -3,8 +3,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingButtons } from '@/components/layout/FloatingButtons';
-import { DisclaimerCopy } from '@/components/common/DisclaimerCopy';
-import { HomeDisclaimerGate } from '@/components/common/HomeDisclaimerGate';
+import { DisclaimerGate } from '@/components/common/DisclaimerGate';
 import { firm } from '@/data/firm';
 import './globals.css';
 
@@ -59,13 +58,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col font-body antialiased">
-        <a className="skip-link" href="#main-content">Skip to content</a>
-        <HomeDisclaimerGate disclaimer={<DisclaimerCopy />}>
+        <DisclaimerGate>
+          <a className="skip-link" href="#main-content">Skip to content</a>
           <Navbar />
           <div id="main-content" className="flex-1">{children}</div>
           <Footer />
           <FloatingButtons />
-        </HomeDisclaimerGate>
+        </DisclaimerGate>
       </body>
     </html>
   );

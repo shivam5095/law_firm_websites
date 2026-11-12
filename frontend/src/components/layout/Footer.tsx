@@ -117,7 +117,7 @@ export function Footer() {
           <div className="flex flex-col items-center gap-3 md:flex-row md:gap-6 md:pr-20">
             <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
               <Link href="/privacy-policy" className="min-h-11 inline-flex items-center transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">Privacy Policy</Link>
-              <Link href="/terms" className="min-h-11 inline-flex items-center transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">Terms of Engagement</Link>
+              <Link href="/terms-of-use" className="min-h-11 inline-flex items-center transition-colors hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">Terms of Use</Link>
             </div>
             <BackToTop />
           </div>
