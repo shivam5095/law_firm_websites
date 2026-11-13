@@ -19,7 +19,7 @@ function PracticeAreaSlide({ area }: { area: (typeof practiceAreas)[number] }) {
     <article data-practice-card className={styles.card}>
       <Link
         href={`/practice-areas/${area.slug}`}
-        aria-label={`${area.title} practice area`}
+        aria-label={`View ${area.title} practice`}
         className={styles.imageLink}
       >
         <Image
@@ -28,7 +28,7 @@ function PracticeAreaSlide({ area }: { area: (typeof practiceAreas)[number] }) {
           width={1600}
           height={900}
           sizes="(max-width: 639px) min(88vw, calc(100vw - 3.5rem)), (max-width: 79.999rem) min(43.75rem, 72vw), (max-width: 99.999rem) calc(50vw - 2.5rem), 43.75rem"
-          className={styles.image}
+          className={`${styles.image} select-none`}
           draggable={false}
         />
       </Link>
@@ -56,8 +56,9 @@ export function PracticeAreasSlider() {
   const frameRef = useRef(0);
   const lastFrameRef = useRef(0);
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const draggedClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const syncAnimationRef = useRef<(() => void) | null>(null);
-  const snapDraggedClickRef = useRef(false);
+  const suppressDraggedClickRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const updateActiveIndex = useCallback((offset: number) => {
@@ -205,6 +206,7 @@ export function PracticeAreasSlider() {
       document.removeEventListener('visibilitychange', handleVisibility);
       if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+      if (draggedClickTimerRef.current) clearTimeout(draggedClickTimerRef.current);
       frameRef.current = 0;
     };
   }, [applyOffset]);
@@ -219,7 +221,6 @@ export function PracticeAreasSlider() {
       startOffset: offsetRef.current,
       moved: false,
     };
-    event.currentTarget.setPointerCapture(event.pointerId);
     setPauseReason('dragging', true);
   };
 
@@ -227,8 +228,13 @@ export function PracticeAreasSlider() {
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
     const delta = drag.startX - event.clientX;
-    if (Math.abs(delta) > 4) drag.moved = true;
-    if (drag.moved) applyOffset(drag.startOffset + delta);
+    if (Math.abs(delta) > 6) {
+      if (!drag.moved) {
+        drag.moved = true;
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
+      applyOffset(drag.startOffset + delta);
+    }
   };
 
   const handlePointerEnd = (event: PointerEvent<HTMLDivElement>) => {
@@ -237,8 +243,12 @@ export function PracticeAreasSlider() {
     dragRef.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     if (drag.moved) {
-      snapDraggedClickRef.current = true;
-      setTimeout(() => { snapDraggedClickRef.current = false; }, 0);
+      suppressDraggedClickRef.current = true;
+      if (draggedClickTimerRef.current) clearTimeout(draggedClickTimerRef.current);
+      draggedClickTimerRef.current = setTimeout(() => {
+        suppressDraggedClickRef.current = false;
+        draggedClickTimerRef.current = null;
+      }, 100);
       const stride = periodRef.current / practiceAreas.length;
       const target = Math.round(offsetRef.current / stride) * stride;
       movementRef.current = {
@@ -289,9 +299,12 @@ export function PracticeAreasSlider() {
           onPointerUp={handlePointerEnd}
           onPointerCancel={handlePointerEnd}
           onClickCapture={(event) => {
-            if (!snapDraggedClickRef.current) return;
+            if (!suppressDraggedClickRef.current) return;
             event.preventDefault();
             event.stopPropagation();
+            suppressDraggedClickRef.current = false;
+            if (draggedClickTimerRef.current) clearTimeout(draggedClickTimerRef.current);
+            draggedClickTimerRef.current = null;
           }}
         >
           <div ref={trackRef} className={styles.track}>

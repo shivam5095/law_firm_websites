@@ -13,7 +13,7 @@ export default function AboutPage() {
     <main className={styles.page}>
       <section className={styles.hero} aria-labelledby="about-heading">
         <Image
-          src="/images/about/about-hero.jpg"
+          src="/images/about/about-hero.png"
           alt="Maurya & Co. boardroom"
           fill
           priority
