@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { consultationSchema, type ConsultationFormData } from '@/lib/validations';
+import { contact } from '@/config/contact';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -103,7 +104,7 @@ export function ConsultationForm() {
               "w-full border rounded-sm px-4 py-3 outline-none transition-colors",
               errors.phone ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500" : "border-charcoal-200 focus:border-navy-600 focus:ring-1 focus:ring-navy-600"
             )}
-            placeholder="+91 98765 43210"
+            placeholder={contact.phones[0]}
           />
           {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
         </div>

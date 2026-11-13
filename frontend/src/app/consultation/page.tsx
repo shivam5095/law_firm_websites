@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { ConsultationForm } from '@/components/forms/ConsultationForm';
-import { MapPin, Info } from 'lucide-react';
-import { firm } from '@/data/firm';
+import { MapPin, Info, Phone, Mail } from 'lucide-react';
+import { contact, getMapSearchUrl } from '@/config/contact';
 
 export const metadata: Metadata = {
   title: 'Request a Consultation',
@@ -44,11 +44,45 @@ export default function ConsultationPage() {
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <MapPin className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
+                    <div className="min-w-0">
+                      <p className="font-medium text-charcoal-900">Address</p>
+                      <div className="mt-1 space-y-2 text-charcoal-600 leading-relaxed">
+                        {contact.addresses.map((address) => (
+                          <a
+                            key={address}
+                            href={getMapSearchUrl(address)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block break-words hover:text-navy-900 focus-visible:outline-2 focus-visible:outline-gold-500 focus-visible:outline-offset-2"
+                          >
+                            {address}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <Phone className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
                     <div>
-                      <p className="font-medium text-charcoal-900">Office</p>
-                      <p className="text-charcoal-600 mt-1 leading-relaxed whitespace-pre-line">
-                        {firm.address}
-                      </p>
+                      <p className="font-medium text-charcoal-900">Telephone</p>
+                      <div className="mt-1 space-y-1 text-charcoal-600 leading-relaxed">
+                        {contact.phones.map((phone) => (
+                          <a key={phone} href={`tel:${phone.replace(/\s/g, '')}`} className="block hover:text-navy-900 focus-visible:outline-2 focus-visible:outline-gold-500 focus-visible:outline-offset-2">
+                            {phone}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <Mail className="w-5 h-5 text-gold-500 mt-1 mr-4 shrink-0" />
+                    <div className="min-w-0">
+                      <p className="font-medium text-charcoal-900">Email</p>
+                      <a href={`mailto:${contact.email}`} className="mt-1 block break-words text-charcoal-600 leading-relaxed hover:text-navy-900 focus-visible:outline-2 focus-visible:outline-gold-500 focus-visible:outline-offset-2">
+                        {contact.email}
+                      </a>
                     </div>
                   </div>
 

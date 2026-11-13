@@ -5,6 +5,7 @@ import { practiceAreas } from '@/data/practiceAreas';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { WhatsAppIcon } from '@/components/common/WhatsAppIcon';
 import { BackToTop } from '@/components/layout/BackToTop';
+import { contact, getMapSearchUrl } from '@/config/contact';
 
 const quickLinks = [
   { label: 'About Us', href: '/about' },
@@ -90,6 +91,21 @@ export function Footer() {
             <span>Connect on WhatsApp</span>
             <ArrowRight aria-hidden="true" size={14} />
           </a>
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ivory-300">
+            {contact.phones.map((phone) => (
+              <li key={phone} className="break-words">
+                <a href={`tel:${phone.replace(/\s/g, '')}`} className="hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">{phone}</a>
+              </li>
+            ))}
+            <li className="break-words">
+              <a href={`mailto:${contact.email}`} className="hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">{contact.email}</a>
+            </li>
+            {contact.addresses.map((address) => (
+              <li key={address} className="break-words">
+                <a href={getMapSearchUrl(address)} target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">{address}</a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
@@ -105,7 +121,7 @@ export function Footer() {
             />
           </div>
           <p className="max-w-3xl break-words text-sm leading-relaxed text-ivory-300">
-            Maurya &amp; Co., anchored at the Noida Hub (Delhi NCR), provides high-stakes legal counsel, banking recovery litigation, debt restructuring, commercial arbitration, and dispute resolution across premier Indian and cross-border jurisdictions.
+            {firm.description}
           </p>
         </div>
       </div>
