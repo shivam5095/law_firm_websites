@@ -278,12 +278,12 @@ export default function WorldMap() {
         .mapSection{padding:3.5rem 1.5rem;background:#fff;color:#14243B;border-top:1px solid rgba(20,36,59,.08)}
         .mapContainer{width:100%;max-width:80rem;margin:0 auto}
         .mapHeading{text-align:center;margin:0 auto 1.625rem;max-width:56.25rem}
-        .mapHeading h2{font-family:var(--font-heading),Georgia,serif;font-size:clamp(1.75rem,3.5vw,2.625rem);line-height:1.08;font-weight:600;color:#14243B;margin:0}
+        .mapHeading h2{font-family:var(--font-heading);font-size:clamp(1.875rem,calc(1.5rem + 1.7vw),3.375rem);line-height:1.2;font-weight:600;color:#14243B;margin:0}
         .mapHeading span{display:block;width:4rem;height:.125rem;background:#B89548;margin:.9375rem auto .8125rem}
-        .mapHeading p{font-size:.9375rem;line-height:1.65;color:#5B6475;margin:0}
+        .mapHeading p{font-size:clamp(.9375rem,calc(.9rem + .16vw),1rem);line-height:1.65;color:#5B6475;margin:0}
         .mapCard{width:100%;aspect-ratio:2/1;overflow:hidden;border-radius:1.125rem;border:1px solid rgba(20,36,59,.15);background:radial-gradient(ellipse at center,#14243B 0%,#0B1426 100%);box-shadow:0 24px 60px rgba(11,20,38,.25)}
         .mapSvg{display:block;width:100%;height:100%;touch-action:pan-y}
-        @media(max-width:639px){.mapSection{padding:2rem 1rem}.mapHeading{margin-bottom:1.25rem}.mapHeading p{font-size:.8125rem}.mapCard{aspect-ratio:4/3}}
+        @media(max-width:639px){.mapSection{padding:2rem 1rem}.mapHeading{margin-bottom:1.25rem}.mapCard{aspect-ratio:4/3}}
       `}</style>
     </section>
   );

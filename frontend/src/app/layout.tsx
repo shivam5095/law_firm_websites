@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { Libre_Caslon_Text, Inter } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingButtons } from '@/components/layout/FloatingButtons';
@@ -7,14 +7,17 @@ import { DisclaimerGate } from '@/components/common/DisclaimerGate';
 import { firm } from '@/data/firm';
 import './globals.css';
 
-const playfair = Playfair_Display({
+const libreCaslon = Libre_Caslon_Text({
   subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
   variable: '--font-heading',
   display: 'swap',
 });
 
 const inter = Inter({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 });
@@ -56,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${libreCaslon.variable} ${inter.variable}`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col font-body antialiased">
         <DisclaimerGate>
           <a className="skip-link" href="#main-content">Skip to content</a>

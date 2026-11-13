@@ -1,6 +1,9 @@
 import Image from 'next/image';
+import { Great_Vibes } from 'next/font/google';
 import { firm } from '@/data/firm';
 import styles from './FirmOverview.module.css';
+
+const greatVibes = Great_Vibes({ subsets: ['latin'], weight: '400' });
 
 type FirmOverviewProps = {
   headingLevel?: 'h2' | 'h3';
@@ -15,7 +18,7 @@ export function FirmOverview({ headingLevel: Heading = 'h2', surface = 'about', 
           <div className={styles.overviewText}>
             {surface === 'home' ? (
               <>
-                <p className={styles.firmName}>FIRM OVERVIEW</p>
+                <p className={`${styles.calligraphyLabel} ${greatVibes.className}`}>Firm Overview</p>
                 <Heading className={styles.sectionHeading}>Counsel that sees the whole board.</Heading>
               </>
             ) : (
@@ -28,7 +31,7 @@ export function FirmOverview({ headingLevel: Heading = 'h2', surface = 'about', 
             <div className={styles.goldRule} aria-hidden="true" />
             <p className={styles.bodyCopy}>
               {surface === 'home'
-                ? 'Maurya & Co. was founded on a simple belief. The most valuable thing a client brings to a lawyer is not a file, it is trust, and every decision we make is measured against it. We are a firm of advocates and legal consultants advising businesses, promoters, investors, financial institutions and families, in India and abroad, wherever capital, assets and reputation meet the law.'
+                  ? <><span className={styles.emphasizedFirmName}>Maurya &amp; Co.</span>{' was founded on a simple belief. The most valuable thing a client brings to a lawyer is not a file, it is trust, and every decision we make is measured against it. We are a firm of advocates and legal consultants advising businesses, promoters, investors, financial institutions and families, in India and abroad, wherever capital, assets and reputation meet the law.'}</>
                 : 'Our firm is a leading Indian legal practice recognized for its depth of knowledge, strategic thinking, and unwavering commitment to client success. We represent a diverse range of clients, including domestic and international corporations, financial institutions, and high-net-worth individuals across complex legal matters.'}
             </p>
             <p className={styles.bodyCopy}>

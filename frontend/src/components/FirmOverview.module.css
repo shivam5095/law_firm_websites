@@ -60,7 +60,7 @@
   margin: 0 0 1.25rem;
   color: #0a1628;
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-size: clamp(1.875rem, calc(1.5rem + 1.7vw), 3.375rem);
   font-weight: 500;
   line-height: 1.2;
 }
@@ -68,10 +68,32 @@
 .firmName {
   margin: 0;
   color: #9a7d34;
-  font-size: 0.75rem;
+  font-size: clamp(0.95rem, 1.1vw, 1.25rem);
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+.calligraphyLabel {
+  margin: 0;
+  color: #B89548;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: inherit;
+}
+
+@media (max-width: 767px) {
+  .calligraphyLabel {
+    font-size: 30px;
+  }
+}
+
+.emphasizedFirmName {
+  color: #142033;
+  font-family: var(--font-heading);
+  font-variant: small-caps;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .tagline {

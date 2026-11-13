@@ -15,7 +15,8 @@ const quickLinks = [
   { label: 'Careers', href: '/careers' },
 ];
 
-const sectionHeadingClass = 'mb-5 font-heading text-sm font-semibold uppercase tracking-[0.16em] text-[#B89548]';
+const sectionHeadingClass = 'mb-0 font-heading uppercase text-[#B89548] lg:whitespace-nowrap';
+const sectionHeadingStyle = { fontSize: 'clamp(1rem, 1.15vw, 1.3rem)', fontWeight: 700, letterSpacing: '0.14em', lineHeight: 1.3 } as const;
 const footerLinkClass = 'inline-flex min-h-10 min-w-0 items-center gap-2 break-words text-sm text-[#D5D9E0] transition-colors hover:text-[#B89548] focus-visible:outline-2 focus-visible:outline-[#B89548] focus-visible:outline-offset-2';
 
 const offices = [
@@ -64,17 +65,20 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-14 md:px-6 lg:px-8 lg:pt-16">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-x-12 md:gap-y-10 lg:grid-cols-3 lg:gap-12">
           <nav aria-label="Footer quick links" className="min-w-0">
-            <h2 className={sectionHeadingClass}>Quick Links</h2>
+            <h2 className={sectionHeadingClass} style={sectionHeadingStyle}>Quick Links</h2>
+            <span aria-hidden="true" className="mb-4 mt-2 block h-px w-[30px] bg-[#B89548]" />
             {quickLinkList}
           </nav>
 
           <nav aria-label="Practice areas" className="min-w-0">
-            <h2 className={sectionHeadingClass}>Practice Areas</h2>
+            <h2 className={sectionHeadingClass} style={sectionHeadingStyle}>Practice Areas</h2>
+            <span aria-hidden="true" className="mb-4 mt-2 block h-px w-[30px] bg-[#B89548]" />
             {practiceAreaList}
           </nav>
 
           <div className="min-w-0">
-            <h2 className={sectionHeadingClass}>Get in Touch</h2>
+              <h2 className={sectionHeadingClass} style={sectionHeadingStyle}>Get in Touch</h2>
+              <span aria-hidden="true" className="mb-4 mt-2 block h-px w-[30px] bg-[#B89548]" />
             <ul className="space-y-1 text-sm leading-relaxed text-[#D5D9E0]">
               {contact.phones.map((phone) => (
                 <li key={phone} className="break-words">
@@ -96,13 +100,14 @@ export function Footer() {
               <ArrowRight aria-hidden="true" size={14} />
             </a>
             <section aria-labelledby="footer-offices-heading" className="mt-8">
-              <h2 id="footer-offices-heading" className={`${sectionHeadingClass} mb-4`}>Our Offices</h2>
+                <h2 id="footer-offices-heading" className={sectionHeadingClass} style={sectionHeadingStyle}>Our Offices</h2>
+                <span aria-hidden="true" className="mb-4 mt-2 block h-px w-[30px] bg-[#B89548]" />
               <div className="grid grid-cols-1 gap-3">
                 {offices.map((office) => (
                   <article key={office.name} className="flex min-w-0 items-start gap-3 rounded-md border border-[#344154] bg-[#081323] p-4">
                     <MapPin aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-[#B89548]" />
                     <div className="min-w-0">
-                      <h3 className="mb-1.5 font-heading text-sm font-semibold tracking-wide text-[#F5F2EB]">{office.name}</h3>
+                        <h3 className="mb-1.5 font-heading font-semibold text-[#F5F2EB]" style={{ fontSize: 'clamp(1rem, 1.1vw, 1.25rem)', letterSpacing: '0.04em' }}>{office.name}</h3>
                       <p className="text-sm leading-relaxed text-[#D5D9E0]">
                         {office.address.map((line) => <span key={line} className="block break-words">{line}</span>)}
                       </p>
