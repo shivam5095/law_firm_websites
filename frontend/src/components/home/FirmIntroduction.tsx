@@ -40,24 +40,28 @@ export function FirmIntroduction() {
           {/* Right Column: Editorial Narrative (7 Cols) */}
           <div className="lg:col-span-7">
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-navy-950 font-normal leading-tight tracking-tight mb-6">
-              Restrained, factual precision in high-stakes corporate disputes.
+              The best disputes are the ones that never begin.
             </h2>
 
             <div className="w-16 h-0.5 bg-gold-500 mb-8" />
 
             <div className="prose prose-slate text-charcoal-700 text-sm md:text-base leading-relaxed space-y-4 max-w-none">
               <p>
-                The Chambers of Anand Kumar Maurya operates with an acute recognition of commercial reality: 
-                litigation and credit distress are not abstract legal puzzles, but high-impact balance sheet events. 
-                Our counsel bridges rigorous statutory drafting with decisive forum strategy across the Delhi High Court, 
-                the Debt Recovery Tribunals (DRT), the National Company Law Appellate Tribunal (NCLAT), and institutional arbitration chambers.
+                Most legal problems are decided long before they reach a courtroom. They are decided in the clause that was never negotiated, the advice that came too late, the risk nobody priced in. That earlier point is where we do our best work. We study the business behind the matter, the numbers behind the business and the people behind the numbers, so that our advice protects not only what a client owns today but everything they are building for tomorrow.
               </p>
               <p>
-                Having represented creditors and corporate debtors across matters against top scheduled banks—including 
-                SBI, HDFC Bank, Axis Bank, American Express, and Standard Chartered—we prioritize early factual audits to dismantle 
-                procedural bottlenecks before irreversible default positions are triggered.
+                When a dispute cannot be avoided, we meet it with the same discipline. Our practice brings banking and finance, restructuring and insolvency, arbitration, regulatory law and cross-border work under one roof. No client has to choose between a lawyer who understands the law and one who understands the money. We begin with the outcome the client needs, and the forum, the timing and the tone follow from it. A family protecting a single home and a group structuring a portfolio worth hundreds of crores receive exactly the same seriousness.
               </p>
             </div>
+
+            <blockquote className="mt-8 border-t border-gold-500/60 pt-5">
+              <p className="font-heading text-[clamp(1.5rem,2.1vw,2.25rem)] italic leading-[1.35] text-navy-950">
+                “Early advice almost always costs less than a late defence.”
+              </p>
+              <footer className="mt-3 text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-gold-600">
+                Anand Kumar Maurya, Founder
+              </footer>
+            </blockquote>
 
           </div>
 

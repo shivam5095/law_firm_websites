@@ -13,19 +13,28 @@ export function FirmOverview({ headingLevel: Heading = 'h2', surface = 'about', 
   const content = (
     <div className={styles.overviewGrid}>
           <div className={styles.overviewText}>
-            <Heading className={styles.sectionHeading}>Firm Overview</Heading>
-            <p className={styles.firmName}>{firm.name}</p>
-            <p className={styles.tagline}>{firm.tagline}</p>
+            {surface === 'home' ? (
+              <>
+                <p className={styles.firmName}>FIRM OVERVIEW</p>
+                <Heading className={styles.sectionHeading}>Counsel that sees the whole board.</Heading>
+              </>
+            ) : (
+              <>
+                <Heading className={styles.sectionHeading}>Firm Overview</Heading>
+                <p className={styles.firmName}>{firm.name}</p>
+                <p className={styles.tagline}>{firm.tagline}</p>
+              </>
+            )}
             <div className={styles.goldRule} aria-hidden="true" />
             <p className={styles.bodyCopy}>
-              Our firm is a leading Indian legal practice recognized for its depth of knowledge,
-              strategic thinking, and unwavering commitment to client success. We represent a diverse
-              range of clients, including domestic and international corporations, financial institutions,
-              and high-net-worth individuals across complex legal matters.
+              {surface === 'home'
+                ? 'Maurya & Co. was founded on a simple belief. The most valuable thing a client brings to a lawyer is not a file, it is trust, and every decision we make is measured against it. We are a firm of advocates and legal consultants advising businesses, promoters, investors, financial institutions and families, in India and abroad, wherever capital, assets and reputation meet the law.'
+                : 'Our firm is a leading Indian legal practice recognized for its depth of knowledge, strategic thinking, and unwavering commitment to client success. We represent a diverse range of clients, including domestic and international corporations, financial institutions, and high-net-worth individuals across complex legal matters.'}
             </p>
             <p className={styles.bodyCopy}>
-              With a focus on corporate law, dispute resolution, intellectual property, and real estate,
-              we combine rigorous legal analysis with commercial acumen to deliver pragmatic solutions.
+              {surface === 'home'
+                ? 'Our roots are in Varanasi, a city where knowledge has passed from teacher to student for centuries, and that inheritance shapes how we work. We think from first principles, we speak plainly, and we tell clients what is realistic before we tell them what is possible. Every mandate, whatever its size, is led personally by our founder from the first conversation to the final outcome. From Noida, New Delhi and Varanasi, we act on matters across India, the United States and the Asia-Pacific.'
+                : 'With a focus on corporate law, dispute resolution, intellectual property, and real estate, we combine rigorous legal analysis with commercial acumen to deliver pragmatic solutions.'}
             </p>
           </div>
           {(surface === 'about' || variant === 'collage') && showCabinImage ? (
