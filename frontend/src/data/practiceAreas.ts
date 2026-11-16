@@ -24,6 +24,9 @@ export type PracticeArea = {
   handlingMethodology: HandlingStep[];
   strategicTactics: string[];
   faqs: { question: string; answer: string }[];
+  legalFramework?: string[];
+  whatWeDo?: string[];
+  perspective?: [string, string, string];
 };
 
 export const practiceAreas: PracticeArea[] = [
@@ -33,8 +36,25 @@ export const practiceAreas: PracticeArea[] = [
     title: 'Banking & Finance',
     caption: 'BANKING & FINANCE',
     published: true,
-    shortDescription: 'Comprehensive legal counsel for banking sector disputes, recovery strategies, facility enforcement, and regulatory compliance.',
-    description: 'Our Banking & Finance practice offers robust legal counsel across complex lending arrangements, security enforcement, and high-stakes financial disputes. We regularly represent scheduled commercial banks, financial institutions, NBFCs, and corporate borrowers across loan documentation, regulatory compliance, and multi-crore recovery proceedings.',
+    shortDescription: 'Where credit, security and regulation meet.',
+    description: `Credit sits at the centre of almost every business in India and of many households, yet the documents that govern it are among the least read. Facility agreements, security documents, guarantees and sanction terms are signed in a few hours and then decide outcomes for years. Our Banking & Finance practice works across that entire life cycle. We advise on how credit is structured and secured, and we act when the relationship comes under strain, whether through a demand, a classification, an enforcement or a dispute.
+
+We advise promoters, businesses, property groups, investors and lenders on lending and security arrangements, including structured, acquisition and mezzanine finance and real estate financing. We also act for borrowers, guarantors, homeowners and MSMEs in their dealings with banks, housing finance companies and NBFCs, from the reconciliation of a disputed account to the defence of enforcement action before the Debt Recovery Tribunal. A borrower with a single account and a group raising capital across several lenders receive the same close reading of their documents and the same candour about where they stand.
+
+Because the same practice structures facilities and handles the disputes that follow, our advice runs in both directions. When we help design a financing, we know from experience where such arrangements tend to break. When we defend an enforcement, we know how the arrangement was meant to work and where the lender’s own process fell short.`,
+    legalFramework: [
+      'Our work in this area rests on the Banking Regulation Act, 1949 and the Reserve Bank of India Act, 1934, which together govern how banks are licensed, supervised and directed. It also rests on the RBI directions issued under them, including the prudential norms on income recognition and asset classification, the Fair Practices Code for lenders and the rules on outsourcing and recovery agents.',
+      'Enforcement of security is governed by the Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 and the Security Interest (Enforcement) Rules, 2002. Recovery of debts is governed by the Recovery of Debts and Bankruptcy Act, 1993, which established the Debt Recovery Tribunals. The creation and priority of security turns on the Transfer of Property Act, 1882, the Registration Act, 1908, the Indian Stamp Act, 1899 and State stamp laws, and the charge registration provisions of the Companies Act, 2013. Guarantees are governed by the Indian Contract Act, 1872. We also work regularly with the Negotiable Instruments Act, 1881, the Credit Information Companies (Regulation) Act, 2005 and the Limitation Act, 1963.'
+    ],
+    whatWeDo: [
+      'On the advisory side, we review and negotiate facility and security documentation, structure financing for commercial real estate and growing businesses, and advise on how debt, mezzanine capital and equity should be sequenced so that each layer is protected.',
+      'On the disputes side, we examine whether a demand notice, an NPA classification or a possession notice complies with the law. We represent borrowers and guarantors before the Debt Recovery Tribunal, negotiate one time settlements, and secure the release of security and no-dues documentation once a matter is closed. Where a lender’s conduct falls short of what RBI requires, we pursue the matter through the grievance framework the regulator has put in place.'
+    ],
+    perspective: [
+      'Banking regulation in India is being rewritten faster than at any time in recent memory. Our founder’s analysis of RBI’s 2026 directions on customer liability in bank fraud, published in The Bar Bulletin as ',
+      'Rs 48,021 Crore in Bank Fraud, What RBI’s 2026 Directions on Customer Liability Actually Change',
+      ', examined what those rules mean for customers and banks and where the resulting disputes will be fought. Following the rulebook as it changes is part of the advice every client receives.'
+    ],
     icon: 'Landmark',
     image: '/images/practice/banking-finance.jpeg',
     services: [
@@ -47,10 +67,9 @@ export const practiceAreas: PracticeArea[] = [
       'Inter-bank consortium dispute resolution'
     ],
     keyMatters: [
-      'Representing premier banks (HDFC, Axis, SBI, ICICI, Kotak) in multi-crore loan recovery suits.',
-      'Enforcing secured mortgages and asset possession under the SARFAESI framework across diverse jurisdictions.',
-      'Drafting and evaluating syndicated credit facilities and consortium inter-creditor pacts.',
-      'Defending borrowers against premature NPA classifications and high-handed institutional measures.'
+      `Building the financing for a ₹200 crore commercial property portfolio\n\nA commercial property group held assets in Ahmedabad and Goa valued at over ₹200 crore. It needed one financing structure that would carry those properties from acquisition all the way to bank funding. The challenge was not finding capital but deciding the order in which different kinds of capital could safely enter, because senior bank debt, mezzanine money and fund investment each demand protections that can collide with one another. We designed the complete financial architecture, covering structured finance, mezzanine capital, fund structuring and the sequencing of debt and equity. Each class of funder knew exactly where it stood, and the structure remained bankable at every stage.`,
+      `Turning a possession notice into a negotiation\n\nA homeowner at Bibinagar, in the fast-growing corridor around the new AIIMS campus outside Hyderabad, faced loan recall and possession action by a housing finance company. On paper, the lender appeared to hold every advantage. A close reading of the record changed that. It revealed defects in the statutory notices under Sections 13(2) and 13(4) of the SARFAESI Act, errors in the amount demanded, and a prior encumbrance on the property that had never been disclosed. Each of these went to the legality of the enforcement itself rather than its fairness. Together they moved the lender away from taking possession and towards a resolution, and the family kept its home in one of the region’s most valuable growth corridors.`,
+      `Lending disputes where the security did not hold\n\nAcross secured and unsecured lending disputes ranging from ₹10 lakh to ₹25 crore per matter, involving institutions such as State Bank of India, HDFC Bank, Axis Bank, Standard Chartered and American Express, our review of the security documents repeatedly found gaps in how charges had been created or registered. Under the Companies Act, 2013, a charge that has not been registered cannot be relied upon against a liquidator or other creditors. A lender that believes itself fully secured may therefore rank far lower in law than it does on paper. These matters went on to include NPA classification challenges, SARFAESI proceedings, arbitration and the enforcement of awards. Identifying the weakness early is what reshaped each negotiation, for the lender and the borrower alike.`
     ],
     approach: 'We adopt an aggressive, commercially viable approach to banking disputes, ensuring our clients\' financial exposure is mitigated while navigating the stringent regulatory oversight of the Reserve Bank of India and Indian courts.',
     caseHandlingStrategy: `When handling banking and financial litigation, my primary objective is to maximize financial recovery speed while neutralizing procedural bottlenecks. 
