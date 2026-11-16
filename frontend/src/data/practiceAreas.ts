@@ -26,7 +26,8 @@ export type PracticeArea = {
   faqs: { question: string; answer: string }[];
   legalFramework?: string[];
   whatWeDo?: string[];
-  perspective?: [string, string, string];
+  perspective?: [string, string, string] | string;
+  pullQuote?: string;
 };
 
 export const practiceAreas: PracticeArea[] = [
@@ -134,8 +135,22 @@ Fourth, during hearings, I maintain rigorous focus on procedural precision, dism
     title: 'Debt Restructuring',
     caption: 'DEBT RESTRUCTURING',
     published: true,
-    shortDescription: 'Strategic advice on restructuring stressed assets, one-time settlements (OTS), and sustainable debt realignment.',
-    description: 'We provide specialized legal services for the resolution of stressed assets and corporate debt restructuring. Our practice encompasses negotiating restructuring master agreements, formulating one-time settlement (OTS) proposals, facilitating consortium buy-outs, and advising on inter-creditor dynamics to revive distressed businesses while safeguarding creditor returns.',
+    shortDescription: 'Turning financial pressure into a workable plan.',
+    description: `Financial distress rarely comes from one lender or one event. It builds across term loans, working capital lines, credit cards and personal guarantees, each with its own deadline and each lender acting on its own track. A borrower who responds to them one at a time usually ends up negotiating with the strongest creditor first and the weakest last, which is the wrong way round. Our Debt Restructuring practice brings every exposure into one strategy, so that each negotiation supports the next.
+
+We act for MSMEs, family businesses, promoters, salaried professionals and personal guarantors facing banks, NBFCs and digital lenders, and we advise lenders and investors on workable outcomes for stressed accounts. The scale varies widely, from a handful of personal accounts to stressed portfolios worth over ₹100 crore, but the questions remain the same. What can the client genuinely afford, what is each lender’s real position, and which settlement will close the exposure for good rather than merely postpone it.
+
+Restructuring is negotiation conducted under legal pressure, and the law is often what restores the balance. Lenders are bound by RBI’s framework on settlements, by fair practice and recovery rules, and by the procedural requirements of every forum they invoke. Where those obligations have not been met, they become the borrower’s strongest leverage.`,
+    pullQuote: '“Distress is a deadline, not a verdict.”',
+    legalFramework: [
+      'Restructuring in India is shaped by RBI’s prudential framework for the resolution of stressed assets and its framework for compromise settlements and technical write-offs, both issued under the Banking Regulation Act, 1949 and the Reserve Bank of India Act, 1934. For smaller businesses, these sit alongside the RBI framework for the revival and rehabilitation of MSMEs and the Micro, Small and Medium Enterprises Development Act, 2006.',
+      'A lender’s recovery options run through the SARFAESI Act, 2002 and the Recovery of Debts and Bankruptcy Act, 1993. For larger defaults they also run through the Insolvency and Bankruptcy Code, 2016, including its pre-packaged insolvency process for MSMEs. A restructuring rarely takes place in a single forum. Lenders frequently pursue arbitration under the Arbitration and Conciliation Act, 1996 or settlement before Lok Adalats constituted under the Legal Services Authorities Act, 1987. Others file cheque dishonour cases under the Negotiable Instruments Act, 1881 or criminal complaints framed under the Bharatiya Nyaya Sanhita, 2023 and the Bharatiya Nagarik Suraksha Sanhita, 2023, often in parallel. The terms of any settlement, and the way it is reported, are governed by the Indian Contract Act, 1872 and the Credit Information Companies (Regulation) Act, 2005.'
+    ],
+    whatWeDo: [
+      'We begin by mapping every facility, security, guarantee and pending proceeding, because a restructuring that ignores one lender usually collapses because of it. We then assess each lender’s position, including weaknesses in its documentation, its process or its conduct, and sequence the negotiations accordingly.',
+      'We negotiate restructurings, refinancing and one time settlements. We defend parallel arbitration, Lok Adalat and criminal proceedings, challenge improper arbitrator appointments, and escalate regulatory non-compliance where it exists. Every settlement we conclude is documented to close the account completely, with release of security and accurate reporting to the credit bureaus.'
+    ],
+    perspective: 'A settlement is only as good as the document that records it. We have seen accounts reopened, guarantees revived and credit records left uncorrected because the closing paperwork was treated as a formality. We treat it as the most important page of the entire negotiation.',
     icon: 'Briefcase',
     image: '/images/practice/debt-restructuring.jpeg',
     services: [
@@ -148,61 +163,15 @@ Fourth, during hearings, I maintain rigorous focus on procedural precision, dism
       'Pre-insolvency corporate debt workouts'
     ],
     keyMatters: [
-      'Formulating strategy for multi-lender stressed infrastructure exposure involving approximately ₹85 crore in debt.',
-      'Negotiating and executing binding One-Time Settlement agreements with scheduled commercial banks.',
-      'Advising promoter groups on protecting personal guarantees through structured equity dilution and debt amortization.',
-      'Structuring asset sales and bridge financing to avoid insolvency admission.'
+      `Nine lenders, four forums, one strategy\n\nAn apparel business in Gujarat found itself facing 9 credit facilities at once, held by banks, leading NBFCs, a card issuer and a fintech lender. Each lender was moving through its own forum, across arbitration, Lok Adalat, criminal complaints and conciliation, and each assumed it was negotiating alone. We brought every proceeding under one strategy. We challenged arbitrator appointments that lenders had made unilaterally, which Indian law does not permit, and escalated lender non-compliance to the RBI Ombudsman. Once the lenders saw that their arbitration track was legally vulnerable, their calculus changed. Settlements followed at about 30% of principal, and the business that had been fighting on four fronts was able to return to running itself.`,
+      `Making ₹100 crore to ₹130 crore of stressed exposure resolvable\n\nAcross stressed asset and credit portfolios aggregating ₹100 crore to ₹130 crore, we worked on restructuring, consolidation, refinancing and one time settlements. The decisive insight in this work was that a settlement figure means little on its own. What matters is whether the structure around it, meaning the security, the repayment schedule and the source of funds, makes the resolution commercially viable for both sides. Bringing structured, acquisition and mezzanine finance thinking into the negotiation is what turned several of these portfolios from unrecoverable into resolvable.`,
+      `Closing accounts for good\n\nFor individual borrowers in several States, we have negotiated settlements with lenders including ICICI Bank, HDFC Bank, Axis Bank, Yes Bank, Poonawalla Fincorp, InCred and Fibe. We have then pursued the paperwork lenders most often delay, the settlement letter, the no-dues certificate and the correction of credit records. Where recovery conduct crossed the limits RBI sets for lenders and their agents, we held the lender to account. For an individual, that final certificate is often worth as much as the settlement itself, because it decides whether they can ever borrow again.`
     ],
     approach: 'Our approach focuses on preserving the core enterprise value of the business while achieving sustainable financial resolution. We balance aggressive legal positions with pragmatic commercial negotiations to deliver win-win outcomes.',
-    caseHandlingStrategy: `My handling of debt restructuring cases begins with an objective assessment of the debtor's cash-flow viability versus the legal leverage held by the lending consortium. 
-
-In my experience, restructuring succeeds only when legal defensibility is paired with financial credibility. When representing lenders, I scrutinize proposed resolution plans to guarantee that security margins remain intact, personal guarantees are fortified, and escrow/cash-flow waterfall arrangements are enforceable.
-
-When representing corporate clients or promoters seeking relief, I conduct an immediate review of sanction letters, interest calculations, and bank actions to identify procedural vulnerabilities that can be leveraged during negotiation. I then prepare comprehensive, commercially feasible One-Time Settlement (OTS) proposals backed by transparent valuation reports and verifiable capital injection timelines.
-
-Throughout the process, I maintain an active line of communication with consortium lead banks, drafting customized Inter-Creditor Agreements (ICAs) and tripartite covenants that provide complete legal immunity against future litigation upon compliance with agreed settlement parameters.`,
-    handlingMethodology: [
-      {
-        stepNumber: '01',
-        title: 'Viability & Legal Exposure Audit',
-        description: 'Comprehensive analysis of existing loan covenants, debt servicing records, encumbered collateral values, and potential guarantor exposures.'
-      },
-      {
-        stepNumber: '02',
-        title: 'Consortium & Inter-Creditor Alignment',
-        description: 'Reviewing inter-creditor pacts and consensus thresholds among consortium members under RBI guidelines to ensure unified decision-making.'
-      },
-      {
-        stepNumber: '03',
-        title: 'Structuring Pragmatic OTS / Restructuring Plans',
-        description: 'Formulating structured OTS terms featuring milestone payments, debt-to-equity conversions, or asset carve-outs with airtight non-revocation clauses.'
-      },
-      {
-        stepNumber: '04',
-        title: 'Bilateral & Multi-Lender Negotiation',
-        description: 'Direct representation before bank management committees, presenting legal safeguards, risk allocations, and mutually beneficial settlement terms.'
-      },
-      {
-        stepNumber: '05',
-        title: 'Execution of Binding Settlement Documents',
-        description: 'Drafting conclusive Settlement Deeds, No Dues Certificates (NDC), satisfaction of charges before RoC/CERSAI, and retrieval of original title deeds.'
-      }
-    ],
-    strategicTactics: [
-      'Establishing clear milestone escrow mechanisms to instill creditor confidence during phased repayments.',
-      'Preventing premature SARFAESI or IBC action through formal standstill pacts while negotiations are underway.',
-      'Securing complete release and discharge of personal guarantees upon fulfillment of agreed settlement thresholds.'
-    ],
-    faqs: [
-      {
-        question: 'What makes a One-Time Settlement (OTS) proposal acceptable to banks?',
-        answer: 'Banks require an upfront earnest money deposit, a credible source of funds, independent asset valuation, and proof that the proposed settlement yields higher and faster recovery than prolonged DRT/IBC liquidation.'
-      },
-      {
-        question: 'Can a bank revoke an approved OTS?',
-        answer: 'Yes, if the borrower defaults on agreed payment schedules or commits material misrepresentation. We draft robust covenants specifying grace periods and cure notices to safeguard the settlement from arbitrary cancellation.'
-      }
-    ]
+    caseHandlingStrategy: '',
+    handlingMethodology: [],
+    strategicTactics: [],
+    faqs: []
   },
   {
     id: 'project-infrastructure-disputes',

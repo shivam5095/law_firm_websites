@@ -95,7 +95,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
 
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Main Column */}
-        <div className={`${area.slug === 'banking-finance' ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-16`}>
+        <div className={`${area.slug === 'banking-finance' || area.slug === 'debt-restructuring' ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-16`}>
           {/* Practice Image Showcase */}
           <div className="relative w-full aspect-[21/9] rounded-sm overflow-hidden border border-charcoal-200 shadow-md bg-navy-950">
             <Image
@@ -112,6 +112,12 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </div>
           </div>
 
+          {area.slug === 'debt-restructuring' && area.pullQuote && (
+            <blockquote className="font-heading text-xl sm:text-2xl italic leading-[1.35] text-navy-950">
+              {area.pullQuote}
+            </blockquote>
+          )}
+
           {/* Section 1: Overview */}
           <section>
             <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
@@ -127,7 +133,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </div>
           </section>
 
-          {area.slug === 'banking-finance' && area.legalFramework && (
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring') && area.legalFramework && (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
@@ -141,7 +147,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          {area.slug === 'banking-finance' && area.whatWeDo && (
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring') && area.whatWeDo && (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
@@ -155,7 +161,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          {area.slug !== 'banking-finance' && <>
+          {area.slug !== 'banking-finance' && area.slug !== 'debt-restructuring' && <>
           {/* Section 2: Detailed "How I Handle Cases In This Area" */}
           <section className="p-8 md:p-10 bg-white border border-gold-500/40 rounded-sm shadow-sm relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-gold-500"></div>
@@ -230,14 +236,14 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
           {/* Section 3: Key Matters */}
           <section>
             <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
-              {area.slug === 'banking-finance' ? 'Matters That Define Our Work' : 'Representative Casework & Involvements'}
+              {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' ? 'Matters That Define Our Work' : 'Representative Casework & Involvements'}
             </h2>
             <div className="w-12 h-0.5 bg-gold-500 mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {area.keyMatters.map((matter, idx) => (
                 <div key={idx} className="p-5 bg-white border border-charcoal-200 rounded-sm shadow-xs flex items-start gap-3">
                   <span className="w-2 h-2 rounded-full bg-gold-500 mt-2 shrink-0"></span>
-                  {area.slug === 'banking-finance' ? (
+                  {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' ? (
                     <div>
                       <h3 className="font-heading text-lg font-bold text-navy-950 mb-2">{matter.split('\n\n')[0]}</h3>
                       <p className="text-xs md:text-sm text-charcoal-800 leading-relaxed">{matter.split('\n\n').slice(1).join('\n\n')}</p>
@@ -250,7 +256,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </div>
           </section>
 
-          {area.slug === 'banking-finance' && area.perspective && (
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring') && area.perspective && (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
@@ -259,14 +265,14 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
               <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">Our Perspective</h2>
               <div className="w-12 h-0.5 bg-gold-500 mb-6" />
               <div className="prose prose-lg text-charcoal-700 max-w-none leading-relaxed text-base">
-                <p>{area.perspective[0]}<em>{area.perspective[1]}</em>{area.perspective[2]}</p>
+                <p>{typeof area.perspective === 'string' ? area.perspective : <>{area.perspective[0]}<em>{area.perspective[1]}</em>{area.perspective[2]}</>}</p>
               </div>
             </section>
           )}
 
           {area.slug !== 'banking-finance' && <>
           {/* Section 4: Relevant Experience Track Record */}
-          {relatedExperience.length > 0 && (
+          {area.slug !== 'debt-restructuring' && relatedExperience.length > 0 && (
             <section>
               <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
                 Track Record &amp; Financial Claims Scale
@@ -319,7 +325,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
           </>}
         </div>
 
-        {area.slug !== 'banking-finance' && <>
+        {area.slug !== 'banking-finance' && area.slug !== 'debt-restructuring' && <>
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-8">
           {/* Key Services Box */}

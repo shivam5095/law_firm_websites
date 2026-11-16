@@ -185,7 +185,7 @@ export default function WorldMap() {
     <section className="mapSection" aria-label="Our Global Reach">
       <div className="mapContainer">
         <header className="mapHeading">
-          <h2 className="!text-2xl md:!text-3xl">Our Global Reach</h2>
+          <h2 className="!text-xl md:!text-2xl">Our Global Reach</h2>
           <span aria-hidden="true" />
         </header>
         <div ref={mapRef} className="mapCard">
