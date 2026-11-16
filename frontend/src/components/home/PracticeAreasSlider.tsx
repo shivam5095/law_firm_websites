@@ -284,7 +284,7 @@ export function PracticeAreasSlider() {
       </div>
       <div className={styles.content}>
         <header className={`${styles.heading} text-center`}>
-          <h2 id="practice-areas-heading" className="font-heading text-3xl font-normal leading-tight text-white sm:text-4xl lg:text-4xl">
+          <h2 id="practice-areas-heading" className="font-heading !text-2xl md:!text-3xl font-normal leading-tight text-white">
             Areas of Practice
           </h2>
           <div className="mx-auto mt-4 mb-4 h-px w-24 bg-gold-500" />

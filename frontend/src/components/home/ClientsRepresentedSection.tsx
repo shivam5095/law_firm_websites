@@ -383,11 +383,11 @@ export function ClientsRepresentedSection() {
         {/* Section Header */}
         <div className="mb-12 pb-6 border-b border-charcoal-100">
           <div>
-            <h2 className="font-heading text-3xl md:text-4xl text-navy-950 font-bold tracking-tight">
+            <h2 className="font-heading !text-2xl md:!text-3xl text-navy-950 font-bold tracking-tight">
               Trusted Across the Table
             </h2>
             <div aria-hidden="true" className="mt-4 h-0.5 w-12 bg-gold-500" />
-            <p className="text-charcoal-600 text-sm md:text-base max-w-3xl mt-3 leading-relaxed">
+            <p className="text-charcoal-600 text-sm max-w-3xl mt-3 leading-relaxed">
               Our work brings us to the table with India’s foremost banks, global financial institutions and non-banking lenders, matter after matter. Every client inherits what that experience teaches, a clear understanding of how institutions think, and how they can be moved.
             </p>
           </div>

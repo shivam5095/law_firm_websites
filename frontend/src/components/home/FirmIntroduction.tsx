@@ -24,7 +24,7 @@ export function FirmIntroduction() {
               
               {/* Monogram Badge */}
               <div className="absolute bottom-6 left-6 right-6 p-5 bg-[#08101E]/90 backdrop-blur-md border border-gold-500/30 text-white rounded-xs">
-                <h3 className="font-heading text-xl text-ivory-50 font-medium">
+                <h3 className="font-heading !text-lg text-ivory-50 font-medium">
                   Anand Kumar Maurya
                 </h3>
                 <p className="text-xs text-ivory-300/80 font-sans mt-0.5">
@@ -39,13 +39,13 @@ export function FirmIntroduction() {
 
           {/* Right Column: Editorial Narrative (7 Cols) */}
           <div className="lg:col-span-7">
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-navy-950 font-normal leading-tight tracking-tight mb-6">
+            <h2 className="font-heading !text-2xl sm:!text-2xl lg:!text-3xl text-navy-950 font-normal leading-tight tracking-tight mb-6">
               The best disputes are the ones that never begin.
             </h2>
 
             <div className="w-16 h-0.5 bg-gold-500 mb-8" />
 
-            <div className="prose prose-slate text-charcoal-700 text-sm md:text-base leading-relaxed space-y-4 max-w-none">
+            <div className="prose prose-slate text-charcoal-700 text-sm leading-relaxed space-y-4 max-w-none">
               <p>
                 Most legal problems are decided long before they reach a courtroom. They are decided in the clause that was never negotiated, the advice that came too late, the risk nobody priced in. That earlier point is where we do our best work. We study the business behind the matter, the numbers behind the business and the people behind the numbers, so that our advice protects not only what a client owns today but everything they are building for tomorrow.
               </p>
@@ -55,7 +55,7 @@ export function FirmIntroduction() {
             </div>
 
             <blockquote className="mt-8 border-t border-gold-500/60 pt-5">
-              <p className="font-heading text-[clamp(1.5rem,2.1vw,2.25rem)] italic leading-[1.35] text-navy-950">
+              <p className="font-heading text-xl sm:text-2xl italic leading-[1.35] text-navy-950">
                 “Early advice almost always costs less than a late defence.”
               </p>
               <footer className="mt-3 text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-gold-600">

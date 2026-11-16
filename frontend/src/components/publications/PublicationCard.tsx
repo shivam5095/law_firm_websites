@@ -1,7 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import type { Publication } from '@/data/publications';
 
-export function PublicationCard({ publication }: { publication: Publication }) {
+export function PublicationCard({ publication, homepagePreview = false }: { publication: Publication; homepagePreview?: boolean }) {
   const isAmazonBook = publication.publication.includes('Amazon');
   const readLabel = isAmazonBook ? 'View on Amazon' : `Read on ${publication.publication}`;
 
@@ -11,7 +11,7 @@ export function PublicationCard({ publication }: { publication: Publication }) {
         <span className="font-medium text-gold-600">{publication.publication}</span>
         <span className="shrink-0">{publication.dateLabel}</span>
       </div>
-      <h3 className="mb-4 font-heading text-xl text-navy-900 transition-colors group-hover:text-gold-600">
+      <h3 className={`mb-4 font-heading ${homepagePreview ? '!text-lg' : 'text-xl'} text-navy-900 transition-colors group-hover:text-gold-600`}>
         {publication.url ? (
           <a href={publication.url} target="_blank" rel="noopener noreferrer" aria-label={`${publication.title} (opens in new tab)`}>
             {publication.title}
@@ -20,7 +20,7 @@ export function PublicationCard({ publication }: { publication: Publication }) {
         ) : publication.title}
       </h3>
       {publication.excerpt && (
-        <p className="mb-6 line-clamp-3 text-charcoal-600">{publication.excerpt}</p>
+        <p className={`mb-6 line-clamp-3 text-charcoal-600 ${homepagePreview ? 'text-sm' : ''}`}>{publication.excerpt}</p>
       )}
       {publication.url && (
         <a

@@ -10,7 +10,7 @@ export function PublicationsPreview() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <h2 className="mb-6 font-heading text-3xl text-navy-900 md:text-4xl">Legal Insights &amp; Publications</h2>
+            <h2 className="mb-6 font-heading !text-xl text-navy-900 md:!text-2xl">Legal Insights &amp; Publications</h2>
             <div className="h-0.5 w-12 bg-gold-500" />
           </div>
           <Link href="/publications" className="inline-flex items-center text-sm font-medium text-navy-800 transition-colors hover:text-gold-600">
@@ -18,7 +18,7 @@ export function PublicationsPreview() {
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {recentPubs.map((publication) => <PublicationCard key={publication.id} publication={publication} />)}
+          {recentPubs.map((publication) => <PublicationCard key={publication.id} publication={publication} homepagePreview />)}
         </div>
       </div>
     </section>
