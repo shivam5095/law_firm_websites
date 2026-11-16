@@ -95,7 +95,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
 
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Main Column */}
-        <div className={`${area.slug === 'banking-finance' || area.slug === 'debt-restructuring' ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-16`}>
+        <div className={`${area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-16`}>
           {/* Practice Image Showcase */}
           <div className="relative w-full aspect-[21/9] rounded-sm overflow-hidden border border-charcoal-200 shadow-md bg-navy-950">
             <Image
@@ -112,7 +112,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </div>
           </div>
 
-          {area.slug === 'debt-restructuring' && area.pullQuote && (
+          {area.pullQuote && (
             <blockquote className="font-heading text-xl sm:text-2xl italic leading-[1.35] text-navy-950">
               {area.pullQuote}
             </blockquote>
@@ -133,7 +133,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </div>
           </section>
 
-          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring') && area.legalFramework && (
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory') && area.legalFramework && (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
@@ -147,7 +147,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring') && area.whatWeDo && (
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory') && area.whatWeDo && (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
@@ -161,7 +161,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          {area.slug !== 'banking-finance' && area.slug !== 'debt-restructuring' && <>
+          {area.slug !== 'banking-finance' && area.slug !== 'debt-restructuring' && area.slug !== 'project-infrastructure-disputes' && area.slug !== 'commercial-disputes' && area.slug !== 'insolvency-financial-distress' && area.slug !== 'capital-markets' && area.slug !== 'financial-regulatory' && <>
           {/* Section 2: Detailed "How I Handle Cases In This Area" */}
           <section className="p-8 md:p-10 bg-white border border-gold-500/40 rounded-sm shadow-sm relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1.5 h-full bg-gold-500"></div>
@@ -236,14 +236,14 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
           {/* Section 3: Key Matters */}
           <section>
             <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
-              {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' ? 'Matters That Define Our Work' : 'Representative Casework & Involvements'}
+              {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? 'Matters That Define Our Work' : 'Representative Casework & Involvements'}
             </h2>
             <div className="w-12 h-0.5 bg-gold-500 mb-6" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {area.keyMatters.map((matter, idx) => (
                 <div key={idx} className="p-5 bg-white border border-charcoal-200 rounded-sm shadow-xs flex items-start gap-3">
                   <span className="w-2 h-2 rounded-full bg-gold-500 mt-2 shrink-0"></span>
-                  {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' ? (
+                  {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? (
                     <div>
                       <h3 className="font-heading text-lg font-bold text-navy-950 mb-2">{matter.split('\n\n')[0]}</h3>
                       <p className="text-xs md:text-sm text-charcoal-800 leading-relaxed">{matter.split('\n\n').slice(1).join('\n\n')}</p>
@@ -256,7 +256,27 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </div>
           </section>
 
-          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring') && area.perspective && (
+          {(area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets') && area.selectedAnalysis && (
+            <section>
+              <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">Selected Analysis</h2>
+              <div className="w-12 h-0.5 bg-gold-500 mb-6" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {area.selectedAnalysis.map((item, idx) => (
+                  <div key={idx} className="p-5 bg-white border border-charcoal-200 rounded-sm shadow-xs flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-gold-500 mt-2 shrink-0"></span>
+                    <div>
+                      <h3 className="font-heading text-lg font-bold text-navy-950 mb-2">{item.title}</h3>
+                      <p className="text-xs md:text-sm text-charcoal-800 leading-relaxed">
+                        {typeof item.text === 'string' ? item.text : <>{item.text[0]}<em>{item.text[1]}</em>{item.text[2]}</>}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress') && area.perspective && (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
@@ -270,9 +290,9 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          {area.slug !== 'banking-finance' && <>
+          {area.slug !== 'banking-finance' && area.slug !== 'insolvency-financial-distress' && area.slug !== 'capital-markets' && area.slug !== 'financial-regulatory' && <>
           {/* Section 4: Relevant Experience Track Record */}
-          {area.slug !== 'debt-restructuring' && relatedExperience.length > 0 && (
+          {area.slug !== 'debt-restructuring' && area.slug !== 'project-infrastructure-disputes' && area.slug !== 'commercial-disputes' && relatedExperience.length > 0 && (
             <section>
               <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
                 Track Record &amp; Financial Claims Scale
@@ -325,7 +345,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
           </>}
         </div>
 
-        {area.slug !== 'banking-finance' && area.slug !== 'debt-restructuring' && <>
+        {area.slug !== 'banking-finance' && area.slug !== 'debt-restructuring' && area.slug !== 'project-infrastructure-disputes' && area.slug !== 'commercial-disputes' && area.slug !== 'insolvency-financial-distress' && area.slug !== 'capital-markets' && area.slug !== 'financial-regulatory' && <>
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-8">
           {/* Key Services Box */}

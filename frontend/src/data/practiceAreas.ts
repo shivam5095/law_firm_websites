@@ -28,6 +28,7 @@ export type PracticeArea = {
   whatWeDo?: string[];
   perspective?: [string, string, string] | string;
   pullQuote?: string;
+  selectedAnalysis?: { title: string; text: string | [string, string, string] }[];
 };
 
 export const practiceAreas: PracticeArea[] = [
@@ -179,8 +180,26 @@ Restructuring is negotiation conducted under legal pressure, and the law is ofte
     title: 'Project & Infrastructure Disputes',
     caption: 'PROJECT & INFRASTRUCTURE DISPUTES',
     published: true,
-    shortDescription: 'Specialized counsel for construction delays, EPC contracts, concession terminations, and infrastructure conflicts.',
-    description: 'Infrastructure and major engineering projects involve substantial capital exposure and intricate multi-layered contracts. We represent developers, concessionaires, EPC contractors, and institutional lenders in complex disputes involving delay claims, force majeure, liquidated damages, design variations, and wrongful contract terminations.',
+    shortDescription: 'Where the construction contract meets the loan agreement.',
+    description: `India is in the middle of one of the largest infrastructure build-outs in its history, across roads, real estate, urban works and industrial projects. Every one of these projects rests on two sets of documents that are rarely read together, the contract that governs the work and the finance that pays for it. When a project slips, the consequences travel from one to the other. A delay on site becomes a claim, an unpaid claim becomes a cash flow gap, and the gap becomes a default under the loan.
+
+Our practice works at that junction. We advise contractors, sub-contractors, developers, project companies and lenders on the disputes that most often derail a project. These include delay and disruption, force majeure and change in law, termination, and liquidated damages. In each case we advise on how the dispute affects debt servicing, lender rights and the enforceability of security. We act for established project companies with multi-lender exposure, and equally for smaller contractors whose entire working capital may depend on a single unpaid claim.
+
+Most infrastructure disputes are decided in arbitration, and most arbitrations are decided on the record. We build that record from the first notice, with one eye on the tribunal and the other on the lenders who will read the outcome.`,
+    pullQuote: '“Projects are built on concrete. Their disputes are built on paper.”',
+    legalFramework: [
+      'Infrastructure disputes are governed principally by the Arbitration and Conciliation Act, 1996, as amended in 2015, 2019 and 2021, and by the Indian Contract Act, 1872, whose provisions on frustration, damages and penalty clauses decide most claims for delay and liquidated damages. The Specific Relief Act, 1963, as amended in 2018, restricts injunctions that would impede or delay infrastructure projects and provides for special courts to hear infrastructure contract disputes. Commercial claims proceed under the Commercial Courts Act, 2015.',
+      'The particular project often brings its own legislation into play. Highway works are shaped by the National Highways Act, 1956 and the National Highways Authority of India Act, 1988. Projects that depend on acquired land are shaped by the Right to Fair Compensation and Transparency in Land Acquisition, Rehabilitation and Resettlement Act, 2013, and real estate developments by the Real Estate (Regulation and Development) Act, 2016. On the financing side, lender rights are enforced through the SARFAESI Act, 2002, the Recovery of Debts and Bankruptcy Act, 1993 and the Insolvency and Bankruptcy Code, 2016.'
+    ],
+    whatWeDo: [
+      'We reconstruct what actually happened on a project from its milestones, correspondence, approvals and site records, because the party with the better chronology usually has the better claim. We draft and defend claims for delay, disruption, extension of time and termination, advise on force majeure and change in law, and analyse how each claim interacts with the project’s financing documents.',
+      'For lenders and borrowers, we assess default triggers, acceleration rights and the enforceability of security and guarantees across lender groups. Throughout, we keep a commercial settlement open wherever it would serve the client better than an award.'
+    ],
+    perspective: [
+      'The 2018 amendments to the Specific Relief Act made it far harder to halt an infrastructure project by injunction. In practice, this has moved the weight of every project dispute towards damages and arbitration, and the parties who build their record from the first day of a delay are the ones who recover. Our founder examined these questions in ',
+      'Arbitrating Construction Disputes in India',
+      ', published in the Journal of Alternative Dispute Resolution.'
+    ],
     icon: 'Building2',
     image: '/images/practice/infrastructure-project-finance.jpeg',
     services: [
@@ -193,63 +212,15 @@ Restructuring is negotiation conducted under legal pressure, and the law is ofte
       'Project financing dispute representation'
     ],
     keyMatters: [
-      'Advised contractors on multi-crore delay claims and force majeure invocations in large-scale road and highway projects.',
-      'Obtained stay orders restraining project authorities from encashing advance and performance bank guarantees.',
-      'Litigated dispute resolution clauses in standard FIDIC Yellow and Silver Book concessions.',
-      'Represented infrastructure developers in arbitration against state government bodies and public sector undertakings.'
+      `Untangling an ₹85 crore infrastructure exposure across a lender group\n\nA stressed infrastructure borrower faced a group of banks and NBFCs, each holding its own facility, security and remedies. In consortium lending, a default under one facility rarely stays there, because cross-default and acceleration clauses can bring every lender to the table at once and turn a recoverable problem into a collapse. We tested which default triggers had genuinely been met, which acceleration rights were actually enforceable, and how far each lender’s security and guarantees could withstand scrutiny. The restructuring and recovery strategy was built around those answers, and the result was a plan grounded in what each lender could really enforce, rather than what each lender assumed it could.`,
+      `Construction claims worth ₹20 crore to ₹25 crore\n\nThese project finance and construction disputes turned on delay, force majeure, termination and liquidated damages. The approach that resolved them was to treat each claim not only as a contract question but as a financing one. The effect of a claim on debt servicing and lender rights often decided what each party could realistically accept, and once that was understood, the negotiation could move. These matters were resolved through arbitration-led commercial settlement, without the years of uncertainty a contested award would have brought to the project and its lenders.`,
+      `Securing the ground before the project begins\n\nIn infrastructure and real estate, land is the first risk and often the last to be resolved. Our work on land acquisition, title review and property transactions across Telangana, Andhra Pradesh, Haryana and Bihar gives project clients a clear picture of title, encumbrances and acquisition risk before capital is committed. A defect found at this stage costs a fraction of what it costs once construction has begun.`
     ],
     approach: 'Our approach integrates deep legal insight with rigorous technical comprehension. We work closely with delay analysts, quantity surveyors, and project engineers to build airtight, calculation-backed claims that withstand judicial and arbitral scrutiny.',
-    caseHandlingStrategy: `Infrastructure disputes are heavily technical and won on contemporaneous project records. My methodology focuses on dissecting the critical path rather than engaging in rhetorical arguments.
-
-When handling a project dispute, the first step is reconstructing the project timeline using daily progress reports, site obstruction logs, RFI submissions, and engineer correspondence. This establishes whether delays were attributable to owner-side defaults (such as delayed right-of-way handover or design approvals) rather than contractor execution.
-
-If the employer or government authority threatens wrongful contract termination or blacklisting, I immediately move the competent Commercial Court or High Court to obtain injunctive relief, protecting both contractor reputation and active project assets.
-
-For bank guarantee protection, I construct focused pleadings satisfying the stringent exceptions established by the Supreme Court—demonstrating egregious fraud or irretrievable injustice—to prevent wrongful encashment.
-
-During arbitration, I lead specialized technical expert evidence using standard delay methodologies (such as Time Impact Analysis or As-Planned vs. As-Built), ensuring claims for idle machinery, head office overheads, and lost profits are comprehensively substantiated with verifiable data.`,
-    handlingMethodology: [
-      {
-        stepNumber: '01',
-        title: 'Project Records & Critical Path Dissection',
-        description: 'Gathering contemporaneous site logs, measurement sheets, extension of time (EOT) requests, and correspondence to map delays to employer defaults.'
-      },
-      {
-        stepNumber: '02',
-        title: 'Bank Guarantee Injunctions & Status Quo Relief',
-        description: 'Filing emergency Section 9 applications to stay invocation of performance and financial bank guarantees by project authorities.'
-      },
-      {
-        stepNumber: '03',
-        title: 'Quantification of Delay, Idle Machinery & Overheads',
-        description: 'Collaborating with technical experts to quantify prolongation costs, Hudson/Emden formula claims, and escalation adjustments.'
-      },
-      {
-        stepNumber: '04',
-        title: 'Technical Dispute Board & Arbitral Advocacy',
-        description: 'Conducting intensive cross-examination of independent engineers, project directors, and government technical committees.'
-      },
-      {
-        stepNumber: '05',
-        title: 'Enforcement Against Statutory & State Bodies',
-        description: 'Executing monetary arbitral awards and recovering escalation dues from public sector undertakings and concessionaires.'
-      }
-    ],
-    strategicTactics: [
-      'Documenting contemporaneous protest letters whenever site possession is delayed to preserve future EOT and prolongation claims.',
-      'Formulating rigorous defenses against liquidated damages deductions where time was rendered at large due to employer variations.',
-      'Deploying statutory conciliation mechanisms prior to formal arbitration to unlock undisputed running bills and escrow funds.'
-    ],
-    faqs: [
-      {
-        question: 'Can the court stop a government department from encashing an unconditional bank guarantee?',
-        answer: 'While courts are generally cautious, injunctions are granted where we demonstrate established fraud, irretrievable injustice, or where the invocation violates express contractual conditions precedent.'
-      },
-      {
-        question: 'How do you prove prolongation costs in construction arbitration?',
-        answer: 'We utilize recognized delay methodologies (e.g. As-Planned vs. As-Built Analysis) supported by audited payroll records, machinery hire bills, site overhead logs, and expert witness testimonies.'
-      }
-    ]
+    caseHandlingStrategy: '',
+    handlingMethodology: [],
+    strategicTactics: [],
+    faqs: []
   },
   {
     id: 'commercial-disputes',
@@ -257,8 +228,26 @@ During arbitration, I lead specialized technical expert evidence using standard 
     title: 'Commercial Disputes',
     caption: 'COMMERCIAL DISPUTES',
     published: true,
-    shortDescription: 'Strategic resolution of contractual breaches, corporate disputes, shareholder oppression, and high-value claims.',
-    description: 'We navigate complex commercial disputes for corporations, directors, investors, and high-net-worth individuals. Our practice covers contract breaches, joint venture breakdowns, director disputes, summary suits, and corporate litigation across Commercial Courts, High Courts, and specialized tribunals across India.',
+    shortDescription: 'Resolution by the route that serves the client.',
+    description: `Every commercial dispute begins as a relationship that stopped working, between partners, between a business and its distributors, between a buyer and a supplier, or between parties in different countries. By the time it reaches a lawyer, positions have hardened and costs have started to rise. The first question we ask is not which forum to file in, but what a good outcome looks like for the client’s business.
+
+We act in arbitration, before commercial courts and in mediation, and we negotiate settlements wherever that serves the client better than a contested hearing. We represent established businesses, MSMEs, partners and investors in contract and recovery disputes. We also act for Non-Resident Indian clients in cross-border matters, including the enforcement of foreign settlements against property in India and expert evidence on Indian law before foreign courts.
+
+Arbitration sits at the centre of the practice. Our founder trained in alternative dispute resolution at NALSAR University of Law, studied international arbitration with Leiden University and trained with the Chartered Institute of Arbitrators, London. He has sat as an arbitrator for the Asia Pacific Vis Pre-Moot 2026, judging rounds of one of the world’s leading international commercial arbitration competitions. His published work includes analysis of the Supreme Court’s approach under Sections 34 and 37 and of res judicata under Sections 9 and 17 of the Arbitration and Conciliation Act, 1996.`,
+    pullQuote: '“Most disputes are won in the documents, long before they are argued.”',
+    legalFramework: [
+      'The procedure of commercial dispute resolution in India is set by the Arbitration and Conciliation Act, 1996, the Commercial Courts Act, 2015 and the Mediation Act, 2023. The Commercial Courts Act requires pre-institution mediation in commercial suits that do not seek urgent interim relief. The Code of Civil Procedure, 1908 also governs these disputes, including its provisions for summary suits and for the execution of foreign decrees.',
+      'The substantive rights in these disputes are drawn from the Indian Contract Act, 1872, the Specific Relief Act, 1963 as amended in 2018, the Sale of Goods Act, 1930, the Indian Partnership Act, 1932 and the Limited Liability Partnership Act, 2008. Evidence is now governed by the Bharatiya Sakshya Adhiniyam, 2023, limitation by the Limitation Act, 1963, and settlements before Lok Adalats by the Legal Services Authorities Act, 1987.'
+    ],
+    whatWeDo: [
+      'We prepare every dispute as if it will reach a final hearing, because that preparation is also what produces the best settlements. Our work runs the full course of a dispute, from sending or answering the notice that invokes arbitration and securing interim protection, through drafting pleadings and evidence and objecting to improper arbitrator appointments, to the challenge or enforcement of the final award.',
+      'We conduct commercial recovery against partners, distributors and buyers, including where a counterparty is moving towards winding up. For clients abroad, we work alongside foreign counsel so that a judgment or settlement obtained overseas can actually be enforced against assets in India.'
+    ],
+    perspective: [
+      'Indian courts have steadily narrowed the grounds on which an arbitral award can be set aside. A party’s best chance now lies in getting the arbitration right, not in challenging the result afterwards. Our founder’s analysis of this shift, ',
+      'Judicial Minimalism in Arbitration',
+      ', was published in the All India Commercial Law Review in March 2026.'
+    ],
     icon: 'Handshake',
     image: '/images/practice/dispute-resolution.jpeg',
     services: [
@@ -271,63 +260,15 @@ During arbitration, I lead specialized technical expert evidence using standard 
       'Cross-border trade dispute resolution'
     ],
     keyMatters: [
-      'Formulated litigation strategy in complex portfolio claims encompassing ₹100-130 crore in commercial assets.',
-      'Represented corporate clients in contractual breaches involving multi-crore supply chain and service agreements.',
-      'Secured urgent pre-suit interim injunctions protecting proprietary corporate assets and trade secrets.',
-      'Litigated contentious oppression and mismanagement petitions before NCLT principal benches.'
+      `Giving evidence on Indian law before a United States court\n\nIn a cross-border property dispute worth about ₹15 crore, our founder appeared by video from New Delhi as an independent expert on Indian law before a Superior Court in the State of Georgia, USA. His evidence covered title, transfer, documentation and the enforceability of rights over property situated in India. The central point was one that foreign courts and counsel often underestimate. A settlement concluded abroad does not by itself transfer title to land in India. It must be given effect under Indian law, through registered conveyances, lender consents and, where necessary, Indian proceedings. The firm is now enforcing that settlement against a residential apartment, a commercial space and agricultural land in and around Hyderabad. It is also structuring the release of a co-borrower from a bank home loan, so that each asset can be sold or retained with clean title.`,
+      `Arbitrations that ended in settlement\n\nAcross a body of commercial arbitrations in which we drafted notices and pleadings under Sections 21 and 30 of the Arbitration and Conciliation Act, 1996, between 40% and 50% of matters closed in commercial settlement. That figure reflects a deliberate method rather than chance. A well-prepared claim gives the other side a clear view of its own risk, and a clear view of risk is what brings parties to terms long before an award is needed.`,
+      `Recovering value from a broken distribution chain\n\nFor a Mumbai apparel business, we are pursuing recovery on several fronts at once. The claims run against a former partner, against dealers and agents holding unpaid dues, and against a buyer moving towards winding up. Each counterparty calls for a different forum and a different timetable. The buyer in particular has to be pursued before its assets are frozen in a formal process. We are coordinating every track so that a gain against one counterparty is never undone by delay against another.`
     ],
     approach: 'We align our litigation tactics with our clients\' broader commercial objectives. While we pursue claims aggressively in court, we constantly evaluate windows for advantageous, structured settlements that save executive time and resources.',
-    caseHandlingStrategy: `Commercial litigation requires an astute blend of legal technicality and business pragmatism. When a client approaches me with a commercial dispute, my first priority is identifying where the commercial leverage lies.
-
-I begin by reviewing the complete transactional documentation—service agreements, master service pacts, shareholder covenants, purchase orders, and communications—to determine unambiguous liability triggers.
-
-Under the Commercial Courts Act, pre-institution mediation is mandatory in eligible suits. I treat this stage not as a bureaucratic delay, but as a strategic offensive—submitting a devastating legal brief detailing our factual evidence, damages quantum, and cost exposure, which frequently induces early, favorable settlements.
-
-Where litigation is unavoidable, I file meticulously crafted commercial plaints or summary suits under Order 37 of the CPC, moving immediately for interim injunctions, attachment before judgment (Order 38 Rule 5), or deposit of disputed sums into court.
-
-Throughout trial, my advocacy centers on precision witness examination and documentary corroboration, cutting through corporate obfuscation to establish clear breach and liability.`,
-    handlingMethodology: [
-      {
-        stepNumber: '01',
-        title: 'Contractual & Transactional Vulnerability Audit',
-        description: 'Scrutinizing contracts, representations, warranties, indemnity thresholds, and limitation timelines to establish clear breach triggers.'
-      },
-      {
-        stepNumber: '02',
-        title: 'Pre-Institution Mediation & Settlement Strategy',
-        description: 'Leveraging mandatory Commercial Courts pre-institution mediation with detailed claims dossiers to force advantageous early settlements.'
-      },
-      {
-        stepNumber: '03',
-        title: 'Urgent Pre-Suit Orders & Asset Attachment',
-        description: 'Filing Order 38 Rule 5 applications to attach debtor assets before judgment, preventing fraudulent asset transfer.'
-      },
-      {
-        stepNumber: '04',
-        title: 'Commercial Court & Appellate Advocacy',
-        description: 'Forceful representation before designated Commercial Divisions and High Courts, upholding contractual rights under the Specific Relief Act.'
-      },
-      {
-        stepNumber: '05',
-        title: 'Decree Execution & Financial Recovery',
-        description: 'Expediting execution proceedings under Order 21 CPC through bank account attachments, garnishee orders, and property auctions.'
-      }
-    ],
-    strategicTactics: [
-      'Deploying Order 37 summary procedure for liquidated debts to prevent defendant from obtaining unconditional leave to defend.',
-      'Filing simultaneous Section 9 or Section 11 applications where contracts feature overlapping arbitration clauses.',
-      'Using garnishee proceedings against third-party debtors of the opposing party to secure swift debt satisfaction.'
-    ],
-    faqs: [
-      {
-        question: 'What is the Commercial Courts Act timeline advantage?',
-        answer: 'The Commercial Courts Act mandates strict case management hearings, mandatory filing of all documents with the plaint, and tighter deadlines for written statements, drastically reducing litigation delays compared to standard civil suits.'
-      },
-      {
-        question: 'Can you stop a counter-party from siphoning funds during active litigation?',
-        answer: 'Yes. We file applications for Attachment Before Judgment under Order 38 Rule 5 or seek interim injunctions under Order 39 to restrain the alienation of assets or mandate court deposits.'
-      }
-    ]
+    caseHandlingStrategy: '',
+    handlingMethodology: [],
+    strategicTactics: [],
+    faqs: []
   },
   {
     id: 'insolvency-financial-distress',
@@ -335,8 +276,22 @@ Throughout trial, my advocacy centers on precision witness examination and docum
     title: 'Insolvency & Financial Distress',
     caption: 'INSOLVENCY & FINANCIAL DISTRESS',
     published: true,
-    shortDescription: 'Navigating the IBC framework for creditors and debtors facing insolvency, CIRP, and corporate liquidation.',
-    description: 'We provide specialized legal counsel under the Insolvency and Bankruptcy Code (IBC). We represent financial creditors, operational creditors, and corporate debtors across Corporate Insolvency Resolution Processes (CIRP), liquidation proceedings, and pre-packaged insolvency regimes before NCLT and NCLAT.',
+    shortDescription: 'Acting before the process acts.',
+    description: `The Insolvency and Bankruptcy Code, 2016 changed the balance of power between borrowers and creditors in India. Once a company defaults beyond the statutory threshold, its management can be displaced, its creditors take control of its future, and its promoters and personal guarantors can face proceedings of their own. The decisions taken in the weeks before and after that point usually decide what is recovered, what is preserved and who bears the loss.
+
+We advise financial and operational creditors on whether and when to invoke the Code, and promoters, directors and personal guarantors on their exposure and their options. For many clients, especially MSMEs and family businesses, the most valuable advice is how to avoid formal insolvency altogether through a timely restructuring or settlement, and we say so when it is true. For others, a well-run process under the Code is the best route to value, and we help them use it well.
+
+Insolvency rarely stands alone. It interacts with recovery proceedings, arbitration and security enforcement, and increasingly with assets and creditors abroad. Our insolvency advice draws on our banking, restructuring and commercial disputes practices, so that a client’s position in one forum is never weakened by a step taken in another.`,
+    pullQuote: '“Insolvency is not the end of a business. It is the moment its value is decided.”',
+    legalFramework: [
+      'The core of this practice is the Insolvency and Bankruptcy Code, 2016, read with the regulations of the Insolvency and Bankruptcy Board of India and the rules governing the insolvency of personal guarantors to corporate debtors. The Insolvency and Bankruptcy Code (Amendment) Act, 2026 has reshaped this landscape further. It introduces a creditor-initiated insolvency process and lays the legislative foundation for group insolvency and for cross-border insolvency, although several of these provisions are not yet in force.',
+      'Insolvency never operates in isolation from the rest of commercial law. It interacts closely with the Companies Act, 2013, particularly its provisions on schemes of arrangement and winding up, with the enforcement and recovery regimes under the SARFAESI Act, 2002 and the Recovery of Debts and Bankruptcy Act, 1993, and with RBI’s prudential framework for the resolution of stressed assets issued under the Banking Regulation Act, 1949.'
+    ],
+    whatWeDo: [
+      'We assess a client’s position under the Code at the earliest stage, including whether a default has occurred, whether the threshold is met and what the other side is likely to do next. For creditors, this means advice on applications, on the filing of claims and on how those claims will be treated in the resolution process. For promoters and guarantors, it means a clear account of their exposure, of the protection the moratorium does and does not offer them, and of the terms on which a repayment plan may be proposed.',
+      'Where a negotiated outcome would preserve more value, we pursue it before the Code is invoked. Where a process has begun, we make sure every claim, objection and reply is filed within the time the Code allows.'
+    ],
+    perspective: 'Promoters once treated personal guarantees as a formality. Under the Code, they are among the most consequential documents a promoter will ever sign, because the moratorium that protects the company does not, by itself, protect its guarantors.',
     icon: 'ShieldAlert',
     image: '/images/practice/insolvency.jpeg',
     services: [
@@ -349,67 +304,37 @@ Throughout trial, my advocacy centers on precision witness examination and docum
       'Avoidance application litigation (PUFE transactions under Section 43-66)'
     ],
     keyMatters: [
-      'Experience includes initiating and defending CIRP applications for major financial institutions and high-value operational creditors.',
-      'Successfully defended corporate debtors against frivolous and time-barred Section 9 IBC petitions.',
-      'Advised resolution applicants on structured resolution plans for stressed mid-market manufacturing enterprises.',
-      'Litigated complex priority-of-claim and preferential transaction matters before NCLAT.'
+      `Keeping a nine-lender business out of formal insolvency\n\nWhen an apparel business in Gujarat faced 9 credit facilities in default, each lender held its own route to coercive recovery, and the pressure from every side was pushing the business towards collapse. The question was whether value could be preserved without a formal process. We brought every lender into one strategy, exposed the legal weaknesses in their arbitration track, and secured settlements at about 30% of principal. The business continued operating, its promoters kept control, and no lender had to wait years for an uncertain recovery.`,
+      `Weighing restructuring against the Code in an ₹85 crore exposure\n\nFor a stressed infrastructure borrower facing a lender group, the cross-default and acceleration rights in the consortium documents meant that a formal process was a real possibility. We assessed which lenders could genuinely enforce, how far their security and guarantees would hold, and what each side stood to recover in a negotiated restructuring compared with a formal insolvency. That analysis shaped a restructuring and recovery strategy built on the realistic value of the business rather than on its distressed sale value.`,
+      `Resolving ₹100 crore to ₹130 crore of stress outside the tribunal\n\nAcross stressed portfolios aggregating ₹100 crore to ₹130 crore, our restructuring, consolidation, refinancing and settlement work resolved exposure that could otherwise have ended before the National Company Law Tribunal. In most of these matters, a negotiated outcome recovered more and recovered it sooner than a formal process would have done.`
+    ],
+    selectedAnalysis: [
+      {
+        title: 'What the Subhash Chandra order costs Indian banking',
+        text: [
+          'Our founder’s analysis of the repayment plan proceedings in ',
+          'Indiabulls Housing Finance v. Dr. Subhash Chandra',
+          ', a personal guarantor insolvency, was published in The Bar Bulletin in September 2026. It examined what such outcomes mean for banks that lend against personal guarantees, for regulators, and for promoters who stand behind corporate debt.'
+        ]
+      },
+      {
+        title: 'India’s cross-border insolvency gap',
+        text: 'The 2026 amendment gives the Central Government power to frame rules for cross-border insolvency. Until those rules are notified, Indian tribunals continue to rely on case-by-case protocols when a debtor’s assets or creditors sit abroad. Our founder’s analysis of the framework was published in The Bar Bulletin in May 2026.'
+      },
+      {
+        title: 'Where arbitration meets insolvency',
+        text: [
+          '',
+          'Navigating the Interplay between Arbitration and Insolvency in International Disputes',
+          ', published by the International Arbitration and Mediation Centre, Hyderabad, examined what happens to an arbitration when one party enters insolvency.'
+        ]
+      }
     ],
     approach: 'Our approach in insolvency matters is highly time-sensitive and strategic, aiming to leverage the stringent timelines and statutory shields of the IBC to protect stakeholder value and resolve financial distress decisively.',
-    caseHandlingStrategy: `The Insolvency and Bankruptcy Code is an exceptional forum of immense commercial leverage where procedural missteps can prove catastrophic. My case handling strategy under the IBC is driven by speed, statutory compliance, and commercial realism.
-
-For Financial Creditors (Banks and NBFCs), I formulate airtight Section 7 petitions supported by verifiable Record of Default (RoD) from the Information Utility (NeSL), loan sanctions, and statement of accounts, eliminating any scope for corporate debtor dispute.
-
-For Operational Creditors, I draft and serve legally immaculate Section 8 statutory demand notices. I meticulously pre-empt and refute any 'pre-existing dispute' defenses by compiling complete correspondence histories, acceptance of goods, and undisputed invoices.
-
-When defending Corporate Debtors, my strategy focuses on demonstrating pre-existing disputes, bar by limitation, defect in demand notices, or abuse of the insolvency process for debt recovery rather than resolution. Simultaneously, I work with promoters to explore Section 12A withdrawal avenues through structured settlement before the Committee of Creditors is formed.
-
-Throughout the CIRP, I actively represent stakeholders before the NCLT and NCLAT, safeguarding voting rights, contesting undervalued or fraudulent transactions (PUFE), and ensuring resolution plans strictly adhere to Section 30(2) requirements.`,
-    handlingMethodology: [
-      {
-        stepNumber: '01',
-        title: 'Default Verification & NeSL Documentation Audit',
-        description: 'Verifying default thresholds (₹1 crore minimum), authentication of debt through NeSL filings, and checking limitation applicability.'
-      },
-      {
-        stepNumber: '02',
-        title: 'Statutory Section 8 Demand & Notice Management',
-        description: 'Drafting structured demand notices for operational debts and establishing the absence of any bona fide pre-existing dispute.'
-      },
-      {
-        stepNumber: '03',
-        title: 'NCLT Petition Filing & Admission Advocacy',
-        description: 'Filing Section 7, 9, or 10 petitions before NCLT benches and presenting rigorous oral arguments on debt existence and default occurrence.'
-      },
-      {
-        stepNumber: '04',
-        title: 'Moratorium Management & CoC Representation',
-        description: 'Advising on Section 14 moratorium protections, voting thresholds in Committee of Creditors meetings, and Resolution Plan scrutiny.'
-      },
-      {
-        stepNumber: '05',
-        title: 'Section 12A Settlement or NCLAT Appellate Appeals',
-        description: 'Facilitating withdrawal of insolvency through 90% CoC settlement votes or prosecuting urgent appeals before NCLAT against admission orders.'
-      }
-    ],
-    strategicTactics: [
-      'Serving statutory notices that leave no window for the corporate debtor to manufacture frivolous pre-existing disputes.',
-      'Using Section 12A mechanisms to negotiate full commercial settlements without losing company management to an IRP.',
-      'Filing urgent caveats before NCLAT to prevent ex-parte stays on favorable admission orders.'
-    ],
-    faqs: [
-      {
-        question: 'What is the minimum threshold for filing an insolvency petition under IBC?',
-        answer: 'The minimum default threshold is ₹1 Crore (under Section 4 of the IBC) for both financial and operational creditors.'
-      },
-      {
-        question: 'What happens immediately once an insolvency petition is admitted?',
-        answer: 'Upon admission, the NCLT imposes a statutory Moratorium under Section 14 pausing all court and recovery proceedings against the corporate debtor, and appoints an Interim Resolution Professional (IRP) who takes over management.'
-      },
-      {
-        question: 'Can a matter be settled after an IBC petition is admitted by the NCLT?',
-        answer: 'Yes. Under Section 12A of the IBC and Regulation 30A, an application can be withdrawn with the approval of 90% voting share of the Committee of Creditors (CoC) or through settlement with the applicant creditor before CoC constitution.'
-      }
-    ]
+    caseHandlingStrategy: '',
+    handlingMethodology: [],
+    strategicTactics: [],
+    faqs: []
   },
   {
     id: 'capital-markets',
@@ -417,29 +342,51 @@ Throughout the CIRP, I actively represent stakeholders before the NCLT and NCLAT
     title: 'Capital Markets',
     caption: 'CAPITAL MARKETS',
     published: false,
-    shortDescription: 'Placeholder: description to be provided.',
-    description: 'Placeholder: practice description to be provided.',
-    representativeScale: null,
+    shortDescription: 'Capital raised on terms that hold.',
+    description: `India’s capital markets now reach far beyond the stock exchanges. Founders raise early capital from angels and funds, family businesses bring in private investors, property groups combine bank debt with mezzanine and fund money, and companies continue to list even when markets fall. In every case, the terms agreed at the point of investment decide who controls the business, who is paid first when things go wrong, and what each party can do about it.
+
+Our Capital Markets practice advises founders, early-stage companies, promoters, family businesses and investors on how capital is raised, structured and documented, and on the SEBI framework that governs it. The work is closely tied to our structured and mezzanine finance practice, where equity, debt and hybrid instruments must sit together inside one financing structure without undermining each other.
+
+We read investor documents the way we read loan documents, for the day they will be tested. Control rights, liquidation preferences, anti-dilution protection, exit rights and information rights are easy to accept when a deal is being celebrated and very hard to change once the relationship is under strain.`,
+    pullQuote: '“Capital moves on trust. Our work is to make that trust enforceable.”',
+    legalFramework: [
+      'This practice operates within the statutory architecture of the Securities and Exchange Board of India Act, 1992, the Securities Contracts (Regulation) Act, 1956 and the Depositories Act, 1996, together with the Companies Act, 2013 and its provisions on private placement and the further issue of capital.',
+      'Beneath these statutes sits the body of SEBI regulation that governs how capital is actually raised and held. The SEBI (Issue of Capital and Disclosure Requirements) Regulations, 2018 govern public issues. The SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015 govern listed companies. Investment funds are regulated by the SEBI (Alternative Investment Funds) Regulations, 2012, and changes in control by the SEBI (Substantial Acquisition of Shares and Takeovers) Regulations, 2011. The SEBI (Prohibition of Insider Trading) Regulations, 2015 govern dealings on price-sensitive information, and the SEBI (Issue and Listing of Non-Convertible Securities) Regulations, 2021 govern debt securities. Foreign investment is governed by the Foreign Exchange Management Act, 1999 and the Foreign Exchange Management (Non-Debt Instruments) Rules, 2019.'
+    ],
+    whatWeDo: [
+      'We advise founders and early-stage companies on funding structures, term sheets and investor documentation, and investors on the protections they need. We structure mezzanine, hybrid and fund capital for real estate and growing businesses, advise on the SEBI framework for alternative investment funds and capital raising, and help clients understand their rights and obligations as promoters and shareholders, including when the business is under financial stress.'
+    ],
     icon: 'Landmark',
     image: '/images/practice/capital.jpeg',
-    services: ['Placeholder: services to be provided.'],
-    keyMatters: ['Placeholder: representative matters to be provided.'],
-    approach: 'Placeholder: approach to be provided.',
-    caseHandlingStrategy: 'Placeholder: case-handling strategy to be provided.',
-    handlingMethodology: [
+    services: [],
+    keyMatters: [
+      `Fund and mezzanine capital in a ₹200 crore financing\n\nIn structuring the financing of a commercial property portfolio in Ahmedabad and Goa valued at over ₹200 crore, the defining question was how fund and mezzanine investors could enter alongside senior bank debt. They had to do so without compromising the lender’s security or their own expected returns. The answer lay in the sequencing of each layer of capital and in the documents that define its rights, priorities and exits. The result was a capital stack in which every investor understood its position before a single rupee was committed.`,
+      `Putting stressed capital back to work\n\nAcross stressed portfolios aggregating ₹100 crore to ₹130 crore, resolution often depended on fresh capital entering a distressed structure. We advised on how structured, acquisition and mezzanine finance could be used to make each resolution commercially viable. The new capital had to come in on terms that protected the incoming investor without stripping existing stakeholders of value.`,
+      `Preparing founders for institutional capital\n\nFor founders and early-stage companies, we advise on structuring, funding rounds, investor documentation and regulatory compliance. Most founders negotiate their first institutional round only once, and the terms they accept at that stage shape control of the company for years. Our role is to make sure they understand every one of those terms before they sign.`
+    ],
+    selectedAnalysis: [
       {
-        stepNumber: '01',
-        title: 'Placeholder',
-        description: 'Placeholder: handling methodology to be provided.'
+        title: 'Who really receives the money in an IPO boom',
+        text: [
+          'Our founder’s column ',
+          'Markets Are Falling but IPOs Are Booming. Who Is Really Getting the Money?',
+          ', published in The Bar Bulletin in October 2026, examined how much of the capital raised in recent public issues went to existing shareholders selling their stakes rather than into the businesses themselves.'
+        ]
+      },
+      {
+        title: 'Majority foreign ownership of an Indian bank',
+        text: [
+          'His analysis ',
+          'Emirates NBD and RBL Bank, Majority Foreign Ownership under Indian Banking Law',
+          ', published in The Bar Bulletin in July 2026, examined the legal path for a foreign bank to take majority control of an Indian private bank under the Banking Regulation Act, 1949 and RBI’s ownership framework.'
+        ]
       }
     ],
-    strategicTactics: ['Placeholder: strategic tactics to be provided.'],
-    faqs: [
-      {
-        question: 'Placeholder: question to be provided.',
-        answer: 'Placeholder: answer to be provided.'
-      }
-    ]
+    approach: '',
+    caseHandlingStrategy: '',
+    handlingMethodology: [],
+    strategicTactics: [],
+    faqs: []
   },
   {
     id: 'financial-regulatory',
@@ -447,28 +394,32 @@ Throughout the CIRP, I actively represent stakeholders before the NCLT and NCLAT
     title: 'Financial & Regulatory',
     caption: 'FINANCIAL & REGULATORY',
     published: false,
-    shortDescription: 'Placeholder: description to be provided.',
-    description: 'Placeholder: practice description to be provided.',
-    representativeScale: null,
+    shortDescription: 'Knowing the rule before it is tested.',
+    description: `Few areas of Indian law change as often as financial regulation. RBI directions decide how banks lend, classify accounts, recover dues and compensate customers for fraud. SEBI rules shape how capital is raised and managed. Foreign exchange and trade law decide how money, property and goods move across borders. A client who knows the rule that applies, in its current form, stands in a far stronger position than one who discovers it in the middle of a dispute.
+
+Our Financial & Regulatory practice advises businesses, exporters, investors and Non-Resident Indian families on the regulatory frameworks that govern their transactions. It also acts for customers when a regulated institution has not met its obligations. That includes complaints under the Reserve Bank Integrated Ombudsman Scheme, 2021, claims arising from fraudulent transactions, and cases where recovery conduct has crossed the limits RBI sets for lenders and their agents.
+
+Our founder writes regularly on Indian banking regulation, including RBI’s 2026 directions on customer liability in fraud, the acquisition finance framework and the rules on bank ownership. Following regulation closely as it changes is part of the advice every client receives.`,
+    pullQuote: '“Compliance always costs less than correction.”',
+    legalFramework: [
+      'The banking side of this practice rests on the Reserve Bank of India Act, 1934, the Banking Regulation Act, 1949, the Payment and Settlement Systems Act, 2007 and the Credit Information Companies (Regulation) Act, 2005. It also rests on the directions RBI issues under them, among them the Reserve Bank Integrated Ombudsman Scheme, 2021, the Fair Practices Code and the directions on customer liability in fraudulent transactions. Securities regulation follows the Securities and Exchange Board of India Act, 1992 and the regulations made under it.',
+      'Cross-border work is governed by the Foreign Exchange Management Act, 1999 and its rules on non-debt instruments, which regulate the acquisition and transfer of immovable property. Trade work is governed by the Foreign Trade (Development and Regulation) Act, 1992, the Foreign Trade Policy and the Customs Act, 1962, read with the trade agreements India has concluded, including the India Japan Comprehensive Economic Partnership Agreement. Customers of banks and financial institutions may, in addition, have remedies under the Consumer Protection Act, 2019.'
+    ],
+    whatWeDo: [
+      'We give clients a clear position on the regulation that applies to them and the steps that follow from it. For businesses and exporters, that means compliance advice, licensing and registrations, and access to the preferential terms that trade agreements offer. For Non-Resident Indians, it means structuring the acquisition, transfer and sale of Indian property in line with foreign exchange law. For customers of banks and NBFCs, it means pursuing grievances through the bank, the RBI Ombudsman or the consumer commission, whichever is most likely to produce a result.'
+    ],
     icon: 'Scale',
     image: '/images/practice/financial-regulatory.jpeg',
-    services: ['Placeholder: services to be provided.'],
-    keyMatters: ['Placeholder: representative matters to be provided.'],
-    approach: 'Placeholder: approach to be provided.',
-    caseHandlingStrategy: 'Placeholder: case-handling strategy to be provided.',
-    handlingMethodology: [
-      {
-        stepNumber: '01',
-        title: 'Placeholder',
-        description: 'Placeholder: handling methodology to be provided.'
-      }
+    services: [],
+    keyMatters: [
+      `Taking Bhadohi carpets to Japan\n\nBhadohi in Uttar Pradesh is India’s leading hand-knotted carpet hub, and Japan is among the most demanding import markets in the world. We advised a carpet manufacturer and exporter from Bhadohi on the entire route from loom to buyer. This covered export licensing and registrations, preferential access under the India Japan Comprehensive Economic Partnership Agreement, Japanese import and product labelling requirements, warehousing, and the contracts for distribution and sale. Preferential tariff treatment under a trade agreement is available only when the rules of origin are satisfied and documented correctly. That makes the paperwork at the Indian end as decisive as the buyer at the Japanese end. A traditional Indian craft business was given the regulatory footing to compete in one of Asia’s most premium markets.`,
+      `Clean title for a Non-Resident Indian family\n\nFor a Non-Resident Indian client based in the United States, we are structuring the transfer of title to a residential apartment, a commercial space and agricultural land in and around Hyderabad. This includes the release of a co-borrower from a bank home loan, so that each asset can be sold or retained with clean title. In matters like this, foreign exchange rules, lender consent and Indian property law must all align before a single transfer can be registered. For agricultural land in particular, the restrictions foreign exchange law places on Non-Resident Indians shape every option available.`,
+      `Holding lenders to the rulebook\n\nFor borrowers dealing with several banks and NBFCs at once, we escalated non-compliance with RBI’s fair practice, outsourcing and recovery rules through the regulator’s grievance framework, including the RBI Ombudsman. Regulatory escalation is no substitute for negotiation. But a documented breach of the rules often changes how a lender chooses to negotiate, and in these matters it opened the way to settlement on terms the borrowers could meet.`
     ],
-    strategicTactics: ['Placeholder: strategic tactics to be provided.'],
-    faqs: [
-      {
-        question: 'Placeholder: question to be provided.',
-        answer: 'Placeholder: answer to be provided.'
-      }
-    ]
+    approach: '',
+    caseHandlingStrategy: '',
+    handlingMethodology: [],
+    strategicTactics: [],
+    faqs: []
   }
 ];
