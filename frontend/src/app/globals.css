@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
-@media (min-width: 1024px) {
-  html {
-    font-size: clamp(14px, 0.3125vw + 10px, 16px);
-  }
+html {
+  font-size: 16px;
 }
 
 @theme {
