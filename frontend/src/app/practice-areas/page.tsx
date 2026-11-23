@@ -13,11 +13,12 @@ export default function PracticeAreasPage() {
       <PageHero
         title="Areas of Practice"
         description="Depth in every discipline. Judgement across all of them."
+        descriptionClassName="!max-w-none !text-[clamp(0.84rem,calc(0.7896rem+0.1848vw),0.945rem)] md:!text-[clamp(0.945rem,calc(0.882rem+0.2352vw),1.05rem)] leading-[1.75]"
       >
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ivory-200 md:text-lg md:text-justify">
+        <p className="mt-4 w-full text-left text-ivory-200 text-[clamp(0.84rem,calc(0.7896rem+0.1848vw),0.945rem)] leading-[1.75] md:text-[clamp(0.945rem,calc(0.882rem+0.2352vw),1.05rem)]">
           Our practice areas are defined by the problems clients bring to us, from a family protecting its home to a group restructuring its debt across several lenders. Real matters rarely stay within one area of law. A loan dispute may carry a regulatory question, a project delay may trigger a default under the financing, and a recovery may meet an insolvency deadline. That is why no matter here is handled in isolation. Whatever its size, every matter is led by the same counsel and held to the same standard of preparation.
         </p>
-        <blockquote className="mt-6 max-w-2xl text-left font-heading text-[clamp(1.5rem,2.1vw,2.25rem)] italic leading-[1.35] text-ivory-100">
+        <blockquote className="mt-6 w-full text-left font-heading text-[clamp(1.5rem,2.1vw,2.25rem)] italic leading-[1.35] text-ivory-100">
           {'\u201cEvery matter is different. The care we bring to it is not.\u201d'}
         </blockquote>
       </PageHero>

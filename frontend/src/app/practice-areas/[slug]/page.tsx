@@ -1,11 +1,21 @@
 import { Metadata } from 'next';
+import { EB_Garamond } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { practiceAreas } from '@/data/practiceAreas';
 import { experienceItems } from '@/data/experience';
+import { PracticeOverview } from '@/components/practice-areas/PracticeOverview';
+import styles from './BankingFinancePage.module.css';
 import * as LucideIcons from 'lucide-react';
 import { Shield, ArrowRight, Scale, Briefcase, FileCheck } from 'lucide-react';
+
+const ebGaramond = EB_Garamond({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-heading',
+  display: 'swap',
+});
 
 export async function generateStaticParams() {
   return practiceAreas.map((area) => ({
@@ -41,43 +51,54 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
   const relatedExperience = experienceItems.filter(item =>
     item.practiceAreas.includes(area.slug)
   );
+  const overviewParagraphs = area.description.split(/\n\s*\n/);
 
   return (
-    <main className="min-h-screen bg-ivory-50 pb-24">
-      {/* Top Banner with Background Image */}
-      <div className="relative flex min-h-[40svh] items-center overflow-hidden bg-navy-950 py-12 text-white lg:min-h-[50vh] lg:py-16">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={area.image}
-            alt={area.title}
-            fill
-            sizes="100vw"
-            fetchPriority="high"
-            className="object-cover opacity-20 filter blur-[1px]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/70" />
-        </div>
+    <main className={`min-h-screen bg-ivory-50 pb-24 ${area.slug === 'banking-finance' ? `${ebGaramond.variable} ${styles.bankingFinancePage}` : ''}`}>
+      {/* Top Banner */}
+      <div className={`relative flex min-h-[40svh] items-center overflow-hidden ${area.slug === 'banking-finance' ? 'bg-[#060e1f]' : 'bg-navy-950'} py-12 text-white lg:min-h-[50vh] lg:py-16 ${area.slug === 'banking-finance' ? styles.hero : ''}`}>
+        {area.slug !== 'banking-finance' && (
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={area.image}
+              alt={area.title}
+              fill
+              sizes="100vw"
+              fetchPriority="high"
+              className="object-cover opacity-20 filter blur-[1px]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/70" />
+          </div>
+        )}
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex items-center gap-2 text-xs text-gold-400 mb-4 uppercase tracking-widest font-semibold">
-            <Link href="/practice-areas" className="hover:text-white transition-colors">Practice Areas</Link>
-            <span>/</span>
-            <span className="text-ivory-200">{area.title}</span>
-          </div>
+          {area.slug !== 'banking-finance' && (
+            <div className="flex items-center gap-2 text-xs text-gold-400 mb-4 uppercase tracking-widest font-semibold">
+              <Link href="/practice-areas" className="hover:text-white transition-colors">Practice Areas</Link>
+              <span>/</span>
+              <span className="text-ivory-200">{area.title}</span>
+            </div>
+          )}
 
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 bg-navy-900/90 border border-gold-500/40 text-gold-400 px-3 py-1 rounded-xs text-xs font-semibold uppercase tracking-wider mb-4">
-                <Icon size={16} />
-                <span>Specialized Legal Practice</span>
-              </div>
+              {area.slug !== 'banking-finance' && (
+                <div className="inline-flex items-center gap-2 bg-navy-900/90 border border-gold-500/40 text-gold-400 px-3 py-1 rounded-xs text-xs font-semibold uppercase tracking-wider mb-4">
+                  <Icon size={16} />
+                  <span>Specialized Legal Practice</span>
+                </div>
+              )}
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-ivory-100">
                 {area.title}
               </h1>
               <p className="text-ivory-200 text-base md:text-lg leading-relaxed">
                 {area.shortDescription}
               </p>
+              {area.slug === 'banking-finance' && (
+                <blockquote className="mt-6 w-full text-left font-heading text-[clamp(1.5rem,2.1vw,2.25rem)] italic leading-[1.35] text-ivory-100">
+                  {'\u201cEvery loan is a promise in two directions. We hold both sides to it.\u201d'}
+                </blockquote>
+              )}
             </div>
 
             <div className="shrink-0">
@@ -93,24 +114,28 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className={area.slug === 'banking-finance' ? styles.contentContainer : 'max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12'}>
         {/* Main Column */}
-        <div className={`${area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-16`}>
-          {/* Practice Image Showcase */}
-          <div className="relative w-full aspect-[21/9] rounded-sm overflow-hidden border border-charcoal-200 shadow-md bg-navy-950">
-            <Image
-              src={area.image}
-              alt={area.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 66vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between text-xs text-ivory-200">
-              <span className="font-semibold text-gold-400">{area.title} Practice Portfolio</span>
-              <span className="bg-navy-950/80 px-2.5 py-1 rounded-xs border border-navy-800">High-Stakes Dispute Resolution</span>
-            </div>
-          </div>
+        <div className={area.slug === 'banking-finance' ? 'space-y-8' : `${area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-16`}>
+          {area.slug !== 'banking-finance' && (
+            <>
+              {/* Practice Image Showcase */}
+              <div className="relative w-full aspect-[21/9] rounded-sm overflow-hidden border border-charcoal-200 shadow-md bg-navy-950">
+                <Image
+                  src={area.image}
+                  alt={area.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between text-xs text-ivory-200">
+                  <span className="font-semibold text-gold-400">{area.title} Practice Portfolio</span>
+                  <span className="bg-navy-950/80 px-2.5 py-1 rounded-xs border border-navy-800">High-Stakes Dispute Resolution</span>
+                </div>
+              </div>
+            </>
+          )}
 
           {area.pullQuote && (
             <blockquote className="font-heading text-xl sm:text-2xl italic leading-[1.35] text-navy-950">
@@ -119,27 +144,44 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
           )}
 
           {/* Section 1: Overview */}
-          <section>
-            <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
-              <Briefcase size={15} />
-              <span>Practice Overview</span>
-            </div>
-            <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
-              Strategic Practice Overview
-            </h2>
-            <div className="w-12 h-0.5 bg-gold-500 mb-6" />
-            <div className="prose prose-lg text-charcoal-700 max-w-none leading-relaxed text-base">
-              <p className="whitespace-pre-wrap">{area.description}</p>
-            </div>
-          </section>
-
-          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory') && area.legalFramework && (
+          {area.slug === 'banking-finance' ? (
+            <PracticeOverview
+              label="Practice Overview"
+              icon={<Briefcase size={15} />}
+              title="Strategic Practice Overview"
+              intro={overviewParagraphs[0]}
+              image={area.image}
+              imageWidth={1600}
+              imageHeight={900}
+              imageAlt="Banking and finance district with glass office towers"
+            >
+              {overviewParagraphs.slice(1).map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+            </PracticeOverview>
+          ) : (
             <section>
               <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
                 <Briefcase size={15} />
-                <span>The Legal Framework</span>
+                <span>Practice Overview</span>
               </div>
-              <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">The Legal Framework</h2>
+              <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
+                Strategic Practice Overview
+              </h2>
+              <div className="w-12 h-0.5 bg-gold-500 mb-6" />
+              <div className="prose prose-lg text-charcoal-700 max-w-none leading-relaxed text-base">
+                <p className="whitespace-pre-wrap">{area.description}</p>
+              </div>
+            </section>
+          )}
+
+          {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory') && area.legalFramework && (
+            <section>
+              {area.slug !== 'banking-finance' && (
+                <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
+                  <Briefcase size={15} />
+                  <span>The Legal Framework</span>
+                </div>
+              )}
+              <h2 className={`font-heading ${area.slug === 'banking-finance' ? 'text-[clamp(1.15149rem,calc(0.89049rem+1.16684vw),2.07267rem)] font-medium' : 'text-3xl font-bold'} text-navy-950 mb-4`}>The Legal Framework</h2>
               <div className="w-12 h-0.5 bg-gold-500 mb-6" />
               <div className="prose prose-lg text-charcoal-700 max-w-none leading-relaxed text-base">
                 {area.legalFramework.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
@@ -149,11 +191,13 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
 
           {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory') && area.whatWeDo && (
             <section>
-              <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
-                <Briefcase size={15} />
-                <span>What We Do</span>
-              </div>
-              <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">What We Do</h2>
+              {area.slug !== 'banking-finance' && (
+                <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
+                  <Briefcase size={15} />
+                  <span>What We Do</span>
+                </div>
+              )}
+              <h2 className={`font-heading ${area.slug === 'banking-finance' ? 'text-[clamp(1.15149rem,calc(0.89049rem+1.16684vw),2.07267rem)] font-medium' : 'text-3xl font-bold'} text-navy-950 mb-4`}>What We Do</h2>
               <div className="w-12 h-0.5 bg-gold-500 mb-6" />
               <div className="prose prose-lg text-charcoal-700 max-w-none leading-relaxed text-base">
                 {area.whatWeDo.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
@@ -235,18 +279,18 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
 
           {/* Section 3: Key Matters */}
           <section>
-            <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">
+            <h2 className={`font-heading ${area.slug === 'banking-finance' ? 'text-[clamp(1.15149rem,calc(0.89049rem+1.16684vw),2.07267rem)] font-medium' : 'text-3xl font-bold'} text-navy-950 mb-4`}>
               {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? 'Matters That Define Our Work' : 'Representative Casework & Involvements'}
             </h2>
             <div className="w-12 h-0.5 bg-gold-500 mb-6" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className={area.slug === 'banking-finance' ? styles.mattersGrid : 'grid grid-cols-1 md:grid-cols-2 gap-4'}>
               {area.keyMatters.map((matter, idx) => (
-                <div key={idx} className="p-5 bg-white border border-charcoal-200 rounded-sm shadow-xs flex items-start gap-3">
+                <div key={idx} className={`bg-white border border-charcoal-200 rounded-sm shadow-xs flex items-start gap-3 ${area.slug === 'banking-finance' ? `h-full ${styles.matterCard}` : 'p-5'}`}>
                   <span className="w-2 h-2 rounded-full bg-gold-500 mt-2 shrink-0"></span>
                   {area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress' || area.slug === 'capital-markets' || area.slug === 'financial-regulatory' ? (
                     <div>
-                      <h3 className="font-heading text-lg font-bold text-navy-950 mb-2">{matter.split('\n\n')[0]}</h3>
-                      <p className="text-xs md:text-sm text-charcoal-800 leading-relaxed">{matter.split('\n\n').slice(1).join('\n\n')}</p>
+                      <h3 className={`font-heading text-lg font-bold text-navy-950 mb-2 ${area.slug === 'banking-finance' ? styles.matterTitle : ''}`}>{matter.split('\n\n')[0]}</h3>
+                      <p className={`text-xs md:text-sm text-charcoal-800 leading-relaxed ${area.slug === 'banking-finance' ? styles.matterDescription : ''}`}>{matter.split('\n\n').slice(1).join('\n\n')}</p>
                     </div>
                   ) : (
                     <p className="text-xs md:text-sm text-charcoal-800 leading-relaxed">{matter}</p>
@@ -278,13 +322,15 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
 
           {(area.slug === 'banking-finance' || area.slug === 'debt-restructuring' || area.slug === 'project-infrastructure-disputes' || area.slug === 'commercial-disputes' || area.slug === 'insolvency-financial-distress') && area.perspective && (
             <section>
-              <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
-                <Briefcase size={15} />
-                <span>Our Perspective</span>
-              </div>
+              {area.slug !== 'banking-finance' && (
+                <div className="flex items-center gap-2 text-gold-600 text-xs font-semibold uppercase tracking-wider mb-2">
+                  <Briefcase size={15} />
+                  <span>Our Perspective</span>
+                </div>
+              )}
               <h2 className="font-heading text-3xl font-bold text-navy-950 mb-4">Our Perspective</h2>
               <div className="w-12 h-0.5 bg-gold-500 mb-6" />
-              <div className="prose prose-lg text-charcoal-700 max-w-none leading-relaxed text-base">
+              <div className={`prose prose-lg text-charcoal-700 max-w-none leading-relaxed ${area.slug === 'banking-finance' ? '' : 'text-base'}`}>
                 <p>{typeof area.perspective === 'string' ? area.perspective : <>{area.perspective[0]}<em>{area.perspective[1]}</em>{area.perspective[2]}</>}</p>
               </div>
             </section>
