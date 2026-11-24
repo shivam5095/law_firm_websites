@@ -2,6 +2,8 @@
 
 html {
   font-size: 16px;
+  --text-h3: clamp(1.25rem, calc(1.05rem + 0.55vw), 1.625rem);
+  --font-libre-caslon: var(--font-heading);
 }
 
 @theme {

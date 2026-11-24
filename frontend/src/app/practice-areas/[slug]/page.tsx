@@ -6,9 +6,11 @@ import { notFound } from 'next/navigation';
 import { practiceAreas } from '@/data/practiceAreas';
 import { experienceItems } from '@/data/experience';
 import { PracticeOverview } from '@/components/practice-areas/PracticeOverview';
+import { PracticeCallout } from '@/components/practice-areas/PracticeCallout';
 import styles from './BankingFinancePage.module.css';
 import * as LucideIcons from 'lucide-react';
 import { Shield, ArrowRight, Scale, Briefcase, FileCheck } from 'lucide-react';
+import { primaryPhone } from '@/config/contact';
 
 const ebGaramond = EB_Garamond({
   subsets: ['latin'],
@@ -115,15 +117,25 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
               )}
             </div>
 
-            <div className="shrink-0">
-              <Link
-                href="/consultation"
-                className="bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-6 py-3.5 text-xs uppercase tracking-wider rounded-xs transition-all shadow-lg inline-flex items-center gap-2"
-              >
-                <span>Consult on this Area</span>
-                <ArrowRight size={14} />
-              </Link>
-            </div>
+            {area.slug === 'banking-finance' ? (
+              <PracticeCallout
+                title="Consult on this area"
+                text="Call us or request a consultation."
+                consultHref="/consultation?area=banking-finance"
+                phoneLabel={primaryPhone}
+                phoneHref={`tel:${primaryPhone.replace(/\D/g, '')}`}
+              />
+            ) : (
+              <div className="shrink-0">
+                <Link
+                  href="/consultation"
+                  className="bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-6 py-3.5 text-xs uppercase tracking-wider rounded-xs transition-all shadow-lg inline-flex items-center gap-2"
+                >
+                  <span>Consult on this Area</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,0 +1,123 @@
+.callout {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--color-gold-500);
+  color: var(--color-navy-950);
+}
+
+.tab {
+  position: absolute;
+  top: -14px;
+  right: 0;
+  width: 48px;
+  height: 14px;
+  background: var(--color-gold-400);
+}
+
+:global(.bankingFinancePage) .title {
+  margin: 0 0 0.5rem;
+  color: var(--color-navy-950);
+  font-family: var(--font-libre-caslon), Georgia, serif;
+  font-size: var(--text-h3);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.text {
+  margin: 0 0 1.25rem;
+  color: var(--color-navy-950);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1.5px solid var(--color-navy-950);
+  border-radius: 999px;
+  padding: 0.625rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.consultButton {
+  order: 2;
+  background: transparent;
+  color: var(--color-navy-950);
+}
+
+.phoneButton {
+  order: 1;
+  background: var(--color-navy-950);
+  color: #fff;
+}
+
+.consultButton:hover {
+  background: var(--color-navy-950);
+  color: #fff;
+}
+
+.phoneButton:hover {
+  background: transparent;
+  color: var(--color-navy-950);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-navy-950);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .callout {
+    width: 360px;
+    flex: 0 0 360px;
+    padding: 1.625rem;
+  }
+
+  .consultButton {
+    order: 1;
+    background: var(--color-navy-950);
+    color: #fff;
+  }
+
+  .phoneButton {
+    order: 2;
+    background: transparent;
+    color: var(--color-navy-950);
+  }
+
+  .consultButton:hover {
+    background: transparent;
+    color: var(--color-navy-950);
+  }
+
+  .phoneButton:hover {
+    background: var(--color-navy-950);
+    color: #fff;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .callout {
+    width: 100%;
+    flex-basis: auto;
+  }
+}

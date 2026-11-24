@@ -1,5 +1,7 @@
+export const primaryPhone = '+91 79859 33594';
+
 export const contact = {
-  phones: ['+91 79859 33594', '+91 87961 81252'],
+  phones: [primaryPhone, '+91 87961 81252'],
   email: 'contact.mauryaandco@gmail.com',
   addresses: [
     'C-51, Sector-33, Noida, Uttar Pradesh, 201301',
