@@ -6,11 +6,10 @@ import { notFound } from 'next/navigation';
 import { practiceAreas } from '@/data/practiceAreas';
 import { experienceItems } from '@/data/experience';
 import { PracticeOverview } from '@/components/practice-areas/PracticeOverview';
-import { PracticeCallout } from '@/components/practice-areas/PracticeCallout';
+import { PracticeHero } from '@/components/practice-areas/PracticeHero';
 import styles from './BankingFinancePage.module.css';
 import * as LucideIcons from 'lucide-react';
 import { Shield, ArrowRight, Scale, Briefcase, FileCheck } from 'lucide-react';
-import { primaryPhone } from '@/config/contact';
 
 const ebGaramond = EB_Garamond({
   subsets: ['latin'],
@@ -72,7 +71,15 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
   return (
     <main className={`min-h-screen bg-ivory-50 pb-24 ${usesFinanceLayout ? `${ebGaramond.variable} ${styles.bankingFinancePage}` : ''}`}>
       {/* Top Banner */}
-      <div className={`relative flex min-h-[40svh] items-center overflow-hidden ${usesFinanceLayout ? 'bg-[#060e1f]' : 'bg-navy-950'} py-12 text-white lg:min-h-[50vh] lg:py-16 ${usesFinanceLayout ? styles.hero : ''}`}>
+      {usesFinanceLayout ? (
+        <PracticeHero
+          title={area.title}
+          subtitle={area.shortDescription}
+          quote={area.slug === 'capital-markets' ? undefined : area.slug === 'banking-finance' ? '\u201cEvery loan is a promise in two directions. We hold both sides to it.\u201d' : area.pullQuote}
+          slug={area.slug}
+        />
+      ) : (
+      <div className="relative flex min-h-[40svh] items-center overflow-hidden bg-navy-950 py-12 text-white lg:min-h-[50vh] lg:py-16">
         {!usesFinanceLayout && (
           <div className="absolute inset-0 z-0">
             <Image
@@ -88,57 +95,39 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
         )}
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {!usesFinanceLayout && (
             <div className="flex items-center gap-2 text-xs text-gold-400 mb-4 uppercase tracking-widest font-semibold">
               <Link href="/practice-areas" className="hover:text-white transition-colors">Practice Areas</Link>
               <span>/</span>
               <span className="text-ivory-200">{area.title}</span>
             </div>
-          )}
 
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-3xl">
-              {!usesFinanceLayout && (
-                <div className="inline-flex items-center gap-2 bg-navy-900/90 border border-gold-500/40 text-gold-400 px-3 py-1 rounded-xs text-xs font-semibold uppercase tracking-wider mb-4">
-                  <Icon size={16} />
-                  <span>Specialized Legal Practice</span>
-                </div>
-              )}
+              <div className="inline-flex items-center gap-2 bg-navy-900/90 border border-gold-500/40 text-gold-400 px-3 py-1 rounded-xs text-xs font-semibold uppercase tracking-wider mb-4">
+                <Icon size={16} />
+                <span>Specialized Legal Practice</span>
+              </div>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-ivory-100">
                 {area.title}
               </h1>
               <p className="text-ivory-200 text-base md:text-lg leading-relaxed">
                 {area.shortDescription}
               </p>
-              {usesFinanceLayout && area.slug !== 'capital-markets' && (
-                <blockquote className="mt-6 w-full text-left font-heading text-[clamp(1.5rem,2.1vw,2.25rem)] italic leading-[1.35] text-ivory-100">
-                  {area.slug === 'banking-finance' ? '\u201cEvery loan is a promise in two directions. We hold both sides to it.\u201d' : area.pullQuote}
-                </blockquote>
-              )}
             </div>
 
-            {area.slug === 'banking-finance' ? (
-              <PracticeCallout
-                title="Consult on this area"
-                text="Call us or request a consultation."
-                consultHref="/consultation?area=banking-finance"
-                phoneLabel={primaryPhone}
-                phoneHref={`tel:${primaryPhone.replace(/\D/g, '')}`}
-              />
-            ) : (
-              <div className="shrink-0">
-                <Link
-                  href="/consultation"
-                  className="bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-6 py-3.5 text-xs uppercase tracking-wider rounded-xs transition-all shadow-lg inline-flex items-center gap-2"
-                >
-                  <span>Consult on this Area</span>
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-            )}
+            <div className="shrink-0">
+              <Link
+                href="/consultation"
+                className="bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-6 py-3.5 text-xs uppercase tracking-wider rounded-xs transition-all shadow-lg inline-flex items-center gap-2"
+              >
+                <span>Consult on this Area</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+      )}
 
       <div className={usesFinanceLayout ? styles.contentContainer : 'max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12'}>
         {/* Main Column */}

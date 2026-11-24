@@ -8,13 +8,6 @@
   letter-spacing: -0.01em;
 }
 
-.hero h1,
-.hero h2,
-.hero h3,
-.hero h4 {
-  color: #ffffff;
-}
-
 .bankingFinancePage h2 {
   font-size: clamp(1.51875rem, calc(1.1745rem + 1.539vw), 2.73375rem);
 }

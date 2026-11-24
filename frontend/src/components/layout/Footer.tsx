@@ -18,6 +18,7 @@ const quickLinks = [
 const sectionHeadingClass = 'mb-0 font-heading uppercase text-[#B89548] lg:whitespace-nowrap';
 const sectionHeadingStyle = { fontSize: 'clamp(1rem, 1.15vw, 1.3rem)', fontWeight: 700, letterSpacing: '0.14em', lineHeight: 1.3 } as const;
 const footerLinkClass = 'inline-flex min-h-10 min-w-0 items-center gap-2 break-words text-sm text-[#D5D9E0] transition-colors hover:text-[#B89548] focus-visible:outline-2 focus-visible:outline-[#B89548] focus-visible:outline-offset-2';
+const practiceAreaFooterLinkClass = 'inline-flex min-h-10 min-w-0 items-center gap-2 break-words text-sm text-[var(--text-on-dark)] transition-colors hover:text-[#B89548] focus-visible:outline-2 focus-visible:outline-[#B89548] focus-visible:outline-offset-2';
 
 const offices = [
   {
@@ -51,7 +52,7 @@ export function Footer() {
     <ul className="space-y-1">
       {practiceAreas.map((area) => (
         <li key={area.id}>
-          <Link href={`/practice-areas/${area.slug}`} className={footerLinkClass}>
+          <Link href={`/practice-areas/${area.slug}`} className={practiceAreaFooterLinkClass}>
             <span aria-hidden="true" className="text-xs text-[#B89548]">›</span>
             <span>{area.title}</span>
           </Link>
