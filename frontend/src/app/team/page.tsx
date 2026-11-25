@@ -38,15 +38,14 @@ export default function TeamPage() {
               </div>
               
               <div className="p-8 flex flex-col flex-grow">
-                <h2 className="font-heading text-2xl text-navy-900 mb-1 group-hover:text-gold-600 transition-colors">
+                <h2
+                  className="font-heading text-navy-900 mb-1 group-hover:text-gold-600 transition-colors"
+                  style={{ fontSize: 'clamp(1.221875rem, calc(0.935rem + 1.19vw), 2.125rem)' }}
+                >
                   {lawyer.name}
                 </h2>
                 <p className="text-sm font-semibold uppercase tracking-wider text-charcoal-500 mb-4">
                   {lawyer.designation}
-                </p>
-                
-                <p className="text-charcoal-600 text-sm line-clamp-3 mb-6 flex-grow">
-                  {lawyer.shortBio}
                 </p>
                 
                 <Link 
