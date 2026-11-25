@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { practiceAreas } from '@/data/practiceAreas';
 import { lawyers } from '@/data/lawyers';
-import { publications } from '@/data/publications';
+import { insights } from '@/data/insights';
 import { firm } from '@/data/firm';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const practiceAreaPages = practiceAreas.map(pa => `/practice-areas/${pa.slug}`);
   const teamPages = lawyers.map(l => `/team/${l.slug}`);
-  const insightPages = publications.map(p => `/insights/${p.slug ?? p.id}`);
+  const insightPages = insights.map(insight => `/insights/${insight.slug}`);
 
   const allPages = [...staticPages, ...practiceAreaPages, ...teamPages, ...insightPages];
 

@@ -52,7 +52,7 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
   );
 
   return (
-    <main className="min-h-screen bg-ivory-50 pb-20">
+    <main className="min-h-screen bg-ivory-50 pb-20 text-[length:var(--text-body)] leading-[1.75]">
       {/* Profile Hero */}
       <section className="min-h-[40svh] bg-navy-900 py-12 text-white lg:min-h-[50vh] lg:py-16">
         <div className="max-w-7xl mx-auto flex flex-col items-end gap-8 px-4 md:px-6 lg:flex-row lg:gap-12 lg:px-8">
@@ -67,21 +67,21 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
                 className="object-cover object-top"
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-gold-500 font-heading text-8xl opacity-20">
+              <div className="absolute inset-0 flex items-center justify-center text-gold-500 font-heading text-[length:var(--text-5xl)] opacity-20">
                 {lawyer.name.charAt(0)}
               </div>
             )}
           </div>
           <div className="w-full pb-4 lg:w-2/3 lg:pb-8">
-            <div className="flex items-center gap-2 text-sm text-ivory-300 mb-4 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-[length:var(--text-small)] leading-[1.5] text-ivory-300 mb-4 uppercase tracking-wider">
               <Link href="/team" className="hover:text-white transition-colors">Our Team</Link>
               <span>/</span>
               <span className="text-gold-400">{lawyer.name}</span>
             </div>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-4">
+            <h1 className="font-heading text-[length:var(--text-h1)] leading-[1.2] font-medium tracking-tight mb-4">
               {lawyer.name}
             </h1>
-            <p className="text-gold-400 text-xl tracking-wide uppercase font-semibold mb-6">
+            <p className="text-gold-400 text-[length:var(--text-small)] leading-[1.5] tracking-wide uppercase font-semibold mb-6">
               {lawyer.designation}
             </p>
           </div>
@@ -90,28 +90,28 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 gap-12 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-3 lg:gap-16 lg:px-8 lg:py-24">
-        <div className="lg:col-span-2 space-y-16">
+        <div className="lg:col-span-2 max-w-[760px] text-left space-y-16">
           {/* Biography */}
           <section>
-            <h2 className="font-heading text-3xl text-navy-900 mb-6">Biography</h2>
+            <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Biography</h2>
             <div className="w-8 h-[2px] bg-gold-500 mb-6" />
-            <div className="prose prose-lg text-charcoal-700 max-w-none">
-              <p className="whitespace-pre-wrap leading-relaxed">{lawyer.fullBio}</p>
+            <div className="prose text-[length:var(--text-body)] leading-[1.75] text-charcoal-700 max-w-none">
+              <p className="whitespace-pre-wrap leading-[1.75]">{lawyer.fullBio}</p>
             </div>
           </section>
 
           {/* Education */}
           {lawyer.education && lawyer.education.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Education</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Education</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <div className="space-y-6">
                 {lawyer.education.map((edu, idx: number) => (
                   <div key={idx} className="relative pl-8 before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-gold-500 before:rounded-full after:absolute after:left-[3px] after:top-4 after:bottom-[-24px] after:w-[2px] after:bg-charcoal-100 last:after:hidden">
-                    <h3 className="font-semibold text-navy-900 text-lg">{edu.degree}</h3>
+                    <h3 className="text-[length:var(--text-h3)] leading-[1.35] font-semibold text-navy-900">{edu.degree}</h3>
                     <p className="text-charcoal-600">{edu.institution}{edu.location ? `, ${edu.location}` : ''}</p>
-                    <p className="text-sm text-charcoal-500">{edu.period}</p>
-                    {edu.details && <p className="text-sm text-gold-600 mt-1 italic">{edu.details}</p>}
+                    <p className="text-[length:var(--text-small)] leading-[1.5] text-charcoal-500">{edu.period}</p>
+                    {edu.details && <p className="text-[length:var(--text-small)] leading-[1.5] text-gold-600 mt-1 italic">{edu.details}</p>}
                   </div>
                 ))}
               </div>
@@ -121,16 +121,16 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
           {/* Professional Experience */}
           {lawyer.experience && lawyer.experience.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Professional Experience</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Professional Experience</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <div className="space-y-8">
                 {lawyer.experience.map((exp, idx: number) => (
                   <div key={idx} className="bg-white p-6 border border-charcoal-100 shadow-sm">
-                    <h3 className="font-semibold text-navy-900 text-lg">{exp.role}</h3>
-                    <p className="text-charcoal-500 text-sm mb-3">{exp.organization}, {exp.location} | {exp.period}</p>
+                    <h3 className="text-[length:var(--text-h3)] leading-[1.35] font-semibold text-navy-900">{exp.role}</h3>
+                    <p className="text-charcoal-500 text-[length:var(--text-small)] leading-[1.5] mb-3">{exp.organization}, {exp.location} | {exp.period}</p>
                     {exp.description && <p className="text-charcoal-700 mb-3">{exp.description}</p>}
                     {exp.highlights && exp.highlights.length > 0 && (
-                      <ul className="list-disc list-inside text-charcoal-600 text-sm space-y-1">
+                      <ul className="list-disc list-inside text-charcoal-600 text-[length:var(--text-body)] leading-[1.75] space-y-1">
                         {exp.highlights.map((h: string, i: number) => (
                           <li key={i}>{h}</li>
                         ))}
@@ -145,16 +145,16 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
           {/* Prior Professional Exposure */}
           {lawyer.priorExposure && lawyer.priorExposure.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Prior Professional Exposure</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Prior Professional Exposure</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <div className="space-y-4">
                 {lawyer.priorExposure.map((exp, idx: number) => (
                   <div key={idx} className="flex items-start gap-4 py-4 border-b border-charcoal-100 last:border-0">
                     <div className="w-2 h-2 bg-gold-500 rounded-full mt-2 shrink-0" />
                     <div>
-                      <h3 className="font-medium text-navy-900">{exp.organization}</h3>
-                      <p className="text-sm text-charcoal-500">{exp.location} · {exp.period}</p>
-                      {exp.description && <p className="text-sm text-charcoal-600 mt-1">{exp.description}</p>}
+                      <h3 className="text-[length:var(--text-h3)] leading-[1.35] font-medium text-navy-900">{exp.organization}</h3>
+                      <p className="text-[length:var(--text-small)] leading-[1.5] text-charcoal-500">{exp.location} · {exp.period}</p>
+                      {exp.description && <p className="text-[length:var(--text-body)] leading-[1.75] text-charcoal-600 mt-1">{exp.description}</p>}
                     </div>
                   </div>
                 ))}
@@ -165,17 +165,17 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
           {/* Academic & Institutional Engagement */}
           {lawyer.academicEngagement && lawyer.academicEngagement.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Academic & Institutional Engagement</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Academic & Institutional Engagement</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <div className="space-y-6">
                 {lawyer.academicEngagement.map((engagement, idx: number) => (
                   <div key={idx} className="bg-white p-6 border border-charcoal-100">
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-navy-900">{engagement.role}</h3>
-                      <span className="text-sm text-charcoal-500 shrink-0 ml-4">{engagement.period}</span>
+                      <h3 className="text-[length:var(--text-h3)] leading-[1.35] font-semibold text-navy-900">{engagement.role}</h3>
+                      <span className="text-[length:var(--text-small)] leading-[1.5] text-charcoal-500 shrink-0 ml-4">{engagement.period}</span>
                     </div>
-                    <p className="text-sm text-gold-600 font-medium mb-2">{engagement.organization}</p>
-                    <p className="text-charcoal-600 text-sm">{engagement.description}</p>
+                    <p className="text-[length:var(--text-small)] leading-[1.5] text-gold-600 font-medium mb-2">{engagement.organization}</p>
+                    <p className="text-charcoal-600 text-[length:var(--text-body)] leading-[1.75]">{engagement.description}</p>
                   </div>
                 ))}
               </div>
@@ -185,15 +185,15 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
           {/* Recognition */}
           {lawyer.recognition && lawyer.recognition.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Recognition & Academic Distinctions</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Recognition & Academic Distinctions</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <ul className="space-y-4">
                 {lawyer.recognition.map((item, idx: number) => (
                   <li key={idx} className="flex items-start">
                     <span className="text-gold-500 mr-3 mt-1">✦</span>
                     <div>
-                      <p className="font-medium text-navy-900">{item.title}</p>
-                      <p className="text-sm text-charcoal-600">{item.description}</p>
+                      <p className="text-[length:var(--text-h3)] leading-[1.35] font-medium text-navy-900">{item.title}</p>
+                    <p className="text-[length:var(--text-body)] leading-[1.75] text-charcoal-600">{item.description}</p>
                     </div>
                   </li>
                 ))}
@@ -204,15 +204,15 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
           {/* Moot Courts */}
           {lawyer.mootCourts && lawyer.mootCourts.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Moot Court Experience</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Moot Court Experience</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <ul className="space-y-4">
                 {lawyer.mootCourts.map((moot, idx: number) => (
                   <li key={idx} className="flex items-start">
                     <span className="text-gold-500 mr-3 mt-1">✦</span>
                     <div>
-                      <p className="font-medium text-navy-900">{moot.name}</p>
-                      <p className="text-sm text-charcoal-500">{moot.institution}, {moot.year}</p>
+                      <p className="text-[length:var(--text-h3)] leading-[1.35] font-medium text-navy-900">{moot.name}</p>
+                      <p className="text-[length:var(--text-small)] leading-[1.5] text-charcoal-500">{moot.institution}, {moot.year}</p>
                     </div>
                   </li>
                 ))}
@@ -223,25 +223,31 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
           {/* Publications */}
           {publications.length > 0 && (
             <section>
-              <h2 className="font-heading text-3xl text-navy-900 mb-6">Publications</h2>
+              <h2 className="font-heading text-[length:var(--text-h2)] leading-[1.2] text-navy-900 mb-6">Publications</h2>
               <div className="w-8 h-[2px] bg-gold-500 mb-6" />
               <div className="space-y-4">
                 {publications.map((pub, idx: number) => (
-                  <Link href={`/insights/${pub.slug ?? pub.id}`} key={idx} className="block group">
+                  <a
+                    href={pub.url || '#publications'}
+                    target={pub.url ? '_blank' : undefined}
+                    rel={pub.url ? 'noopener noreferrer' : undefined}
+                    key={idx}
+                    className="block group"
+                  >
                     <div className="border border-charcoal-100 p-5 hover:border-gold-300 transition-colors bg-white">
-                      <p className="text-xs text-charcoal-500 mb-2">
+                      <p className="text-[length:var(--text-label)] leading-[1.4] text-charcoal-500 mb-2">
                         {pub.publication} · {pub.date}
                         {pub.coAuthor && <span> · Co-authored with {pub.coAuthor}</span>}
                       </p>
-                      <h3 className="font-medium text-navy-800 group-hover:text-gold-600 transition-colors">
+                      <h3 className="text-[length:var(--text-h3)] leading-[1.35] font-medium text-navy-800 group-hover:text-gold-600 transition-colors">
                         {pub.title}
                       </h3>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
               <div className="mt-6">
-                <Link href="/publications" className="text-sm font-medium text-navy-600 uppercase tracking-wider hover:text-gold-600 transition-colors">
+                <Link href="/publications" className="text-[length:var(--text-small)] leading-[1.5] font-medium text-navy-600 uppercase tracking-wider hover:text-gold-600 transition-colors">
                   View All Publications →
                 </Link>
               </div>
@@ -252,13 +258,13 @@ export default async function LawyerProfilePage({ params }: { params: Promise<{ 
         {/* Sidebar */}
         <div className="lg:col-span-1 space-y-8">
           <div className="bg-white p-8 border border-charcoal-100 shadow-sm sticky top-24">
-            <h3 className="font-heading text-2xl text-navy-900 mb-6">Areas of Practice</h3>
+            <h3 className="font-heading text-[length:var(--text-h3)] leading-[1.35] text-navy-900 mb-6">Areas of Practice</h3>
             <ul className="space-y-3 mb-8">
               {lawyerPracticeAreas.map((area, idx: number) => (
                 <li key={idx} className="pb-3 border-b border-charcoal-100 last:border-0 last:pb-0">
                   <Link
                     href={`/practice-areas/${area.slug}`}
-                    className="text-sm text-charcoal-700 hover:text-gold-600 transition-colors"
+                    className="text-[length:var(--text-body)] leading-[1.75] text-charcoal-700 hover:text-gold-600 transition-colors"
                   >
                     {area.title}
                   </Link>

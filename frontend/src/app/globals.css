@@ -3,7 +3,20 @@
 html {
   font-size: 16px;
   --text-on-dark: #ffffff;
+  --text-h1: clamp(2.125rem, calc(1.5rem + 2.5vw), 4rem);
+  --text-h1--line-height: 1.2;
+  --text-h2: clamp(1.875rem, calc(1.5rem + 1.7vw), 3.375rem);
+  --text-h2--line-height: 1.2;
   --text-h3: clamp(1.25rem, calc(1.05rem + 0.55vw), 1.625rem);
+  --text-h3--line-height: 1.35;
+  --text-h4: var(--text-lg);
+  --text-h4--line-height: var(--text-lg--line-height);
+  --text-body: clamp(1rem, calc(0.94rem + 0.22vw), 1.125rem);
+  --text-body--line-height: 1.75;
+  --text-small: var(--text-xs);
+  --text-small--line-height: var(--text-xs--line-height);
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
   --font-libre-caslon: var(--font-heading);
 }
 
@@ -82,7 +95,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 20rem;
-  font-size: clamp(1rem, calc(0.94rem + 0.22vw), 1.125rem);
+  font-size: var(--text-body);
   line-height: 1.65;
 }
 
@@ -100,11 +113,11 @@ video {
 }
 
 h1 {
-  font-size: clamp(2.125rem, calc(1.5rem + 2.5vw), 4rem);
+  font-size: var(--text-h1);
 }
 
 h2 {
-  font-size: clamp(1.875rem, calc(1.5rem + 1.7vw), 3.375rem);
+  font-size: var(--text-h2);
 }
 
 h3 {
