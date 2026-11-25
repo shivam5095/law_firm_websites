@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import * as path from 'path';
+import prisma from '../config/db';
 import { careerApplicationSchema, MAX_RESUME_SIZE_BYTES, resumeSizeSchema } from '../validators/careers.validator';
 import { sendCareerApplicationNotification } from '../services/email.service';
 
@@ -45,7 +46,7 @@ export function uploadResume(req: Request, res: Response, next: NextFunction) {
     });
 }
 
-export async function applyForInternship(req: Request, res: Response, next: NextFunction) {
+export async function applyForCareer(req: Request, res: Response, next: NextFunction) {
     if (typeof req.body.honeypot === 'string' && req.body.honeypot.trim()) {
         return res.status(200).json({ success: true, message: 'Application submitted.' });
     }
@@ -98,7 +99,23 @@ export async function applyForInternship(req: Request, res: Response, next: Next
             .slice(0, 120);
         const attachmentFilename = `${safeBaseName || 'resume'}${extension}`;
 
+        await prisma.careerApplication.create({
+            data: {
+                applicationType: parsed.data.applicationType,
+                fullName: parsed.data.fullName,
+                email: parsed.data.email,
+                phone: parsed.data.phone,
+                practiceArea: parsed.data.practiceArea,
+                message: parsed.data.message,
+                resumeFileName: attachmentFilename,
+                resumeMimeType: req.file.mimetype,
+                resumeBytes: req.file.buffer,
+                consent: parsed.data.consent,
+            },
+        });
+
         const emailResult = await sendCareerApplicationNotification({
+            applicationType: parsed.data.applicationType,
             name: parsed.data.fullName,
             email: parsed.data.email,
             phone: parsed.data.phone,
@@ -109,10 +126,9 @@ export async function applyForInternship(req: Request, res: Response, next: Next
 
         if (!emailResult.success) {
             console.error(emailResult.reason); // shows the real Resend error in Vercel Logs
-            return res.status(502).json({
-                success: false,
-                message: 'Application email could not be sent. Please try again later.',
-                code: 'EMAIL_SEND_FAILED',
+            return res.status(201).json({
+                success: true,
+                message: 'Application received, but our team could not be notified automatically.',
             });
         }
         return res.status(201).json({ success: true, message: 'Application submitted successfully.' });

@@ -37,9 +37,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadResume = uploadResume;
-exports.applyForInternship = applyForInternship;
+exports.applyForCareer = applyForCareer;
 const multer_1 = __importDefault(require("multer"));
 const path = __importStar(require("path"));
+const db_1 = __importDefault(require("../config/db"));
 const careers_validator_1 = require("../validators/careers.validator");
 const email_service_1 = require("../services/email.service");
 const ALLOWED_EXTENSIONS = ['.pdf', '.doc', '.docx'];
@@ -78,7 +79,7 @@ function uploadResume(req, res, next) {
         return next();
     });
 }
-async function applyForInternship(req, res, next) {
+async function applyForCareer(req, res, next) {
     if (typeof req.body.honeypot === 'string' && req.body.honeypot.trim()) {
         return res.status(200).json({ success: true, message: 'Application submitted.' });
     }
@@ -125,7 +126,22 @@ async function applyForInternship(req, res, next) {
             .replace(/^\.+/, '')
             .slice(0, 120);
         const attachmentFilename = `${safeBaseName || 'resume'}${extension}`;
+        await db_1.default.careerApplication.create({
+            data: {
+                applicationType: parsed.data.applicationType,
+                fullName: parsed.data.fullName,
+                email: parsed.data.email,
+                phone: parsed.data.phone,
+                practiceArea: parsed.data.practiceArea,
+                message: parsed.data.message,
+                resumeFileName: attachmentFilename,
+                resumeMimeType: req.file.mimetype,
+                resumeBytes: req.file.buffer,
+                consent: parsed.data.consent,
+            },
+        });
         const emailResult = await (0, email_service_1.sendCareerApplicationNotification)({
+            applicationType: parsed.data.applicationType,
             name: parsed.data.fullName,
             email: parsed.data.email,
             phone: parsed.data.phone,
@@ -135,10 +151,9 @@ async function applyForInternship(req, res, next) {
         });
         if (!emailResult.success) {
             console.error(emailResult.reason); // shows the real Resend error in Vercel Logs
-            return res.status(502).json({
-                success: false,
-                message: 'Application email could not be sent. Please try again later.',
-                code: 'EMAIL_SEND_FAILED',
+            return res.status(201).json({
+                success: true,
+                message: 'Application received, but our team could not be notified automatically.',
             });
         }
         return res.status(201).json({ success: true, message: 'Application submitted successfully.' });

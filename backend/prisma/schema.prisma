@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum CareerApplicationType {
+  internship
+  job
+}
+
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
@@ -69,5 +74,27 @@ model Lawyer {
 
   @@index([name])
   @@index([specialization])
+  @@index([createdAt])
+}
+
+model CareerApplication {
+  id                String                @id @default(uuid())
+  applicationType   CareerApplicationType?
+  fullName          String
+  email             String
+  phone             String
+  practiceArea      String
+  message           String
+  resumeFileName    String
+  resumeMimeType    String
+  resumeBytes       Bytes
+  consent           Boolean               @default(true)
+  status            String                @default("NEW")
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@index([applicationType])
+  @@index([email])
+  @@index([status])
   @@index([createdAt])
 }

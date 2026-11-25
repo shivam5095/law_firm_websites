@@ -45,20 +45,11 @@ export default function CareersPage() {
               Our internship programme is designed to offer law students and recent graduates hands-on experience in research, drafting, and case preparation. Interns work closely with senior advocates on live client matters across our focus practice areas.
             </p>
 
-            <div className="space-y-3 text-sm text-charcoal-600 pt-2">
-              <p className="flex items-start">
-                <span className="text-gold-600 mr-3 font-bold">✓</span>
-                <span>Active mentoring and guidance from experienced legal practitioners.</span>
-              </p>
-              <p className="flex items-start">
-                <span className="text-gold-600 mr-3 font-bold">✓</span>
-                <span>In-depth research on arbitration, insolvencies, infrastructure and banking regulations.</span>
-              </p>
-              <p className="flex items-start">
-                <span className="text-gold-600 mr-3 font-bold">✓</span>
-                <span>Exposure to drafting pleadings, petitions, legal opinions and contracts.</span>
-              </p>
-            </div>
+            <ul className="list-none pl-0 space-y-3 text-sm text-charcoal-600 pt-2">
+              <li>Active mentoring and guidance from experienced legal practitioners.</li>
+              <li>In-depth research on arbitration, insolvencies, infrastructure and banking regulations.</li>
+              <li>Exposure to drafting pleadings, petitions, legal opinions and contracts.</li>
+            </ul>
 
             <p className="text-xs text-charcoal-500 italic pt-4">
               * Applications are reviewed based on the firm&apos;s requirements and the applicant&apos;s profile. Submission of an application does not guarantee an internship slot.

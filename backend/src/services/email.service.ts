@@ -91,6 +91,7 @@ async function sendNotification(opts: SendOptions): Promise<EmailResult> {
 
 // ---- Careers ----
 export async function sendCareerApplicationNotification(data: {
+  applicationType: 'internship' | 'job';
   name: string;
   email: string;
   phone: string;
@@ -98,11 +99,13 @@ export async function sendCareerApplicationNotification(data: {
   message: string;
   resume: { filename: string; content: Buffer };
 }): Promise<EmailResult> {
+  const applicationLabel = data.applicationType === 'internship' ? 'internship' : 'job';
   return sendNotification({
-    subject: `New career application: ${data.name}`,
+    subject: `New ${applicationLabel} application: ${data.name}`,
     replyTo: data.email,
     html: `
-      <h2>New Career Application</h2>
+      <h2>New ${applicationLabel.charAt(0).toUpperCase()}${applicationLabel.slice(1)} Application</h2>
+      <p><b>Applying for:</b> ${applicationLabel === 'internship' ? 'Internship' : 'Job'}</p>
       <p><b>Name:</b> ${escapeHtml(data.name)}</p>
       <p><b>Email:</b> ${escapeHtml(data.email)}</p>
       <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>

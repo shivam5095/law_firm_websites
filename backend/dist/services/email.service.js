@@ -82,11 +82,13 @@ async function sendNotification(opts) {
 }
 // ---- Careers ----
 async function sendCareerApplicationNotification(data) {
+    const applicationLabel = data.applicationType === 'internship' ? 'internship' : 'job';
     return sendNotification({
-        subject: `New career application: ${data.name}`,
+        subject: `New ${applicationLabel} application: ${data.name}`,
         replyTo: data.email,
         html: `
-      <h2>New Career Application</h2>
+      <h2>New ${applicationLabel.charAt(0).toUpperCase()}${applicationLabel.slice(1)} Application</h2>
+      <p><b>Applying for:</b> ${applicationLabel === 'internship' ? 'Internship' : 'Job'}</p>
       <p><b>Name:</b> ${escapeHtml(data.name)}</p>
       <p><b>Email:</b> ${escapeHtml(data.email)}</p>
       <p><b>Phone:</b> ${escapeHtml(data.phone)}</p>

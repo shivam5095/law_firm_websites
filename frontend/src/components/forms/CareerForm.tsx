@@ -11,6 +11,7 @@ export function CareerForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [applicationTypeError, setApplicationTypeError] = useState('');
     const [resumeName, setResumeName] = useState('');
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,6 +21,12 @@ export function CareerForm() {
 
         const form = event.currentTarget;
         const formData = new FormData(form);
+        const applicationType = formData.get('applicationType');
+        if (applicationType !== 'internship' && applicationType !== 'job') {
+            setApplicationTypeError('Please choose Internship or Job.');
+            setIsSubmitting(false);
+            return;
+        }
         const resume = formData.get('resume');
         if (!(resume instanceof File) || resume.size === 0) {
             setErrorMessage('Please attach your resume.');
@@ -61,6 +68,29 @@ export function CareerForm() {
     return (
         <form onSubmit={onSubmit} className="space-y-6">
             {errorMessage && <p role="alert" className="border border-red-200 bg-red-50 p-3 text-sm text-red-700">{errorMessage}</p>}
+            <fieldset className="space-y-2">
+                <legend className="text-sm font-medium text-charcoal-700">I am applying for</legend>
+                <div className="grid grid-cols-2 gap-3">
+                    {(['internship', 'job'] as const).map((type) => (
+                        <label key={type} className="cursor-pointer">
+                            <input
+                                className="peer sr-only"
+                                type="radio"
+                                name="applicationType"
+                                value={type}
+                                required
+                                aria-describedby={applicationTypeError ? 'application-type-error' : undefined}
+                                onInvalid={() => setApplicationTypeError('Please choose Internship or Job.')}
+                                onChange={() => setApplicationTypeError('')}
+                            />
+                            <span className="flex min-h-[50px] w-full items-center justify-center rounded-sm border border-navy-900 bg-white px-4 py-3 text-sm font-medium text-navy-900 transition-colors peer-checked:bg-navy-900 peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gold-500">
+                                {type === 'internship' ? 'Internship' : 'Job'}
+                            </span>
+                        </label>
+                    ))}
+                </div>
+                {applicationTypeError && <p id="application-type-error" role="alert" className="text-sm text-red-700">{applicationTypeError}</p>}
+            </fieldset>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <label className="space-y-2 text-sm font-medium text-charcoal-700">
                     <span>Full Name</span>
